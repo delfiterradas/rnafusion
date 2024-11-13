@@ -28,11 +28,11 @@ process ARRIBA {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def blacklist = blacklist ? "-b $blacklist" : "-f blacklist"
-    def known_fusions = known_fusions ? "-k $known_fusions" : ""
-    def structural_variants = structural_variants ? "-d $structual_variants" : ""
-    def tags = tags ? "-t $tags" : ""
-    def protein_domains = protein_domains ? "-p $protein_domains" : ""
+    def arg_blacklist = blacklist ? "-b $blacklist" : "-f blacklist"
+    def arg_known_fusions = known_fusions ? "-k $known_fusions" : ""
+    def arg_structural_variants = structural_variants ? "-d $structural_variants" : ""
+    def arg_tags = tags ? "-t $tags" : ""
+    def arg_protein_domains = protein_domains ? "-p $protein_domains" : ""
 
     """
     arriba \\
@@ -41,11 +41,11 @@ process ARRIBA {
         -g $gtf \\
         -o ${prefix}.fusions.tsv \\
         -O ${prefix}.fusions.discarded.tsv \\
-        $blacklist \\
-        $known_fusions \\
-        $structural_variants \\
-        $tags \\
-        $protein_domains \\
+        $arg_blacklist \\
+        $arg_known_fusions \\
+        $arg_structural_variants \\
+        $arg_tags \\
+        $arg_protein_domains \\
         $args
 
     cat <<-END_VERSIONS > versions.yml

@@ -7,8 +7,6 @@ process HGNC_DOWNLOAD {
         'https://depot.galaxyproject.org/singularity/gnu-wget:1.18--h5bf99c6_5' :
         'quay.io/biocontainers/gnu-wget:1.18--h5bf99c6_5' }"
 
-    input:
-
     output:
     path "hgnc_complete_set.txt"        , emit: hgnc_ref
     path "HGNC-DB-timestamp.txt"        , emit: hgnc_date

@@ -133,15 +133,15 @@ workflow BUILD_REFERENCES {
     //     }
 
 
-    // if ((params.starfusion || params.all) &&
-    //         (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
-    //         !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
-    //     if (params.download_refs) {
-    //         ch_starfusion_ref = STARFUSION_DOWNLOAD( ch_fasta, ch_gtf ).out.reference }
-    //     else {
-    //         ch_starfusion_ref = STARFUSION_BUILD( ch_fasta, ch_gtf ).out.reference }
-    // } else {
-    //     ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { that -> [[id:that.Name], that] }}
+    if ((params.starfusion || params.all) &&
+            (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
+            !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
+        if (params.download_refs) {
+            ch_starfusion_ref = STARFUSION_DOWNLOAD( ch_fasta, ch_gtf ).out.reference }
+        else {
+            ch_starfusion_ref = STARFUSION_BUILD( ch_fasta, ch_gtf ).out.reference }
+    } else {
+        ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { that -> [[id:that.Name], that] }}
 
 
     // if ((params.fusionreport || params.all) &&
