@@ -79,8 +79,7 @@
                 "genome_gencode_version": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",
-                    "description": "ensembl version",
-                    "default": 102
+                    "description": "gencode version"
                 },
                 "starfusion_build": {
                     "type": "boolean",
@@ -107,6 +106,11 @@
                     "type": "string",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
+                },
+                "arriba_ref_cytobands": {
+                    "type": "string",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Path to arriba reference cytobands"
                 },
                 "arriba_ref_known_fusions": {
                     "type": "string",
@@ -307,9 +311,9 @@
             "fa_icon": "fas fa-dna",
             "description": "Reference genome related files and options required for the workflow.",
             "properties": {
-                "genome": {
-                    "type": "string",
-                    "description": "Name of iGenomes reference.",
+                "references_only": {
+                    "type": "boolean",
+                    "description": "Skip running the analysis, only builds the references",
                     "fa_icon": "fas fa-book"
                 },
                 "fasta": {
@@ -327,6 +331,11 @@
                     "pattern": "^\\S+\\.fn?ai(\\.gz)?$",
                     "description": "Path to FASTA genome index file.",
                     "fa_icon": "far fa-file-code"
+                },
+                "genome": {
+                    "type": "string",
+                    "description": "Name of iGenomes reference.",
+                    "fa_icon": "fas fa-book"
                 },
                 "gtf": {
                     "type": "string",

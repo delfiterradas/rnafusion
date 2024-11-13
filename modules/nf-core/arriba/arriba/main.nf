@@ -8,14 +8,13 @@ process ARRIBA_ARRIBA {
         'biocontainers/arriba:2.4.0--h0033a41_2' }"
 
     input:
-    tuple val(meta), path(bam)
+    tuple val(meta),  path(bam)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(gtf)
-    tuple val(meta4), path(blacklist)
-    tuple val(meta5), path(known_fusions)
-    tuple val(meta6), path(structural_variants)
-    tuple val(meta7), path(tags)
-    tuple val(meta8), path(protein_domains)
+    path(blacklist)
+    path(known_fusions)
+    path(cytobands)
+    path(protein_domains)
 
     output:
     tuple val(meta), path("*.fusions.tsv")          , emit: fusions
@@ -28,11 +27,10 @@ process ARRIBA_ARRIBA {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def arg_blacklist = blacklist ? "-b $blacklist" : "-f blacklist"
-    def arg_known_fusions = known_fusions ? "-k $known_fusions" : ""
-    def arg_structural_variants = structural_variants ? "-d $structural_variants" : ""
-    def arg_tags = tags ? "-t $tags" : ""
-    def arg_protein_domains = protein_domains ? "-p $protein_domains" : ""
+    def blacklist = blacklist ? "-b $blacklist" : "-f blacklist"
+    def known_fusions = known_fusions ? "-k $known_fusions" : ""
+    def cytobands = cytobands ? "-d $cytobands" : ""
+    def protein_domains = protein_domains ? "-p $protein_domains" : ""
 
     """
     arriba \\
@@ -41,11 +39,10 @@ process ARRIBA_ARRIBA {
         -g $gtf \\
         -o ${prefix}.fusions.tsv \\
         -O ${prefix}.fusions.discarded.tsv \\
-        $arg_blacklist \\
-        $arg_known_fusions \\
-        $arg_structural_variants \\
-        $arg_tags \\
-        $arg_protein_domains \\
+        $blacklist \\
+        $known_fusions \\
+        $cytobands \\
+        $protein_domains \\
         $args
 
     cat <<-END_VERSIONS > versions.yml

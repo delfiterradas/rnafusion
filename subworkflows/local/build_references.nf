@@ -4,7 +4,6 @@
 ========================================================================================
 */
 
-include { ARRIBA_DOWNLOAD }                 from '../../modules/local/arriba/download/main'
 include { GENCODE_DOWNLOAD }                from '../../modules/local/gencode_download/main'
 include { FUSIONCATCHER_DOWNLOAD }          from '../../modules/local/fusioncatcher/download/main'
 include { FUSIONCATCHER_BUILD }             from '../../modules/local/fusioncatcher/build/main'
@@ -14,13 +13,14 @@ include { STARFUSION_BUILD }                from '../../modules/local/starfusion
 include { STARFUSION_DOWNLOAD }             from '../../modules/local/starfusion/download/main'
 include { GTF_TO_REFFLAT }                  from '../../modules/local/uscs/custom_gtftogenepred/main'
 include { RRNA_TRANSCRIPTS }                from '../../modules/local/rrnatranscripts/main'
-include { CONVERT2BED }                     from '../../modules/local/convert2bed/main'
+include { GET_RRNA_TRANSCRIPTS }            from '../../modules/local/get_rrna_transcripts'
+// include { CONVERT2BED }                     from '../../modules/local/convert2bed/main'
 /*
 ========================================================================================
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ========================================================================================
 */
-
+include { ARRIBA_DOWNLOAD }                 from '../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../modules/nf-core/samtools/faidx/main'
 include { STAR_GENOMEGENERATE }             from '../../modules/nf-core/star/genomegenerate/main'
 include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../modules/nf-core/gatk4/createsequencedictionary/main'
@@ -73,9 +73,8 @@ workflow BUILD_REFERENCES {
 
     if (!file(params.rrna_intervals).exists() || file(params.rrna_intervals).isEmpty()){
         GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
-        RRNA_TRANSCRIPTS(ch_gtf)
-        CONVERT2BED(RRNA_TRANSCRIPTS.out.rrna_gtf)
-        GATK4_BEDTOINTERVALLIST(CONVERT2BED.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict)
+        GET_RRNA_TRANSCRIPTS(ch_gtf)
+        GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed.map { it -> [ [id:it.name], it ] }, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
         ch_rrna_interval = GATK4_BEDTOINTERVALLIST.out.interval_list
     } else {
         ch_rrna_interval = Channel.fromPath(params.rrna_intervals).map { that -> [[id:that.Name], that] }
@@ -106,31 +105,35 @@ workflow BUILD_REFERENCES {
         ch_starindex_ref = Channel.fromPath(params.starindex_ref).map { that -> [[id:that.Name], that] }
     }
 
-//     if ((params.arriba || params.all) &&
-//             (!file(params.arriba_ref_blacklist).exists() || file(params.arriba_ref_blacklist).isEmpty() ||
-//             !file(params.arriba_ref_known_fusions).exists() || file(params.arriba_ref_known_fusions).isEmpty() ||
-//             !file(params.arriba_ref_protein_domains).exists() || file(params.arriba_ref_protein_domains).isEmpty())) {
-//         ARRIBA_DOWNLOAD()
-//         ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist).map { that -> [[id:that.Name], that] }
-//         ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions).map { that -> [[id:that.Name], that] }
-//         ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { that -> [[id:that.Name], that] }
-//     } else {
-// // TODO need to update the module to emit blacklist,knownfusions etc
-//     }
+    if ((params.arriba || params.all) &&
+            (!file(params.arriba_ref_blacklist).exists() || file(params.arriba_ref_blacklist).isEmpty() ||
+            !file(params.arriba_ref_known_fusions).exists() || file(params.arriba_ref_known_fusions).isEmpty() ||
+            !file(params.arriba_ref_protein_domains).exists() || file(params.arriba_ref_protein_domains).isEmpty())) {
+        ARRIBA_DOWNLOAD(genome)
+        ch_arriba_ref_blacklist = ARRIBA_DOWNLOAD.out.blacklist
+        ch_arriba_ref_cytobands = ARRIBA_DOWNLOAD.out.cytobands
+        ch_arriba_ref_known_fusions = ARRIBA_DOWNLOAD.out.known_fusions
+        ch_arriba_ref_protein_domains = ARRIBA_DOWNLOAD.out.protein_domains
+    } else {
+        ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist).map { that -> [[id:that.Name], that] }
+        ch_arriba_ref_cytobands = Channel.fromPath(params.arriba_ref_cytobands).map { that -> [[id:that.Name], that] }
+        ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions).map { that -> [[id:that.Name], that] }
+        ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { that -> [[id:that.Name], that] }
+    }
 
 
-    // if ((params.fusioncatcher || params.all) &&
-    //         (!file(params.fusioncatcher_ref).exists() || file(params.fusioncatcher_ref).isEmpty() ||
-    //         !file(params.fusioncatcher_ref_stub_check).exists() || file(params.fusioncatcher_ref_stub_check).isEmpty() )) {
-    //     if (params.download_refs) {
-    //         FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
-    //         ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference}
-    //     else {
-    //         FUSIONCATCHER_BUILD(params.genome_gencode_version)
-    //         ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference}
-    //     } else {
-    //         ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { that -> [[id:that.Name], that] }
-    //     }
+    if ((params.fusioncatcher || params.all) &&
+            (!file(params.fusioncatcher_ref).exists() || file(params.fusioncatcher_ref).isEmpty() ||
+            !file(params.fusioncatcher_ref_stub_check).exists() || file(params.fusioncatcher_ref_stub_check).isEmpty() )) {
+        if (params.download_refs) {
+            FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
+            ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference}
+        else {
+            FUSIONCATCHER_BUILD(params.genome_gencode_version)
+            ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference}
+        } else {
+            ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { that -> [[id:that.Name], that] }
+        }
 
 
     if ((params.starfusion || params.all) &&
@@ -144,14 +147,14 @@ workflow BUILD_REFERENCES {
         ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { that -> [[id:that.Name], that] }}
 
 
-    // if ((params.fusionreport || params.all) &&
-    //         (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
-    //         !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
-    //     if (!params.cosmic_username || !params.cosmic_passwd) { exit 1, 'COSMIC username and/or password missing' }
-    //     ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD( params.cosmic_username, params.cosmic_passwd ).out.reference
-    // } else {
-    //     ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref).map { that -> [[id:that.Name], that] }
-    // }
+    if ((params.fusionreport || params.all) &&
+            (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
+            !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
+        if (!params.cosmic_username || !params.cosmic_passwd) { exit 1, 'COSMIC username and/or password missing' }
+        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD( params.cosmic_username, params.cosmic_passwd ).out.reference
+    } else {
+        ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref).map { that -> [[id:that.Name], that] }
+    }
 
     emit:
     ch_fasta
@@ -160,16 +163,17 @@ workflow BUILD_REFERENCES {
 
     ch_hgnc_ref
     ch_hgnc_date
-    // ch_rrna_interval
-    // ch_refflat
-    // ch_salmon_index
-    // ch_starindex_ref
-    // ch_arriba_ref_blacklist
-    // ch_arriba_ref_known_fusions
-    // ch_arriba_ref_protein_domains
-    // ch_fusioncatcher_ref
-    // ch_starfusion_ref
-    // ch_fusionreport_ref
+    ch_rrna_interval
+    ch_refflat
+    ch_salmon_index
+    ch_starindex_ref
+    ch_arriba_ref_blacklist
+    ch_arriba_ref_cytobands
+    ch_arriba_ref_known_fusions
+    ch_arriba_ref_protein_domains
+    ch_fusioncatcher_ref
+    ch_starfusion_ref
+    ch_fusionreport_ref
     versions        = ch_versions
 }
 

@@ -41,6 +41,8 @@ include { RNAFUSION               } from './workflows/rnafusion'
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow NFCORE_RNAFUSION {
+    take:
+    samplesheet
 
     main:
 
@@ -48,8 +50,7 @@ workflow NFCORE_RNAFUSION {
     // WORKFLOW: Run pipeline
     //
 
-    ch_samplesheet = Channel.value(file(params.input, checkIfExists: true))
-    RNAFUSION(ch_samplesheet)
+    RNAFUSION(samplesheet)
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -75,7 +76,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_RNAFUSION ()
+    NFCORE_RNAFUSION (PIPELINE_INITIALISATION.out.samplesheet)
 
     //
     // SUBWORKFLOW: Run completion tasks

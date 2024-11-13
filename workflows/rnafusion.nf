@@ -4,41 +4,21 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES/SUBWORKFLOWS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-//
-// SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
-//
 include { BUILD_REFERENCES              }   from '../subworkflows/local/build_references'
-include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow'
-include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
-include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
-include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
-include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow'
-include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
-include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
-include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
-include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
+// include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow'
+// include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
+// include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
+// include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
+// include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow'
+// include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
+// include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
+// include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
+// include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT NF-CORE MODULES/SUBWORKFLOWS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-//
-// MODULE: Installed directly from nf-core/modules
-//
-include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/main'
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
-include { MULTIQC                } from '../modules/nf-core/multiqc/main'
-include { SALMON_QUANT           } from '../modules/nf-core/salmon/quant/main'
+include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
+include { FASTQC                        }   from '../modules/nf-core/fastqc/main'
+include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
+// include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,7 +34,7 @@ workflow RNAFUSION {
 
 
     ch_versions = Channel.empty()
-    ch_multiqc_files = Channel.empty()
+    // ch_multiqc_files = Channel.empty()
 
     //
     // Create references if necessary
@@ -268,7 +248,7 @@ workflow RNAFUSION {
     // QC_WORKFLOW (
     //     ch_reads_all,
     //     STARFUSION_WORKFLOW.out.ch_bam_sorted,
-    //     ch_chrgtf,
+    //     ch_gtf,
     //     ch_refflat,
     //     ch_fasta,
     //     ch_fai,

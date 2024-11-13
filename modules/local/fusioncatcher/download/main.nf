@@ -7,10 +7,10 @@ process FUSIONCATCHER_DOWNLOAD {
 
 
     input:
-    val ensembl_version
+    val genome_gencode_version
 
     output:
-    path "human_v${ensembl_version}"                , emit: reference
+    path "human_v${genome_gencode_version}"                , emit: reference
     path "versions.yml"     , emit: versions
 
     when:
@@ -24,12 +24,12 @@ process FUSIONCATCHER_DOWNLOAD {
 
     // def url =
     """
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${ensembl_version}.tar.gz.aa
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${ensembl_version}.tar.gz.ab
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${ensembl_version}.tar.gz.ac
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${ensembl_version}.tar.gz.ad
-    cat human_${ensembl_version}.tar.gz.* | tar xz
-    rm human_${ensembl_version}.tar*
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.aa
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ab
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ac
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ad
+    cat human_${genome_gencode_version}.tar.gz.* | tar xz
+    rm human_${genome_gencode_version}.tar*
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -39,8 +39,8 @@ process FUSIONCATCHER_DOWNLOAD {
 
     stub:
     """
-    mkdir human_v${ensembl_version}
-    touch human_v${ensembl_version}/ensembl_fully_overlapping_genes.txt
+    mkdir human_v${genome_gencode_version}
+    touch human_v${genome_gencode_version}/ensembl_fully_overlapping_genes.txt
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         fusioncatcher: \$(echo \$(fusioncatcher --version 2>&1))
