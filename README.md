@@ -31,9 +31,9 @@ In rnafusion the full-sized test includes reference building and fusion detectio
 
 ### Build references
 
-`--build_references` triggers a parallel workflow to build references, which is a prerequisite to running the pipeline:
+`--references_only` triggers a workflow to ONLY build references, otherwise the references are built with the analysis run:
 
-1. Download ensembl fasta and gtf files
+1. Download gencode fasta and gtf files
 2. Create [STAR](https://github.com/alexdobin/STAR) index
 3. Download [Arriba](https://github.com/suhrig/arriba) references
 4. Download [FusionCatcher](https://github.com/ndaniel/fusioncatcher) references
@@ -78,7 +78,7 @@ First, build the references:
 nextflow run nf-core/rnafusion \
    -profile test,<docker/singularity/.../institute> \
    --outdir <OUTDIR>\
-   --build_references \
+   --references_only \
    -stub
 ```
 

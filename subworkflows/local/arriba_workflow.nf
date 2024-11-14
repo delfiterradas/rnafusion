@@ -11,6 +11,7 @@ workflow ARRIBA_WORKFLOW {
         ch_fasta
         ch_starindex_ref
         ch_arriba_ref_blacklist
+        ch_arriba_ref_cytobands
         ch_arriba_ref_known_fusions
         ch_arriba_ref_protein_domains
 
@@ -28,7 +29,7 @@ workflow ARRIBA_WORKFLOW {
                     .map { meta, reads, fusions -> [ meta, fusions ] }
                 ch_arriba_fusion_fail = ch_dummy_file
             } else {
-                ARRIBA_ARRIBA ( STAR_FOR_ARRIBA.out.bam, ch_fasta, ch_gtf, ch_arriba_ref_blacklist, ch_arriba_ref_known_fusions, [[],[]], [[],[]], ch_arriba_ref_protein_domains )
+                ARRIBA_ARRIBA ( STAR_FOR_ARRIBA.out.bam, ch_fasta, ch_gtf, ch_arriba_ref_blacklist, ch_arriba_ref_known_fusions, ch_arriba_ref_cytobands, ch_arriba_ref_protein_domains )
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
 
                 ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions

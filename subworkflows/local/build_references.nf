@@ -35,9 +35,6 @@ include { GFFREAD }                         from '../../modules/nf-core/gffread/
 */
 
 workflow BUILD_REFERENCES {
-    take:
-        genome                           // channel: [mandatory]  val(genome)
-        genome_gencode_version           // channel: [mandatory]  val(genome_gencode_version)
 
     main:
     ch_versions = Channel.empty()
@@ -82,7 +79,7 @@ workflow BUILD_REFERENCES {
 
     if (!file(params.refflat).exists() || file(params.refflat).isEmpty()){
         GTF_TO_REFFLAT(ch_gtf)
-        ch_refflat = GTF_TO_REFFLAT.out.refflat
+        ch_refflat = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
     } else {
         ch_refflat = Channel.fromPath(params.refflat).map { that -> [[id:that.Name], that] }
     }
@@ -109,58 +106,55 @@ workflow BUILD_REFERENCES {
             (!file(params.arriba_ref_blacklist).exists() || file(params.arriba_ref_blacklist).isEmpty() ||
             !file(params.arriba_ref_known_fusions).exists() || file(params.arriba_ref_known_fusions).isEmpty() ||
             !file(params.arriba_ref_protein_domains).exists() || file(params.arriba_ref_protein_domains).isEmpty())) {
-        ARRIBA_DOWNLOAD(genome)
+        ARRIBA_DOWNLOAD(params.genome)
         ch_arriba_ref_blacklist = ARRIBA_DOWNLOAD.out.blacklist
         ch_arriba_ref_cytobands = ARRIBA_DOWNLOAD.out.cytobands
         ch_arriba_ref_known_fusions = ARRIBA_DOWNLOAD.out.known_fusions
         ch_arriba_ref_protein_domains = ARRIBA_DOWNLOAD.out.protein_domains
     } else {
-        ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist).map { that -> [[id:that.Name], that] }
-        ch_arriba_ref_cytobands = Channel.fromPath(params.arriba_ref_cytobands).map { that -> [[id:that.Name], that] }
-        ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions).map { that -> [[id:that.Name], that] }
-        ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { that -> [[id:that.Name], that] }
+        ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist)
+        ch_arriba_ref_cytobands = Channel.fromPath(params.arriba_ref_cytobands)
+        ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions)
+        ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains)
     }
 
 
     if ((params.fusioncatcher || params.all) &&
             (!file(params.fusioncatcher_ref).exists() || file(params.fusioncatcher_ref).isEmpty() ||
             !file(params.fusioncatcher_ref_stub_check).exists() || file(params.fusioncatcher_ref_stub_check).isEmpty() )) {
-        if (params.download_refs) {
-            FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
-            ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference}
-        else {
             FUSIONCATCHER_BUILD(params.genome_gencode_version)
-            ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference}
-        } else {
-            ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { that -> [[id:that.Name], that] }
-        }
+            ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference
+    }
+    else {
+        ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref)
+    }
 
 
     if ((params.starfusion || params.all) &&
             (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
             !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
-        if (params.download_refs) {
-            ch_starfusion_ref = STARFUSION_DOWNLOAD( ch_fasta, ch_gtf ).out.reference }
-        else {
-            ch_starfusion_ref = STARFUSION_BUILD( ch_fasta, ch_gtf ).out.reference }
-    } else {
-        ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { that -> [[id:that.Name], that] }}
+            STARFUSION_BUILD(ch_fasta, ch_gtf)
+            ch_starfusion_ref = STARFUSION_BUILD.out.reference
+    }
+    else {
+        ch_starfusion_ref = Channel.fromPath(params.starfusion_ref)
+    }
 
 
     if ((params.fusionreport || params.all) &&
             (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
             !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
         if (!params.cosmic_username || !params.cosmic_passwd) { exit 1, 'COSMIC username and/or password missing' }
-        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD( params.cosmic_username, params.cosmic_passwd ).out.reference
+        FUSIONREPORT_DOWNLOAD(params.cosmic_username, params.cosmic_passwd)
+        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.reference
     } else {
-        ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref).map { that -> [[id:that.Name], that] }
+        ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref)
     }
 
     emit:
     ch_fasta
     ch_gtf
     ch_fai
-
     ch_hgnc_ref
     ch_hgnc_date
     ch_rrna_interval

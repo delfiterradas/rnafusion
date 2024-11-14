@@ -5,20 +5,20 @@
 */
 
 include { BUILD_REFERENCES              }   from '../subworkflows/local/build_references'
-// include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow'
-// include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
-// include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
-// include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
-// include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow'
-// include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
-// include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
-// include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
-// include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
+include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow'
+include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
+include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
+include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
+include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow'
+include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
+include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
+include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
+include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
 include { FASTQC                        }   from '../modules/nf-core/fastqc/main'
 include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
-// include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
+include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,204 +34,123 @@ workflow RNAFUSION {
 
 
     ch_versions = Channel.empty()
-    // ch_multiqc_files = Channel.empty()
+    ch_multiqc_files = Channel.empty()
 
     //
     // Create references if necessary
     //
 
-    BUILD_REFERENCES(params.genome, params.genome_gencode_version)
+    BUILD_REFERENCES()
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
 
-    // // Optional
-    // ch_fasta                      = params.fasta                        ? Channel.fromPath(params.fasta).map {it -> [[id:it[0].simpleName], it]}.collect()
-    //                                                                     : BUILD_REFERENCES.out.fasta.map {it -> [[id:it[0].simpleName], it]}.collect()
-    // ch_gtf                        = params.gtf                          ? Channel.fromPath(params.gtf).map {it -> [[id:it[0].simpleName], it]}.collect()
-    //                                                                     : downloads.gtf.map {it -> [[id:it[0].simpleName], it]}.collect()
-    // ch_vep_cache_unprocessed      = params.vep_cache                    ? Channel.fromPath(params.vep_cache)
-    //                                                                     : Channel.empty().mix(downloads.vep_cache)
-    // ch_vep_extra_files_unsplit    = params.vep_plugin_files             ? Channel.fromPath(params.vep_plugin_files)
-    //                                                                     : Channel.empty().mix(downloads.vep_plugin)
-    // ch_fai                        = params.fai                          ? Channel.fromPath(params.fai).map {it -> [[id:it[0].simpleName], it]}.collect()
-    //                                                                     : Channel.empty()
-    // ch_gene_panel_clinical_filter = params.gene_panel_clinical_filter   ? Channel.fromPath(params.gene_panel_clinical_filter).collect()
-    //                                                                     : Channel.empty()
-    // ch_ref_drop_annot_file        = params.reference_drop_annot_file    ? Channel.fromPath(params.reference_drop_annot_file).collect()
-    //                                                                     : Channel.empty()
-    // ch_ref_drop_count_file        = params.reference_drop_count_file    ? Channel.fromPath(params.reference_drop_count_file).collect()
-    //                                                                     : Channel.empty()
-    // ch_ref_drop_splice_folder     = params.reference_drop_splice_folder ? Channel.fromPath(params.reference_drop_splice_folder).collect()
-    //                                                                     : Channel.empty()
-    // ch_salmon_index               = params.salmon_index                 ? Channel.fromPath(params.salmon_index)
-    //                                                                     : Channel.empty()
-    // ch_star_index                 = params.star_index                   ? Channel.fromPath(params.star_index).map {it -> [[id:it[0].simpleName], it]}.collect()
-    //                                                                     : Channel.empty()
-    // ch_transcript_fasta           = params.transcript_fasta             ? Channel.fromPath(params.transcript_fasta)
-    //                                                                     : Channel.empty()
-    // ch_sequence_dict              = params.sequence_dict                ? Channel.fromPath(params.sequence_dict).map{ it -> [[id:it[0].simpleName], it] }.collect()
-    //                                                                     : Channel.empty()
-    // ch_subsample_bed              = params.subsample_bed                ? Channel.fromPath(params.subsample_bed).collect()
-    //                                                                     : Channel.empty()
 
     //
-    // Create channel from input file provided through params.input
+    // QC from FASTQ files
     //
-    // Channel
-    //     .fromSamplesheet("input")
-    //     .map {
-    //         meta, fastq_1, fastq_2, strandedness ->
-    //             if (!fastq_2) {
-    //                 return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-    //             } else {
-    //                 return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-    //             }
-    //     }
-    //     .groupTuple()
-    //     .map {
-    //         validateInputSamplesheet(it)
-    //     }
-    //     .branch {
-    //         meta, fastqs ->
-    //             single  : fastqs.size() == 1
-    //                 return [ meta, fastqs.flatten() ]
-    //             multiple: fastqs.size() > 1
-    //                 return [ meta, fastqs.flatten() ]
-    //     }
-    //     .set { ch_fastq }
-
-    // //
-    // // MODULE: Concatenate FastQ files from same sample if required
-    // //
-    // CAT_FASTQ (
-    //     ch_fastq.multiple
-    // )
-    // .reads
-    // .mix(ch_fastq.single)
-    // .set { ch_cat_fastq }
-    // ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
+    FASTQC (
+        ch_samplesheet
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
+    ch_versions = ch_versions.mix(FASTQC.out.versions)
 
 
-    // //
-    // // QC from FASTQ files
-    // //
-    // FASTQC (
-    //     ch_cat_fastq
-    // )
-    // ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    // ch_versions = ch_versions.mix(FASTQC.out.versions)
+    //
+    // Trimming
+    //
+    TRIM_WORKFLOW (
+        ch_samplesheet
+    )
+    ch_reads = TRIM_WORKFLOW.out.trimmed_reads
+    ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
 
-    // SALMON_QUANT( ch_reads_all, BUILD_REFERENCES.out.ch_salmon_index.map{ meta, index ->  index  }, BUILD_REFERENCES.out.ch_gtf.map{ meta, gtf ->  gtf  }, [], false, 'A')
-    // ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.zip.collect{it[1]})
+    // SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ meta, index ->  index  }, BUILD_REFERENCES.out.ch_gtf.map{ meta, gtf ->  gtf  }, [], false, 'A')
+    // ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.zi.collect{it[1]})
     // ch_versions = ch_versions.mix(SALMON_QUANT.out.versions)
 
-    // //
-    // // Trimming
-    // //
-    // TRIM_WORKFLOW (
-    //     ch_cat_fastq
-    // )
-    // ch_reads = TRIM_WORKFLOW.out.trimmed_reads
-    // ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
+
     //
-    // MODULE: Run FastQC
+    // SUBWORKFLOW:  Run STAR alignment and Arriba
     //
-    // FASTQC (
-    //     ch_samplesheet
+
+    ARRIBA_WORKFLOW (
+        ch_reads,
+        BUILD_REFERENCES.out.ch_gtf,
+        BUILD_REFERENCES.out.ch_fasta,
+        BUILD_REFERENCES.out.ch_starindex_ref,
+        BUILD_REFERENCES.out.ch_arriba_ref_blacklist,
+        BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
+        BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
+        BUILD_REFERENCES.out.ch_arriba_ref_protein_domains
+    )
+    ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
+
+
+//Run STAR fusion
+    STARFUSION_WORKFLOW (
+        ch_reads,
+        BUILD_REFERENCES.out.ch_gtf,
+        BUILD_REFERENCES.out.ch_starindex_ref,
+        BUILD_REFERENCES.out.ch_fasta
+    )
+    ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
+
+
+//Run fusioncatcher
+    FUSIONCATCHER_WORKFLOW (
+        ch_reads
+    )
+    ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+
+
+//Run stringtie
+    STRINGTIE_WORKFLOW (
+        STARFUSION_WORKFLOW.out.ch_bam_sorted,
+        BUILD_REFERENCES.out.ch_gtf
+    )
+    ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
+
+
+    //Run fusion-report
+    FUSIONREPORT_WORKFLOW (
+        ch_reads,
+        BUILD_REFERENCES.out.ch_fusionreport_ref,
+        ARRIBA_WORKFLOW.out.fusions,
+        STARFUSION_WORKFLOW.out.fusions,
+        FUSIONCATCHER_WORKFLOW.out.fusions
+    )
+    ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
+
+
+
+    //Run fusionInpector
+    FUSIONINSPECTOR_WORKFLOW (
+        ch_reads,
+        FUSIONREPORT_WORKFLOW.out.fusion_list,
+        FUSIONREPORT_WORKFLOW.out.fusion_list_filtered,
+        FUSIONREPORT_WORKFLOW.out.report,
+        FUSIONREPORT_WORKFLOW.out.csv,
+        STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
+        BUILD_REFERENCES.out.ch_gtf,
+        BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
+        BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
+        BUILD_REFERENCES.out.ch_hgnc_ref,
+        BUILD_REFERENCES.out.ch_hgnc_date
+    )
+    ch_versions = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
+
+
+    // //QC
+    // QC_WORKFLOW (
+    //     ch_reads,
+    //     STARFUSION_WORKFLOW.out.ch_bam_sorted,
+    //     STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
+    //     BUILD_REFERENCES.out.ch_gtf,
+    //     BUILD_REFERENCES.out.ch_refflat,
+    //     BUILD_REFERENCES.out.ch_fasta,
+    //     BUILD_REFERENCES.out.ch_fai,
+    //     BUILD_REFERENCES.out.ch_rrna_interval
     // )
-    // ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    // ch_versions = ch_versions.mix(FASTQC.out.versions.first())
-
-
-
-    // TRIM_WORKFLOW (
-    //     ch_samplesheet
-    // )
-    // ch_reads_fusioncatcher = TRIM_WORKFLOW.out.ch_reads_fusioncatcher
-    // ch_reads_all = TRIM_WORKFLOW.out.ch_reads_all
-    // ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
-
-
-//     //
-//     // SUBWORKFLOW:  Run STAR alignment and Arriba
-//     //
-//     ARRIBA_WORKFLOW (
-//         ch_reads_all,
-//         ch_gtf,
-//         ch_fasta,
-//         ch_starindex_ensembl_ref,
-//         ch_arriba_ref_blacklist,
-//         ch_arriba_ref_known_fusions,
-//         ch_arriba_ref_protein_domains
-//     )
-//     ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
-
-
-// //Run STAR fusion
-//     STARFUSION_WORKFLOW (
-//         ch_reads_all,
-//         ch_gtf,
-//         ch_starindex_ref,
-//         ch_fasta
-//     )
-//     ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
-
-
-// //Run fusioncatcher
-//     FUSIONCATCHER_WORKFLOW (
-//         ch_reads_fusioncatcher
-//     )
-//     ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
-
-
-// //Run stringtie
-//     STRINGTIE_WORKFLOW (
-//         STARFUSION_WORKFLOW.out.ch_bam_sorted,
-//         ch_gtf
-//     )
-//     ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
-
-
-//     //Run fusion-report
-//     FUSIONREPORT_WORKFLOW (
-//         ch_reads_all,
-//         ch_fusionreport_ref,
-//         ARRIBA_WORKFLOW.out.fusions,
-//         STARFUSION_WORKFLOW.out.fusions,
-//         FUSIONCATCHER_WORKFLOW.out.fusions
-//     )
-//     ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
-
-
-
-//     //Run fusionInpector
-//     FUSIONINSPECTOR_WORKFLOW (
-//         ch_reads_all,
-//         FUSIONREPORT_WORKFLOW.out.fusion_list,
-//         FUSIONREPORT_WORKFLOW.out.fusion_list_filtered,
-//         FUSIONREPORT_WORKFLOW.out.report,
-//         FUSIONREPORT_WORKFLOW.out.csv,
-//         STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
-//         ch_gtf,
-//         ch_arriba_ref_protein_domains,
-//         ch_arriba_ref_cytobands,
-//         ch_hgnc_ref,
-//         ch_hgnc_date
-//     )
-//     ch_versions = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
-
-
-//     //QC
-//     QC_WORKFLOW (
-//         ch_reads_all,
-//         STARFUSION_WORKFLOW.out.ch_bam_sorted,
-//         STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
-//         ch_gtf,
-//         ch_refflat,
-//         ch_fasta,
-//         ch_fai,
-//         ch_rrna_interval
-//     )
-//     ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
+    // ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
 
 //     //
 //     // Collate and save software versions
@@ -243,18 +162,6 @@ workflow RNAFUSION {
 //             sort: true,
 //             newLine: true
 //         ).set { ch_collated_versions }
-
-    // //QC
-    // QC_WORKFLOW (
-    //     ch_reads_all,
-    //     STARFUSION_WORKFLOW.out.ch_bam_sorted,
-    //     ch_gtf,
-    //     ch_refflat,
-    //     ch_fasta,
-    //     ch_fai,
-    //     ch_rrna_interval
-    // )
-    // ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
 
 
     // //
