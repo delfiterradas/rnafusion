@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Normalized gene expression calculated [#488](https://github.com/nf-core/rnafusion/pull/488)
 - Primary assembly now used as main reference genome FASTA file, as recommended by the STAR manual [#488](https://github.com/nf-core/rnafusion/pull/488)
 - Use of only ensembl GTF file, not chr.gtf file as GTF reference file [#488](https://github.com/nf-core/rnafusion/pull/488)
+- Add nf-test to local module: `ENSEMBL_DOWNLOAD` [#508](https://github.com/nf-core/rnafusion/pull/508)
 
 ### Changed
 
