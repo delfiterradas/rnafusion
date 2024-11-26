@@ -18,7 +18,7 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.hgnc_ref[0]).name,
+                    process.out.hgnc_ref,
                     file(process.out.hgnc_date[0]).name,
                     process.out.versions
                 ).match() }
@@ -42,7 +42,7 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.hgnc_ref[0]).name,
+                    process.out.hgnc_ref,
                     file(process.out.hgnc_date[0]).name,
                     process.out.versions
                 ).match() }
