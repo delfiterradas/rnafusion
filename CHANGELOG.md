@@ -10,13 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Normalized gene expression calculated [#488](https://github.com/nf-core/rnafusion/pull/488)
 - Primary assembly now used as main reference genome FASTA file, as recommended by the STAR manual [#488](https://github.com/nf-core/rnafusion/pull/488)
 - Use of only ensembl GTF file, not chr.gtf file as GTF reference file [#488](https://github.com/nf-core/rnafusion/pull/488)
-- Add nf-test to local module: `ENSEMBL_DOWNLOAD` [#508](https://github.com/nf-core/rnafusion/pull/508)
-- Add nf-test to local module: `HGNC_DOWNLOAD` [#508](https://github.com/nf-core/rnafusion/pull/509)
+- Add nf-test to local module: `ENSEMBL_DOWNLOAD` [#539](https://github.com/nf-core/rnafusion/pull/539)
+- Add nf-test to local module: `HGNC_DOWNLOAD` [#540](https://github.com/nf-core/rnafusion/pull/540)
 
 ### Changed
 
 - Updated modules and migrated non-specific modules to nf-core/modules [#484](https://github.com/nf-core/rnafusion/pull/484)
 - Updated to nf-core/tools 3.0.2 [#504](https://github.com/nf-core/rnafusion/pull/504)
+- Remove local module `RRNA_TRANSCRIPTS` (replaced by nf-core module) [#541](https://github.com/nf-core/rnafusion/pull/541)
 
 ### Fixed
 
