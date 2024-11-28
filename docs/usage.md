@@ -49,6 +49,8 @@ nextflow run nf-core/rnafusion \
   --outdir <OUTPUT/PATH>
 ```
 
+If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
+
 ### Downloading the cosmic database with SANGER or QUIAGEN
 
 #### For academic users
@@ -155,6 +157,9 @@ nextflow run nf-core/rnafusion \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
 ```
+
+If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
+
 
 > **IMPORTANT: Either `--all` or `--<tool>`** is necessary to run detection tools
 
