@@ -45,7 +45,7 @@ nextflow_pipeline {
         when {
             params {
                 outdir          = "$outputDir"
-                fastp_trim      = true
+                fastp_trim      = false
                 cosmic_username = "user" // placeholder string to avoid null input val in process
                 cosmic_passwd   = "password" // placeholder string to avoid null input val in process
                 all             = true

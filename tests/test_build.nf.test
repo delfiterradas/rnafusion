@@ -13,6 +13,7 @@ nextflow_pipeline {
             params {
                 outdir = "$outputDir"
                 fastp_trim = true
+                no_cosmic  = true
             }
         }
 
@@ -44,6 +45,7 @@ nextflow_pipeline {
             params {
                 outdir     = "$outputDir"
                 fastp_trim = false
+                no_cosmic  = true
             }
         }
 

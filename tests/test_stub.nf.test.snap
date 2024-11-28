@@ -1,18 +1,12 @@
 {
     "stub test no fastp trim": {
         "content": [
-            17,
+            15,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
-                "FASTP": {
-                    "fastp": "0.23.4"
-                },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "FASTQC_FOR_FASTP": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER": {
@@ -61,18 +55,9 @@
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
-                "fastp",
-                "fastp/test.fastp.html",
-                "fastp/test.fastp.json",
-                "fastp/test.fastp.log",
-                "fastp/test_1.fastp.fastq.gz",
-                "fastp/test_2.fastp.fastq.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
-                "fastqc_for_fastp",
-                "fastqc_for_fastp/test_trimmed.html",
-                "fastqc_for_fastp/test_trimmed.zip",
                 "fusioncatcher",
                 "fusioncatcher/test.fusioncatcher.fusion-genes.txt",
                 "fusioncatcher/test.fusioncatcher.log",
@@ -156,15 +141,8 @@
             [
                 "test.arriba.fusions.discarded.tsv:md5,f50b84b1db4b83ba62ec1deacc69c260",
                 "test.arriba.fusions.tsv:md5,f50b84b1db4b83ba62ec1deacc69c260",
-                "test.fastp.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "test.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "test.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "test_1.fastp.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                "test_2.fastp.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
                 "test.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "test_trimmed.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "test_trimmed.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test.fusioncatcher.fusion-genes.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test.fusioncatcher.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "test.fusioncatcher.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -234,7 +212,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T21:06:57.215801319"
+        "timestamp": "2024-11-28T21:25:48.332933141"
     },
     "stub test with fastp trim": {
         "content": [
