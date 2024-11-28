@@ -77,7 +77,7 @@
                     },
                     "picard/collectrnaseqmetrics": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "49f4e50534fe4b64101e62ea41d5dc43b1324358",
                         "installed_by": ["modules"]
                     },
                     "picard/collectwgsmetrics": {
