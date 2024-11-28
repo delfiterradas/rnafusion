@@ -1,5 +1,5 @@
 {
-    "stub test with fastp trim": {
+    "stub test no fastp trim": {
         "content": [
             17,
             {
@@ -29,7 +29,7 @@
                     "picard": "3.2.0-1-g3948afb6b"
                 },
                 "PICARD_COLLECTRNASEQMETRICS": {
-                    "picard": "3.2.0-1-g3948afb6b"
+                    "picard": "3.3.0"
                 },
                 "SAMTOOLS_INDEX_FOR_STARFUSION": {
                     "samtools": 1.21
@@ -234,6 +234,243 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T14:46:31.727687792"
+        "timestamp": "2024-11-28T21:06:57.215801319"
+    },
+    "stub test with fastp trim": {
+        "content": [
+            17,
+            {
+                "ARRIBA_ARRIBA": {
+                    "arriba": "2.4.0"
+                },
+                "FASTP": {
+                    "fastp": "0.23.4"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQC_FOR_FASTP": {
+                    "fastqc": "0.12.1"
+                },
+                "FUSIONCATCHER": {
+                    "fusioncatcher": 1.33
+                },
+                "FUSIONREPORT": {
+                    "fusion_report": "2.1.5"
+                },
+                "GATK4_MARKDUPLICATES": {
+                    "gatk4": "4.5.0.0",
+                    "samtools": "1.19.2"
+                },
+                "PICARD_COLLECTINSERTSIZEMETRICS": {
+                    "picard": "3.2.0-1-g3948afb6b"
+                },
+                "PICARD_COLLECTRNASEQMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "SAMTOOLS_INDEX_FOR_STARFUSION": {
+                    "samtools": 1.21
+                },
+                "STARFUSION": {
+                    "STAR-Fusion": "1.7.0"
+                },
+                "STAR_FOR_ARRIBA": {
+                    "star": "2.7.10a",
+                    "samtools": 1.18,
+                    "gawk": "5.1.0"
+                },
+                "STAR_FOR_STARFUSION": {
+                    "star": "2.7.10a",
+                    "samtools": 1.18,
+                    "gawk": "5.1.0"
+                },
+                "STRINGTIE_MERGE": {
+                    "stringtie": "2.2.1"
+                },
+                "STRINGTIE_STRINGTIE": {
+                    "stringtie": "2.2.1"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
+            [
+                "arriba",
+                "arriba/test.arriba.fusions.discarded.tsv",
+                "arriba/test.arriba.fusions.tsv",
+                "fastp",
+                "fastp/test.fastp.html",
+                "fastp/test.fastp.json",
+                "fastp/test.fastp.log",
+                "fastp/test_1.fastp.fastq.gz",
+                "fastp/test_2.fastp.fastq.gz",
+                "fastqc",
+                "fastqc/test.html",
+                "fastqc/test.zip",
+                "fastqc_for_fastp",
+                "fastqc_for_fastp/test_trimmed.html",
+                "fastqc_for_fastp/test_trimmed.zip",
+                "fusioncatcher",
+                "fusioncatcher/test.fusioncatcher.fusion-genes.txt",
+                "fusioncatcher/test.fusioncatcher.log",
+                "fusioncatcher/test.fusioncatcher.summary.txt",
+                "fusionreport",
+                "fusionreport/test",
+                "fusionreport/test/AAA_BBB.html",
+                "fusionreport/test/test.fusionreport.tsv",
+                "fusionreport/test/test.fusionreport_filtered.tsv",
+                "fusionreport/test/test.fusions.csv",
+                "fusionreport/test/test.fusions.json",
+                "fusionreport/test/test_fusionreport_index.html",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_report.html",
+                "picard",
+                "picard/test.bai",
+                "picard/test.bam",
+                "picard/test.bam.metrics",
+                "picard/test.cram",
+                "picard/test.cram.crai",
+                "picard/test.rna_metrics",
+                "picard/test_collectinsertsize.pdf",
+                "picard/test_collectinsertsize.txt",
+                "pipeline_info",
+                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "salmon",
+                "salmon/test",
+                "salmon/test_lib_format_counts.json",
+                "salmon/test_meta_info.json",
+                "star_for_arriba",
+                "star_for_arriba/test.Aligned.sortedByCoord.out.bam",
+                "star_for_arriba/test.Aligned.unsort.out.bam",
+                "star_for_arriba/test.Chimeric.out.junction",
+                "star_for_arriba/test.Log.final.out",
+                "star_for_arriba/test.Log.out",
+                "star_for_arriba/test.Log.progress.out",
+                "star_for_arriba/test.ReadsPerGene.out.tab",
+                "star_for_arriba/test.SJ.out.tab",
+                "star_for_arriba/test.Signal.UniqueMultiple.str1.out.bg",
+                "star_for_arriba/test.Signal.UniqueMultiple.str1.out.wig",
+                "star_for_arriba/test.out.sam",
+                "star_for_arriba/test.sortedByCoord.out.bam",
+                "star_for_arriba/test.tab",
+                "star_for_arriba/test.toTranscriptome.out.bam",
+                "star_for_arriba/test.unmapped_1.fastq.gz",
+                "star_for_arriba/test.unmapped_2.fastq.gz",
+                "star_for_arriba/testXd.out.bam",
+                "star_for_starfusion",
+                "star_for_starfusion/test.Aligned.sortedByCoord.out.bam",
+                "star_for_starfusion/test.Aligned.unsort.out.bam",
+                "star_for_starfusion/test.Chimeric.out.junction",
+                "star_for_starfusion/test.Log.final.out",
+                "star_for_starfusion/test.Log.out",
+                "star_for_starfusion/test.Log.progress.out",
+                "star_for_starfusion/test.ReadsPerGene.out.tab",
+                "star_for_starfusion/test.SJ.out.tab",
+                "star_for_starfusion/test.Signal.UniqueMultiple.str1.out.bg",
+                "star_for_starfusion/test.Signal.UniqueMultiple.str1.out.wig",
+                "star_for_starfusion/test.out.sam",
+                "star_for_starfusion/test.sortedByCoord.out.bam",
+                "star_for_starfusion/test.sortedByCoord.out.bam.bai",
+                "star_for_starfusion/test.tab",
+                "star_for_starfusion/test.toTranscriptome.out.bam",
+                "star_for_starfusion/test.unmapped_1.fastq.gz",
+                "star_for_starfusion/test.unmapped_2.fastq.gz",
+                "star_for_starfusion/testXd.out.bam",
+                "starfusion",
+                "starfusion/test.starfusion.abridged.coding_effect.tsv",
+                "starfusion/test.starfusion.abridged.tsv",
+                "starfusion/test.starfusion.fusion_predictions.tsv",
+                "stringtie",
+                "stringtie/[:]",
+                "stringtie/[:]/stringtie.merged.gtf",
+                "stringtie/test.ballgown",
+                "stringtie/test.coverage.gtf",
+                "stringtie/test.gene.abundance.txt",
+                "stringtie/test.transcripts.gtf"
+            ],
+            [
+                "test.arriba.fusions.discarded.tsv:md5,f50b84b1db4b83ba62ec1deacc69c260",
+                "test.arriba.fusions.tsv:md5,f50b84b1db4b83ba62ec1deacc69c260",
+                "test.fastp.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_1.fastp.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "test_2.fastp.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "test.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_trimmed.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_trimmed.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusioncatcher.fusion-genes.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusioncatcher.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusioncatcher.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "AAA_BBB.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusionreport.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusionreport_filtered.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusions.csv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.fusions.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_fusionreport_index.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "multiqc_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.bam.metrics:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.cram:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.cram.crai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.rna_metrics:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_collectinsertsize.pdf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_collectinsertsize.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_lib_format_counts.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test_meta_info.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Aligned.sortedByCoord.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Aligned.unsort.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Chimeric.out.junction:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Log.final.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Log.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Log.progress.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.ReadsPerGene.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.SJ.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Signal.UniqueMultiple.str1.out.bg:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Signal.UniqueMultiple.str1.out.wig:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.out.sam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.sortedByCoord.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.toTranscriptome.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.unmapped_1.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "test.unmapped_2.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "testXd.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Aligned.sortedByCoord.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Aligned.unsort.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Chimeric.out.junction:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Log.final.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Log.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Log.progress.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.ReadsPerGene.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.SJ.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Signal.UniqueMultiple.str1.out.bg:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.Signal.UniqueMultiple.str1.out.wig:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.out.sam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.sortedByCoord.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.sortedByCoord.out.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.toTranscriptome.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.unmapped_1.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "test.unmapped_2.fastq.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "testXd.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.starfusion.abridged.coding_effect.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.starfusion.abridged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.starfusion.fusion_predictions.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "stringtie.merged.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.ballgown:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.coverage.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.gene.abundance.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.transcripts.gtf:md5,d41d8cd98f00b204e9800998ecf8427e"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-11-28T21:06:29.861338628"
     }
 }

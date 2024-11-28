@@ -2,21 +2,17 @@ nextflow_pipeline {
 
     name "Test pipeline"
     script "../main.nf"
-    profile "test"
-    options "-stub" // TODO remove once the pipeline is fixed
+    profile "test_build"
     tag "pipeline"
     tag "pipeline_rnafusion"
-    tag "test_stub"
+    tag "test_build"
 
-    test("stub test with fastp trim") {
+    test("test_build with fastp_trim") {
 
         when {
             params {
-                outdir          = "$outputDir"
-                fastp_trim      = true
-                cosmic_username = "user" // placeholder string to avoid null input val in process
-                cosmic_passwd   = "password" // placeholder string to avoid null input val in process
-                all             = true
+                outdir = "$outputDir"
+                fastp_trim = true
             }
         }
 
@@ -42,15 +38,12 @@ nextflow_pipeline {
         }
     }
 
-    test("stub test no fastp trim") {
+    test("test_build no fastp_trim") {
 
         when {
             params {
-                outdir          = "$outputDir"
-                fastp_trim      = true
-                cosmic_username = "user" // placeholder string to avoid null input val in process
-                cosmic_passwd   = "password" // placeholder string to avoid null input val in process
-                all             = true
+                outdir     = "$outputDir"
+                fastp_trim = false
             }
         }
 

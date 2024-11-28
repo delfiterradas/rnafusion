@@ -1,4 +1,3 @@
 pipeline_info/*.{html,json,txt,yml}
-references
 references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz
 references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz
