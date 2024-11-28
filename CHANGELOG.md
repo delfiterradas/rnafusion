@@ -31,11 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-
-| Old parameter                    | New parameter                     |
-| -------------------------------- | --------------------------------- |
-|                                  | `--no_cosmic`                     |
-
+| Old parameter | New parameter |
+| ------------- | ------------- |
+|               | `--no_cosmic` |
 
 ## v3.0.2 - [2024-04-10]
 

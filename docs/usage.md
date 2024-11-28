@@ -160,7 +160,6 @@ nextflow run nf-core/rnafusion \
 
 If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
 
-
 > **IMPORTANT: Either `--all` or `--<tool>`** is necessary to run detection tools
 
 `--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--build_references`.
