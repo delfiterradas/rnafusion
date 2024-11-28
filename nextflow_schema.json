@@ -348,6 +348,11 @@
                     "pattern": "^\\S+\\.interval_list?$",
                     "description": "Path to ribosomal interval list.",
                     "fa_icon": "far fa-file-code"
+                },
+                "no_cosmic": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Avoid using Cosmic DB (for example in clinical case applications where a paid license applies."
                 }
             }
         },

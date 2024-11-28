@@ -3,7 +3,7 @@ process FUSIONREPORT_DOWNLOAD {
     label 'process_medium'
 
     conda "bioconda::star=2.7.9a"
-    container "docker.io/clinicalgenomics/fusion-report:2.1.8"
+    container "docker.io/clinicalgenomics/fusion-report:3.1.0"
 
     input:
     val(username)
@@ -15,6 +15,7 @@ process FUSIONREPORT_DOWNLOAD {
 
     script:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args ?: ''
     """
     fusion_report download --cosmic_usr "$username" --cosmic_passwd "$passwd" $args ./
 
