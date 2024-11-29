@@ -18,6 +18,10 @@
                 "skip_vis": {
                     "type": "boolean",
                     "description": "Skip visualisation steps"
+                },
+                "skip_vcf": {
+                    "type": "boolean",
+                    "description": "Skip vcf generation step"
                 }
             },
             "fa_icon": "fas fa-fast-forward"

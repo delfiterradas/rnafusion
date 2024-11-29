@@ -13,12 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local module: `ENSEMBL_DOWNLOAD` [#539](https://github.com/nf-core/rnafusion/pull/539)
 - Add nf-test to local module: `HGNC_DOWNLOAD` [#540](https://github.com/nf-core/rnafusion/pull/540)
 - Option to avoid using COSMIC (for example in the case of clinical use) [547](https://github.com/nf-core/rnafusion/pull/547)
+- Add nf-test to nf-core module: `PICARD_COLLECTRNASEQMETRICS` and update module [#551](https://github.com/nf-core/rnafusion/pull/551)
+- Add `--skip_vcf` boolean parameter to skip vcf file generation [#554](https://github.com/nf-core/rnafusion/pull/554)
 
 ### Changed
 
 - Updated modules and migrated non-specific modules to nf-core/modules [#484](https://github.com/nf-core/rnafusion/pull/484)
 - Updated to nf-core/tools 3.0.2 [#504](https://github.com/nf-core/rnafusion/pull/504)
 - Remove local module `RRNA_TRANSCRIPTS` (replaced by nf-core module) [#541](https://github.com/nf-core/rnafusion/pull/541)
+- Allow fastq files without a dot before .fn(.gz)/.fastq(.gz) files [#548](https://github.com/nf-core/rnafusion/pull/548)
 
 ### Fixed
 
