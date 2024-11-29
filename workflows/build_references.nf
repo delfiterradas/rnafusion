@@ -76,8 +76,8 @@ workflow BUILD_REFERENCES {
     } else {
         UCSC_GTFTOGENEPRED(STARFUSION_DOWNLOAD.out.chrgtf)
     }
-    if ((params.fusionreport || params.all) && !params.no_cosmic) {
-        FUSIONREPORT_DOWNLOAD( params.cosmic_username, params.cosmic_passwd )
+    if (params.fusionreport || params.all) {
+        FUSIONREPORT_DOWNLOAD()
     }
 
 }
