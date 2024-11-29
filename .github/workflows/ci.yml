@@ -89,7 +89,7 @@ jobs:
           -stub --build_references \
           --outdir /home/runner/work/rnafusion/rnafusion/results --all \
           --genomes_base /home/runner/work/rnafusion/rnafusion/results/references \
-          --cosmic_username ${{ secrets.COSMIC_USERNAME }} --cosmic_passwd ${{ secrets.COSMIC_PASSWD }}
+          --no_cosmic
 
       - name: "Run pipeline with test data ${{ matrix.NXF_VER }} | ${{ matrix.test_name }} | ${{ matrix.profile }}"
         run: |
