@@ -10,7 +10,7 @@ process FUSIONREPORT_DOWNLOAD {
     val(passwd)
 
     output:
-    path "*"                , emit: reference
+    path "*.db"             , emit: reference
     path "versions.yml"     , emit: versions
 
     script:

@@ -58,11 +58,7 @@ process FUSIONREPORT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusion_report: sth
+        fusion_report: \$(fusion_report --version | sed 's/fusion-report //')
     END_VERSIONS
     """
 }
-    // cat <<-END_VERSIONS > versions.yml
-    // "${task.process}":
-    //     fusion_report: \$(fusion_report --version 2>&1 | sed 's/fusion-report //')
-    // END_VERSIONS

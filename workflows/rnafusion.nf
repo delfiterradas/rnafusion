@@ -13,6 +13,10 @@ include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringti
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
 include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
 include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
+include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
+include { paramsSummaryMap              }   from 'plugin/nf-schema'
+include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
@@ -63,9 +67,10 @@ workflow RNAFUSION {
     ch_reads = TRIM_WORKFLOW.out.trimmed_reads
     ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
 
-    // SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ meta, index ->  index  }, BUILD_REFERENCES.out.ch_gtf.map{ meta, gtf ->  gtf  }, [], false, 'A')
-    // ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.zi.collect{it[1]})
-    // ch_versions = ch_versions.mix(SALMON_QUANT.out.versions)
+
+    SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
+    ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
+    ch_versions = ch_versions.mix(SALMON_QUANT.out.versions)
 
 
     //
@@ -139,97 +144,86 @@ workflow RNAFUSION {
     ch_versions = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
 
 
-    // //QC
-    // QC_WORKFLOW (
-    //     ch_reads,
-    //     STARFUSION_WORKFLOW.out.ch_bam_sorted,
-    //     STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
-    //     BUILD_REFERENCES.out.ch_gtf,
-    //     BUILD_REFERENCES.out.ch_refflat,
-    //     BUILD_REFERENCES.out.ch_fasta,
-    //     BUILD_REFERENCES.out.ch_fai,
-    //     BUILD_REFERENCES.out.ch_rrna_interval
-    // )
-    // ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
+    //QC
+    QC_WORKFLOW (
+        ch_reads,
+        STARFUSION_WORKFLOW.out.ch_bam_sorted,
+        STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
+        BUILD_REFERENCES.out.ch_gtf,
+        BUILD_REFERENCES.out.ch_refflat,
+        BUILD_REFERENCES.out.ch_fasta,
+        BUILD_REFERENCES.out.ch_fai,
+        BUILD_REFERENCES.out.ch_rrna_interval
+    )
+    ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
 
-//     //
-//     // Collate and save software versions
-//     //
-//     softwareVersionsToYAML(ch_versions)
-//         .collectFile(
-//             storeDir: "${params.outdir}/pipeline_info",
-//             name: 'nf_core_pipeline_software_mqc_versions.yml',
-//             sort: true,
-//             newLine: true
-//         ).set { ch_collated_versions }
+    //
+    // Collate and save software versions
+    //
+    softwareVersionsToYAML(ch_versions)
+        .collectFile(
+            storeDir: "${params.outdir}/pipeline_info",
+            name: 'nf_core_pipeline_software_mqc_versions.yml',
+            sort: true,
+            newLine: true
+        ).set { ch_collated_versions }
 
 
-    // //
-    // // Collate and save software versions
-    // //
-    // softwareVersionsToYAML(ch_versions)
-    //     .collectFile(
-    //         storeDir: "${params.outdir}/pipeline_info",
-    //         name: 'nf_core_'  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
-    //         sort: true,
-    //         newLine: true
-    //     ).set { ch_collated_versions }
+    //
+    // MODULE: MultiQC
+    //
+    ch_multiqc_config        = Channel.fromPath(
+        "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+    ch_multiqc_custom_config = params.multiqc_config ?
+        Channel.fromPath(params.multiqc_config, checkIfExists: true) :
+        Channel.empty()
+    ch_multiqc_logo          = params.multiqc_logo ?
+        Channel.fromPath(params.multiqc_logo, checkIfExists: true) :
+        Channel.empty()
 
-    // //
-    // // MODULE: MultiQC
-    // //
-    // ch_multiqc_config        = Channel.fromPath(
-    //     "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    // ch_multiqc_custom_config = params.multiqc_config ?
-    //     Channel.fromPath(params.multiqc_config, checkIfExists: true) :
-    //     Channel.empty()
-    // ch_multiqc_logo          = params.multiqc_logo ?
-    //     Channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-    //     Channel.empty()
+    summary_params      = paramsSummaryMap(
+        workflow, parameters_schema: "nextflow_schema.json")
+    ch_workflow_summary = Channel.value(paramsSummaryMultiqc(summary_params))
+    ch_multiqc_files = ch_multiqc_files.mix(
+        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+    ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
+        file(params.multiqc_methods_description, checkIfExists: true) :
+        file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
+    ch_methods_description                = Channel.value(
+        methodsDescriptionText(ch_multiqc_custom_methods_description))
 
-    // summary_params      = paramsSummaryMap(
-    //     workflow, parameters_schema: "nextflow_schema.json")
-    // ch_workflow_summary = Channel.value(paramsSummaryMultiqc(summary_params))
-    // ch_multiqc_files = ch_multiqc_files.mix(
-    //     ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    // ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
-    //     file(params.multiqc_methods_description, checkIfExists: true) :
-    //     file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    // ch_methods_description                = Channel.value(
-    //     methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
+    ch_multiqc_files = ch_multiqc_files.mix(
+        ch_methods_description.collectFile(
+            name: 'methods_description_mqc.yaml',
+            sort: true
+        )
+    )
+    ch_multiqc_files                      = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.fastp_html.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.fastp_json.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.fastqc_trimmed.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_stats.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_gene_count.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.rnaseq_metrics.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.duplicate_metrics.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.insertsize_metrics.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files                      = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
 
-    // ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
-    // ch_multiqc_files = ch_multiqc_files.mix(
-    //     ch_methods_description.collectFile(
-    //         name: 'methods_description_mqc.yaml',
-    //         sort: true
-    //     )
-    // )
-    // ch_multiqc_files                      = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_stats.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_gene_count.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.rnaseq_metrics.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.duplicate_metrics.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.insertsize_metrics.collect{it[1]}.ifEmpty([]))
-    // ch_multiqc_files                      = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
-
-    // MULTIQC (
-    //     ch_multiqc_files.collect(),
-    //     ch_multiqc_config.toList(),
-    //     ch_multiqc_custom_config.toList(),
-    //     ch_multiqc_logo.toList(),
-    //     [],
-    //     []
-    // )
+    MULTIQC (
+        ch_multiqc_files.collect(),
+        ch_multiqc_config.toList(),
+        ch_multiqc_custom_config.toList(),
+        ch_multiqc_logo.toList(),
+        [],
+        []
+    )
 
 
 
-    // emit:
-    // multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    // versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    emit:
+    multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 
