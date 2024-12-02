@@ -5,10 +5,6 @@ process FUSIONREPORT_DOWNLOAD {
     conda "bioconda::star=2.7.9a"
     container "docker.io/clinicalgenomics/fusion-report:3.1.0"
 
-    input:
-    val(username)
-    val(passwd)
-
     output:
     path "*"                , emit: reference
     path "versions.yml"     , emit: versions
@@ -17,7 +13,7 @@ process FUSIONREPORT_DOWNLOAD {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args ?: ''
     """
-    fusion_report download --cosmic_usr "$username" --cosmic_passwd "$passwd" $args ./
+    fusion_report download $args ./
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
