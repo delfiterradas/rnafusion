@@ -87,7 +87,7 @@
                     },
                     "rrnatranscripts": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "812edf8cf702de42d2d8c7314d6f03b97e20abeb",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/rrnatranscripts/rrnatranscripts.diff"
                     },
