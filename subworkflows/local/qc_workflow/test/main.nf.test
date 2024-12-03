@@ -83,40 +83,32 @@ nextflow_workflow {
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam", checkIfExists: true)
                     ])
 
-                // ch_bam_sorted_indexed
-                input[1] = Channel.of(
-                    [
-                        [id: "chr22_bam"],
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam", checkIfExists: true),
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai", checkIfExists: true)
-                    ])
-
                 // ch_chrgtf
-                input[2] = Channel.of(
+                input[1] = Channel.of(
                     [
                         [ id: "chr22_gtf" ],
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf", checkIfExists: true)
                     ])
 
                 // ch_refflat
-                input[3] = UCSC_GTFTOGENEPRED.out.refflat
+                input[2] = UCSC_GTFTOGENEPRED.out.refflat
 
                 // ch_fasta
-                input[4] = Channel.of(
+                input[3] = Channel.of(
                     [
                         [ id: "test_ref" ],
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta", checkIfExist: true)
                     ] )
 
                 // ch_fai
-                input[5] = Channel.of(
+                input[4] = Channel.of(
                     [
                         [ id: "test_ref" ],
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta.fai", checkIfExist: true)
                     ] )
 
                 // ch rRNA interval list
-                input[6] = GATK4_BEDTOINTERVALLIST.out.interval_list
+                input[5] = GATK4_BEDTOINTERVALLIST.out.interval_list
                 """
             }
         }
@@ -124,10 +116,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    file( workflow.out.versions[0] ),
+                    file( workflow.out.rnaseq_metrics[0][1] ).readLines()[4..-1],
+                    file( workflow.out.duplicate_metrics[0][1] ).readLines()[4..-1],
+                    file( workflow.out.insertsize_metrics[0][1] ).readLines()[4..-1],
+                ).match() }
             )
         }
-
     }
 
 }
