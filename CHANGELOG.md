@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Option to avoid using COSMIC (for example in the case of clinical use) [#547](https://github.com/nf-core/rnafusion/pull/547)
 - Add nf-test to nf-core module: `PICARD_COLLECTRNASEQMETRICS` and update module [#551](https://github.com/nf-core/rnafusion/pull/551)
 - Add `--skip_vcf` boolean parameter to skip vcf file generation [#554](https://github.com/nf-core/rnafusion/pull/554)
+- Add nf-test to local module: `FUSIONREPORT_DOWNLOAD` [#560](https://github.com/nf-core/rnafusion/pull/560)
 
 ### Changed
 
@@ -30,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug when trying to build indices behind a proxy and wget was unable to download arriba indices [#495](https://github.com/nf-core/rnafusion/issues/495)
 - Fixed bug in `FUSIONREPORT_DOWNLOAD` when building references with `--no_cosmic parameter` [#555](https://github.com/nf-core/rnafusion/issues/555)
 - Refactor structure in `FUSIONREPORT_DOWNLOAD` to use cosmic credentials in `ext.args` [#556](https://github.com/nf-core/rnafusion/issues/556)
+- Fixed bug in nf-core `RRNATRANSCRIPTS` module [#563](https://github.com/nf-core/rnafusion/issues/563)
+- Fixed bug in `GFFREAD` that caused output `gffread_fasta` not being produced [#565](https://github.com/nf-core/rnafusion/issues/565)
 
 ### Removed
 
