@@ -7,7 +7,7 @@ include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_wor
 include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
 include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
-include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow'
+include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
 include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
 include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
