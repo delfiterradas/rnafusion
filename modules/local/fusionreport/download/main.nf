@@ -6,7 +6,11 @@ process FUSIONREPORT_DOWNLOAD {
     container "docker.io/clinicalgenomics/fusion-report:3.1.0"
 
     output:
-    path "*"                , emit: reference
+    path "fusiongdb2.db"    , emit: fusiongdb2
+    path "mitelman.db"      , emit: mitelman
+    path "cosmic.db"        , emit: cosmic, optional: true
+    path "*.txt"            , emit: timestamp
+    path "*.log"            , emit: log
     path "versions.yml"     , emit: versions
 
     script:
@@ -26,6 +30,9 @@ process FUSIONREPORT_DOWNLOAD {
     touch cosmic.db
     touch fusiongdb2.db
     touch mitelman.db
+    touch DB-timestamp.txt
+    touch fusion_report.log
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         fusion_report: \$(fusion_report --version | sed 's/fusion-report //')
