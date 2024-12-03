@@ -5,6 +5,7 @@ nextflow_process {
     process "FUSIONREPORT_DOWNLOAD"
 
     test("Download fusionreport databases") {
+        config './nextflow.config'
 
         when {
             process {
