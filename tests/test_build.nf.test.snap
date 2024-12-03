@@ -2,6 +2,8 @@
     "test_build": {
         "content": [
             [
+                "bedops",
+                "bedops/Homo_sapiens.GRCh38.102_rrna_intervals.gtf.bed",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.102.dna.primary_assembly.dict",
                 "gffread",
@@ -15,12 +17,15 @@
                 "references/ensembl/Homo_sapiens.GRCh38.102.genepred",
                 "references/ensembl/Homo_sapiens.GRCh38.102.gtf",
                 "references/ensembl/Homo_sapiens.GRCh38.102.refflat",
+                "references/ensembl/Homo_sapiens.GRCh38.102_rrna_intervals.gtf.interval_list",
                 "references/hgnc",
                 "references/hgnc/HGNC-DB-timestamp.txt",
                 "references/hgnc/hgnc_complete_set.txt",
-                "rrnatranscripts"
+                "rrnatranscripts",
+                "rrnatranscripts/Homo_sapiens.GRCh38.102_rrna_intervals.gtf"
             ],
             [
+                "Homo_sapiens.GRCh38.102_rrna_intervals.gtf.bed:md5,5bc3ccc76735ae46699a75269f0ea65b",
                 "Homo_sapiens.GRCh38.102.dna.primary_assembly.dict:md5,092f1bf29fce906ff7b5ece02b4b21c8",
                 "Homo_sapiens.GRCh38.102.gff3:md5,f559ec7a1e361351b97f4856ddfcbf84",
                 "Homo_sapiens.GRCh38.102.chr.gtf:md5,0069687307852c63596b4d2ebdbbaf0c",
@@ -28,13 +33,15 @@
                 "Homo_sapiens.GRCh38.102.genepred:md5,59c577ca4ab033c0ce1feac1e387bcab",
                 "Homo_sapiens.GRCh38.102.gtf:md5,defac755cd9aa4e82ec33398c27745ef",
                 "Homo_sapiens.GRCh38.102.refflat:md5,ef095e13743811c31d44752c32e9673e",
-                "hgnc_complete_set.txt:md5,34f4bd879d972e511fcb0318df9775b6"
+                "Homo_sapiens.GRCh38.102_rrna_intervals.gtf.interval_list:md5,0abf61877f65247b15c438d605d85599",
+                "hgnc_complete_set.txt:md5,34f4bd879d972e511fcb0318df9775b6",
+                "Homo_sapiens.GRCh38.102_rrna_intervals.gtf:md5,744bf505deb50837b15441e808cad345"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T13:45:13.303642069"
+        "timestamp": "2024-12-03T15:04:03.186303848"
     }
 }
