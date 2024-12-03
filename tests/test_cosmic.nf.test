@@ -43,7 +43,6 @@ nextflow_pipeline {
         when {
             params {
                 outdir     = "$outputDir"
-                fastp_trim = false
             }
         }
 
@@ -73,8 +72,8 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir     = "$outputDir"
-                fastp_trim = false
+                outdir           = "$outputDir"
+                build_references = true
             }
         }
 

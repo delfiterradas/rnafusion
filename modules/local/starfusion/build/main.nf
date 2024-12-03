@@ -1,7 +1,6 @@
 process STARFUSION_BUILD {
     tag 'star-fusion'
 
-    conda "bioconda::dfam=3.7 bioconda::hmmer=3.4 bioconda::star-fusion=1.7.0 bioconda::trinity=2.15.2 bioconda::samtools=1.21 bioconda::star=2.7.11b"
     container 'community.wave.seqera.io/library/dfam_hmmer_samtools_star-fusion_pruned:5694d82381bf039e'
 
     input:

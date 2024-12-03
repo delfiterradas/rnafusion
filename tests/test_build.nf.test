@@ -12,7 +12,6 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
-                no_cosmic  = true
             }
         }
 

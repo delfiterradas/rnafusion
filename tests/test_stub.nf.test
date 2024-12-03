@@ -3,7 +3,7 @@ nextflow_pipeline {
     name "Test pipeline"
     script "../main.nf"
     profile "test"
-    options "-stub" // TODO remove once the pipeline is fixed
+    options "-stub" // TODO remove once reference files are available
     tag "pipeline"
     tag "pipeline_rnafusion"
     tag "test_stub"
@@ -14,9 +14,6 @@ nextflow_pipeline {
             params {
                 outdir          = "$outputDir"
                 fastp_trim      = true
-                cosmic_username = "user" // placeholder string to avoid null input val in process
-                cosmic_passwd   = "password" // placeholder string to avoid null input val in process
-                all             = true
             }
         }
 
@@ -25,7 +22,7 @@ nextflow_pipeline {
             // Ignore files with timestamps in their names
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            // def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore') //TODO uncomment once -stub is removed
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
@@ -36,7 +33,7 @@ nextflow_pipeline {
                     // All stable path name, with a relative path
                     stable_name,
                     // All files with stable contents
-                    stable_path
+                    // stable_path // TODO uncomment once -stub is removed
                 ).match() }
             )
         }
@@ -47,10 +44,6 @@ nextflow_pipeline {
         when {
             params {
                 outdir          = "$outputDir"
-                fastp_trim      = false
-                cosmic_username = "user" // placeholder string to avoid null input val in process
-                cosmic_passwd   = "password" // placeholder string to avoid null input val in process
-                all             = true
             }
         }
 
