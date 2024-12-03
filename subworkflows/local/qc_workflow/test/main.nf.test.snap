@@ -1,0 +1,71 @@
+{
+    "QC_WORKFLOW - Homo sapiens chr22": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,3f13b395c67e317f74194b3b6c89f139",
+                    "versions.yml:md5,5b495d995918c2b39708211c01036a5a",
+                    "versions.yml:md5,5c0ffe79bb7206c2652cf7f477f9b53f"
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "chr22_bam"
+                        },
+                        "chr22_bam.rna_metrics:md5,3415d05e545714d98114ab36a25afd91"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "chr22_bam"
+                        },
+                        "chr22_bam.bam.metrics:md5,3c9779078c3afdb9d438956473111bb5"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "chr22_bam"
+                        },
+                        "chr22_bam_collectinsertsize.txt:md5,846e2e72f7c4cb287d778b1739fa221e"
+                    ]
+                ],
+                "duplicate_metrics": [
+                    [
+                        {
+                            "id": "chr22_bam"
+                        },
+                        "chr22_bam.bam.metrics:md5,3c9779078c3afdb9d438956473111bb5"
+                    ]
+                ],
+                "insertsize_metrics": [
+                    [
+                        {
+                            "id": "chr22_bam"
+                        },
+                        "chr22_bam_collectinsertsize.txt:md5,846e2e72f7c4cb287d778b1739fa221e"
+                    ]
+                ],
+                "rnaseq_metrics": [
+                    [
+                        {
+                            "id": "chr22_bam"
+                        },
+                        "chr22_bam.rna_metrics:md5,3415d05e545714d98114ab36a25afd91"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,3f13b395c67e317f74194b3b6c89f139",
+                    "versions.yml:md5,5b495d995918c2b39708211c01036a5a",
+                    "versions.yml:md5,5c0ffe79bb7206c2652cf7f477f9b53f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-03T19:48:07.253685279"
+    }
+}
