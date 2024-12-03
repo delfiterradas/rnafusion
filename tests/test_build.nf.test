@@ -12,6 +12,7 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                all    = false // Output files when running all are too big for CI
             }
         }
 
