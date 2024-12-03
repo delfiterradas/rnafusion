@@ -64,7 +64,6 @@
                 "cytobands_hg38_GRCh38_v2.4.0.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "protein_domains_hg38_GRCh38_v2.4.0.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "Homo_sapiens.GRCh38.102.chr.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "Homo_sapiens.GRCh38.102.dna.primary_assembly.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "Homo_sapiens.GRCh38.102.dna.primary_assembly.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "Homo_sapiens.GRCh38.102.genepred:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "Homo_sapiens.GRCh38.102.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -74,7 +73,6 @@
                 "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "HGNC-DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "hgnc_complete_set.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "Genome:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "Log.out:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -100,6 +98,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-29T17:29:03.231447837"
+        "timestamp": "2024-12-03T13:46:03.887799524"
     }
 }
