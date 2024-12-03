@@ -1,5 +1,5 @@
 process RRNATRANSCRIPTS {
-    tag '$rrna'
+    tag "$gtf"
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
