@@ -28,7 +28,7 @@ jobs:
       matrix:
         NXF_VER:
           - "24.04.2"
-          - "latest-everything"
+          - "latest-stable"
         trim_parameters:
           - "--fastp_trim false"
           - "--fastp_trim true"
