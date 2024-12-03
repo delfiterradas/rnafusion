@@ -1,0 +1,133 @@
+nextflow_workflow {
+
+    name "Test Subworkflow QC_WORKFLOW"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "QC_WORKFLOW"
+    tag "qc"
+    tag "subworkflow"
+
+    test("QC_WORKFLOW - Homo sapiens chr22") {
+
+        // Generate refflat file
+        setup {
+
+            // Create refflat reference
+            run("UCSC_GTFTOGENEPRED") {
+                script "../../../../modules/nf-core/ucsc/gtftogenepred/main.nf"
+                process {
+                    """
+                    input[0] =
+                        Channel.fromPath(
+                            "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf",
+                            checkIfExists: true
+                        )
+                        .map{ [ [id:it.Name], it ] }
+                    """
+                }
+            }
+
+            // Filter GTF to extract rRNA genes
+            run("RRNATRANSCRIPTS") {
+                script "../../../../modules/nf-core/rrnatranscripts/main.nf"
+                process {
+                    """
+                    input[0] = Channel.fromPath("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf", checkIfExists: true)
+                    """
+                }
+            }
+
+            // Convert rRNA GTF to BED
+            run("BEDOPS_CONVERT2BED") {
+                script "../../../../modules/nf-core/bedops/convert2bed/main.nf"
+                process {
+                    """
+                    input[0] = RRNATRANSCRIPTS.out.rrna_gtf.map{ it -> [ [id:it.Name], it ] }
+                    """
+                }
+            }
+
+            // Convert rRNA BED to interval list (the necessary file)
+            run("GATK4_BEDTOINTERVALLIST") {
+                script "../../../../modules/nf-core/gatk4/bedtointervallist/main.nf"
+                process {
+                    """
+                    input[0] = BEDOPS_CONVERT2BED.out.bed
+                    input[1] = Channel.of(
+                        [
+                            [id: 'chr22_dic'],
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dic", checkIfExist: true)
+                        ]
+                    )
+                    """
+                }
+            }
+
+        }
+
+        when {
+            // Params to activate modules ext.when condition
+            params {
+                skip_qc              = false
+                fusioninspector_only = false
+                starfusion           = true
+                all                  = true
+            }
+
+            workflow {
+                """
+                // ch_bam_sorted
+                input[0] = Channel.of(
+                    [
+                        [id: "chr22_bam"],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam", checkIfExists: true)
+                    ])
+
+                // ch_bam_sorted_indexed
+                input[1] = Channel.of(
+                    [
+                        [id: "chr22_bam"],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam", checkIfExists: true),
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai", checkIfExists: true)
+                    ])
+
+                // ch_chrgtf
+                input[2] = Channel.of(
+                    [
+                        [ id: "chr22_gtf" ],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf", checkIfExists: true)
+                    ])
+
+                // ch_refflat
+                input[3] = UCSC_GTFTOGENEPRED.out.refflat
+
+                // ch_fasta
+                input[4] = Channel.of(
+                    [
+                        [ id: "test_ref" ],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta", checkIfExist: true)
+                    ] )
+
+                // ch_fai
+                input[5] = Channel.of(
+                    [
+                        [ id: "test_ref" ],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta.fai", checkIfExist: true)
+                    ] )
+
+                // ch rRNA interval list
+                input[6] = GATK4_BEDTOINTERVALLIST.out.interval_list
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+}
