@@ -147,7 +147,6 @@ workflow RNAFUSION {
 
     //QC
     QC_WORKFLOW (
-        ch_reads_all,
         STARFUSION_WORKFLOW.out.ch_bam_sorted,
         ch_chrgtf,
         ch_refflat,
