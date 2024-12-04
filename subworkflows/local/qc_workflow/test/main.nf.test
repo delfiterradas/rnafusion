@@ -116,12 +116,16 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    file( workflow.out.versions[0] ),
-                    file( workflow.out.rnaseq_metrics[0][1] ).readLines()[4..-1],
-                    file( workflow.out.duplicate_metrics[0][1] ).readLines()[4..-1],
-                    file( workflow.out.insertsize_metrics[0][1] ).readLines()[4..-1],
-                ).match() }
+                { assert snapshot(file( workflow.out.versions[0] )).match('versions' )                                                },
+                { assert snapshot(file( workflow.out.rnaseq_metrics[0][1]     ).readLines()[4..-1]).md5().match('rnaseq_metrics'    ) },
+                { assert snapshot(file( workflow.out.duplicate_metrics[0][1]  ).readLines()[4..-1]).md5().match('duplicate_metrics' ) },
+                { assert snapshot(file( workflow.out.insertsize_metrics[0][1] ).readLines()[4..-1]).md5().match('insertsize_metrics') }
+
+                    //file( workflow.out.versions[0] ),
+                    //file( workflow.out.rnaseq_metrics[0][1] ).readLines()[4..-1],
+                    //file( workflow.out.duplicate_metrics[0][1] ).readLines()[4..-1],
+                    //file( workflow.out.insertsize_metrics[0][1] ).readLines()[4..-1],
+                //).md5().match() }
             )
         }
     }
