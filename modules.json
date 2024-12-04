@@ -88,7 +88,8 @@
                     "rrnatranscripts": {
                         "branch": "master",
                         "git_sha": "812edf8cf702de42d2d8c7314d6f03b97e20abeb",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/rrnatranscripts/rrnatranscripts.diff"
                     },
                     "salmon/index": {
                         "branch": "master",
