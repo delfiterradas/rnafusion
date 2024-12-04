@@ -1,5 +1,5 @@
 //
-// Check input samplesheet and get read channels
+// Extract descriptive values from BAMs
 //
 
 include { PICARD_COLLECTRNASEQMETRICS       } from '../../../modules/nf-core/picard/collectrnaseqmetrics'
@@ -31,10 +31,10 @@ workflow QC_WORKFLOW {
         ch_insertsize_metrics = PICARD_COLLECTINSERTSIZEMETRICS.out.metrics
 
     emit:
-        versions            = ch_versions
-        rnaseq_metrics      = ch_rnaseq_metrics
-        duplicate_metrics   = ch_duplicate_metrics
-        insertsize_metrics  = ch_insertsize_metrics
+        versions            = ch_versions            // channel [ path       ]
+        rnaseq_metrics      = ch_rnaseq_metrics      // channel [ meta, path ]
+        duplicate_metrics   = ch_duplicate_metrics   // channel [ meta, path ]
+        insertsize_metrics  = ch_insertsize_metrics  // channel [ meta, path ]
 
 }
 
