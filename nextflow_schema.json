@@ -22,6 +22,11 @@
                 "skip_vcf": {
                     "type": "boolean",
                     "description": "Skip vcf generation step"
+                },
+                "skip_salmon_index": {
+                    "type": "boolean",
+                    "description": "Skip salmon index generation step",
+                    "hidden": true
                 }
             },
             "fa_icon": "fas fa-fast-forward"
