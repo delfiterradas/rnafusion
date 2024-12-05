@@ -2,8 +2,8 @@ process FUSIONCATCHER_DOWNLOAD {
     tag "fusioncatcher_download"
     label 'process_medium'
 
-    conda "bioconda::fusioncatcher=1.33"
-    container "docker.io/clinicalgenomics/fusioncatcher:1.33"
+    conda "${moduleDir}/environment.yml"
+    container "community.wave.seqera.io/library/fusioncatcher:e0ca700aac225cc8"
 
     output:
     path "*"                , emit: reference
