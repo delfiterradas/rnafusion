@@ -1,0 +1,29 @@
+{
+    "TRIM_WORKFLOW - Homo sapiens - FASTQs - FastP true": {
+        "content": [
+            [
+                "versions.yml:md5,16187796d989b6260f572247e7dc0fc6",
+                "versions.yml:md5,ea42abe9875f41f8362a55ee7533f102"
+            ],
+            [
+                "test_fastq_1.fastp.fastq.gz:md5,0c436583301dea48755a5252a2675b64",
+                "test_fastq_2.fastp.fastq.gz:md5,f7f38138255e63b33286b819b6177612"
+            ],
+            [
+                "test_fastq_1.fastp.fastq.gz:md5,0c436583301dea48755a5252a2675b64",
+                "test_fastq_2.fastp.fastq.gz:md5,f7f38138255e63b33286b819b6177612"
+            ],
+            "test_fastq.fastp.html",
+            "test_fastq.fastp.json:md5,62066ad48c3d5981045cdd43e354cb2b",
+            [
+                "test_fastq_trimmed_1_fastqc.zip",
+                "test_fastq_trimmed_2_fastqc.zip"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-05T13:42:33.340326167"
+    }
+}
