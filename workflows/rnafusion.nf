@@ -22,23 +22,25 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 
 
-ch_chrgtf = params.starfusion_build ? Channel.fromPath(params.chrgtf).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_annot.gtf").map { it -> [[id:it.Name], it] }.collect()
-ch_starindex_ref = params.starfusion_build ? Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_genome.fa.star.idx").map { it -> [[id:it.Name], it] }.collect()
-ch_starindex_ensembl_ref = Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect()
-ch_refflat = params.starfusion_build ? Channel.fromPath(params.refflat).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.gtf.refflat").map { it -> [[id:it.Name], it] }.collect()
-ch_rrna_interval = params.starfusion_build ?  Channel.fromPath(params.rrna_intervals).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.interval_list").map { it -> [[id:it.Name], it] }.collect()
-ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions).map { it -> [[id:it.Name], it] }.collect()
+ch_chrgtf                     = params.starfusion_build ? Channel.fromPath(params.chrgtf).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_annot.gtf").map { it -> [[id:it.Name], it] }.collect()
+ch_starindex_ref              = params.starfusion_build ? Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_genome.fa.star.idx").map { it -> [[id:it.Name], it] }.collect()
+ch_starindex_ensembl_ref      = Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect()
+ch_refflat                    = params.starfusion_build ? Channel.fromPath(params.refflat).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.gtf.refflat").map { it -> [[id:it.Name], it] }.collect()
+ch_rrna_interval              = params.starfusion_build ?  Channel.fromPath(params.rrna_intervals).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.interval_list").map { it -> [[id:it.Name], it] }.collect()
+ch_adapter_fastp              = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta, checkIfExists: true) : Channel.empty()
+ch_fusionreport_ref           = Channel.fromPath(params.fusionreport_ref).map { it -> [[id:it.Name], it] }.collect()
+ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist).map { it -> [[id:it.Name], it] }.collect()
+ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions).map { it -> [[id:it.Name], it] }.collect()
 ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_cytobands = Channel.fromPath(params.arriba_ref_cytobands).map { it -> [[id:it.Name], it] }.collect()
-ch_hgnc_ref = Channel.fromPath(params.hgnc_ref).map { it -> [[id:it.Name], it] }.collect()
-ch_hgnc_date = Channel.fromPath(params.hgnc_date).map { it -> [[id:it.Name], it] }.collect()
-ch_fasta = Channel.fromPath(params.fasta).map { it -> [[id:it.Name], it] }.collect()
-ch_gtf = Channel.fromPath(params.gtf).map { it -> [[id:it.Name], it] }.collect()
+ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands).map { it -> [[id:it.Name], it] }.collect()
+ch_hgnc_ref     = Channel.fromPath(params.hgnc_ref).map { it -> [[id:it.Name], it] }.collect()
+ch_hgnc_date    = Channel.fromPath(params.hgnc_date).map { it -> [[id:it.Name], it] }.collect()
+ch_fasta        = Channel.fromPath(params.fasta).map { it -> [[id:it.Name], it] }.collect()
+ch_gtf          = Channel.fromPath(params.gtf).map { it -> [[id:it.Name], it] }.collect()
 ch_salmon_index = Channel.fromPath(params.salmon_index).map { it -> [[id:it.Name], it] }.collect()
-ch_transcript = Channel.fromPath(params.transcript).map { it -> [[id:it.Name], it] }.collect()
-ch_fai = Channel.fromPath(params.fai).map { it -> [[id:it.Name], it] }.collect()
+ch_transcript   = Channel.fromPath(params.transcript).map { it -> [[id:it.Name], it] }.collect()
+ch_fai          = Channel.fromPath(params.fai).map { it -> [[id:it.Name], it] }.collect()
+
 
 
 /*
@@ -51,6 +53,7 @@ workflow RNAFUSION {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+
     main:
 
     ch_versions = Channel.empty()
@@ -67,11 +70,13 @@ workflow RNAFUSION {
 
 
     TRIM_WORKFLOW (
-        ch_samplesheet
+        ch_samplesheet,
+        ch_adapter_fastp,
+        params.fastp_trim
     )
     ch_reads_fusioncatcher = TRIM_WORKFLOW.out.ch_reads_fusioncatcher
-    ch_reads_all = TRIM_WORKFLOW.out.ch_reads_all
-    ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
+    ch_reads_all           = TRIM_WORKFLOW.out.ch_reads_all
+    ch_versions            = ch_versions.mix(TRIM_WORKFLOW.out.versions)
 
 
     SALMON_QUANT( ch_reads_all, ch_salmon_index.map{ meta, index ->  index  }, ch_gtf.map{ meta, gtf ->  gtf  }, [], false, 'A')
