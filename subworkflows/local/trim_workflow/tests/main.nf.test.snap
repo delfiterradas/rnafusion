@@ -24,6 +24,21 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T13:42:33.340326167"
+        "timestamp": "2024-12-05T14:11:12.374063253"
+    },
+    "TRIM_WORKFLOW - Homo sapiens - FASTQs - FastP false": {
+        "content": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-05T14:21:42.396615145"
     }
 }
