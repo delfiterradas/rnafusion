@@ -1,5 +1,5 @@
 {
-    "TRIM_WORKFLOW - Homo sapiens - FASTQs - FastP true": {
+    "TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == true": {
         "content": [
             [
                 "versions.yml:md5,16187796d989b6260f572247e7dc0fc6",
@@ -24,9 +24,9 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T14:11:12.374063253"
+        "timestamp": "2024-12-05T16:21:52.926289296"
     },
-    "TRIM_WORKFLOW - Homo sapiens - FASTQs - FastP false": {
+    "TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == false": {
         "content": [
             true,
             true,
@@ -39,6 +39,33 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T14:21:42.396615145"
+        "timestamp": "2024-12-05T16:22:45.877168833"
+    },
+    "TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == true + fasp_adaptors": {
+        "content": [
+            [
+                "versions.yml:md5,16187796d989b6260f572247e7dc0fc6",
+                "versions.yml:md5,ea42abe9875f41f8362a55ee7533f102"
+            ],
+            [
+                "test_fastq_1.fastp.fastq.gz:md5,adc67a7b4d0bf3520866d7599a4ba814",
+                "test_fastq_2.fastp.fastq.gz:md5,9ee7d6c5230442970997477464255e67"
+            ],
+            [
+                "test_fastq_1.fastp.fastq.gz:md5,adc67a7b4d0bf3520866d7599a4ba814",
+                "test_fastq_2.fastp.fastq.gz:md5,9ee7d6c5230442970997477464255e67"
+            ],
+            "test_fastq.fastp.html",
+            "test_fastq.fastp.json:md5,feb3483311bfa4ded60146f1cbc13fd5",
+            [
+                "test_fastq_trimmed_1_fastqc.zip",
+                "test_fastq_trimmed_2_fastqc.zip"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-05T16:22:26.29488483"
     }
 }
