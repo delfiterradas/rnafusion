@@ -3,7 +3,7 @@ process FUSIONCATCHER_DOWNLOAD {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "community.wave.seqera.io/library/fusioncatcher:e0ca700aac225cc8"
+    container "community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f"
 
     output:
     path "*"                , emit: reference
