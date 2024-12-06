@@ -2,7 +2,7 @@ process FUSIONCATCHER_BUILD {
     tag "fusioncatcher_build"
     label 'process_medium'
 
-    container "docker.io/clinicalgenomics/fusioncatcher:1.33"
+    container "docker.io/rannickscilifelab/fusioncatcher:1.34"
 
     input:
     val genome_gencode_version
