@@ -1,0 +1,49 @@
+{
+    "ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_fastqs"
+                        },
+                        "test_fastqs.arriba.fusions.tsv:md5,8f39789c4428e81eb9a8d0e54c34c43d"
+                    ]
+                ],
+                "1": [
+                    "test_fastqs.arriba.fusions.discarded.tsv:md5,b804c1ed5b01d34163f5c0b2f6810f98"
+                ],
+                "2": [
+                    "versions.yml:md5,24030f38976402fad0861e6ec99ee6b6",
+                    "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9",
+                    "versions.yml:md5,85458747b55f37c1a5afd39ee7a3a4aa",
+                    "versions.yml:md5,bfc5d96804f2991c7f7c705f1ddf81ec",
+                    "versions.yml:md5,f4f64d3f1fd867d5afa51e03f7cf2824"
+                ],
+                "fusions": [
+                    [
+                        {
+                            "id": "test_fastqs"
+                        },
+                        "test_fastqs.arriba.fusions.tsv:md5,8f39789c4428e81eb9a8d0e54c34c43d"
+                    ]
+                ],
+                "fusions_fail": [
+                    "test_fastqs.arriba.fusions.discarded.tsv:md5,b804c1ed5b01d34163f5c0b2f6810f98"
+                ],
+                "versions": [
+                    "versions.yml:md5,24030f38976402fad0861e6ec99ee6b6",
+                    "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9",
+                    "versions.yml:md5,85458747b55f37c1a5afd39ee7a3a4aa",
+                    "versions.yml:md5,bfc5d96804f2991c7f7c705f1ddf81ec",
+                    "versions.yml:md5,f4f64d3f1fd867d5afa51e03f7cf2824"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-06T18:40:22.919178866"
+    }
+}

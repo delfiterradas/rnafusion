@@ -2,7 +2,6 @@ nextflow_workflow {
 
     name "Test Subworkflow ARRIBA_WORKFLOW"
     script "../main.nf"
-    //config "./nextflow.config"
     workflow "ARRIBA_WORKFLOW"
     tag "subworkflow"
     tag "arriba"
@@ -12,35 +11,35 @@ nextflow_workflow {
     tag "samtools/sort"
     tag "samtools/view"
     tag "star"
+    tag "star/genomegenerate"
     tag "star/align"
 
+    test("ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4") {
 
-    test("ARRIBA_WORKFLOW - Homo sapiens chr22") {
+        setup {
+            // Create genome index for STAR
+            run("STAR_GENOMEGENERATE") {
+                script "../../../../modules/nf-core/star/genomegenerate/main"
+                process {
+                """
+                    // FASTA
+                    input[0] = Channel.fromPath(
+                            "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExists: true
+                            //"/workspace/rnafusion/results/test.fa", checkIfExists: true
+                        )
+                        .map{ [[id: it.getName() ], it ]}
 
-        when {
-            setup {
-                // Create genome index for STAR
-                run("STAR_GENOMEGENERATE") {
-                    script "../../../../modules/nf-core/star/genomegenerate/main"
-                    process {
-                        """
-                        // FASTA
-                        input[0] = Channel.fromPath(
-                                "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExist: true
-                            )
-                            .map{ [[id: it.name], it ]}
-
-
-                        // GTF
-                        input[1] = Channel.fromPath(
-                                "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf", checkIfExists: true
-                            )
-                            .map{ [[id: it.name], it ]}
-                        """
-                    }
+                    // GTF
+                    input[1] = Channel.fromPath(
+                            "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf", checkIfExists: true
+                        )
+                        .map{ [[id: it.getName() ], it ]}
+                    """
                 }
             }
+        }
 
+        when {
             workflow {
                 """
                 // ch_reads
@@ -63,38 +62,39 @@ nextflow_workflow {
                 // ch_fasta
                 input[2] =
                     Channel.fromPath(
-                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExist: true
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExists: true
+                        //"/workspace/rnafusion/results/test.fa", checkIfExists: true
                     )
                     .map{ [ [ id: it.name ], it ] }
 
                 // ch_starindex_ref
-                input[3] = STAR_GENOMEGENERATE.out.index.map{ [ [id: "star_index"], it ] }
+                input[3] = STAR_GENOMEGENERATE.out.index
 
                 // ch_arriba_ref_blacklist
                 input[4] =
                     Channel.fromPath(
-                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz", checkIfExist: true
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz", checkIfExists: true
                     )
                     .map{ [ [ id: it.name ], it ] }
 
                 // ch_arriba_ref_known_fusions
                 input[5] =
                     Channel.fromPath(
-                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz", checkIfExist: true
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz", checkIfExists: true
                     )
                     .map{ [ [ id: it.name ], it ] }
 
                 // ch_arriba_ref_cytobands
                 input[6] =
                     Channel.fromPath(
-                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv", checkIfExist: true
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv", checkIfExists: true
                     )
                     .map{ [ [ id: it.name ], it ] }
 
                 // ch_arriba_ref_protein_domains
                 input[7] =
                     Channel.fromPath(
-                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv", checkIfExist: true
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3", checkIfExists: true
                     )
                     .map{ [ [ id: it.name ], it ] }
 
@@ -124,11 +124,8 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success }/*,
-                { assert snapshot(file( workflow.out.versions[0] )).match('versions' )                                                },
-                { assert snapshot(file( workflow.out.rnaseq_metrics[0][1]     ).readLines()[4..-1]).md5().match('rnaseq_metrics'    ) },
-                { assert snapshot(file( workflow.out.duplicate_metrics[0][1]  ).readLines()[4..-1]).md5().match('duplicate_metrics' ) },
-                { assert snapshot(file( workflow.out.insertsize_metrics[0][1] ).readLines()[4..-1]).md5().match('insertsize_metrics') }*/
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
