@@ -92,7 +92,15 @@ workflow RNAFUSION {
         ch_starindex_ensembl_ref,
         ch_arriba_ref_blacklist,
         ch_arriba_ref_known_fusions,
-        ch_arriba_ref_protein_domains
+        ch_arriba_ref_cytobands,
+        ch_arriba_ref_protein_domains,
+        params.arriba                   // boolean
+        params.all                      // boolean
+        params.fusioninspector_only     // boolean
+        params.star_ignore_sjdbgtf,
+        params.seq_center ?: '',
+        params.arriba_fusions,          // path
+        params.cram                     // array?
     )
     ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
 
