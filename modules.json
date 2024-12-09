@@ -42,27 +42,27 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "dc94b6ee04a05ddb9f7ae050712ff30a13149164",
                         "installed_by": ["modules"]
                     },
                     "gatk4/bedtointervallist": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "1999eff2c530b2b185a25cc42117a1686f09b685",
                         "installed_by": ["modules"]
                     },
                     "gatk4/createsequencedictionary": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "1999eff2c530b2b185a25cc42117a1686f09b685",
                         "installed_by": ["modules"]
                     },
                     "gatk4/markduplicates": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "1999eff2c530b2b185a25cc42117a1686f09b685",
                         "installed_by": ["modules"]
                     },
                     "gffread": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "bd5f75ccaf2345269810e66e85de8a70e4de8764",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
@@ -87,8 +87,9 @@
                     },
                     "rrnatranscripts": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
+                        "git_sha": "812edf8cf702de42d2d8c7314d6f03b97e20abeb",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/rrnatranscripts/rrnatranscripts.diff"
                     },
                     "salmon/index": {
                         "branch": "master",
@@ -117,7 +118,7 @@
                     },
                     "samtools/view": {
                         "branch": "master",
-                        "git_sha": "669eb24fd82a9d3cb18ad0e73673ecb26827f683",
+                        "git_sha": "2d20463181b1c38981a02e90d3084b5f9fa8d540",
                         "installed_by": ["modules"]
                     },
                     "star/align": {

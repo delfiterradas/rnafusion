@@ -12,7 +12,7 @@ workflow FUSIONCATCHER_WORKFLOW {
         if ((params.fusioncatcher || params.all) && !params.fusioninspector_only) {
             if (params.fusioncatcher_fusions){
                 ch_fusioncatcher_fusions = reads.combine(Channel.value(file(params.fusioncatcher_fusions, checkIfExists:true)))
-                                            .map { meta, reads, fusions -> [ meta, fusions ] }
+                                            .map { it -> [ it[0], it[1] ] }
             } else {
                 FUSIONCATCHER (
                     reads,
@@ -24,7 +24,7 @@ workflow FUSIONCATCHER_WORKFLOW {
         }
         else {
             ch_fusioncatcher_fusions = reads.combine(Channel.value(file(ch_dummy_file, checkIfExists:true)))
-                                        .map { meta, reads, fusions -> [ meta, fusions ] }
+                                        .map { it -> [ it[0], it[1] ] }
         }
 
     emit:

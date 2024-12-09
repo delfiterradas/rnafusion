@@ -26,7 +26,7 @@ workflow ARRIBA_WORKFLOW {
 
             if (params.arriba_fusions) {
                 ch_arriba_fusions = reads.combine( Channel.value( file( params.arriba_fusions, checkIfExists: true ) ) )
-                    .map { meta, reads, fusions -> [ meta, fusions ] }
+                    .map { it -> [ it[0], it[1] ] }
                 ch_arriba_fusion_fail = ch_dummy_file
             } else {
                 ARRIBA_ARRIBA ( STAR_FOR_ARRIBA.out.bam, ch_fasta, ch_gtf, ch_arriba_ref_blacklist, ch_arriba_ref_known_fusions, ch_arriba_ref_cytobands, ch_arriba_ref_protein_domains )

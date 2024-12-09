@@ -12,7 +12,6 @@ include { HGNC_DOWNLOAD }                   from '../../modules/local/hgnc/main'
 include { STARFUSION_BUILD }                from '../../modules/local/starfusion/build/main'
 include { STARFUSION_DOWNLOAD }             from '../../modules/local/starfusion/download/main'
 include { GTF_TO_REFFLAT }                  from '../../modules/local/uscs/custom_gtftogenepred/main'
-include { RRNA_TRANSCRIPTS }                from '../../modules/local/rrnatranscripts/main'
 include { GET_RRNA_TRANSCRIPTS }            from '../../modules/local/get_rrna_transcripts'
 // include { CONVERT2BED }                     from '../../modules/local/convert2bed/main'
 /*

@@ -155,6 +155,11 @@ workflow PIPELINE_COMPLETION {
 //
 def validateInputParameters() {
     genomeExistsError()
+
+    if (params.no_cosmic) {
+            log.warn("Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD`")
+    }
+
 }
 
 //
