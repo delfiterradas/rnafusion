@@ -54,4 +54,3 @@ jobs:
           path: |
             seqera_platform_action_*.log
             seqera_platform_action_*.json
-
