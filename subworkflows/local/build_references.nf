@@ -5,15 +5,13 @@
 */
 
 include { GENCODE_DOWNLOAD }                from '../../modules/local/gencode_download/main'
-include { FUSIONCATCHER_DOWNLOAD }          from '../../modules/local/fusioncatcher/download/main'
 include { FUSIONCATCHER_BUILD }             from '../../modules/local/fusioncatcher/build/main'
 include { FUSIONREPORT_DOWNLOAD }           from '../../modules/local/fusionreport/download/main'
 include { HGNC_DOWNLOAD }                   from '../../modules/local/hgnc/main'
 include { STARFUSION_BUILD }                from '../../modules/local/starfusion/build/main'
-include { STARFUSION_DOWNLOAD }             from '../../modules/local/starfusion/download/main'
 include { GTF_TO_REFFLAT }                  from '../../modules/local/uscs/custom_gtftogenepred/main'
-include { GET_RRNA_TRANSCRIPTS }            from '../../modules/local/get_rrna_transcripts'
-// include { CONVERT2BED }                     from '../../modules/local/convert2bed/main'
+include { GET_RRNA_TRANSCRIPTS }            from '../../modules/local/get_rrna_transcript/main'
+
 /*
 ========================================================================================
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -41,7 +39,7 @@ workflow BUILD_REFERENCES {
     if (!file(params.fasta).exists() || file(params.fasta).isEmpty() ||
             !file(params.gtf).exists() || file(params.gtf).isEmpty()){
         GENCODE_DOWNLOAD(params.genome_gencode_version, params.genome)
-        ch_versions = GENCODE_DOWNLOAD.out.versions
+        ch_versions = ch_versions.mix(GENCODE_DOWNLOAD.out.versions)
         ch_fasta = GENCODE_DOWNLOAD.out.fasta.map { that -> [[id:that.Name], that] }
         ch_gtf = GENCODE_DOWNLOAD.out.gtf.map { that -> [[id:that.Name], that] }
     } else {
@@ -51,7 +49,7 @@ workflow BUILD_REFERENCES {
 
     if (!file(params.fai).exists() || file(params.fai).isEmpty()){
         SAMTOOLS_FAIDX(ch_fasta, [[],[]])
-        ch_versions = SAMTOOLS_FAIDX.out.versions
+        ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
         ch_fai = SAMTOOLS_FAIDX.out.fai
     } else {
         ch_fai = Channel.fromPath(params.fai).map { that -> [[id:that.Name], that] }
@@ -60,6 +58,7 @@ workflow BUILD_REFERENCES {
     if ((!file(params.hgnc_ref).exists() || file(params.hgnc_ref).isEmpty() ||
             !file(params.hgnc_date).exists() || file(params.hgnc_date).isEmpty()) && !params.skip_vcf){
         HGNC_DOWNLOAD( )
+        ch_versions = ch_versions.mix(HGNC_DOWNLOAD.out.versions)
         ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref
         ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date
     } else {
@@ -69,8 +68,11 @@ workflow BUILD_REFERENCES {
 
     if (!file(params.rrna_intervals).exists() || file(params.rrna_intervals).isEmpty()){
         GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
+        ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
         GET_RRNA_TRANSCRIPTS(ch_gtf)
+        ch_versions = ch_versions.mix(GET_RRNA_TRANSCRIPTS.out.versions)
         GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed.map { it -> [ [id:it.name], it ] }, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
+        ch_versions = ch_versions.mix(GATK4_BEDTOINTERVALLIST.out.versions)
         ch_rrna_interval = GATK4_BEDTOINTERVALLIST.out.interval_list
     } else {
         ch_rrna_interval = Channel.fromPath(params.rrna_intervals).map { that -> [[id:that.Name], that] }
@@ -78,6 +80,7 @@ workflow BUILD_REFERENCES {
 
     if (!file(params.refflat).exists() || file(params.refflat).isEmpty()){
         GTF_TO_REFFLAT(ch_gtf)
+        ch_versions = ch_versions.mix(GTF_TO_REFFLAT.out.versions)
         ch_refflat = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
     } else {
         ch_refflat = Channel.fromPath(params.refflat).map { that -> [[id:that.Name], that] }
@@ -86,7 +89,9 @@ workflow BUILD_REFERENCES {
     if (!file(params.salmon_index).exists() || file(params.salmon_index).isEmpty() ||
         !file(params.salmon_index_stub_check).exists() || file(params.salmon_index_stub_check).isEmpty()){ // add condition for qc
         GFFREAD(ch_gtf, ch_fasta.map{ meta, fasta -> [ fasta ] })
+        ch_versions = ch_versions.mix(GFFREAD.out.versions)
         SALMON_INDEX(ch_fasta.map{ meta, fasta -> [ fasta ] }, GFFREAD.out.gffread_fasta.map{ meta, gffread_fasta -> [ gffread_fasta ] })
+        ch_versions = ch_versions.mix(SALMON_INDEX.out.versions)
         ch_salmon_index = SALMON_INDEX.out.index
     } else {
         ch_salmon_index = Channel.fromPath(params.salmon_index)
@@ -96,6 +101,7 @@ workflow BUILD_REFERENCES {
             (!file(params.starindex_ref).exists() || file(params.starindex_ref).isEmpty() ||
             !file(params.starindex_ref_stub_check).exists() || file(params.starindex_ref_stub_check).isEmpty() )) {
         STAR_GENOMEGENERATE(ch_fasta, ch_gtf)
+        ch_versions = ch_versions.mix(STAR_GENOMEGENERATE.out.versions)
         ch_starindex_ref = STAR_GENOMEGENERATE.out.index
     } else {
         ch_starindex_ref = Channel.fromPath(params.starindex_ref).map { that -> [[id:that.Name], that] }
@@ -106,6 +112,7 @@ workflow BUILD_REFERENCES {
             !file(params.arriba_ref_known_fusions).exists() || file(params.arriba_ref_known_fusions).isEmpty() ||
             !file(params.arriba_ref_protein_domains).exists() || file(params.arriba_ref_protein_domains).isEmpty())) {
         ARRIBA_DOWNLOAD(params.genome)
+        ch_versions = ch_versions.mix(ARRIBA_DOWNLOAD.out.versions)
         ch_arriba_ref_blacklist = ARRIBA_DOWNLOAD.out.blacklist
         ch_arriba_ref_cytobands = ARRIBA_DOWNLOAD.out.cytobands
         ch_arriba_ref_known_fusions = ARRIBA_DOWNLOAD.out.known_fusions
@@ -122,6 +129,7 @@ workflow BUILD_REFERENCES {
             (!file(params.fusioncatcher_ref).exists() || file(params.fusioncatcher_ref).isEmpty() ||
             !file(params.fusioncatcher_ref_stub_check).exists() || file(params.fusioncatcher_ref_stub_check).isEmpty() )) {
             FUSIONCATCHER_BUILD(params.genome_gencode_version)
+            ch_versions = ch_versions.mix(FUSIONCATCHER_BUILD.out.versions)
             ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference
     }
     else {
@@ -133,6 +141,7 @@ workflow BUILD_REFERENCES {
             (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
             !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
             STARFUSION_BUILD(ch_fasta, ch_gtf)
+            ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             ch_starfusion_ref = STARFUSION_BUILD.out.reference
     }
     else {
@@ -145,6 +154,7 @@ workflow BUILD_REFERENCES {
             !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
         if (!params.cosmic_username || !params.cosmic_passwd) { exit 1, 'COSMIC username and/or password missing' }
         FUSIONREPORT_DOWNLOAD(params.cosmic_username, params.cosmic_passwd)
+        ch_versions = ch_versions.mix(FUSIONREPORT_DOWNLOAD.out.versions)
         ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.reference
     } else {
         ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref)

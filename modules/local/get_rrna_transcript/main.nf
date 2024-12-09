@@ -2,17 +2,17 @@ process GET_RRNA_TRANSCRIPTS {
     tag 'get_rrna_bed'
     label 'process_low'
 
-    conda "bioconda::pirate=1.0.4 bioconda::perl-bioperl=1.7.2"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pirate:1.0.4--hdfd78af_2' :
-        'biocontainers/pirate:1.0.4--hdfd78af_2' }"
+        'https://depot.galaxyproject.org/singularity/pirate:1.0.5--hdfd78af_0' :
+        'biocontainers/pirate:1.0.5--hdfd78af_0' }"
 
     input:
     tuple val(meta), path(gtf)
 
     output:
-    path('rrna.gtf')    , emit: rrnagtf
-    path('rrna.bed')    , emit: bed
+    tuple val(meta), path('rrna.gtf')    , emit: rrnagtf
+    tuple val(meta), path('rrna.bed')    , emit: bed
     path "versions.yml" , emit: versions
 
     when:
