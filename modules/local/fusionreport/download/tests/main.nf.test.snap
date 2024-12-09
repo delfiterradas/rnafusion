@@ -1,12 +1,10 @@
 {
     "Download fusionreport databases": {
         "content": [
-            [
-                "fusiongdb2.db:md5,e1ac123a744e515d3e5f85b8344d526a"
-            ],
-            [
-                "mitelman.db:md5,1363795c97f77c641065ecd9ad0e484a"
-            ],
+            "fusiongdb2.db:md5,e1ac123a744e515d3e5f85b8344d526a",
+            "mitelman.db:md5,1363795c97f77c641065ecd9ad0e484a",
+            true,
+            true,
             [
                 "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
             ]
@@ -15,43 +13,41 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-02T13:09:56.930477745"
+        "timestamp": "2024-12-05T19:27:38.99855171"
     },
     "Create stub files": {
         "content": [
             {
                 "0": [
-                    "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    [
+                        {
+                            "id": "fusionreport_dbs"
+                        },
+                        [
+                            "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cosmic.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
                 ],
                 "1": [
-                    "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "2": [
-                    "cosmic.db:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "3": [
-                    "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "4": [
-                    "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "5": [
                     "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
                 ],
-                "cosmic": [
-                    "cosmic.db:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "fusiongdb2": [
-                    "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "log": [
-                    "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "mitelman": [
-                    "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                "timestamp": [
-                    "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                "fusionreport_db": [
+                    [
+                        {
+                            "id": "fusionreport_dbs"
+                        },
+                        [
+                            "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cosmic.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
                 ],
                 "versions": [
                     "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
@@ -62,6 +58,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-02T13:10:12.577952658"
+        "timestamp": "2024-12-05T19:35:49.629287874"
     }
 }
