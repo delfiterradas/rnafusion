@@ -19,11 +19,12 @@ workflow ARRIBA_WORKFLOW {
         fusioninspector_only            // boolean
         star_ignore_sjdbgtf             // boolean
         seq_center                      // string
-        arriba_fusions                  // path?
-        cram                            // array?
+        arriba_fusions                  // path
+        cram                            // array
 
     main:
-        ch_versions = Channel.empty()
+        ch_versions   = Channel.empty()
+        ch_bam_index  = Channel.empty()
         ch_dummy_file = file("$baseDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
         if (( arriba || all) && !fusioninspector_only) {
@@ -74,6 +75,10 @@ workflow ARRIBA_WORKFLOW {
                 SAMTOOLS_INDEX_FOR_ARRIBA(SAMTOOLS_VIEW_FOR_ARRIBA.out.cram)
                 ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_ARRIBA.out.versions )
 
+                // Join bam and index files
+                SAMTOOLS_SORT_FOR_ARRIBA.out.bam
+                    .join(SAMTOOLS_INDEX_FOR_ARRIBA.out.cram)
+                    .set{ ch_bam_index }
             }
 
         } else {
@@ -87,8 +92,9 @@ workflow ARRIBA_WORKFLOW {
         }
 
     emit:
-        fusions      = ch_arriba_fusions
-        fusions_fail = ch_arriba_fusion_fail
-        versions     = ch_versions
+        fusions      = ch_arriba_fusions        // channel [ meta, path_fusions   ]
+        fusions_fail = ch_arriba_fusion_fail    // channel [ path, fusions_failed ]
+        bam_index    = ch_bam_index             // channel [ meta, bam, index     ]
+        versions     = ch_versions              // channel [ versions             ]
     }
 

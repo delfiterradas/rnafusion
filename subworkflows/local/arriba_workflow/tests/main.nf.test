@@ -14,6 +14,8 @@ nextflow_workflow {
     tag "star/genomegenerate"
     tag "star/align"
 
+
+    // Test #1 Indexing
     test("ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4") {
 
         setup {
@@ -114,8 +116,124 @@ nextflow_workflow {
                 // arriba_fusions (path)
                 input[13] = null
 
-                // cram (array??)
+                // cram (array)
                 input[14] = [ 'arriba' ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+
+    // TEST #2 WITHOUT INDEXING
+    test("ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4 - cram = []") {
+
+        setup {
+            // Create genome index for STAR
+            run("STAR_GENOMEGENERATE") {
+                script "../../../../modules/nf-core/star/genomegenerate/main"
+                process {
+                """
+                    // FASTA
+                    input[0] = Channel.fromPath(
+                            "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExists: true
+                        )
+                        .map{ [[id: it.getName() ], it ]}
+
+                    // GTF
+                    input[1] = Channel.fromPath(
+                            "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf", checkIfExists: true
+                        )
+                        .map{ [[id: it.getName() ], it ]}
+                    """
+                }
+            }
+        }
+
+        when {
+            workflow {
+                """
+                // ch_reads
+                input[0] = Channel.of(
+                    [
+                        [ id: "test_fastqs" ],
+                        [
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/human/reads_1.fq.gz", checkIfExists: true),
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/human/reads_2.fq.gz", checkIfExists: true)
+                        ]
+                    ] )
+
+                // ch_gtf
+                input[1] =
+                    Channel.fromPath(
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf", checkIfExists: true
+                    )
+                    .map{ [ [ id: it.name ], it ] }
+
+                // ch_fasta
+                input[2] =
+                    Channel.fromPath(
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExists: true
+                    )
+                    .map{ [ [ id: it.name ], it ] }
+
+                // ch_starindex_ref
+                input[3] = STAR_GENOMEGENERATE.out.index
+
+                // ch_arriba_ref_blacklist
+                input[4] =
+                    Channel.fromPath(
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz", checkIfExists: true
+                    )
+                    .map{ [ [ id: it.name ], it ] }
+
+                // ch_arriba_ref_known_fusions
+                input[5] =
+                    Channel.fromPath(
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz", checkIfExists: true
+                    )
+                    .map{ [ [ id: it.name ], it ] }
+
+                // ch_arriba_ref_cytobands
+                input[6] =
+                    Channel.fromPath(
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv", checkIfExists: true
+                    )
+                    .map{ [ [ id: it.name ], it ] }
+
+                // ch_arriba_ref_protein_domains
+                input[7] =
+                    Channel.fromPath(
+                        "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3", checkIfExists: true
+                    )
+                    .map{ [ [ id: it.name ], it ] }
+
+                // arriba (boolean)
+                input[8] = true
+
+                // all (boolean)
+                input[9] = true
+
+                // fusioninspector_only  (boolean)
+                input[10] = false
+
+                // star_ignore_sjdbgtf (boolean)
+                input[11] = false
+
+                // seq_center (string)
+                input[12] = 'test_center'
+
+                // arriba_fusions (path)
+                input[13] = null
+
+                // cram (array)
+                input[14] = [ ]
                 """
             }
         }
