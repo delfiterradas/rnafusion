@@ -31,7 +31,7 @@ In rnafusion the full-sized test includes reference building and fusion detectio
 
 ### Build references
 
-`--references_only` triggers a workflow to ONLY build references, otherwise the references are built with the analysis run:
+`--references_only` triggers a workflow to ONLY build references, otherwise the references are build when the analysis is run:
 
 1. Download gencode fasta and gtf files
 2. Create [STAR](https://github.com/alexdobin/STAR) index

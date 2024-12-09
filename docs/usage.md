@@ -397,7 +397,6 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `test`
   - A profile with a complete configuration for automated testing
   - Includes links to test data so needs no other parameters
-  - Needs to run in two steps: with `--references_only` first and then without `--references_only` to run the analysis
   - !!!! Run with `-stub` as all references need to be downloaded otherwise !!!!
 
 ### `-resume`

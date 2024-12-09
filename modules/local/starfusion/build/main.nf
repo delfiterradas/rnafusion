@@ -10,6 +10,7 @@ process STARFUSION_BUILD {
 
     output:
     path "*"  , emit: reference
+    path "versions.yml"   , emit: versions
 
     script:
     def binPath = (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1)  ? "prep_genome_lib.pl" : "/usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl"

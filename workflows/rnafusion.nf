@@ -66,7 +66,6 @@ workflow RNAFUSION {
     BUILD_REFERENCES()
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
 
-
     //
     // QC from FASTQ files
     //
@@ -81,8 +80,7 @@ workflow RNAFUSION {
     // Trimming
     //
     TRIM_WORKFLOW (
-        ch_samplesheet,
-        ch_adapter_fastp,
+        ch_samplesheet
     )
     ch_reads = TRIM_WORKFLOW.out.ch_reads_all
     ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
