@@ -21,7 +21,7 @@ nextflow_workflow {
         setup {
             // Create genome index for STAR
             run("STAR_GENOMEGENERATE") {
-                script "../../../../modules/nf-core/star/genomegenerate/main"
+                script "../../../../modules/nf-core/star/genomegenerate/main.nf"
                 process {
                 """
                     // FASTA
@@ -137,7 +137,7 @@ nextflow_workflow {
         setup {
             // Create genome index for STAR
             run("STAR_GENOMEGENERATE") {
-                script "../../../../modules/nf-core/star/genomegenerate/main"
+                script "../../../../modules/nf-core/star/genomegenerate/main.nf"
                 process {
                 """
                     // FASTA
