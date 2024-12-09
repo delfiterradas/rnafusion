@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local module: `ENSEMBL_DOWNLOAD` [#539](https://github.com/nf-core/rnafusion/pull/539)
 - Add nf-test to local module: `HGNC_DOWNLOAD` [#540](https://github.com/nf-core/rnafusion/pull/540)
 - Add nf-test to local subworkflow: `STRINGTIE_WORKFLOW` [#541](https://github.com/nf-core/rnafusion/pull/541)
-- Option to avoid using COSMIC (for example in the case of clinical use) [547](https://github.com/nf-core/rnafusion/pull/547)
+- Option to avoid using COSMIC (for example in the case of clinical use) [#547](https://github.com/nf-core/rnafusion/pull/547)
 - Add nf-test to nf-core module: `PICARD_COLLECTRNASEQMETRICS` and update module [#551](https://github.com/nf-core/rnafusion/pull/551)
 - Add `--skip_vcf` boolean parameter to skip vcf file generation [#554](https://github.com/nf-core/rnafusion/pull/554)
 - Add nf-test to local module: `FUSIONREPORT_DOWNLOAD` [#560](https://github.com/nf-core/rnafusion/pull/560)
@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor structure in `FUSIONREPORT_DOWNLOAD` to use cosmic credentials in `ext.args` [#556](https://github.com/nf-core/rnafusion/issues/556)
 - Fixed bug in nf-core `RRNATRANSCRIPTS` module [#563](https://github.com/nf-core/rnafusion/issues/563)
 - Fixed bug in `GFFREAD` that caused output `gffread_fasta` not being produced [#565](https://github.com/nf-core/rnafusion/issues/565)
+- Fixed bug in `FUSIONCATCHER_DOWNLOAD` that caused an error when running with singularity profile [#573](https://github.com/nf-core/rnafusion/issues/573)
 
 ### Removed
 

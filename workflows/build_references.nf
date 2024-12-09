@@ -49,7 +49,10 @@ workflow BUILD_REFERENCES {
     GATK4_BEDTOINTERVALLIST(BEDOPS_CONVERT2BED.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict)
 
     GFFREAD(ENSEMBL_DOWNLOAD.out.gtf, ENSEMBL_DOWNLOAD.out.primary_assembly.map { meta, fasta -> [ fasta ] })
-    SALMON_INDEX(ENSEMBL_DOWNLOAD.out.primary_assembly.map{ meta, fasta -> [ fasta ] }, GFFREAD.out.gffread_fasta.map{ meta, gffread_fasta -> [ gffread_fasta ] })
+
+    if (!params.skip_salmon_index){
+        SALMON_INDEX(ENSEMBL_DOWNLOAD.out.primary_assembly.map{ meta, fasta -> [ fasta ] }, GFFREAD.out.gffread_fasta.map{ meta, gffread_fasta -> [ gffread_fasta ] })
+    }
 
     if (params.starindex || params.all || params.starfusion || params.arriba) {
         STAR_GENOMEGENERATE( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf )
