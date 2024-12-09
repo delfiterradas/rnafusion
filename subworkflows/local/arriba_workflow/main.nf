@@ -41,7 +41,7 @@ workflow ARRIBA_WORKFLOW {
 
             if ( arriba_fusions ) {
 
-                ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) ) // This should be done in the main scirpt?
+                ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) ) // Should this be done in the main script?
                     .map { meta, reads, fusions -> [ meta, fusions ] }
                 ch_arriba_fusion_fail = ch_dummy_file
 
@@ -76,8 +76,7 @@ workflow ARRIBA_WORKFLOW {
 
             }
 
-        }
-        else {
+        } else {
             // Not sure how this dummy file can be useful
             // If this tool can be skipped, why not just emitting an empty channel?
             ch_arriba_fusions = reads

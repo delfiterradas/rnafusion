@@ -25,7 +25,6 @@ nextflow_workflow {
                     // FASTA
                     input[0] = Channel.fromPath(
                             "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExists: true
-                            //"/workspace/rnafusion/results/test.fa", checkIfExists: true
                         )
                         .map{ [[id: it.getName() ], it ]}
 
@@ -63,7 +62,6 @@ nextflow_workflow {
                 input[2] =
                     Channel.fromPath(
                         "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa", checkIfExists: true
-                        //"/workspace/rnafusion/results/test.fa", checkIfExists: true
                     )
                     .map{ [ [ id: it.name ], it ] }
 
