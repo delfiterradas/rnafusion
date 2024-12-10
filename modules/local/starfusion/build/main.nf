@@ -2,7 +2,7 @@ process STARFUSION_BUILD {
     tag 'star-fusion'
 
     conda "${moduleDir}/environment.yml"
-    container 'community.wave.seqera.io/library/dfam_hmmer_samtools_star-fusion_pruned:5694d82381bf039e'
+    container 'community.wave.seqera.io/library/star-fusion:4d0a3a362520dfa'
 
     input:
     tuple val(meta), path(fasta)
