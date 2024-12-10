@@ -39,11 +39,11 @@ process STARFUSION_BUILD {
     """
     mkdir ctat_genome_lib_build_dir
     touch ctat_genome_lib_build_dir/AnnotFilterRule.pm
-    touch ctat_genome_lib_build_dir/PFAM.domtblout.dat.gz
+    gzip -c /dev/null > ctat_genome_lib_build_dir/PFAM.domtblout.dat.gz
     touch ctat_genome_lib_build_dir/ref_annot.gtf.gene_spans
     touch ctat_genome_lib_build_dir/ref_genome.fa.mm2
     touch ctat_genome_lib_build_dir/ref_genome.fa.ntf
-    touch ctat_genome_lib_build_dir/blast_pairs.dat.gz
+    gzip -c /dev/null > ctat_genome_lib_build_dir/blast_pairs.dat.gz
     touch ctat_genome_lib_build_dir/ref_annot.cdna.fa
     touch ctat_genome_lib_build_dir/ref_annot.gtf.mini.sortu
     touch ctat_genome_lib_build_dir/ref_genome.fa.ndb
@@ -58,7 +58,7 @@ process STARFUSION_BUILD {
     touch ctat_genome_lib_build_dir/ref_annot.pep
     touch ctat_genome_lib_build_dir/ref_genome.fa.nin
     touch ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat
-    touch ctat_genome_lib_build_dir/fusion_annot_lib.gz
+    gzip -c /dev/null > ctat_genome_lib_build_dir/fusion_annot_lib.gz
     touch ctat_genome_lib_build_dir/ref_annot.cdsplus.fa
     touch ctat_genome_lib_build_dir/ref_annot.prot_info.dbm
     touch ctat_genome_lib_build_dir/ref_genome.fa.njs
@@ -67,7 +67,7 @@ process STARFUSION_BUILD {
     touch ctat_genome_lib_build_dir/ref_annot.cdsplus.fa.idx
     touch ctat_genome_lib_build_dir/ref_genome.fa
     touch ctat_genome_lib_build_dir/ref_genome.fa.not
-    touch ctat_genome_lib_build_dir/trans.blast.dat.gz
+    gzip -c /dev/null > ctat_genome_lib_build_dir/trans.blast.dat.gz
     touch ctat_genome_lib_build_dir/pfam_domains.dbm
     touch ctat_genome_lib_build_dir/ref_annot.gtf
     touch ctat_genome_lib_build_dir/ref_genome.fa.fai
