@@ -1,13 +1,13 @@
 process FUSIONCATCHER {
-    tag "$meta.id"
+    tag "$meta.id - $meta2.id"
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
     container "community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f"
 
     input:
-    tuple val(meta), path(fasta)
-    path reference
+    tuple val(meta), path(fastqs, stageAs: "input/*")
+    tuple val(meta2), path(reference, stageAs: "reference/*")
 
     output:
     tuple val(meta), path("*.fusioncatcher.fusion-genes.txt")   , optional:true  , emit: fusions
@@ -25,8 +25,8 @@ process FUSIONCATCHER {
     def single_end = meta.single_end ? "--single-end" : ""
     """
     fusioncatcher.py \\
-        -d $reference \\
-        -i $reads \\
+        -d reference \\
+        -i input \\
         -p $task.cpus \\
         -o . \\
         --skip-blat \\

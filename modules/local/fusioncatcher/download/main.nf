@@ -6,8 +6,8 @@ process FUSIONCATCHER_DOWNLOAD {
     container "community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f"
 
     output:
-    path "*"                , emit: reference
-    path "versions.yml"     , emit: versions
+    tuple env(meta), path("*"), emit: reference
+    path "versions.yml"       , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -18,6 +18,7 @@ process FUSIONCATCHER_DOWNLOAD {
     def args2 = task.ext.args2 ?: ''
     def human_version = "v102"
     def url = "http://sourceforge.net/projects/fusioncatcher/files/data/human_${human_version}.tar.gz.aa"
+    def meta = [ id: "human_${human_version}" ]
     """
     if wget --spider "$url" 2>/dev/null; then
         wget $args $url
