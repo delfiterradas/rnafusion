@@ -4,19 +4,23 @@ nextflow_process {
     script "../main.nf"
     process "STARFUSION_BUILD"
 
-    test("STARFUSION_BUILD - human - chr4") {
+    test("STARFUSION_BUILD - human - minigenome") {
 
         when {
             process {
                 """
                 input[0] = [
-                    [ id:'fasta' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa")
+                    [ id:'minigenome fasta' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
                 ]
                 input[1] = [
-                    [ id:'gtf' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf")
+                    [ id:'minigenome gtf' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
                 ]
+
+                input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
+                input [3] = "human"
+
                 """
             }
         }
@@ -27,7 +31,7 @@ nextflow_process {
 
     }
 
-    test("STARFUSION_BUILD - human - chr4") {
+    test("STARFUSION_BUILD - human - minigenome - stub") {
 
         options "-stub"
 
@@ -35,13 +39,17 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    [ id:'fasta' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa")
+                    [ id:'minigenome fasta' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
                 ]
                 input[1] = [
-                    [ id:'gtf' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf")
+                    [ id:'minigenome gtf' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
                 ]
+
+                input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
+                input [3] = "human"
+
                 """
             }
         }
