@@ -6,18 +6,17 @@ process FUSIONREPORT_DOWNLOAD {
     container "docker.io/clinicalgenomics/fusion-report:3.1.0"
 
     output:
-    path "fusiongdb2.db"    , emit: fusiongdb2
-    path "mitelman.db"      , emit: mitelman
-    path "cosmic.db"        , emit: cosmic, optional: true
-    path "*.txt"            , emit: timestamp
-    path "*.log"            , emit: log
-    path "versions.yml"     , emit: versions
+    tuple val(meta), path("fusionreport_dbs"), emit: fusionreport_db
+    path "versions.yml"                      , emit: versions
 
     script:
+    meta = [id: 'fusionreport_dbs']
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
     """
     fusion_report download $args ./
+    mkdir fusionreport_dbs
+    mv *.txt *.log *.db fusionreport_dbs
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -26,17 +25,18 @@ process FUSIONREPORT_DOWNLOAD {
     """
 
     stub:
+    meta = [id: 'fusionreport_dbs']
     """
-    touch cosmic.db
-    touch fusiongdb2.db
-    touch mitelman.db
-    touch DB-timestamp.txt
-    touch fusion_report.log
+    mkdir fusionreport_dbs
+    touch fusionreport_dbs/cosmic.db
+    touch fusionreport_dbs/fusiongdb2.db
+    touch fusionreport_dbs/mitelman.db
+    touch fusionreport_dbs/DB-timestamp.txt
+    touch fusionreport_dbs/fusion_report.log
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         fusion_report: \$(fusion_report --version | sed 's/fusion-report //')
     END_VERSIONS
     """
-
 }
