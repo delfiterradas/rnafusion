@@ -1,0 +1,55 @@
+nextflow_process {
+
+    name "Test Process STARFUSION_BUILD"
+    script "../main.nf"
+    process "STARFUSION_BUILD"
+
+    test("STARFUSION_BUILD - human - chr4") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'fasta' ],
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa")
+                ]
+                input[1] = [
+                    [ id:'gtf' ],
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf")
+                ]
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+    test("STARFUSION_BUILD - human - chr4") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'fasta' ],
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.1700000-54900000.fa")
+                ]
+                input[1] = [
+                    [ id:'gtf' ],
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/ensembl/Homo_sapiens.GRCh38.102.chr4.gtf")
+                ]
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}
