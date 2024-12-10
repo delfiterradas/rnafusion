@@ -7,31 +7,23 @@ process STARFUSION_BUILD {
     input:
     tuple val(meta), path(fasta)
     tuple val(meta2), path(gtf)
+    path fusion_annot_lib
+    val dfam_species
 
     output:
-    path "*"  , emit: reference
+    path "ctat_genome_lib_build_dir"  , emit: reference
 
     script:
-    def binPath = (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1)  ? "prep_genome_lib.pl" : "/usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl"
+    def binPath = (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1)  ? "prep_genome_lib.pl" : "/opt/conda/lib/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl"
+    if (dfam_species != "human" && dfam_species != "mouse") {
+        error "Invalid species for --dfam_db. Only 'human' or 'mouse' are accepted. Provided: ${dfam_species}"
+    }
     """
-    export TMPDIR=/tmp
-    wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam34.0/Pfam-A.hmm.gz --no-check-certificate
-    wget https://github.com/FusionAnnotator/CTAT_HumanFusionLib/releases/download/v0.3.0/fusion_lib.Mar2021.dat.gz -O CTAT_HumanFusionLib_Mar2021.dat.gz --no-check-certificate
-    wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm -O AnnotFilterRule.pm --no-check-certificate
-    wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm --no-check-certificate
-    wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3f --no-check-certificate
-    wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3i --no-check-certificate
-    wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m --no-check-certificate
-    wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p --no-check-certificate
-    gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
-    /opt/conda/lib/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl \\
+    prep_genome_lib.pl \\
         --genome_fa $fasta \\
         --gtf $gtf \\
-        --annot_filter_rule AnnotFilterRule.pm \\
-        --fusion_annot_lib CTAT_HumanFusionLib_Mar2021.dat.gz \\
-        --pfam_db Pfam-A.hmm \\
-        --dfam_db homo_sapiens_dfam.hmm \\
-        --max_readlength $params.read_length \\
+        --dfam_db ${dfam_species} \\
+        --fusion_annot_lib $fusion_annot_lib \\
         --CPU $task.cpus
 
     cat <<-END_VERSIONS > versions.yml
