@@ -1,4 +1,4 @@
-name: fusioncatcher_download
+name: fusioncatcher_build
 description: Build genome for fusioncatcher
 keywords:
   - sort
@@ -19,7 +19,6 @@ output:
   - reference:
       type: directory
       description: Path to fusioncatcher references
-      pattern: "*"
 
 authors:
   - "@praveenraj2018, @rannick"
