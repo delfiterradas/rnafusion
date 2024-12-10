@@ -2,7 +2,7 @@ process STARFUSION_BUILD {
     tag 'star-fusion'
 
     conda "${moduleDir}/environment.yml"
-    container 'community.wave.seqera.io/library/dfam_hmmer_samtools_star-fusion_pruned:5694d82381bf039e'
+    container 'community.wave.seqera.io/library/dfam_hmmer_minimap2_samtools_pruned:63e3d21ca68ea531'
 
     input:
     tuple val(meta), path(fasta)
@@ -24,7 +24,7 @@ process STARFUSION_BUILD {
     wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p --no-check-certificate
     gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
-    $binPath \\
+    /opt/conda/lib/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl \\
         --genome_fa $fasta \\
         --gtf $gtf \\
         --annot_filter_rule AnnotFilterRule.pm \\
