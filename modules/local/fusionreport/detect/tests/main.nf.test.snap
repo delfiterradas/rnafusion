@@ -1,0 +1,186 @@
+{
+    "FUSIONREPORT - arriba - starfusion - fusioncatcher": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test_sample"
+                    },
+                    "test_sample.fusionreport.tsv:md5,3593b7021f26cc5427fdc96f0d1c72f0"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test_sample"
+                    },
+                    "test_sample.fusionreport_filtered.tsv:md5,3593b7021f26cc5427fdc96f0d1c72f0"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test_sample"
+                    },
+                    "test_sample.fusions.csv:md5,49f378c2112d7e0b3b17d9095c79e6bd"
+                ]
+            ],
+            "test_sample_fusionreport_index.html",
+            [
+                "AKAP9_BRAF.html",
+                "BRD4-1_NUTM1.html",
+                "BRD4_NUTM1.html",
+                "CD74_AL132671.2.html",
+                "CD74_ROS1.html",
+                "CIC_DUX4.html",
+                "DUX4_IGH@.html",
+                "EML4_ALK.html",
+                "ETV6_NTRK3.html",
+                "EWSR1_ATF1.html",
+                "EWSR1_FLI1.html",
+                "FGFR3_TACC3.html",
+                "FIP1L1_PDGFRA.html",
+                "GOPC_ROS1.html",
+                "HOOK3_RET.html",
+                "IGH@_CRLF2.html",
+                "MALT1_IGH@.html",
+                "NPM1_ALK.html",
+                "TMPRSS2_ETV1.html",
+                "test_sample_fusionreport_index.html"
+            ],
+            [
+                [
+                    {
+                        "id": "test_sample"
+                    },
+                    "fusion_genes_mqc.json:md5,b196dc8d064a47d17fd3a032b8fbed4f"
+                ]
+            ],
+            "versions.yml"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-06T14:23:44.59690452"
+    },
+    "FUSIONREPORT - arriba - starfusion - fusioncatcher - stub": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,6bd28f2526774f519a7627a30c6a7f2f"
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusionreport.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusionreport_filtered.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample_fusionreport_index.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        [
+                            "AAA_BBB.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_sample_fusionreport_index.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusions.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusions.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "csv": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusions.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fusion_list": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusionreport.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fusion_list_filtered": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusionreport_filtered.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "html": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        [
+                            "AAA_BBB.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_sample_fusionreport_index.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample.fusions.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "report": [
+                    [
+                        {
+                            "id": "test_sample"
+                        },
+                        "test_sample_fusionreport_index.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,6bd28f2526774f519a7627a30c6a7f2f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-06T13:12:32.981394201"
+    }
+}
