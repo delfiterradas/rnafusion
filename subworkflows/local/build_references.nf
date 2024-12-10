@@ -152,12 +152,12 @@ workflow BUILD_REFERENCES {
     if ((params.fusionreport || params.all) &&
             (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
             !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
-        if (!params.cosmic_username || !params.cosmic_passwd) { exit 1, 'COSMIC username and/or password missing' }
+        if (!params.no_cosmic && (!params.cosmic_username || !params.cosmic_passwd)) { exit 1, 'COSMIC username and/or password missing' }
         FUSIONREPORT_DOWNLOAD()
         ch_versions = ch_versions.mix(FUSIONREPORT_DOWNLOAD.out.versions)
-        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.mitelman.map{ it.parent }
+        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.fusionreport_ref
     } else {
-        ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref)
+        ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref).map { that -> [[id:that.Name], that] }
     }
 
     emit:

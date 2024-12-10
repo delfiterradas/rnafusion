@@ -7,7 +7,7 @@ process FUSIONREPORT {
 
     input:
     tuple val(meta), path(reads), path(arriba_fusions), path(starfusion_fusions),  path(fusioncatcher_fusions)
-    path(fusionreport_ref)
+    tuple val(meta2), path(fusionreport_ref)
     val(tools_cutoff)
 
     output:

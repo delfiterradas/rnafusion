@@ -157,7 +157,7 @@ def validateInputParameters() {
     genomeExistsError()
 
     if (params.no_cosmic) {
-            log.warn("Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD`")
+            log.warn("Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD` and skip using it in `FUSIONREPORT`")
     }
 
 }
