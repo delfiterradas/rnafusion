@@ -71,7 +71,7 @@ workflow BUILD_REFERENCES {
         ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
         GET_RRNA_TRANSCRIPTS(ch_gtf)
         ch_versions = ch_versions.mix(GET_RRNA_TRANSCRIPTS.out.versions)
-        GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed.map { it -> [ [id:it.name], it ] }, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
+        GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
         ch_versions = ch_versions.mix(GATK4_BEDTOINTERVALLIST.out.versions)
         ch_rrna_interval = GATK4_BEDTOINTERVALLIST.out.interval_list
     } else {
@@ -153,9 +153,9 @@ workflow BUILD_REFERENCES {
             (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
             !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
         if (!params.cosmic_username || !params.cosmic_passwd) { exit 1, 'COSMIC username and/or password missing' }
-        FUSIONREPORT_DOWNLOAD(params.cosmic_username, params.cosmic_passwd)
+        FUSIONREPORT_DOWNLOAD()
         ch_versions = ch_versions.mix(FUSIONREPORT_DOWNLOAD.out.versions)
-        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.reference
+        ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.mitelman.map{ it.parent }
     } else {
         ch_fusionreport_ref = Channel.fromPath(params.fusionreport_ref)
     }

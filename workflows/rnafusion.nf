@@ -38,26 +38,9 @@ workflow RNAFUSION {
 
     main:
 
-    ch_starindex_ref              = params.starfusion_build ? Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_genome.fa.star.idx").map { it -> [[id:it.Name], it] }.collect()
-    ch_starindex_ensembl_ref      = Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect()
-    ch_refflat                    = params.starfusion_build ? Channel.fromPath(params.refflat).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.gtf.refflat").map { it -> [[id:it.Name], it] }.collect()
-    ch_rrna_interval              = params.starfusion_build ?  Channel.fromPath(params.rrna_intervals).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.interval_list").map { it -> [[id:it.Name], it] }.collect()
-    ch_adapter_fastp              = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta, checkIfExists: true) : Channel.empty()
-    ch_fusionreport_ref           = Channel.fromPath(params.fusionreport_ref).map { it -> [[id:it.Name], it] }.collect()
-    ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist).map { it -> [[id:it.Name], it] }.collect()
-    ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions).map { it -> [[id:it.Name], it] }.collect()
-    ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { it -> [[id:it.Name], it] }.collect()
-    ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands).map { it -> [[id:it.Name], it] }.collect()
-    ch_hgnc_ref                   = Channel.fromPath(params.hgnc_ref).map { it -> [[id:it.Name], it] }.collect()
-    ch_hgnc_date                  = Channel.fromPath(params.hgnc_date).map { it -> [[id:it.Name], it] }.collect()
-    ch_fasta                      = Channel.fromPath(params.fasta).map { it -> [[id:it.Name], it] }.collect()
-    ch_gtf                        = Channel.fromPath(params.gtf).map { it -> [[id:it.Name], it] }.collect()
-    ch_salmon_index               = Channel.fromPath(params.salmon_index).map { it -> [[id:it.Name], it] }.collect()
-    ch_fai                        = Channel.fromPath(params.fai).map { it -> [[id:it.Name], it] }.collect()
-
-
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
+
 
     //
     // Create references if necessary
@@ -65,6 +48,7 @@ workflow RNAFUSION {
 
     BUILD_REFERENCES()
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
+
 
     //
     // QC from FASTQ files
@@ -84,7 +68,6 @@ workflow RNAFUSION {
     )
     ch_reads = TRIM_WORKFLOW.out.ch_reads_all
     ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
-
 
     SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
     ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
@@ -108,7 +91,7 @@ workflow RNAFUSION {
     ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
 
 
-//Run STAR fusion
+    //Run STAR fusion
     STARFUSION_WORKFLOW (
         ch_reads,
         BUILD_REFERENCES.out.ch_gtf,
@@ -118,14 +101,14 @@ workflow RNAFUSION {
     ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
 
 
-//Run fusioncatcher
+    //Run fusioncatcher
     FUSIONCATCHER_WORKFLOW (
         ch_reads
     )
     ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
 
 
-//Run stringtie
+    //Run stringtie
     STRINGTIE_WORKFLOW (
         STARFUSION_WORKFLOW.out.ch_bam_sorted,
         BUILD_REFERENCES.out.ch_gtf
