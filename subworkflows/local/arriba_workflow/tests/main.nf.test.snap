@@ -1,114 +1,57 @@
 {
-    "ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4": {
+    "ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4 - External fusion file": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test_fastqs"
-                        },
-                        "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/da/0878f3451a0f8db34ffd9b178974e6/test_fastqs.arriba.fusions.tsv"
-                    ]
-                ],
-                "1": [
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/da/0878f3451a0f8db34ffd9b178974e6/test_fastqs.arriba.fusions.discarded.tsv"
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test_fastqs"
-                        },
-                        "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/c8/482130c0382c0d0318b9e98d0650da/test_fastqs_star_for_arriba_sorted.cram",
-                        "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/b5/57dffeefbc4801b0f7c4af2c8530e6/test_fastqs_star_for_arriba_sorted.cram.crai"
-                    ]
-                ],
-                "3": [
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/da/0878f3451a0f8db34ffd9b178974e6/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/5b/18880ae27c2497bddad57c4b7ba766/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/b5/57dffeefbc4801b0f7c4af2c8530e6/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/c8/482130c0382c0d0318b9e98d0650da/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/48/58af6204cc601a1a0e6e826a117f31/versions.yml"
-                ],
-                "cram_index": [
-                    [
-                        {
-                            "id": "test_fastqs"
-                        },
-                        "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/c8/482130c0382c0d0318b9e98d0650da/test_fastqs_star_for_arriba_sorted.cram",
-                        "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/b5/57dffeefbc4801b0f7c4af2c8530e6/test_fastqs_star_for_arriba_sorted.cram.crai"
-                    ]
-                ],
-                "fusions": [
-                    [
-                        {
-                            "id": "test_fastqs"
-                        },
-                        "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/da/0878f3451a0f8db34ffd9b178974e6/test_fastqs.arriba.fusions.tsv"
-                    ]
-                ],
-                "fusions_fail": [
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/da/0878f3451a0f8db34ffd9b178974e6/test_fastqs.arriba.fusions.discarded.tsv"
-                ],
-                "versions": [
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/da/0878f3451a0f8db34ffd9b178974e6/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/5b/18880ae27c2497bddad57c4b7ba766/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/b5/57dffeefbc4801b0f7c4af2c8530e6/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/c8/482130c0382c0d0318b9e98d0650da/versions.yml",
-                    "/workspace/rnafusion/.nf-test/tests/7899df1159e4d52047799028a4a24a9a/work/48/58af6204cc601a1a0e6e826a117f31/versions.yml"
-                ]
-            }
+            true,
+            true,
+            "test_fastqs_star_for_arriba_sorted.cram",
+            "test_fastqs_star_for_arriba_sorted.cram.crai",
+            [
+                "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9",
+                "versions.yml:md5,85458747b55f37c1a5afd39ee7a3a4aa",
+                "versions.yml:md5,bfc5d96804f2991c7f7c705f1ddf81ec",
+                "versions.yml:md5,f4f64d3f1fd867d5afa51e03f7cf2824"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-09T18:02:58.142697295"
+        "timestamp": "2024-12-11T15:53:59.18258718"
+    },
+    "ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4": {
+        "content": [
+            "test_fastqs.arriba.fusions.tsv:md5,8f39789c4428e81eb9a8d0e54c34c43d",
+            "test_fastqs.arriba.fusions.discarded.tsv:md5,b804c1ed5b01d34163f5c0b2f6810f98",
+            "test_fastqs_star_for_arriba_sorted.cram",
+            "test_fastqs_star_for_arriba_sorted.cram.crai",
+            [
+                "versions.yml:md5,24030f38976402fad0861e6ec99ee6b6",
+                "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9",
+                "versions.yml:md5,85458747b55f37c1a5afd39ee7a3a4aa",
+                "versions.yml:md5,bfc5d96804f2991c7f7c705f1ddf81ec",
+                "versions.yml:md5,f4f64d3f1fd867d5afa51e03f7cf2824"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-11T15:43:48.053656601"
     },
     "ARRIBA_WORKFLOW - Homo sapiens - FASTQs chr4 - cram = []": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test_fastqs"
-                        },
-                        "test_fastqs.arriba.fusions.tsv:md5,8f39789c4428e81eb9a8d0e54c34c43d"
-                    ]
-                ],
-                "1": [
-                    "test_fastqs.arriba.fusions.discarded.tsv:md5,b804c1ed5b01d34163f5c0b2f6810f98"
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    "versions.yml:md5,24030f38976402fad0861e6ec99ee6b6",
-                    "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9"
-                ],
-                "cram_index": [
-                    
-                ],
-                "fusions": [
-                    [
-                        {
-                            "id": "test_fastqs"
-                        },
-                        "test_fastqs.arriba.fusions.tsv:md5,8f39789c4428e81eb9a8d0e54c34c43d"
-                    ]
-                ],
-                "fusions_fail": [
-                    "test_fastqs.arriba.fusions.discarded.tsv:md5,b804c1ed5b01d34163f5c0b2f6810f98"
-                ],
-                "versions": [
-                    "versions.yml:md5,24030f38976402fad0861e6ec99ee6b6",
-                    "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9"
-                ]
-            }
+            "test_fastqs.arriba.fusions.tsv:md5,8f39789c4428e81eb9a8d0e54c34c43d",
+            "test_fastqs.arriba.fusions.discarded.tsv:md5,b804c1ed5b01d34163f5c0b2f6810f98",
+            true,
+            [
+                "versions.yml:md5,24030f38976402fad0861e6ec99ee6b6",
+                "versions.yml:md5,439bbb92ff0a83f1e278fc396e9d8ce9"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-09T18:15:28.965848873"
+        "timestamp": "2024-12-11T16:07:37.079418154"
     }
 }

@@ -27,14 +27,14 @@ workflow ARRIBA_WORKFLOW {
         ch_cram_index = Channel.empty()
         ch_dummy_file = file("$baseDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
-        if (( arriba || all) && !fusioninspector_only) {
+        if (( arriba || all ) && !fusioninspector_only) {
 
             STAR_FOR_ARRIBA(
                 reads,
                 ch_starindex_ref,
                 ch_gtf,
                 star_ignore_sjdbgtf,
-                '',                       // seq_platform, should be a params like other pipelines
+                '',
                 seq_center
             )
 
@@ -42,7 +42,7 @@ workflow ARRIBA_WORKFLOW {
 
             if ( arriba_fusions ) {
 
-                ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) ) // Should this be done in the main script?
+                ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
                     .map { meta, reads, fusions -> [ meta, fusions ] }
                 ch_arriba_fusion_fail = ch_dummy_file
 
@@ -52,7 +52,7 @@ workflow ARRIBA_WORKFLOW {
                     STAR_FOR_ARRIBA.out.bam,
                     ch_fasta,
                     ch_gtf,
-                    ch_arriba_ref_blacklist.map{ it[1] },       // should we update nf-core module to includes meta?
+                    ch_arriba_ref_blacklist.map{ it[1] },
                     ch_arriba_ref_known_fusions.map{ it[1] },
                     ch_arriba_ref_cytobands.map{ it[1] },
                     ch_arriba_ref_protein_domains.map{ it[1] }
@@ -80,8 +80,7 @@ workflow ARRIBA_WORKFLOW {
             }
 
         } else {
-            // Not sure how this dummy file can be useful
-            // If this tool can be skipped, why not just emitting an empty channel?
+
             ch_arriba_fusions = reads
                 .combine(Channel.value( file(ch_dummy_file, checkIfExists: true ) ) )
                 .map { meta, reads, fusions -> [ meta, fusions ] }
