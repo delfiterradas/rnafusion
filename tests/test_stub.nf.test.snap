@@ -80,17 +80,17 @@
                     "STAR-Fusion": "1.7.0"
                 },
                 "STAR_FOR_ARRIBA": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_FOR_STARFUSION": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
@@ -355,17 +355,17 @@
                     "STAR-Fusion": "1.7.0"
                 },
                 "STAR_FOR_ARRIBA": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_FOR_STARFUSION": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
