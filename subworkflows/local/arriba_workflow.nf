@@ -52,7 +52,7 @@ workflow ARRIBA_WORKFLOW {
         }
         else {
             ch_arriba_fusions       = reads.combine(Channel.value( file(ch_dummy_file, checkIfExists:true ) ) )
-                                        .map { meta, reads, fusions -> [ meta, fusions ] }
+                                        .map { it -> [ it[0], it[2] ] }
 
             ch_arriba_fusion_fail   = ch_dummy_file
         }

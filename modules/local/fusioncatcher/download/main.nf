@@ -19,7 +19,6 @@ process FUSIONCATCHER_DOWNLOAD {
     script:
 
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
         // TODO: move to S3
 
     // def url =

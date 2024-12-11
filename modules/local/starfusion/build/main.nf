@@ -33,6 +33,7 @@ process STARFUSION_BUILD {
         --pfam_db Pfam-A.hmm \\
         --dfam_db homo_sapiens_dfam.hmm \\
         --max_readlength $params.read_length \\
+        --human_gencode_filter \\
         --CPU $task.cpus
 
     cat <<-END_VERSIONS > versions.yml
