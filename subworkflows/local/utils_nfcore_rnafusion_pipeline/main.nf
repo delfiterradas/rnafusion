@@ -161,6 +161,10 @@ def validateInputParameters() {
             log.warn("No cosmic credentials were provided. Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD`")
     }
 
+    if (params.starfusion_build && !params.fusion_annot_lib) {
+            error("No fusion annotation library provided. `STARFUSION_BUILD` is unable to run.")
+    }
+
 }
 
 //
