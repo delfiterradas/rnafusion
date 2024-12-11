@@ -16,7 +16,7 @@ process FUSIONREPORT_DOWNLOAD {
     """
     fusion_report download $args ./
     mkdir fusion_report_db
-    mv *.txt *.log *.db fusion_report_db
+    mv *.txt *.log *.db fusion_report_db/
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -25,7 +25,7 @@ process FUSIONREPORT_DOWNLOAD {
     """
 
     stub:
-    meta = [id: 'fusionreport_dbs']
+    meta = [id: 'fusion_report_db']
     """
     mkdir fusion_report_db
     touch fusion_report_db/cosmic.db
