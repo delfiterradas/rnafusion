@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local module: `FUSIONREPORT_DOWNLOAD` [#560](https://github.com/nf-core/rnafusion/pull/560)
 - Add nf-test to local subworkflow: `QC_WORKFLOW` [#568](https://github.com/nf-core/rnafusion/pull/568)
 - Add nf-test to local subworkflow: `TRIM_WORKFLOW` [#572](https://github.com/nf-core/rnafusion/pull/572)
-- Add nf-test to local module: `FUSIONREPORT_DETECT`. Improve `FUSIONREPORT_DOWNLOAD` module [#572](https://github.com/nf-core/rnafusion/pull/577)
+- Add nf-test to local module: `FUSIONREPORT_DETECT`. Improve `FUSIONREPORT_DOWNLOAD` module [#577](https://github.com/nf-core/rnafusion/pull/577)
 
 ### Changed
 
@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated to nf-core/tools 3.0.2 [#504](https://github.com/nf-core/rnafusion/pull/504)
 - Remove local module `RRNA_TRANSCRIPTS` (replaced by nf-core module) [#541](https://github.com/nf-core/rnafusion/pull/541)
 - Allow fastq files without a dot before .fn(.gz)/.fastq(.gz) files [#548](https://github.com/nf-core/rnafusion/pull/548)
+- Remove double nested folder introduced in [#577](https://github.com/nf-core/rnafusion/pull/577), [#581](https://github.com/nf-core/rnafusion/pull/581)
   ext.args = "-genePredExt -geneNameAsName2 -ignoreGroupsWithoutExons" GTF_TO_REFFLAT
 
 ### Fixed
