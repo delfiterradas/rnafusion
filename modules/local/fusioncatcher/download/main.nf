@@ -18,7 +18,7 @@ process FUSIONCATCHER_DOWNLOAD {
     def args2 = task.ext.args2 ?: ''
     def human_version = "v102"
     def url = "http://sourceforge.net/projects/fusioncatcher/files/data/human_${human_version}.tar.gz.aa"
-    def meta = [ id: "human_${human_version}" ]
+    meta = [ id: "human_${human_version}" ]
     """
     if wget --spider "$url" 2>/dev/null; then
         wget $args $url

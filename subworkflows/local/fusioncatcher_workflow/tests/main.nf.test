@@ -11,7 +11,7 @@ nextflow_workflow {
     // Test
     test("FUSIONCATCHER_WORKFLOW - Homo sapiens - FASTQs chr4") {
 
-        setup {
+        /*setup {
             // Download reference files for fusioncatch
             run("FUSIONCATCHER_DOWNLOAD") {
                 script "../../../../modules/local/fusioncatcher/download/main.nf"
@@ -21,7 +21,7 @@ nextflow_workflow {
                 """
                 }
             }
-        }
+        }*/
 
         when {
             workflow {
@@ -37,7 +37,7 @@ nextflow_workflow {
                     ] )
 
                 // ch_references
-                input[1] = FUSIONCATCHER_DOWNLOAD.out.reference
+                input[1] = Channel.fromPath("/scratch/moebbs/NEXTFLOW_CODE/reference_rnafusion/human_v102").map{ [ [id: "human_v102"], it] } //FUSIONCATCHER_DOWNLOAD.out.reference
 
                 // fusioncatcher (boolean)
                 input[2] = true

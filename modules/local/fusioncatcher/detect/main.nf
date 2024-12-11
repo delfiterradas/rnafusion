@@ -21,7 +21,7 @@ process FUSIONCATCHER {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def reads = fasta.toString().replace(" ", ",")
+    def reads = fastqs.toString().replace(" ", ",")
     def single_end = meta.single_end ? "--single-end" : ""
     """
     fusioncatcher.py \\

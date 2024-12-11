@@ -10,7 +10,7 @@ workflow FUSIONCATCHER_WORKFLOW {
         fusioncatcher_fusions   // path, string
 
     main:
-        ch_versions = Channel.empty()
+        ch_versions   = Channel.empty()
         ch_dummy_file = file("$baseDir/assets/dummy_file_fusioncatcher.txt", checkIfExists: true)
 
         if (( run_fusioncatcher || all) && !fusioninspector_only ) {
