@@ -12,7 +12,7 @@ process STARFUSION_BUILD {
     val dfam_species
 
     output:
-    path "ctat_genome_lib_build_dir"  , emit: reference
+    tuple val(meta), path("ctat_genome_lib_build_dir"), emit: reference
 
     script:
     if (dfam_species != "human" && dfam_species != "mouse") {
