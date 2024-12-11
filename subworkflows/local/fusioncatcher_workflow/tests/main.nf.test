@@ -11,7 +11,7 @@ nextflow_workflow {
     // Test
     test("FUSIONCATCHER_WORKFLOW - Homo sapiens - FASTQs chr4") {
 
-        /*setup {
+        setup {
             // Download reference files for fusioncatch
             run("FUSIONCATCHER_DOWNLOAD") {
                 script "../../../../modules/local/fusioncatcher/download/main.nf"
@@ -21,8 +21,7 @@ nextflow_workflow {
                 """
                 }
             }
-        }*/
-
+        
         when {
             workflow {
                 """

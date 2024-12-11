@@ -1,5 +1,5 @@
 process FUSIONCATCHER {
-    tag "$meta.id - $meta2.id"
+    tag "$meta.id"
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
@@ -7,7 +7,7 @@ process FUSIONCATCHER {
 
     input:
     tuple val(meta), path(fastqs, stageAs: "input/*")
-    tuple val(meta2), path(reference, stageAs: "reference/*")
+    tuple val(meta2), path(reference)
 
     output:
     tuple val(meta), path("*.fusioncatcher.fusion-genes.txt")   , optional:true  , emit: fusions
@@ -25,7 +25,7 @@ process FUSIONCATCHER {
     def single_end = meta.single_end ? "--single-end" : ""
     """
     fusioncatcher.py \\
-        -d reference \\
+        -d ${reference} \\
         -i input \\
         -p $task.cpus \\
         -o . \\
