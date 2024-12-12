@@ -3,7 +3,7 @@ process STARFUSION_BUILD {
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
-    container 'community.wave.seqera.io/library/dfam_hmmer_minimap2_samtools_pruned:63e3d21ca68ea531'
+    container 'community.wave.seqera.io/library/dfam_hmmer_minimap2_samtools_pruned:bd39df228dad7086'
 
     input:
     tuple val(meta), path(fasta)
@@ -15,9 +15,6 @@ process STARFUSION_BUILD {
     tuple val(meta), path("ctat_genome_lib_build_dir"), emit: reference
 
     script:
-    if (dfam_species != "human" && dfam_species != "mouse") {
-        error "Invalid species for --dfam_db. Only 'human' or 'mouse' are accepted. Provided: ${dfam_species}"
-    }
     def args = task.ext.args ?: ''
     """
     prep_genome_lib.pl \\
