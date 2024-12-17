@@ -6,6 +6,7 @@
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow'
 include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
+include { CTATSPLICING_WORKFLOW         }   from '../subworkflows/local/ctatsplicing_workflow'
 include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
@@ -22,27 +23,6 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 
 
-ch_chrgtf                     = params.starfusion_build ? Channel.fromPath(params.chrgtf).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_annot.gtf").map { it -> [[id:it.Name], it] }.collect()
-ch_starindex_ref              = params.starfusion_build ? Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_genome.fa.star.idx").map { it -> [[id:it.Name], it] }.collect()
-ch_starindex_ensembl_ref      = Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect()
-ch_refflat                    = params.starfusion_build ? Channel.fromPath(params.refflat).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.gtf.refflat").map { it -> [[id:it.Name], it] }.collect()
-ch_rrna_interval              = params.starfusion_build ?  Channel.fromPath(params.rrna_intervals).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.interval_list").map { it -> [[id:it.Name], it] }.collect()
-ch_adapter_fastp              = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta, checkIfExists: true) : Channel.empty()
-ch_fusionreport_ref           = Channel.fromPath(params.fusionreport_ref).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { it -> [[id:it.Name], it] }.collect()
-ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands).map { it -> [[id:it.Name], it] }.collect()
-ch_hgnc_ref     = Channel.fromPath(params.hgnc_ref).map { it -> [[id:it.Name], it] }.collect()
-ch_hgnc_date    = Channel.fromPath(params.hgnc_date).map { it -> [[id:it.Name], it] }.collect()
-ch_fasta        = Channel.fromPath(params.fasta).map { it -> [[id:it.Name], it] }.collect()
-ch_gtf          = Channel.fromPath(params.gtf).map { it -> [[id:it.Name], it] }.collect()
-ch_salmon_index = Channel.fromPath(params.salmon_index).map { it -> [[id:it.Name], it] }.collect()
-ch_transcript   = Channel.fromPath(params.transcript).map { it -> [[id:it.Name], it] }.collect()
-ch_fai          = Channel.fromPath(params.fai).map { it -> [[id:it.Name], it] }.collect()
-
-
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -56,8 +36,29 @@ workflow RNAFUSION {
 
     main:
 
-    ch_versions = Channel.empty()
-    ch_multiqc_files = Channel.empty()
+    def ch_versions = Channel.empty()
+    def ch_multiqc_files = Channel.empty()
+
+    def ch_chrgtf                     = params.starfusion_build ? Channel.fromPath(params.chrgtf).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_annot.gtf").map { it -> [[id:it.Name], it] }.collect()
+    def ch_starindex_ref              = params.starfusion_build ? Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.starfusion_ref}/ref_genome.fa.star.idx").map { it -> [[id:it.Name], it] }.collect()
+    def ch_starindex_ensembl_ref      = Channel.fromPath(params.starindex_ref).map { it -> [[id:it.Name], it] }.collect()
+    def ch_refflat                    = params.starfusion_build ? Channel.fromPath(params.refflat).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.gtf.refflat").map { it -> [[id:it.Name], it] }.collect()
+    def ch_rrna_interval              = params.starfusion_build ?  Channel.fromPath(params.rrna_intervals).map { it -> [[id:it.Name], it] }.collect() : Channel.fromPath("${params.ensembl_ref}/ref_annot.interval_list").map { it -> [[id:it.Name], it] }.collect()
+    def ch_adapter_fastp              = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta, checkIfExists: true) : Channel.empty()
+    def ch_fusionreport_ref           = Channel.fromPath(params.fusionreport_ref).map { it -> [[id:it.Name], it] }.collect()
+    def ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist).map { it -> [[id:it.Name], it] }.collect()
+    def ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions).map { it -> [[id:it.Name], it] }.collect()
+    def ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { it -> [[id:it.Name], it] }.collect()
+    def ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands).map { it -> [[id:it.Name], it] }.collect()
+    def ch_hgnc_ref                   = Channel.fromPath(params.hgnc_ref).map { it -> [[id:it.Name], it] }.collect()
+    def ch_hgnc_date                  = Channel.fromPath(params.hgnc_date).map { it -> [[id:it.Name], it] }.collect()
+    def ch_fasta                      = Channel.fromPath(params.fasta).map { it -> [[id:it.Name], it] }.collect()
+    def ch_gtf                        = Channel.fromPath(params.gtf).map { it -> [[id:it.Name], it] }.collect()
+    def ch_salmon_index               = Channel.fromPath(params.salmon_index).map { it -> [[id:it.Name], it] }.collect()
+    def ch_transcript                 = Channel.fromPath(params.transcript).map { it -> [[id:it.Name], it] }.collect()
+    def ch_fai                        = Channel.fromPath(params.fai).map { it -> [[id:it.Name], it] }.collect()
+    def ch_starfusion_ref             = Channel.fromPath(params.starfusion_ref).map { it -> [[id:it.name], it]}.collect()
+
     //
     // MODULE: Run FastQC
     //
@@ -115,7 +116,8 @@ workflow RNAFUSION {
         ch_reads_all,
         ch_chrgtf,
         ch_starindex_ref,
-        ch_fasta
+        ch_fasta,
+        ch_starfusion_ref
     )
     ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
 
@@ -145,6 +147,13 @@ workflow RNAFUSION {
     )
     ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
 
+    //Run CTAT-splicing
+    CTATSPLICING_WORKFLOW(
+        STARFUSION_WORKFLOW.out.split_junctions,
+        STARFUSION_WORKFLOW.out.junctions,
+        STARFUSION_WORKFLOW.out.bam_align_sorted,
+        ch_starfusion_ref
+    )
 
     //Run fusionInpector
     FUSIONINSPECTOR_WORKFLOW (

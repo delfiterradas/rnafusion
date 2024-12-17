@@ -7,7 +7,7 @@ process CTATSPLICING_STARTOCANCERINTRONS {
         'docker.io/trinityctat/ctat_splicing:0.0.2' }"
 
     input:
-    tuple val(meta), path(sj), path(junction), path(bam), path(bai)
+    tuple val(meta), path(split_junction), path(junction), path(bam), path(bai)
     tuple val(meta2), path(genome_lib)
 
     output:
@@ -33,7 +33,7 @@ process CTATSPLICING_STARTOCANCERINTRONS {
     """
     ${create_index}
     /usr/local/src/CTAT-SPLICING/STAR_to_cancer_introns.py \\
-        --SJ_tab_file ${sj} \\
+        --SJ_tab_file ${split_junction} \\
         --chimJ_file ${junction} \\
         ${bam_arg} \\
         --output_prefix ${prefix} \\

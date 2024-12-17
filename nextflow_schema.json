@@ -143,6 +143,11 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba output"
                 },
+                "ctatsplicing": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Build or run arriba CTAT-SPLICING"
+                },
                 "ensembl_ref": {
                     "type": "string",
                     "fa_icon": "far fa-file-code",
