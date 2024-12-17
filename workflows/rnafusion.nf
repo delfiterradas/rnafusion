@@ -6,7 +6,6 @@
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow'
 include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
-include { CTATSPLICING_WORKFLOW         }   from '../subworkflows/local/ctatsplicing_workflow'
 include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
@@ -100,10 +99,12 @@ workflow RNAFUSION {
         ch_arriba_ref_known_fusions,
         ch_arriba_ref_cytobands,
         ch_arriba_ref_protein_domains,
+        ch_starfusion_ref,
         params.arriba,                   // boolean
         params.all,                      // boolean
         params.fusioninspector_only,     // boolean
         params.star_ignore_sjdbgtf,      // boolean
+        params.ctatsplicing,             // boolean
         params.seq_center ?: '',         // string
         params.arriba_fusions,           // path
         params.cram                      // array
@@ -146,14 +147,6 @@ workflow RNAFUSION {
         FUSIONCATCHER_WORKFLOW.out.fusions
     )
     ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
-
-    //Run CTAT-splicing
-    CTATSPLICING_WORKFLOW(
-        STARFUSION_WORKFLOW.out.split_junctions,
-        STARFUSION_WORKFLOW.out.junctions,
-        STARFUSION_WORKFLOW.out.bam_align_sorted,
-        ch_starfusion_ref
-    )
 
     //Run fusionInpector
     FUSIONINSPECTOR_WORKFLOW (

@@ -146,7 +146,7 @@
                 "ctatsplicing": {
                     "type": "boolean",
                     "fa_icon": "far fa-file-code",
-                    "description": "Build or run arriba CTAT-SPLICING"
+                    "description": "Run CTAT-splicing to detect abberant cancer splicing introns. Needs --arriba and/or --starfusion to run."
                 },
                 "ensembl_ref": {
                     "type": "string",
