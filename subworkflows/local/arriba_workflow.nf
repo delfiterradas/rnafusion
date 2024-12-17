@@ -33,7 +33,7 @@ workflow ARRIBA_WORKFLOW {
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
 
                 ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
-                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ meta, file -> return file}
+                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> it[1]}
             }
 
             if (params.cram.contains('arriba') ){
