@@ -2,7 +2,7 @@ process STARFUSION_DOWNLOAD {
     tag 'star-fusion'
 
     conda "${moduleDir}/environment.yml"
-    container 'community.wave.seqera.io/library/dfam_hmmer_samtools_star-fusion_pruned:5694d82381bf039e'
+    container 'docker.io/trinityctat/starfusion:1.14.0'
 
     output:
     path "ctat_genome_lib_build_dir/*"            , emit: reference
