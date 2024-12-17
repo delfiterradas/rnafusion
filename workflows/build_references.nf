@@ -55,7 +55,7 @@ workflow BUILD_REFERENCES {
     }
 
     if (params.starindex || params.all || params.starfusion || params.arriba) {
-        STAR_GENOMEGENERATE( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf )
+        STAR_GENOMEGENERATE( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.chrgtf )
     }
 
     if (params.arriba || params.all) {
@@ -68,7 +68,7 @@ workflow BUILD_REFERENCES {
 
     if (params.starfusion || params.all) {
         if (params.starfusion_build){
-            STARFUSION_BUILD( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf )
+            STARFUSION_BUILD( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.chrgtf )
         } else {
             STARFUSION_DOWNLOAD()
         }
