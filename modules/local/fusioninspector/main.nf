@@ -3,7 +3,9 @@ process FUSIONINSPECTOR {
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
-    container 'trinityctat/fusioninspector:2.10.0'
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/f0/f0bf770bcc7a7af4c9b7a83a88a191bb9e9875759e1985030268df9ffa27dde6/data':
+        'community.wave.seqera.io/library/star-fusion:4d0a3a362520dfa6'}"
 
     input:
     tuple val(meta), path(reads), path(fusion_list)
