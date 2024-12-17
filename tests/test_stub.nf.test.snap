@@ -1,11 +1,8 @@
 {
     "stub test no fastp trim": {
         "content": [
-            31,
+            20,
             {
-                "ARRIBA_ARRIBA": {
-                    "arriba": "2.4.0"
-                },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.4.0"
                 },
@@ -19,13 +16,10 @@
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER": {
-                    "fusioncatcher": 1.33
+                    "fusioncatcher": 1.35
                 },
                 "FUSIONCATCHER_BUILD": {
                     "fusioncatcher": "fusioncatcher.py 1.35"
-                },
-                "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
                     "fusion_report": "2.1.5"
@@ -35,10 +29,6 @@
                 },
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
-                },
-                "GATK4_MARKDUPLICATES": {
-                    "gatk4": "4.5.0.0",
-                    "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": null
@@ -55,59 +45,32 @@
                 "HGNC_DOWNLOAD": {
                     "wget": null
                 },
-                "PICARD_COLLECTINSERTSIZEMETRICS": {
-                    "picard": "3.3.0"
-                },
-                "PICARD_COLLECTRNASEQMETRICS": {
-                    "picard": "3.3.0"
-                },
-                "SALMON_INDEX": {
-                    "salmon": "1.10.3"
-                },
-                "SALMON_QUANT": {
-                    "salmon": "1.10.3"
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
-                },
-                "SAMTOOLS_INDEX_FOR_STARFUSION": {
-                    "samtools": 1.21
-                },
-                "STARFUSION": {
-                    "STAR-Fusion": "1.7.0"
                 },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.7.0"
                 },
                 "STAR_FOR_ARRIBA": {
-                    "star": "2.7.11b",
+                    "star": null,
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_FOR_STARFUSION": {
-                    "star": "2.7.11b",
+                    "star": null,
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": "2.7.11b",
+                    "star": null,
                     "samtools": 1.2,
                     "gawk": "5.1.0"
-                },
-                "STRINGTIE_MERGE": {
-                    "stringtie": "2.2.1"
-                },
-                "STRINGTIE_STRINGTIE": {
-                    "stringtie": "2.2.3"
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
             },
             [
-                "arriba",
-                "arriba/test.arriba.fusions.discarded.tsv",
-                "arriba/test.arriba.fusions.tsv",
                 "fastp",
                 "fastp/test.fastp.html",
                 "fastp/test.fastp.json",
@@ -126,32 +89,11 @@
                 "fusioncatcher/test.fusioncatcher.fusion-genes.txt",
                 "fusioncatcher/test.fusioncatcher.log",
                 "fusioncatcher/test.fusioncatcher.summary.txt",
-                "fusionreport",
-                "fusionreport/test",
-                "fusionreport/test/AAA_BBB.html",
-                "fusionreport/test/test.fusionreport.tsv",
-                "fusionreport/test/test.fusionreport_filtered.tsv",
-                "fusionreport/test/test.fusions.csv",
-                "fusionreport/test/test.fusions.json",
-                "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "get",
                 "get/rrna.bed",
                 "get/rrna.gtf",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
-                "picard",
-                "picard/test.bai",
-                "picard/test.bam",
-                "picard/test.bam.metrics",
-                "picard/test.cram",
-                "picard/test.cram.crai",
-                "picard/test.rna_metrics",
-                "picard/test_collectinsertsize.pdf",
-                "picard/test_collectinsertsize.txt",
                 "pipeline_info",
                 "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
                 "references",
@@ -214,10 +156,6 @@
                 "references/starfusion",
                 "references/starfusion/ctat_genome_lib_build_dir",
                 "references/starfusion/ref_annot.cdna.fa",
-                "salmon",
-                "salmon/test",
-                "salmon/test_lib_format_counts.json",
-                "salmon/test_meta_info.json",
                 "star_for_arriba",
                 "star_for_arriba/test.Aligned.sortedByCoord.out.bam",
                 "star_for_arriba/test.Aligned.unsort.out.bam",
@@ -249,38 +187,23 @@
                 "star_for_starfusion/test.Signal.UniqueMultiple.str1.out.wig",
                 "star_for_starfusion/test.out.sam",
                 "star_for_starfusion/test.sortedByCoord.out.bam",
-                "star_for_starfusion/test.sortedByCoord.out.bam.bai",
                 "star_for_starfusion/test.tab",
                 "star_for_starfusion/test.toTranscriptome.out.bam",
                 "star_for_starfusion/test.unmapped_1.fastq.gz",
                 "star_for_starfusion/test.unmapped_2.fastq.gz",
-                "star_for_starfusion/testXd.out.bam",
-                "starfusion",
-                "starfusion/test.starfusion.abridged.coding_effect.tsv",
-                "starfusion/test.starfusion.abridged.tsv",
-                "starfusion/test.starfusion.fusion_predictions.tsv",
-                "stringtie",
-                "stringtie/[:]",
-                "stringtie/[:]/stringtie.merged.gtf",
-                "stringtie/test.ballgown",
-                "stringtie/test.coverage.gtf",
-                "stringtie/test.gene.abundance.txt",
-                "stringtie/test.transcripts.gtf"
+                "star_for_starfusion/testXd.out.bam"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-11T12:43:59.534889"
+        "timestamp": "2024-12-17T16:44:02.121512"
     },
     "stub test with fastp trim": {
         "content": [
-            31,
+            19,
             {
-                "ARRIBA_ARRIBA": {
-                    "arriba": "2.4.0"
-                },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.4.0"
                 },
@@ -294,13 +217,10 @@
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER": {
-                    "fusioncatcher": 1.33
+                    "fusioncatcher": 1.35
                 },
                 "FUSIONCATCHER_BUILD": {
                     "fusioncatcher": "fusioncatcher.py 1.35"
-                },
-                "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
                     "fusion_report": "2.1.5"
@@ -310,10 +230,6 @@
                 },
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
-                },
-                "GATK4_MARKDUPLICATES": {
-                    "gatk4": "4.5.0.0",
-                    "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": null
@@ -330,59 +246,27 @@
                 "HGNC_DOWNLOAD": {
                     "wget": null
                 },
-                "PICARD_COLLECTINSERTSIZEMETRICS": {
-                    "picard": "3.3.0"
-                },
-                "PICARD_COLLECTRNASEQMETRICS": {
-                    "picard": "3.3.0"
-                },
-                "SALMON_INDEX": {
-                    "salmon": "1.10.3"
-                },
-                "SALMON_QUANT": {
-                    "salmon": "1.10.3"
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
-                },
-                "SAMTOOLS_INDEX_FOR_STARFUSION": {
-                    "samtools": 1.21
-                },
-                "STARFUSION": {
-                    "STAR-Fusion": "1.7.0"
                 },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.7.0"
                 },
                 "STAR_FOR_ARRIBA": {
-                    "star": "2.7.11b",
-                    "samtools": 1.2,
-                    "gawk": "5.1.0"
-                },
-                "STAR_FOR_STARFUSION": {
-                    "star": "2.7.11b",
+                    "star": null,
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": "2.7.11b",
+                    "star": null,
                     "samtools": 1.2,
                     "gawk": "5.1.0"
-                },
-                "STRINGTIE_MERGE": {
-                    "stringtie": "2.2.1"
-                },
-                "STRINGTIE_STRINGTIE": {
-                    "stringtie": "2.2.3"
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
             },
             [
-                "arriba",
-                "arriba/test.arriba.fusions.discarded.tsv",
-                "arriba/test.arriba.fusions.tsv",
                 "fastp",
                 "fastp/test.fastp.html",
                 "fastp/test.fastp.json",
@@ -401,32 +285,11 @@
                 "fusioncatcher/test.fusioncatcher.fusion-genes.txt",
                 "fusioncatcher/test.fusioncatcher.log",
                 "fusioncatcher/test.fusioncatcher.summary.txt",
-                "fusionreport",
-                "fusionreport/test",
-                "fusionreport/test/AAA_BBB.html",
-                "fusionreport/test/test.fusionreport.tsv",
-                "fusionreport/test/test.fusionreport_filtered.tsv",
-                "fusionreport/test/test.fusions.csv",
-                "fusionreport/test/test.fusions.json",
-                "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "get",
                 "get/rrna.bed",
                 "get/rrna.gtf",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
-                "picard",
-                "picard/test.bai",
-                "picard/test.bam",
-                "picard/test.bam.metrics",
-                "picard/test.cram",
-                "picard/test.cram.crai",
-                "picard/test.rna_metrics",
-                "picard/test_collectinsertsize.pdf",
-                "picard/test_collectinsertsize.txt",
                 "pipeline_info",
                 "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
                 "references",
@@ -452,23 +315,6 @@
                 "references/hgnc",
                 "references/hgnc/HGNC-DB-timestamp.txt",
                 "references/hgnc/hgnc_complete_set.txt",
-                "references/salmon",
-                "references/salmon/salmon",
-                "references/salmon/salmon/complete_ref_lens.bin",
-                "references/salmon/salmon/ctable.bin",
-                "references/salmon/salmon/ctg_offsets.bin",
-                "references/salmon/salmon/duplicate_clusters.tsv",
-                "references/salmon/salmon/info.json",
-                "references/salmon/salmon/mphf.bin",
-                "references/salmon/salmon/pos.bin",
-                "references/salmon/salmon/pre_indexing.log",
-                "references/salmon/salmon/rank.bin",
-                "references/salmon/salmon/refAccumLengths.bin",
-                "references/salmon/salmon/ref_indexing.log",
-                "references/salmon/salmon/reflengths.bin",
-                "references/salmon/salmon/refseq.bin",
-                "references/salmon/salmon/seq.bin",
-                "references/salmon/salmon/versionInfo.json",
                 "references/star",
                 "references/star/Genome",
                 "references/star/Log.out",
@@ -489,10 +335,6 @@
                 "references/starfusion",
                 "references/starfusion/ctat_genome_lib_build_dir",
                 "references/starfusion/ref_annot.cdna.fa",
-                "salmon",
-                "salmon/test",
-                "salmon/test_lib_format_counts.json",
-                "salmon/test_meta_info.json",
                 "star_for_arriba",
                 "star_for_arriba/test.Aligned.sortedByCoord.out.bam",
                 "star_for_arriba/test.Aligned.unsort.out.bam",
@@ -524,29 +366,17 @@
                 "star_for_starfusion/test.Signal.UniqueMultiple.str1.out.wig",
                 "star_for_starfusion/test.out.sam",
                 "star_for_starfusion/test.sortedByCoord.out.bam",
-                "star_for_starfusion/test.sortedByCoord.out.bam.bai",
                 "star_for_starfusion/test.tab",
                 "star_for_starfusion/test.toTranscriptome.out.bam",
                 "star_for_starfusion/test.unmapped_1.fastq.gz",
                 "star_for_starfusion/test.unmapped_2.fastq.gz",
-                "star_for_starfusion/testXd.out.bam",
-                "starfusion",
-                "starfusion/test.starfusion.abridged.coding_effect.tsv",
-                "starfusion/test.starfusion.abridged.tsv",
-                "starfusion/test.starfusion.fusion_predictions.tsv",
-                "stringtie",
-                "stringtie/[:]",
-                "stringtie/[:]/stringtie.merged.gtf",
-                "stringtie/test.ballgown",
-                "stringtie/test.coverage.gtf",
-                "stringtie/test.gene.abundance.txt",
-                "stringtie/test.transcripts.gtf"
+                "star_for_starfusion/testXd.out.bam"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-11T12:40:22.066494"
+        "timestamp": "2024-12-17T16:42:11.182735"
     }
 }

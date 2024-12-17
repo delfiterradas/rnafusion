@@ -90,7 +90,7 @@ workflow RNAFUSION {
         BUILD_REFERENCES.out.ch_arriba_ref_blacklist,
         BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
         BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
-        BUILD_REFERENCES.out.ch_arriba_ref_protein_domains
+        BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
         params.arriba,                   // boolean
         params.all,                      // boolean
         params.fusioninspector_only,     // boolean
@@ -139,7 +139,7 @@ workflow RNAFUSION {
 
 
 
-    //Run fusionInpector
+    //Run fusionInspector
     FUSIONINSPECTOR_WORKFLOW (
         ch_reads,
         FUSIONREPORT_WORKFLOW.out.fusion_list,
