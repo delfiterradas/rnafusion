@@ -3,7 +3,9 @@ process STARFUSION_BUILD {
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
-    container 'community.wave.seqera.io/library/dfam_hmmer_minimap2_samtools_pruned:bd39df228dad7086'
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/09/0941210949303990f23c63831c7f23ceec099d52ffbe5f1ac2152964d328747e/data':
+        'community.wave.seqera.io/library/dfam_hmmer_minimap2_samtools_pruned:bd39df228dad7086' }"
 
     input:
     tuple val(meta), path(fasta)
