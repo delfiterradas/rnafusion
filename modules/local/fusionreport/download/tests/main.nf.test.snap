@@ -21,7 +21,7 @@
                 "0": [
                     [
                         {
-                            "id": "fusionreport_dbs"
+                            "id": "fusion_report_db"
                         },
                         [
                             "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -35,10 +35,10 @@
                 "1": [
                     "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
                 ],
-                "fusionreport_db": [
+                "fusionreport_ref": [
                     [
                         {
-                            "id": "fusionreport_dbs"
+                            "id": "fusion_report_db"
                         },
                         [
                             "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -58,6 +58,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T19:35:49.629287874"
+        "timestamp": "2024-12-10T15:05:22.781845"
     }
 }

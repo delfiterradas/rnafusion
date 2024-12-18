@@ -85,6 +85,11 @@ workflow RNAFUSION {
     //
     // SUBWORKFLOW:  Run STAR alignment and Arriba
     //
+
+    // TODO: add params.seq_platform and pass it as argument to arriba_workflow
+    // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe inputed from samplesheet?
+    // TODO: same as above, but with ch_arriba_fusion_fail. It's currently replaces by a dummy file
+
     ARRIBA_WORKFLOW (
         ch_reads_all,
         ch_gtf,
@@ -92,7 +97,15 @@ workflow RNAFUSION {
         ch_starindex_ensembl_ref,
         ch_arriba_ref_blacklist,
         ch_arriba_ref_known_fusions,
-        ch_arriba_ref_protein_domains
+        ch_arriba_ref_cytobands,
+        ch_arriba_ref_protein_domains,
+        params.arriba,                   // boolean
+        params.all,                      // boolean
+        params.fusioninspector_only,     // boolean
+        params.star_ignore_sjdbgtf,      // boolean
+        params.seq_center ?: '',         // string
+        params.arriba_fusions,           // path
+        params.cram                      // array
     )
     ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
 
