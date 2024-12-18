@@ -3,7 +3,7 @@ process STARFUSION_BUILD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/f8/f804c086cee338c315fbc51faf0c37de360b047b47c33388716962eb3467b087/data':
+        'https://depot.galaxyproject.org/singularity/star-fusion:1.14.0--hdfd78af_0' :
         'community.wave.seqera.io/library/dfam_hmmer_minimap2_samtools_pruned:bd39df228dad7086'}"
 
     input:
@@ -14,6 +14,7 @@ process STARFUSION_BUILD {
     path "*"  , emit: reference
 
     script:
+    def binPath = (workflow.profile.tokenize(',').intersect(['singularity']).size() >= 1)  ?  "/usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl" : "prep_genome_lib.pl"
     """
     export TMPDIR=/tmp
     wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam34.0/Pfam-A.hmm.gz --no-check-certificate
@@ -25,7 +26,7 @@ process STARFUSION_BUILD {
     wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p --no-check-certificate
     gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
-    prep_genome_lib.pl \\
+    $binPath \\
         --genome_fa $fasta \\
         --gtf $gtf \\
         --annot_filter_rule AnnotFilterRule.pm \\
