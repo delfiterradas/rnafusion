@@ -21,6 +21,7 @@ nextflow_workflow {
                 """
                 }
             }
+        }
         
         when {
             workflow {
@@ -36,7 +37,7 @@ nextflow_workflow {
                     ] )
 
                 // ch_references
-                input[1] = Channel.fromPath("/scratch/moebbs/NEXTFLOW_CODE/reference_rnafusion/human_v102").map{ [ [id: "human_v102"], it] } //FUSIONCATCHER_DOWNLOAD.out.reference
+                input[1] = FUSIONCATCHER_DOWNLOAD.out.reference 
 
                 // fusioncatcher (boolean)
                 input[2] = true

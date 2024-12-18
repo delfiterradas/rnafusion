@@ -1,4 +1,4 @@
-process FUSIONCATCHER {
+process FUSIONCATCHER_DETECT {
     tag "$meta.id"
     label 'process_high'
 
@@ -21,7 +21,6 @@ process FUSIONCATCHER {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def reads = fastqs.toString().replace(" ", ",")
     def single_end = meta.single_end ? "--single-end" : ""
     """
     fusioncatcher.py \\

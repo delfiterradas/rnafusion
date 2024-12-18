@@ -1,0 +1,94 @@
+{
+    "test cosmic no fastp trim": {
+        "content": [
+            1,
+            {
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
+            [
+                "fastqc",
+                "fastqc/test_1_fastqc.html",
+                "fastqc/test_1_fastqc.zip",
+                "fastqc/test_2_fastqc.html",
+                "fastqc/test_2_fastqc.zip",
+                "pipeline_info",
+                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml"
+            ],
+            [
+                "test_1_fastqc.html:md5,fce82f01594d12b109776ced37ec0739",
+                "test_1_fastqc.zip:md5,166d13bbf5ebfcb24eb30c78b129a172",
+                "test_2_fastqc.html:md5,40f5f42c62a0e36def4fc3d3c48089cd",
+                "test_2_fastqc.zip:md5,4747768318b29ce4effe6c572ccbc36c"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2024-12-18T21:06:31.911972"
+    },
+    "test cosmic with fastp trim": {
+        "content": [
+            3,
+            {
+                "FASTP": {
+                    "fastp": "0.23.4"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQC_FOR_FASTP": {
+                    "fastqc": "0.12.1"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
+            [
+                "fastp",
+                "fastp/test.fastp.html",
+                "fastp/test.fastp.json",
+                "fastp/test.fastp.log",
+                "fastp/test_1.fastp.fastq.gz",
+                "fastp/test_2.fastp.fastq.gz",
+                "fastqc",
+                "fastqc/test_1_fastqc.html",
+                "fastqc/test_1_fastqc.zip",
+                "fastqc/test_2_fastqc.html",
+                "fastqc/test_2_fastqc.zip",
+                "fastqc_for_fastp",
+                "fastqc_for_fastp/test_trimmed_1_fastqc.html",
+                "fastqc_for_fastp/test_trimmed_1_fastqc.zip",
+                "fastqc_for_fastp/test_trimmed_2_fastqc.html",
+                "fastqc_for_fastp/test_trimmed_2_fastqc.zip",
+                "pipeline_info",
+                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml"
+            ],
+            [
+                "test.fastp.html:md5,d26a7f988fd5ed667832d391ab06e202",
+                "test.fastp.json:md5,ebf549d5793aa40efcd9e1ca41504f26",
+                "test.fastp.log:md5,1c04b14e212aac5ace51f9bd25859f23",
+                "test_1.fastp.fastq.gz:md5,2a5519a03fb226ae2379b1150b02ff0b",
+                "test_2.fastp.fastq.gz:md5,4b8d3865b857e6bfae0035a45b2cdc27",
+                "test_1_fastqc.html:md5,fce82f01594d12b109776ced37ec0739",
+                "test_1_fastqc.zip:md5,f9e7e4dbf71703d98214cfd5cb79ee07",
+                "test_2_fastqc.html:md5,40f5f42c62a0e36def4fc3d3c48089cd",
+                "test_2_fastqc.zip:md5,7428e5d3c26f0934c75b15de29d6af5c",
+                "test_trimmed_1_fastqc.html:md5,2c2256226962e9be8c20e5720b8a51ab",
+                "test_trimmed_1_fastqc.zip:md5,3b8731204e07bfe7a6ecce66ba8617db",
+                "test_trimmed_2_fastqc.html:md5,343c493ba215089723e9d4df7180a0fc",
+                "test_trimmed_2_fastqc.zip:md5,fcec86b3067854ffdadd00db615f0cdd"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2024-12-18T21:06:00.758494"
+    }
+}
