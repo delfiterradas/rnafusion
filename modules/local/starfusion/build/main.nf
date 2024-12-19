@@ -14,7 +14,6 @@ process STARFUSION_BUILD {
     path "*"  , emit: reference
 
     script:
-    def binPath = (workflow.profile.tokenize(',').intersect(['singularity']).size() >= 1)  ?  "/usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl" : "prep_genome_lib.pl"
     """
     export TMPDIR=/tmp
     wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam34.0/Pfam-A.hmm.gz --no-check-certificate
@@ -26,7 +25,7 @@ process STARFUSION_BUILD {
     wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p --no-check-certificate
     gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
-    $binPath \\
+    prep_genome_lib.pl \\
         --genome_fa $fasta \\
         --gtf $gtf \\
         --annot_filter_rule AnnotFilterRule.pm \\
