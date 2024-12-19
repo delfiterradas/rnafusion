@@ -7,6 +7,8 @@ workflow TRIM_WORKFLOW {
 
     take:
         reads           // channel [ meta, [ fastq files ] ]
+        adapter_fasta   // channel [ path ]
+        fastp_trim      // boolean
 
     main:
         ch_versions       = Channel.empty()
@@ -14,8 +16,8 @@ workflow TRIM_WORKFLOW {
         ch_fastp_json     = Channel.empty()
         ch_fastqc_trimmed = Channel.empty()
 
-        if ( {params.fastp_trim} ) {
-            FASTP(reads, {params.adapter_fasta}, false, false, false)
+        if ( fastp_trim ) {
+            FASTP(reads, adapter_fasta.ifEmpty( [] ), false, false, false)
             ch_versions = ch_versions.mix(FASTP.out.versions)
 
             FASTQC_FOR_FASTP(FASTP.out.reads)
