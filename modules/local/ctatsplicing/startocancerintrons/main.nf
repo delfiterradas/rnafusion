@@ -29,9 +29,7 @@ process CTATSPLICING_STARTOCANCERINTRONS {
     prefix = task.ext.prefix ?: "${meta.id}"
     def bam_arg = bam ? "--bam_file ${bam}" : ""
     def VERSION = '0.0.2' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
-    def create_index = bam && !bai ? "samtools index ${bam}" : ""
     """
-    ${create_index}
     /usr/local/src/CTAT-SPLICING/STAR_to_cancer_introns.py \\
         --SJ_tab_file ${split_junction} \\
         --chimJ_file ${junction} \\
