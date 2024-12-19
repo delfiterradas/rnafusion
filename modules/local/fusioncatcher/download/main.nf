@@ -2,12 +2,12 @@ process FUSIONCATCHER_DOWNLOAD {
     tag "fusioncatcher_download"
     label 'process_medium'
 
-    conda "${moduleDir}/environment.yml"
     container "docker.io/rannickscilifelab/fusioncatcher:1.34"
 
 
     input:
     val genome_gencode_version
+
 
     output:
     path "human_v${genome_gencode_version}"                , emit: reference

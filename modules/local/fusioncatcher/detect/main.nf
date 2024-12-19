@@ -2,8 +2,6 @@ process FUSIONCATCHER {
     tag "$meta.id"
     label 'process_high'
 
-    conda "${moduleDir}/environment.yml"
-
     container "docker.io/rannickscilifelab/fusioncatcher:1.34"
 
     input:
