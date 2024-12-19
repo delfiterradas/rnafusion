@@ -31,9 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove double nested folder introduced in [#577](https://github.com/nf-core/rnafusion/pull/577), [#581](https://github.com/nf-core/rnafusion/pull/581)
 - Use docker.io and galaxy containers for fusioncatcher and starfusion (incl. fusioninspector) instead of wave as they are not functional on wave [#588](https://github.com/nf-core/rnafusion/pull/588)
 - Update STAR-Fusion to 1.14 [#588](https://github.com/nf-core/rnafusion/pull/588)
-
-  ext.args = "-genePredExt -geneNameAsName2 -ignoreGroupsWithoutExons" GTF_TO_REFFLAT
-
+- Use -genePredExt -geneNameAsName2 -ignoreGroupsWithoutExons for GTF_TO_REFFLAT[#505](https://github.com/nf-core/rnafusion/pull/505)
 
 ### Fixed
 
