@@ -30,7 +30,6 @@ workflow ARRIBA_WORKFLOW {
         def ch_versions   = Channel.empty()
         def ch_cram_index = Channel.empty()
         def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
-        def ch_arriba_fusions = Channel.empty()
 
         if (( arriba || all ) && !fusioninspector_only) {
 
@@ -48,7 +47,7 @@ workflow ARRIBA_WORKFLOW {
                 CTATSPLICING_WORKFLOW(
                     STAR_FOR_ARRIBA.out.spl_junc_tab,
                     STAR_FOR_ARRIBA.out.junction,
-                    STAR_FOR_ARRIBA.out.bam_sorted_aligned,
+                    STAR_FOR_ARRIBA.out.bam,
                     ch_starfusion_ref
                 )
                 ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
