@@ -15,10 +15,16 @@ workflow FUSIONREPORT_WORKFLOW {
         ch_csv = Channel.empty()
 
         if (!params.fusioninspector_only) {
+            arriba_fusions.view { it -> "arriba fusions:${it}"}
+            starfusion_fusions.view { it -> "starfusion fusions:${it}"}
+            fusioncatcher_fusions.view { it -> "fusioncatcher fusions:${it}"}
+
             reads_fusions = reads
-            .join(arriba_fusions, remainder: true)
-            .join(starfusion_fusions, remainder: true)
-            .join(fusioncatcher_fusions, remainder: true)
+            .join(arriba_fusions, failOnMismatch:true, failOnDuplicate:true)
+            .join(starfusion_fusions, failOnMismatch:true, failOnDuplicate:true)
+            .join(fusioncatcher_fusions, failOnMismatch:true, failOnDuplicate:true)
+
+            reads_fusions.view()
 
             FUSIONREPORT(reads_fusions, fusionreport_ref, params.tools_cutoff)
             ch_fusion_list = FUSIONREPORT.out.fusion_list
