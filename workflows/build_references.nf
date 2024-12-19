@@ -68,7 +68,9 @@ workflow BUILD_REFERENCES {
 
     if (params.starfusion || params.all) {
         if (params.starfusion_build){
-            STARFUSION_BUILD( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf )
+            val_species = Channel.value("human")
+            ch_fusion_annot_lib = params.fusion_annot_lib
+            STARFUSION_BUILD( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf, ch_fusion_annot_lib, val_species)
         } else {
             STARFUSION_DOWNLOAD()
         }
