@@ -4,8 +4,8 @@ process STARFUSION {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/f7/f7977acd75883433483258a1cc21d069a64947af431b26c3fc13c6be62666dfa/data' :
-        'community.wave.seqera.io/library/dfam_hmmer_star-fusion:e8fe96707386872f'}"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/be/bed86145102fdf7e381e1a506a4723676f98b4bbe1db5085d02213cef18525c9/data' :
+        'community.wave.seqera.io/library/dfam_hmmer_minimap2_star-fusion:aa3a8e3951498552'}"
 
     input:
     tuple val(meta), path(reads), path(junction)
