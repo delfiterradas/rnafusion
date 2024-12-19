@@ -27,9 +27,10 @@ workflow ARRIBA_WORKFLOW {
         cram                            // array
 
     main:
-        ch_versions   = Channel.empty()
-        ch_cram_index = Channel.empty()
-        ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
+        def ch_versions   = Channel.empty()
+        def ch_cram_index = Channel.empty()
+        def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
+        def ch_arriba_fusions = Channel.empty()
 
         if (( arriba || all ) && !fusioninspector_only) {
 
