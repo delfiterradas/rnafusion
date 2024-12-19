@@ -30,7 +30,7 @@ workflow STARFUSION_WORKFLOW {
                 SAMTOOLS_INDEX_FOR_STARFUSION(STAR_FOR_STARFUSION.out.bam_sorted)
                 ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_STARFUSION.out.versions)
                 bam_sorted_indexed = STAR_FOR_STARFUSION.out.bam_sorted.join(SAMTOOLS_INDEX_FOR_STARFUSION.out.bai)
-                reads_junction = reads.join(STAR_FOR_STARFUSION.out.junction )
+                reads_junction = reads.join(STAR_FOR_STARFUSION.out.junction )  // TODO: This join is not needed as STARFUSION can simply read from the junction file: https://github.com/STAR-Fusion/STAR-Fusion/wiki#alternatively-kickstart-mode-running-star-yourself-and-then-running-star-fusion-using-the-existing-outputs
 
                 if (params.cram.contains('starfusion')){
                     SAMTOOLS_VIEW_FOR_STARFUSION (bam_sorted_indexed, ch_fasta, [] )
