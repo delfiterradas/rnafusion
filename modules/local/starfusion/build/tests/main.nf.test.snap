@@ -62,12 +62,12 @@
             "exonGeTrInfo.tab:md5,3c35618d07a8e35a0f9108699fcdda42",
             "exonInfo.tab:md5,bcbb3f32fa31fe504cc737f337ad341c",
             "geneInfo.tab:md5,db5db4b6e003904e9908fce7c05f0125",
-            "Genome:md5,21aac51c5062f73d6305ae77691f5d4e",
+            "Genome:md5,9e3efdd0901cabb5a2d589664a63b372",
             true,
             true,
-            "SA:md5,4d6ee7c82328aa304300e51ab5677ff9",
-            "SAindex:md5,2d3498f7d84a69bbc65fe9de1887820c",
-            "sjdbInfo.txt:md5,0ad0c108e6d02ec541d6adeffbdea6fd",
+            "SA:md5,7dd9083264be9c6a2194d990bc10d237",
+            "SAindex:md5,ac4711df685109e04356db9e9cb9fb7f",
+            "sjdbInfo.txt:md5,e4cc1bbf8bd687cfc3d7c2c702e6def7",
             "sjdbList.fromGTF.out.tab:md5,8f3e8604b00d4067e4eb80aa476a8113",
             "sjdbList.out.tab:md5,5d78dd49d5db24ca2c056b7ebe5c2059",
             "transcriptInfo.tab:md5,b758c0ccaddcf0453bab5905b3cec4a2",
@@ -77,10 +77,10 @@
             null
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-12T14:57:13.528134845"
+        "timestamp": "2024-12-19T17:03:12.812884291"
     },
     "STARFUSION_BUILD - human - minigenome - stub": {
         "content": [
