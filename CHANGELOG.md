@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local module: `FUSIONREPORT_DETECT`. Improve `FUSIONREPORT_DOWNLOAD` module [#577](https://github.com/nf-core/rnafusion/pull/577)
 - Add nf-test to local subworkflow: `ARRIBA_WORKFLOW` [#578](https://github.com/nf-core/rnafusion/pull/578)
 - Add nf-test to local module: `STARFUSION_BUILD`. [#585](https://github.com/nf-core/rnafusion/pull/585)
-
+- Add nf-test to local module: `STARFUSION_DETECT`. [#586](https://github.com/nf-core/rnafusion/pull/586)
 
 ### Changed
 
