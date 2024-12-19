@@ -40,7 +40,7 @@ workflow STARFUSION_WORKFLOW {
                     CTATSPLICING_WORKFLOW(
                         STAR_FOR_STARFUSION.out.spl_junc_tab,
                         STAR_FOR_STARFUSION.out.junction,
-                        STAR_FOR_STARFUSION.out.bam_sorted_aligned,
+                        STAR_FOR_STARFUSION.out.bam,
                         ch_starfusion_ref
                     )
                     ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
