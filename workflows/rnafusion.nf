@@ -65,7 +65,7 @@ workflow RNAFUSION {
     //
     TRIM_WORKFLOW (
         ch_samplesheet,
-        params.adapter_fasta,
+        Channel.value(params.adapter_fasta),
         params.fastp_trim
     )
     ch_reads = TRIM_WORKFLOW.out.ch_reads_all

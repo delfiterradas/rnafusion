@@ -25,7 +25,7 @@ workflow ARRIBA_WORKFLOW {
     main:
         ch_versions   = Channel.empty()
         ch_cram_index = Channel.empty()
-        ch_dummy_file = file("$baseDir/assets/dummy_file_arriba.txt", checkIfExists: true)
+        ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
         if (( arriba || all ) && !fusioninspector_only) {
 
@@ -43,7 +43,7 @@ workflow ARRIBA_WORKFLOW {
             if ( arriba_fusions ) {
 
                 ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
-                    .map { meta, reads, fusions -> [ meta, fusions ] }
+                    .map { it -> [ it[0], it[2] ] }
                 ch_arriba_fusion_fail = ch_dummy_file
 
             } else {
@@ -61,7 +61,7 @@ workflow ARRIBA_WORKFLOW {
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
 
                 ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
-                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ meta, file -> return file }
+                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> return it[1] }
             }
 
             if ( cram.contains('arriba') ) {
@@ -83,7 +83,7 @@ workflow ARRIBA_WORKFLOW {
 
             ch_arriba_fusions = reads
                 .combine(Channel.value( file(ch_dummy_file, checkIfExists: true ) ) )
-                .map { meta, reads, fusions -> [ meta, fusions ] }
+                .map { it -> [ it[0], it[2] ] }
 
             ch_arriba_fusion_fail = ch_dummy_file
         }
