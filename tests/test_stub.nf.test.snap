@@ -1,13 +1,16 @@
 {
     "stub test no fastp trim": {
         "content": [
-            29,
+            31,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.4.0"
+                },
+                "CTATSPLICING_STARTOCANCERINTRONS": {
+                    "ctat-splicing": "0.0.2"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -74,17 +77,17 @@
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_FOR_ARRIBA": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_FOR_STARFUSION": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
@@ -102,6 +105,31 @@
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "ctatsplicing",
+                "ctatsplicing/arriba",
+                "ctatsplicing/arriba/test.cancer.introns",
+                "ctatsplicing/arriba/test.cancer.introns.prelim",
+                "ctatsplicing/arriba/test.cancer_intron_reads.sorted.bam",
+                "ctatsplicing/arriba/test.cancer_intron_reads.sorted.bam.bai",
+                "ctatsplicing/arriba/test.chckpts",
+                "ctatsplicing/arriba/test.ctat-splicing.igv.html",
+                "ctatsplicing/arriba/test.gene_reads.sorted.sifted.bam",
+                "ctatsplicing/arriba/test.gene_reads.sorted.sifted.bam.bai",
+                "ctatsplicing/arriba/test.igv.tracks",
+                "ctatsplicing/arriba/test.introns",
+                "ctatsplicing/arriba/test.introns.for_IGV.bed",
+                "ctatsplicing/starfusion",
+                "ctatsplicing/starfusion/test.cancer.introns",
+                "ctatsplicing/starfusion/test.cancer.introns.prelim",
+                "ctatsplicing/starfusion/test.cancer_intron_reads.sorted.bam",
+                "ctatsplicing/starfusion/test.cancer_intron_reads.sorted.bam.bai",
+                "ctatsplicing/starfusion/test.chckpts",
+                "ctatsplicing/starfusion/test.ctat-splicing.igv.html",
+                "ctatsplicing/starfusion/test.gene_reads.sorted.sifted.bam",
+                "ctatsplicing/starfusion/test.gene_reads.sorted.sifted.bam.bai",
+                "ctatsplicing/starfusion/test.igv.tracks",
+                "ctatsplicing/starfusion/test.introns",
+                "ctatsplicing/starfusion/test.introns.for_IGV.bed",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -329,17 +357,20 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-20T13:17:20.018293"
+        "timestamp": "2024-12-20T14:00:19.311265"
     },
     "stub test with fastp trim": {
         "content": [
-            31,
+            33,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.4.0"
+                },
+                "CTATSPLICING_STARTOCANCERINTRONS": {
+                    "ctat-splicing": "0.0.2"
                 },
                 "FASTP": {
                     "fastp": "0.23.4"
@@ -412,17 +443,17 @@
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_FOR_ARRIBA": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_FOR_STARFUSION": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
@@ -440,6 +471,31 @@
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "ctatsplicing",
+                "ctatsplicing/arriba",
+                "ctatsplicing/arriba/test.cancer.introns",
+                "ctatsplicing/arriba/test.cancer.introns.prelim",
+                "ctatsplicing/arriba/test.cancer_intron_reads.sorted.bam",
+                "ctatsplicing/arriba/test.cancer_intron_reads.sorted.bam.bai",
+                "ctatsplicing/arriba/test.chckpts",
+                "ctatsplicing/arriba/test.ctat-splicing.igv.html",
+                "ctatsplicing/arriba/test.gene_reads.sorted.sifted.bam",
+                "ctatsplicing/arriba/test.gene_reads.sorted.sifted.bam.bai",
+                "ctatsplicing/arriba/test.igv.tracks",
+                "ctatsplicing/arriba/test.introns",
+                "ctatsplicing/arriba/test.introns.for_IGV.bed",
+                "ctatsplicing/starfusion",
+                "ctatsplicing/starfusion/test.cancer.introns",
+                "ctatsplicing/starfusion/test.cancer.introns.prelim",
+                "ctatsplicing/starfusion/test.cancer_intron_reads.sorted.bam",
+                "ctatsplicing/starfusion/test.cancer_intron_reads.sorted.bam.bai",
+                "ctatsplicing/starfusion/test.chckpts",
+                "ctatsplicing/starfusion/test.ctat-splicing.igv.html",
+                "ctatsplicing/starfusion/test.gene_reads.sorted.sifted.bam",
+                "ctatsplicing/starfusion/test.gene_reads.sorted.sifted.bam.bai",
+                "ctatsplicing/starfusion/test.igv.tracks",
+                "ctatsplicing/starfusion/test.introns",
+                "ctatsplicing/starfusion/test.introns.for_IGV.bed",
                 "fastp",
                 "fastp/test.fastp.html",
                 "fastp/test.fastp.json",
@@ -676,6 +732,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-20T13:15:06.974011"
+        "timestamp": "2024-12-20T13:57:10.179877"
     }
 }

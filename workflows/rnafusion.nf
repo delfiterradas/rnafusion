@@ -92,7 +92,7 @@ workflow RNAFUSION {
         BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
         BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
         BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
-        ch_starfusion_ref,
+        BUILD_REFERENCES.out.ch_starfusion_ref,
         params.arriba,                   // boolean
         params.all,                      // boolean
         params.fusioninspector_only,     // boolean
@@ -110,8 +110,8 @@ workflow RNAFUSION {
         ch_reads,
         BUILD_REFERENCES.out.ch_gtf,
         BUILD_REFERENCES.out.ch_starindex_ref,
-        BUILD_REFERENCES.out.ch_fasta
-        ch_starfusion_ref
+        BUILD_REFERENCES.out.ch_fasta,
+        BUILD_REFERENCES.out.ch_starfusion_ref
     )
     ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
 
