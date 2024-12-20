@@ -1,0 +1,105 @@
+{
+    "stub test no fastp trim": {
+        "content": [
+            4,
+            {
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FUSIONREPORT": {
+                    "fusion_report": "2.1.5"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
+            [
+                "fastqc",
+                "fastqc/test.html",
+                "fastqc/test.zip",
+                "fusionreport",
+                "fusionreport/test",
+                "fusionreport/test/AAA_BBB.html",
+                "fusionreport/test/test.fusionreport.tsv",
+                "fusionreport/test/test.fusionreport_filtered.tsv",
+                "fusionreport/test/test.fusions.csv",
+                "fusionreport/test/test.fusions.json",
+                "fusionreport/test/test_fusionreport_index.html",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "salmon",
+                "salmon/test",
+                "salmon/test_lib_format_counts.json",
+                "salmon/test_meta_info.json"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-03T19:27:00.717876194"
+    },
+    "stub test with fastp trim": {
+        "content": [
+            6,
+            {
+                "FASTP": {
+                    "fastp": "0.23.4"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQC_FOR_FASTP": {
+                    "fastqc": "0.12.1"
+                },
+                "FUSIONREPORT": {
+                    "fusion_report": "2.1.5"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
+            [
+                "fastp",
+                "fastp/test.fastp.html",
+                "fastp/test.fastp.json",
+                "fastp/test.fastp.log",
+                "fastp/test_1.fastp.fastq.gz",
+                "fastp/test_2.fastp.fastq.gz",
+                "fastqc",
+                "fastqc/test.html",
+                "fastqc/test.zip",
+                "fastqc_for_fastp",
+                "fastqc_for_fastp/test_trimmed.html",
+                "fastqc_for_fastp/test_trimmed.zip",
+                "fusionreport",
+                "fusionreport/test",
+                "fusionreport/test/AAA_BBB.html",
+                "fusionreport/test/test.fusionreport.tsv",
+                "fusionreport/test/test.fusionreport_filtered.tsv",
+                "fusionreport/test/test.fusions.csv",
+                "fusionreport/test/test.fusions.json",
+                "fusionreport/test/test_fusionreport_index.html",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "salmon",
+                "salmon/test",
+                "salmon/test_lib_format_counts.json",
+                "salmon/test_meta_info.json"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-03T19:26:43.375635514"
+    }
+}
