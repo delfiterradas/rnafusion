@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local subworkflow: `TRIM_WORKFLOW` [#572](https://github.com/nf-core/rnafusion/pull/572)
 - Add nf-test to local module: `FUSIONREPORT_DETECT`. Improve `FUSIONREPORT_DOWNLOAD` module [#577](https://github.com/nf-core/rnafusion/pull/577)
 - Add nf-test to local subworkflow: `ARRIBA_WORKFLOW` [#578](https://github.com/nf-core/rnafusion/pull/578)
-- Added a new module `CTATSPLICING_STARTOCANCERINTRONS` [#587](https://github.com/nf-core/rnafusion/pull/587)
+- Added a new module `CTATSPLICING_STARTOCANCERINTRONS` and a new parameter `--ctatsplicing`. This options creates reports on cancer splicing abberations and requires one or both of `--arriba` and `--starfusion` to be given. [#587](https://github.com/nf-core/rnafusion/pull/587)
 
 ### Changed
 
