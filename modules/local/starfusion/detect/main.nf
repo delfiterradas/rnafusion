@@ -19,7 +19,7 @@ process STARFUSION {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def fasta = reads ? (meta.single_end ? "--left_fq ${reads[0]}" : "--left_fq ${reads[0]} --right_fq ${reads[1]}") : ""
+    def fastq_arg = reads ? (meta.single_end ? "--left_fq ${reads[0]}" : "--left_fq ${reads[0]} --right_fq ${reads[1]}") : ""
     def junction_arg =  junction ? "-J ${junction}" : ""
     def args = task.ext.args ?: ''
     """
