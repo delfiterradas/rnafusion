@@ -222,7 +222,6 @@ The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They m
 
 [CTAT-SPLICING](https://github.com/TrinityCTAT/CTAT-SPLICING/wiki) detects and annotates of aberrant splicing isoforms in cancer. This is run on the input files for `arriba` and/or `starfusion`.
 
-
 ### FusionInspector
 
 <details markdown="1">
