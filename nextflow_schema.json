@@ -375,6 +375,11 @@
                     "type": "string",
                     "description": "Path to Fusion Annotation Library to be used in STARFUSION_BUILD.",
                     "fa_icon": "far fa-file-code"
+                },
+                "species": {
+                    "type": "string",
+                    "description": "Which species dfam should automatically download, default: human.",
+                    "fa_icon": "far fa-file-code"
                 }
             }
         },
