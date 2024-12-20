@@ -44,14 +44,14 @@ workflow BUILD_REFERENCES {
     GATK4_CREATESEQUENCEDICTIONARY(ENSEMBL_DOWNLOAD.out.primary_assembly)
 
 
-    RRNATRANSCRIPTS(ENSEMBL_DOWNLOAD.out.gtf.map{ meta, gtf -> [ gtf ] })
+    RRNATRANSCRIPTS(ENSEMBL_DOWNLOAD.out.gtf.map{ it -> [ it[1] ] })
     BEDOPS_CONVERT2BED(RRNATRANSCRIPTS.out.rrna_gtf.map{ it -> [[id:it.Name], it] })
     GATK4_BEDTOINTERVALLIST(BEDOPS_CONVERT2BED.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict)
 
-    GFFREAD(ENSEMBL_DOWNLOAD.out.gtf, ENSEMBL_DOWNLOAD.out.primary_assembly.map { meta, fasta -> [ fasta ] })
+    GFFREAD(ENSEMBL_DOWNLOAD.out.gtf, ENSEMBL_DOWNLOAD.out.primary_assembly.map { it -> [ it[1] ] })
 
     if (!params.skip_salmon_index){
-        SALMON_INDEX(ENSEMBL_DOWNLOAD.out.primary_assembly.map{ meta, fasta -> [ fasta ] }, GFFREAD.out.gffread_fasta.map{ meta, gffread_fasta -> [ gffread_fasta ] })
+        SALMON_INDEX(ENSEMBL_DOWNLOAD.out.primary_assembly.map{ it -> [ it[1] ] }, GFFREAD.out.gffread_fasta.map{ it -> [ it[1] ] })
     }
 
     if (params.starindex || params.all || params.starfusion || params.arriba) {
@@ -68,7 +68,9 @@ workflow BUILD_REFERENCES {
 
     if (params.starfusion || params.all) {
         if (params.starfusion_build){
-            STARFUSION_BUILD( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf )
+            val_species = Channel.value("human")
+            ch_fusion_annot_lib = params.fusion_annot_lib
+            STARFUSION_BUILD( ENSEMBL_DOWNLOAD.out.primary_assembly, ENSEMBL_DOWNLOAD.out.gtf, ch_fusion_annot_lib, val_species)
         } else {
             STARFUSION_DOWNLOAD()
         }

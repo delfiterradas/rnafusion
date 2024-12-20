@@ -367,6 +367,11 @@
                     "type": "boolean",
                     "fa_icon": "far fa-file-code",
                     "description": "Avoid using Cosmic DB (for example in clinical case applications where a paid license applies."
+                },
+                "fusion_annot_lib": {
+                    "type": "string",
+                    "description": "Path to Fusion Annotation Library to be used in STARFUSION_BUILD.",
+                    "fa_icon": "far fa-file-code"
                 }
             }
         },
