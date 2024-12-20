@@ -39,7 +39,6 @@ jobs:
           - "latest-stable"
         test_profile:
           - "test_stub"
-          - "test_build"
         compute_profile:
           - "docker"
           - "singularity"

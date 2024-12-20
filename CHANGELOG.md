@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local module: `STARFUSION_BUILD`. [#585](https://github.com/nf-core/rnafusion/pull/585)
 - Add nf-test to local module: `STARFUSION_DETECT`. [#586](https://github.com/nf-core/rnafusion/pull/586)
 - Added a new module `CTATSPLICING_STARTOCANCERINTRONS` and a new parameter `--ctatsplicing`. This options creates reports on cancer splicing abberations and requires one or both of `--arriba` and `--starfusion` to be given. [#587](https://github.com/nf-core/rnafusion/pull/587)
+- Add parameter `--references_only` when no data should be analysed, but only the references should be built [#505](https://github.com/nf-core/rnafusion/pull/505)
 
 ### Changed
 
@@ -34,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove double nested folder introduced in [#577](https://github.com/nf-core/rnafusion/pull/577), [#581](https://github.com/nf-core/rnafusion/pull/581)
 - Use docker.io and galaxy containers for fusioncatcher and starfusion (incl. fusioninspector) instead of wave as they are not functional on wave [#588](https://github.com/nf-core/rnafusion/pull/588)
 - Update STAR-Fusion to 1.14 [#588](https://github.com/nf-core/rnafusion/pull/588)
+- Use "-genePredExt -geneNameAsName2 -ignoreGroupsWithoutExons" (to mimic gms/tomte) for GTF_TO_REFFLAT [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Integrate reference building in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Move from ensembl to gencode base [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Update from ensembl 102 to gencode 46 default references [#505](https://github.com/nf-core/rnafusion/pull/505)
 
 ### Fixed
 
@@ -48,12 +53,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove fusionGDB from documentation and fusion-report download stubs [#503](https://github.com/nf-core/rnafusion/pull/503)
+- Removed test-build as reference building gets integrated in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Removed parameter `--build_references`
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
-|               | `--no_cosmic` |
+| Old parameter        | New parameter       |
+| -------------------- | ------------------- |
+|                      | `--no_cosmic`       |
+| `--build_references` | `--references_only` |
 
 ## v3.0.2 - [2024-04-10]
 

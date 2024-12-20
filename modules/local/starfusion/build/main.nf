@@ -15,6 +15,7 @@ process STARFUSION_BUILD {
 
     output:
     tuple val(meta), path("ctat_genome_lib_build_dir"), emit: reference
+    path "versions.yml"   , emit: versions
 
     script:
     def args = task.ext.args ?: ''
@@ -25,8 +26,8 @@ process STARFUSION_BUILD {
         --dfam_db ${dfam_species} \\
         --pfam_db current \\
         --fusion_annot_lib $fusion_annot_lib \\
-        ${args} \\
-        --CPU $task.cpus
+        --CPU $task.cpus \\
+        ${args}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

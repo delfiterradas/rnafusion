@@ -9,7 +9,7 @@ include { CTATSPLICING_WORKFLOW         }   from './ctatsplicing_workflow'
 workflow STARFUSION_WORKFLOW {
     take:
         reads
-        ch_chrgtf
+        ch_gtf
         ch_starindex_ref
         ch_fasta
         ch_starfusion_ref
@@ -25,9 +25,9 @@ workflow STARFUSION_WORKFLOW {
         if ((params.starfusion || params.all || params.stringtie) && !params.fusioninspector_only) {
             if (params.starfusion_fusions){
                 ch_starfusion_fusions = reads.combine(Channel.value(file(params.starfusion_fusions, checkIfExists:true)))
-                                        .map { meta, reads, fusions -> [ meta, fusions ] }
+                                        .map { it -> [ it[0], it[2] ] }
             } else {
-                STAR_FOR_STARFUSION( reads, ch_starindex_ref, ch_chrgtf, params.star_ignore_sjdbgtf, '', params.seq_center ?: '')
+                STAR_FOR_STARFUSION( reads, ch_starindex_ref, ch_gtf, params.star_ignore_sjdbgtf, '', params.seq_center ?: '')
                 ch_versions = ch_versions.mix(STAR_FOR_STARFUSION.out.versions)
                 ch_align = STAR_FOR_STARFUSION.out.bam_sorted
 
@@ -65,7 +65,7 @@ workflow STARFUSION_WORKFLOW {
         }
         else {
             ch_starfusion_fusions = reads.combine(Channel.value(file(ch_dummy_file, checkIfExists:true)))
-                                    .map { meta, reads, fusions -> [ meta, fusions ] }
+                                    .map { it -> [ it[0], it[2] ] }
             ch_star_stats = Channel.empty()
             ch_star_gene_count = Channel.empty()
         }

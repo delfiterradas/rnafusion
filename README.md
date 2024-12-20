@@ -19,7 +19,7 @@
 
 ## Introduction
 
-**nf-core/rnafusion** is a bioinformatics best-practice analysis pipeline for RNA sequencing consisting of several tools designed for detecting and visualizing fusion genes. Results from up to 5 fusion callers tools are created, and are also aggregated, most notably in a pdf visualiation document, a vcf data collection file, and html and tsv reports.
+**nf-core/rnafusion** is a bioinformatics best-practice analysis pipeline for RNA sequencing consisting of several tools designed for detecting and visualizing fusion genes. Results from up to 5 fusion callers tools are created, and are also aggregated, most notably in a pdf visualisation document, a vcf data collection file, and html and tsv reports.
 
 On release, automated continuous integration tests run the pipeline on a full-sized dataset on the AWS cloud infrastructure. This ensures that the pipeline runs on AWS, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources. The results obtained from the full-sized test can be viewed on the [nf-core website](https://nf-co.re/rnafusion/results).
 
@@ -31,9 +31,9 @@ In rnafusion the full-sized test includes reference building and fusion detectio
 
 ### Build references
 
-`--build_references` triggers a parallel workflow to build references, which is a prerequisite to running the pipeline:
+`--references_only` triggers a workflow to ONLY build references, otherwise the references are build when the analysis is run:
 
-1. Download ensembl fasta and gtf files
+1. Download gencode fasta and gtf files
 2. Create [STAR](https://github.com/alexdobin/STAR) index
 3. Download [Arriba](https://github.com/suhrig/arriba) references
 4. Download [FusionCatcher](https://github.com/ndaniel/fusioncatcher) references
@@ -78,7 +78,7 @@ First, build the references:
 nextflow run nf-core/rnafusion \
    -profile test,<docker/singularity/.../institute> \
    --outdir <OUTDIR>\
-   --build_references \
+   --references_only \
    -stub
 ```
 
