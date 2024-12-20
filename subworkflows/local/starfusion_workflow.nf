@@ -53,7 +53,7 @@ workflow STARFUSION_WORKFLOW {
                     SAMTOOLS_INDEX_FOR_STARFUSION_CRAM (SAMTOOLS_VIEW_FOR_STARFUSION.out.cram)
                     ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_STARFUSION_CRAM.out.versions)
                 }
-                if (params.starfusion || params.all || params.ctatsplicing){
+                if (params.starfusion || params.all){
                     STARFUSION( reads_junction, ch_starfusion_ref.map { it -> it[1] })
                     ch_versions = ch_versions.mix(STARFUSION.out.versions)
                     ch_starfusion_fusions = STARFUSION.out.fusions
