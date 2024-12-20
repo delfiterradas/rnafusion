@@ -52,10 +52,10 @@ workflow ARRIBA_WORKFLOW {
                     STAR_FOR_ARRIBA.out.bam,
                     ch_fasta,
                     ch_gtf,
-                    ch_arriba_ref_blacklist.map{ it[1] },
-                    ch_arriba_ref_known_fusions.map{ it[1] },
-                    ch_arriba_ref_cytobands.map{ it[1] },
-                    ch_arriba_ref_protein_domains.map{ it[1] }
+                    ch_arriba_ref_blacklist,
+                    ch_arriba_ref_known_fusions,
+                    ch_arriba_ref_cytobands,
+                    ch_arriba_ref_protein_domains
                 )
 
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)

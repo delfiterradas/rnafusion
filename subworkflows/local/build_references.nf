@@ -118,14 +118,10 @@ workflow BUILD_REFERENCES {
         ch_arriba_ref_known_fusions = ARRIBA_DOWNLOAD.out.known_fusions
         ch_arriba_ref_protein_domains = ARRIBA_DOWNLOAD.out.protein_domains
     } else {
-        ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist).map { file ->
-        [ id: file.baseName, path: file ]}
-        ch_arriba_ref_cytobands = Channel.fromPath(params.arriba_ref_cytobands).map { file ->
-        [ id: file.baseName, path: file ]}
-        ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions).map { file ->
-        [ id: file.baseName, path: file ]}
-        ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains).map { file ->
-        [ id: file.baseName, path: file ]}
+        ch_arriba_ref_blacklist = Channel.fromPath(params.arriba_ref_blacklist)
+        ch_arriba_ref_cytobands = Channel.fromPath(params.arriba_ref_cytobands)
+        ch_arriba_ref_known_fusions = Channel.fromPath(params.arriba_ref_known_fusions)
+        ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains)
     }
 
 
