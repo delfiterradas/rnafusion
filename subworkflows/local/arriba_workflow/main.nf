@@ -4,6 +4,8 @@ include { SAMTOOLS_SORT as SAMTOOLS_SORT_FOR_ARRIBA   } from '../../../modules/n
 include { SAMTOOLS_VIEW as SAMTOOLS_VIEW_FOR_ARRIBA   } from '../../../modules/nf-core/samtools/view/main'
 include { STAR_ALIGN as STAR_FOR_ARRIBA               } from '../../../modules/nf-core/star/align/main'
 
+include { CTATSPLICING_WORKFLOW         }   from '../ctatsplicing_workflow'
+
 workflow ARRIBA_WORKFLOW {
     take:
         reads                           // channel [ meta, [ fastqs ]         ]
@@ -14,18 +16,21 @@ workflow ARRIBA_WORKFLOW {
         ch_arriba_ref_cytobands         // channel [ meta, path_cytobands     ]
         ch_arriba_ref_known_fusions     // channel [ meta, path_known_fusions ]
         ch_arriba_ref_protein_domains   // channel [ meta, path_proteins      ]
+        ch_starfusion_ref               // channel [ meta, path_starfusion_ref ]
         arriba                          // boolean
         all                             // boolean
         fusioninspector_only            // boolean
         star_ignore_sjdbgtf             // boolean
+        ctatsplicing                    // boolean
         seq_center                      // string
         arriba_fusions                  // path
         cram                            // array
 
     main:
-        ch_versions   = Channel.empty()
-        ch_cram_index = Channel.empty()
-        ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
+
+        def ch_versions   = Channel.empty()
+        def ch_cram_index = Channel.empty()
+        def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
         if (( arriba || all ) && !fusioninspector_only) {
 
@@ -37,8 +42,17 @@ workflow ARRIBA_WORKFLOW {
                 '',
                 seq_center
             )
-
             ch_versions = ch_versions.mix(STAR_FOR_ARRIBA.out.versions)
+
+            if ( ctatsplicing || all ) {
+                CTATSPLICING_WORKFLOW(
+                    STAR_FOR_ARRIBA.out.spl_junc_tab,
+                    STAR_FOR_ARRIBA.out.junction,
+                    STAR_FOR_ARRIBA.out.bam,
+                    ch_starfusion_ref
+                )
+                ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
+            }
 
             if ( arriba_fusions ) {
 

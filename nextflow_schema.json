@@ -137,6 +137,11 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Download references instead of building them (for fusioncatcher and starfusion)"
                 },
+                "ctatsplicing": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Run CTAT-splicing to detect abberant cancer splicing introns. Needs --arriba and/or --starfusion to run."
+                },
                 "gencode_ref": {
                     "type": "string",
                     "fa_icon": "far fa-file-code",

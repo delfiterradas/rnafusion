@@ -16,9 +16,10 @@ workflow FUSIONREPORT_WORKFLOW {
 
         if (!params.fusioninspector_only) {
             reads_fusions = reads
-            .join(arriba_fusions, remainder: true)
-            .join(starfusion_fusions, remainder: true)
-            .join(fusioncatcher_fusions, remainder: true)
+            .join(arriba_fusions, failOnMismatch:true, failOnDuplicate:true)
+            .join(starfusion_fusions, failOnMismatch:true, failOnDuplicate:true)
+            .join(fusioncatcher_fusions, failOnMismatch:true, failOnDuplicate:true)
+
             FUSIONREPORT(reads_fusions, fusionreport_ref, params.tools_cutoff)
             ch_fusion_list = FUSIONREPORT.out.fusion_list
             ch_fusion_list_filtered = FUSIONREPORT.out.fusion_list_filtered

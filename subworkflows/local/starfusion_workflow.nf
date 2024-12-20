@@ -4,17 +4,21 @@ include { SAMTOOLS_VIEW as SAMTOOLS_VIEW_FOR_STARFUSION }        from '../../mod
 include { STAR_ALIGN as STAR_FOR_STARFUSION }                    from '../../modules/nf-core/star/align/main'
 include { STARFUSION }                                           from '../../modules/local/starfusion/detect/main'
 
+include { CTATSPLICING_WORKFLOW         }   from './ctatsplicing_workflow'
+
 workflow STARFUSION_WORKFLOW {
     take:
         reads
         ch_gtf
         ch_starindex_ref
         ch_fasta
+        ch_starfusion_ref
 
     main:
-        ch_versions = Channel.empty()
-        ch_align = Channel.empty()
-        bam_sorted_indexed = Channel.empty()
+        def ch_versions = Channel.empty()
+        def ch_align = Channel.empty()
+        def ch_starfusion_fusions = Channel.empty()
+        def bam_sorted_indexed = Channel.empty()
 
         ch_dummy_file = file("$baseDir/assets/dummy_file_starfusion.txt", checkIfExists: true)
 
@@ -32,6 +36,16 @@ workflow STARFUSION_WORKFLOW {
                 bam_sorted_indexed = STAR_FOR_STARFUSION.out.bam_sorted.join(SAMTOOLS_INDEX_FOR_STARFUSION.out.bai)
                 reads_junction = reads.join(STAR_FOR_STARFUSION.out.junction )
 
+                if (params.ctatsplicing || params.all) {
+                    CTATSPLICING_WORKFLOW(
+                        STAR_FOR_STARFUSION.out.spl_junc_tab,
+                        STAR_FOR_STARFUSION.out.junction,
+                        STAR_FOR_STARFUSION.out.bam,
+                        ch_starfusion_ref
+                    )
+                    ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
+                }
+
                 if (params.cram.contains('starfusion')){
                     SAMTOOLS_VIEW_FOR_STARFUSION (bam_sorted_indexed, ch_fasta, [] )
                     ch_versions = ch_versions.mix(SAMTOOLS_VIEW_FOR_STARFUSION.out.versions)
@@ -40,7 +54,7 @@ workflow STARFUSION_WORKFLOW {
                     ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_STARFUSION_CRAM.out.versions)
                 }
                 if (params.starfusion || params.all){
-                    STARFUSION( reads_junction, params.starfusion_ref)
+                    STARFUSION( reads_junction, ch_starfusion_ref.map { it -> it[1] })
                     ch_versions = ch_versions.mix(STARFUSION.out.versions)
                     ch_starfusion_fusions = STARFUSION.out.fusions
                 }
@@ -59,9 +73,8 @@ workflow STARFUSION_WORKFLOW {
         fusions               = ch_starfusion_fusions
         star_stats            = ch_star_stats
         star_gene_count       = ch_star_gene_count
-        ch_bam_sorted         = ch_align.ifEmpty([[],[]])
-        ch_bam_sorted_indexed = bam_sorted_indexed.ifEmpty([[],[],[]])
+        ch_bam_sorted         = ch_align
+        ch_bam_sorted_indexed = bam_sorted_indexed
         versions              = ch_versions
-
     }
 

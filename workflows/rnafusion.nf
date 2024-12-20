@@ -38,9 +38,8 @@ workflow RNAFUSION {
 
     main:
 
-    ch_versions = Channel.empty()
-    ch_multiqc_files = Channel.empty()
-
+    def ch_versions = Channel.empty()
+    def ch_multiqc_files = Channel.empty()
 
     //
     // Create references if necessary
@@ -93,10 +92,12 @@ workflow RNAFUSION {
         BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
         BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
         BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
+        ch_starfusion_ref,
         params.arriba,                   // boolean
         params.all,                      // boolean
         params.fusioninspector_only,     // boolean
         params.star_ignore_sjdbgtf,      // boolean
+        params.ctatsplicing,             // boolean
         params.seq_center ?: '',         // string
         params.arriba_fusions,           // path
         params.cram                      // array
@@ -110,6 +111,7 @@ workflow RNAFUSION {
         BUILD_REFERENCES.out.ch_gtf,
         BUILD_REFERENCES.out.ch_starindex_ref,
         BUILD_REFERENCES.out.ch_fasta
+        ch_starfusion_ref
     )
     ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
 
@@ -139,9 +141,7 @@ workflow RNAFUSION {
     )
     ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
 
-
-
-    //Run fusionInspector
+    //Run fusionInpector
     FUSIONINSPECTOR_WORKFLOW (
         ch_reads,
         FUSIONREPORT_WORKFLOW.out.fusion_list,
