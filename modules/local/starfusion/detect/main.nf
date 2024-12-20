@@ -25,7 +25,7 @@ process STARFUSION {
     """
     STAR-Fusion \\
         --genome_lib_dir $reference \\
-        $fasta \\
+        $fastq_arg \\
         $junction_arg \\
         --CPU $task.cpus \\
         --examine_coding_effect \\
