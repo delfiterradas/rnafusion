@@ -17,6 +17,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [STAR-fusion](#starfusion) - STAR-fusion fusion detection
 - [StringTie](#stringtie) - StringTie assembly
 - [FusionCatcher](#fusioncatcher) - Fusion catcher fusion detection
+- [CTAT-SPLICING](#ctat-splicing) - Detection and annotation of cancer splicing aberrations
 - [Samtools](#samtools) - SAM/BAM file manipulation
 - [Fusion-report](#fusion-report) - Summary of the findings of each tool and comparison to COSMIC, Mitelman, and FusionGDB2 databases
 - [FusionInspector](#fusionInspector) - Supervised analysis of fusion predictions from fusion-report, recover and re-score evidence for such predictions
@@ -185,6 +186,41 @@ The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They m
 </details>
 
 [FusionCatcher](https://github.com/ndaniel/fusioncatcher) searches for novel/known somatic fusion genes translocations, and chimeras in RNA-seq data. Possibility to use parameter `--fusioncatcher_limitSjdbInsertNsj` to modify limitSjdbInsertNsj.
+
+### CTAT-SPLICING
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `ctatsplicing`
+  - `arriba`
+    - `<sample>.cancer_intron_reads.sorted.bam`
+    - `<sample>.cancer_intron_reads.sorted.bam.bai`
+    - `<sample>.cancer.introns`
+    - `<sample>.cancer.introns.prelim`
+    - `<sample>.chckpts`
+    - `<sample>.ctat-splicing.igv.html`
+    - `<sample>.gene_reads.sorted.sifted.bam`
+    - `<sample>.gene_reads.sorted.sifted.bam.bai`
+    - `<sample>.igv.tracks`
+    - `<sample>.introns`
+    - `<sample>.introns.for_IGV.bed`
+  - `starfusion`
+    - `<sample>.cancer_intron_reads.sorted.bam`
+    - `<sample>.cancer_intron_reads.sorted.bam.bai`
+    - `<sample>.cancer.introns`
+    - `<sample>.cancer.introns.prelim`
+    - `<sample>.chckpts`
+    - `<sample>.ctat-splicing.igv.html`
+    - `<sample>.gene_reads.sorted.sifted.bam`
+    - `<sample>.gene_reads.sorted.sifted.bam.bai`
+    - `<sample>.igv.tracks`
+    - `<sample>.introns`
+    - `<sample>.introns.for_IGV.bed`
+
+</details>
+
+[CTAT-SPLICING](https://github.com/TrinityCTAT/CTAT-SPLICING/wiki) detects and annotates of aberrant splicing isoforms in cancer. This is run on the input files for `arriba` and/or `starfusion`.
 
 ### FusionInspector
 
