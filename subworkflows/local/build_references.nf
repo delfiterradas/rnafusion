@@ -88,9 +88,9 @@ workflow BUILD_REFERENCES {
 
     if (!file(params.salmon_index).exists() || file(params.salmon_index).isEmpty() ||
         !file(params.salmon_index_stub_check).exists() || file(params.salmon_index_stub_check).isEmpty()){ // add condition for qc
-        GFFREAD(ch_gtf, ch_fasta.map{ meta, fasta -> [ fasta ] })
+        GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
         ch_versions = ch_versions.mix(GFFREAD.out.versions)
-        SALMON_INDEX(ch_fasta.map{ meta, fasta -> [ fasta ] }, GFFREAD.out.gffread_fasta.map{ meta, gffread_fasta -> [ gffread_fasta ] })
+        SALMON_INDEX(ch_fasta.map{ it -> it[1] }, GFFREAD.out.gffread_fasta.map{ it -> it[1] })
         ch_versions = ch_versions.mix(SALMON_INDEX.out.versions)
         ch_salmon_index = SALMON_INDEX.out.index
     } else {
@@ -140,7 +140,7 @@ workflow BUILD_REFERENCES {
     if ((params.starfusion || params.all) &&
             (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
             !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
-            STARFUSION_BUILD(ch_fasta, ch_gtf)
+            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             ch_starfusion_ref = STARFUSION_BUILD.out.reference
     }

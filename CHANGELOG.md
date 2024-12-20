@@ -53,14 +53,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed test-build as reference building gets integrated in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Removed parameter `--build_references`
 
-
 ### Parameters
 
-| Old parameter       | New parameter |
+| Old parameter       | New parameter       |
 | ------------------- | ------------------- |
 |                     | `--no_cosmic`       |
 | `-build_references` | `--references_only` |
-
 
 ## v3.0.2 - [2024-04-10]
 
