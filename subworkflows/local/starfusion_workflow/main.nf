@@ -1,10 +1,9 @@
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FOR_STARFUSION }      from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FOR_STARFUSION_CRAM } from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_VIEW as SAMTOOLS_VIEW_FOR_STARFUSION }        from '../../modules/nf-core/samtools/view/main'
-include { STAR_ALIGN as STAR_FOR_STARFUSION }                    from '../../modules/nf-core/star/align/main'
-include { STARFUSION }                                           from '../../modules/local/starfusion/detect/main'
-
-include { CTATSPLICING_WORKFLOW         }   from './ctatsplicing_workflow'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FOR_STARFUSION       }   from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FOR_STARFUSION_CRAM  }   from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_VIEW as SAMTOOLS_VIEW_FOR_STARFUSION         }   from '../../../modules/nf-core/samtools/view/main'
+include { STAR_ALIGN as STAR_FOR_STARFUSION                     }   from '../../../modules/nf-core/star/align/main'
+include { STARFUSION                                            }   from '../../../modules/local/starfusion/detect/main'
+include { CTATSPLICING_WORKFLOW                                 }   from '../ctatsplicing_workflow'
 
 workflow STARFUSION_WORKFLOW {
     take:
@@ -29,7 +28,8 @@ workflow STARFUSION_WORKFLOW {
             } else {
                 STAR_FOR_STARFUSION( reads, ch_starindex_ref, ch_gtf, params.star_ignore_sjdbgtf, '', params.seq_center ?: '')
                 ch_versions = ch_versions.mix(STAR_FOR_STARFUSION.out.versions)
-                ch_align = STAR_FOR_STARFUSION.out.bam_sorted
+                ch_align = STAR_FOR_STARFUSION.out.bam_sorted // TODO: This does not seem to be captured and used as the output is bam_sorted_aligned and not bam_sorted
+
 
                 SAMTOOLS_INDEX_FOR_STARFUSION(STAR_FOR_STARFUSION.out.bam_sorted)
                 ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_STARFUSION.out.versions)
