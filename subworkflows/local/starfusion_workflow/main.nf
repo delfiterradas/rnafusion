@@ -28,7 +28,7 @@ workflow STARFUSION_WORKFLOW {
             } else {
                 STAR_FOR_STARFUSION( reads, ch_starindex_ref, ch_gtf, params.star_ignore_sjdbgtf, '', params.seq_center ?: '')
                 ch_versions = ch_versions.mix(STAR_FOR_STARFUSION.out.versions)
-                ch_align = STAR_FOR_STARFUSION.out.bam_sorted
+                ch_align = STAR_FOR_STARFUSION.out.bam_sorted // TODO: This does not seem to be captured and used as the output is bam_sorted_aligned and not bam_sorted
 
                 ch_align.view()
 
