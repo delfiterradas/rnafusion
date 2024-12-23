@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Integrate reference building in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Move from ensembl to gencode base [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Update from ensembl 102 to gencode 46 default references [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Remove local module `STARFUSION_DOWNLOAD` [#598](https://github.com/nf-core/rnafusion/pull/598)
 
 ### Fixed
 
