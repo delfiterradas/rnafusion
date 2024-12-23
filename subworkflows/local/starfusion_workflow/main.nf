@@ -30,7 +30,6 @@ workflow STARFUSION_WORKFLOW {
                 ch_versions = ch_versions.mix(STAR_FOR_STARFUSION.out.versions)
                 ch_align = STAR_FOR_STARFUSION.out.bam_sorted // TODO: This does not seem to be captured and used as the output is bam_sorted_aligned and not bam_sorted
 
-                ch_align.view()
 
                 SAMTOOLS_INDEX_FOR_STARFUSION(STAR_FOR_STARFUSION.out.bam_sorted)
                 ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_STARFUSION.out.versions)
