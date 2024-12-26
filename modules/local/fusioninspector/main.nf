@@ -15,7 +15,7 @@ process FUSIONINSPECTOR {
     tuple val(meta), path("*FusionInspector.fusions.tsv")                  , emit: tsv
     tuple val(meta), path("*.coding_effect")                , optional:true, emit: tsv_coding_effect
     tuple val(meta), path("*.gtf")                          , optional:true, emit: out_gtf
-    path "*"                                                               , emit: output
+    tuple val(meta), path("*FusionInspector.log")                          , emit: log
     path "versions.yml"                                                    , emit: versions
 
     when:
