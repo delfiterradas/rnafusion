@@ -8,6 +8,7 @@ nextflow_process {
     tag "fusioninspector"
 
     test("FUSIONINSPECTOR") {
+        config './nextflow.config'
 
     setup {
         run("STARFUSION_BUILD") {
@@ -44,6 +45,43 @@ nextflow_process {
                     ]
                 ]
                 input[1] = STARFUSION_BUILD.out.reference.map { it[1] }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.tsv,
+                    process.out.tsv_coding_effect,  // TODO: These files do not seem to be produced. Consult Annick.
+                    process.out.out_gtf,            // TODO: These files do not seem to be produced. Consult Annick.
+                    file(process.out.log[0][1]).name,
+                    process.out.versions
+                    ).match() }
+            )
+        }
+
+    }
+
+    test("FUSIONINSPECTOR - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    [
+                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_1.fastq.gz"),
+                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_2.fastq.gz")
+                    ], // reads
+                    [
+                        file("https://github.com/FusionInspector/FusionInspector/raw/master/test/fusion_targets.A.txt")
+                    ]
+                ]
+                input[1] = []
                 """
             }
         }
