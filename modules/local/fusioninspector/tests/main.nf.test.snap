@@ -90,15 +90,7 @@
     },
     "FUSIONINSPECTOR": {
         "content": [
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test.FusionInspector.fusions.tsv:md5,63d2b8205f7725d1c8458c642b1cde61"
-                ]
-            ],
+            "test.FusionInspector.fusions.tsv",
             [
                 
             ],
@@ -114,6 +106,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-26T23:12:44.532760924"
+        "timestamp": "2024-12-27T16:38:17.787825557"
     }
 }
