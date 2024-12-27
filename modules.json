@@ -20,11 +20,6 @@
                         "git_sha": "467c202a876d26af544fa8c4b22a050a535462a7",
                         "installed_by": ["modules"]
                     },
-                    "bedops/convert2bed": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
-                    },
                     "cat/cat": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
