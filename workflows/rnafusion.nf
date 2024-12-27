@@ -48,6 +48,7 @@ workflow RNAFUSION {
     BUILD_REFERENCES()
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
 
+    if (!params.references_only) { // TODO: Remove this temporary parameter when we have a full-working GitHub nf-test
 
     //
     // QC from FASTQ files
@@ -168,6 +169,7 @@ workflow RNAFUSION {
     )
     ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
 
+    }
     //
     // Collate and save software versions
     //
@@ -210,6 +212,8 @@ workflow RNAFUSION {
             sort: true
         )
     )
+
+    if (!params.references_only) { // TODO: Remove this temporary parameter when we have a full-working GitHub nf-test
     ch_multiqc_files                      = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]}.ifEmpty([]))
@@ -220,6 +224,7 @@ workflow RNAFUSION {
     ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.duplicate_metrics.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.insertsize_metrics.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files                      = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
+    }
 
     MULTIQC (
         ch_multiqc_files.collect(),
