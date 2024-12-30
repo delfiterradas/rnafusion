@@ -57,6 +57,11 @@ nextflow_process {
                     process.out.tsv_coding_effect,  // TODO: These files do not seem to be produced. Consult Annick.
                     process.out.out_gtf,            // TODO: These files do not seem to be produced. Consult Annick.
                     file(process.out.log[0][1]).name,
+                    file(process.out.html[0][1]).name,
+                    process.out.abridged_tsv,
+                    process.out.igv_inputs,
+                    process.out.fi_workdir,
+                    process.out.chckpts_dir,
                     process.out.versions
                     ).match() }
             )

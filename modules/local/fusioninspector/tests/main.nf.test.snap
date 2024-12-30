@@ -12,22 +12,10 @@
                     ]
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.FusionInspector.fusions.tsv.annotated.coding_effect:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.gtf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "3": [
                     [
@@ -39,7 +27,327 @@
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.fusion_inspector_web.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.FusionInspector.fusions.abridged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "TrinityFusion.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cytoBand.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.ROI.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.sorted.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.sorted.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.consolidated.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.consolidated.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_inspector_web.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.Pfam.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.seqsimilar.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.junction_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.junction_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.spanning_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.spanning_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "tracks.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "Log.final.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "Log.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "Log.progress.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "SJ.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            [
+                                "exonGeTrInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "exonInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "geneInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "sjdbInfo.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "sjdbList.fromGTF.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "sjdbList.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "transcriptInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            ],
+                            "microH.dat:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "pipeliner.456.cmds:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "star_align.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter.info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.fusion_junction_read_accs:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.fusion_spanning_read_accs:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.Pfam.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.seqsimilar.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated.coding_effect:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.failed_reads_during_span_analysis:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_junc_reads.sam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_junction_info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_span_reads.sam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_spanning_info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.read_align_counts.idx:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.read_align_counts.idx.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.spanning_reads_want.idx:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam.bai.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "EM_adj_counts.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "add_FFPM.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "add_splice_info.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "append_microH_info.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "blast_filter.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "coalesce_junc_n_span.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_consol_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_contigs_file_workdir:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_final.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_gtf_file_workdir.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_tracks_json.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "create_fi_igvjs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cytoband.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "filter_by_frag_threshs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "final.abridged.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_annotator.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_coding_region_effect.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_contigs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_reports_html.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "get_fusion_JUNCTION_reads_from_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "get_fusion_SPANNING_reads_from_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "index_consol_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "init_EM_adj_counts.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "init_spanning_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mark_dup_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mark_dups_reads.index.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged_contig_fai.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged_contig_gtf_to_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "microH.dat.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_extract_junc_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_junc_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_pfam_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_pfam_gff3.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_seqsim_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_seqsim_gff3.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_spanning_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "run_STAR.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "samtools_idx_junc_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "samtools_index_span_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "span_reads_acc.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.bedsort.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.bgzip.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.tabix.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "9": [
                     "versions.yml:md5,ad8d0da5929dfa70794bccf8765ddb23"
+                ],
+                "abridged_tsv": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.FusionInspector.fusions.abridged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "chckpts_dir": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "EM_adj_counts.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "add_FFPM.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "add_splice_info.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "append_microH_info.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "blast_filter.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "coalesce_junc_n_span.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_consol_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_contigs_file_workdir:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_final.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_gtf_file_workdir.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cp_tracks_json.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "create_fi_igvjs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cytoband.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "filter_by_frag_threshs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "final.abridged.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_annotator.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_coding_region_effect.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_contigs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_reports_html.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "get_fusion_JUNCTION_reads_from_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "get_fusion_SPANNING_reads_from_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "index_consol_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "init_EM_adj_counts.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "init_spanning_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mark_dup_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mark_dups_reads.index.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged_contig_fai.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged_contig_gtf_to_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "microH.dat.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_extract_junc_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_junc_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_pfam_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_pfam_gff3.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_seqsim_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_igv_seqsim_gff3.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "prep_spanning_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "run_STAR.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "samtools_idx_junc_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "samtools_index_span_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "span_reads_acc.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.bedsort.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.bgzip.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.tabix.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "fi_workdir": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "Log.final.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "Log.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "Log.progress.out:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "SJ.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            [
+                                "exonGeTrInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "exonInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "geneInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "sjdbInfo.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "sjdbList.fromGTF.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "sjdbList.out.tab:md5,d41d8cd98f00b204e9800998ecf8427e",
+                                "transcriptInfo.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            ],
+                            "microH.dat:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "pipeliner.456.cmds:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "star_align.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter.info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.fusion_junction_read_accs:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_preds.coalesced.summary.fusion_spanning_read_accs:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.Pfam.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.seqsimilar.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated.coding_effect:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.failed_reads_during_span_analysis:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_junc_reads.sam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_junction_info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_span_reads.sam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.fusion_spanning_info:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.read_align_counts.idx:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.read_align_counts.idx.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.cSorted.dupsMarked.bam.spanning_reads_want.idx:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam.bai.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.star.sortedByCoord.out.bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "html": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.fusion_inspector_web.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "igv_inputs": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "TrinityFusion.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cytoBand.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.ROI.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.sorted.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.bed.sorted.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.consolidated.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.consolidated.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.fusion_inspector_web.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.Pfam.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.igv.seqsimilar.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.junction_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.junction_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.spanning_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.spanning_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "tracks.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
                 ],
                 "log": [
                     [
@@ -51,13 +359,7 @@
                     ]
                 ],
                 "out_gtf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.gtf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "tsv": [
                     [
@@ -69,13 +371,7 @@
                     ]
                 ],
                 "tsv_coding_effect": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.FusionInspector.fusions.tsv.annotated.coding_effect:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,ad8d0da5929dfa70794bccf8765ddb23"
@@ -86,7 +382,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-26T23:13:02.858688488"
+        "timestamp": "2024-12-30T14:11:28.656578568"
     },
     "FUSIONINSPECTOR": {
         "content": [
@@ -96,7 +392,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.FusionInspector.fusions.tsv:md5,63d2b8205f7725d1c8458c642b1cde61"
+                    "test.FusionInspector.fusions.tsv:md5,d460c0d7fa555fcf0db9615228b4c90f"
                 ]
             ],
             [
@@ -106,6 +402,158 @@
                 
             ],
             "FusionInspector.log",
+            "test.fusion_inspector_web.html",
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.FusionInspector.fusions.abridged.tsv:md5,4ea7d11c65f33f963f0c87559d8c51b2"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    [
+                        "TrinityFusion.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cytoBand.txt:md5,d8a84202fa42d9455222c94ae641c8b4",
+                        "test.ROI.bed:md5,671de301af27b3dab40ee224401d3a0e",
+                        "test.bed:md5,f3263827da9544f59c67700341086dd8",
+                        "test.bed.sorted.bed.gz:md5,a306900912cc4479f06d61bea00a3ea6",
+                        "test.bed.sorted.bed.gz.tbi:md5,8c9d524558ade2b82c67d60bcfa0de6b",
+                        "test.consolidated.bam:md5,8744a27f874ad01ee159d588a482f29d",
+                        "test.consolidated.bam.bai:md5,07b2313770d96851c54b224daeb9f5eb",
+                        "test.fa:md5,a54bec9daad731a086e8533f89d9c2e6",
+                        "test.fa.fai:md5,15ddfba09f4abf8a15de5eea6c6286ee",
+                        "test.fusion_inspector_web.json:md5,ebe4faf6b6133b40d6c2847195cf55a9",
+                        "test.gtf:md5,d523061bd8b443a014d4cca9406ec772",
+                        "test.igv.Pfam.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.igv.seqsimilar.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.junction_reads.bam:md5,914400e910a2ff23e0daf9326a81700e",
+                        "test.junction_reads.bam.bai:md5,0b6a1078fb91a6d4b9591324b0f95649",
+                        "test.spanning_reads.bam:md5,7a328ec72821a97f2d38f76a642a507e",
+                        "test.spanning_reads.bam.bai:md5,962a587d2c752d7762a511fd02bca62e",
+                        "tracks.json:md5,72f2234c2ad2b7997226283acf040161"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    [
+                        "Log.final.out:md5,858dea4a306e57423b12cb2fcfe3b7fd",
+                        "Log.out:md5,28f71667674309af6a6017d357255bad",
+                        "Log.progress.out:md5,b2bd061d6cbaaf3d6d3b1fed547f69b8",
+                        "SJ.out.tab:md5,2ed3417c0ef9daa230a72e6fd3137588",
+                        [
+                            "exonGeTrInfo.tab:md5,8815dc1fce3a5f6cb836ea8f822e9c81",
+                            "exonInfo.tab:md5,e51c649a0ca61719e8d4f7324c069c60",
+                            "geneInfo.tab:md5,2f334fb0772c906860c9489ee0d8f3ff",
+                            "sjdbInfo.txt:md5,3a27e9e4b5f402d3daed85dd6f06519e",
+                            "sjdbList.fromGTF.out.tab:md5,fd4e89499ee467de647bd202d8894628",
+                            "sjdbList.out.tab:md5,dad82973249f1c094e36610d2663ddec",
+                            "transcriptInfo.tab:md5,69658043a209e2bb59c1da71b11fd5c3"
+                        ],
+                        "microH.dat:md5,153277f4c2b5600b70fea4508255b20b",
+                        "pipeliner.456.cmds:md5,a057d47f4b3903f9c2b363016f909314",
+                        "star_align.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.fa:md5,a54bec9daad731a086e8533f89d9c2e6",
+                        "test.fusion_preds.coalesced.summary:md5,6aea1d2c5e0e916b0c9cfa2bf233e9aa",
+                        "test.fusion_preds.coalesced.summary.EMadj:md5,930f235f0915af2c35af3e75e451e464",
+                        "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh:md5,47bcd82c0ffca6b64c64bb9edca549e0",
+                        "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo:md5,6bb11f5efe7bb3879950a492a078d21b",
+                        "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter:md5,5cd1259a3279026bb5e50c2a4890e548",
+                        "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.info:md5,ed6214ba6c0cd135afd76a808dfdbd5d",
+                        "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter:md5,5cd1259a3279026bb5e50c2a4890e548",
+                        "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter.info:md5,ed6214ba6c0cd135afd76a808dfdbd5d",
+                        "test.fusion_preds.coalesced.summary.fusion_junction_read_accs:md5,9b872a5f1e6a5a21957a55fbf758cbef",
+                        "test.fusion_preds.coalesced.summary.fusion_spanning_read_accs:md5,5475c0ed243fbeb67f5a3e3dd25869ce",
+                        "test.gtf:md5,d523061bd8b443a014d4cca9406ec772",
+                        "test.igv.Pfam.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.igv.seqsimilar.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.post_blast_and_promiscuity_filter:md5,5cd1259a3279026bb5e50c2a4890e548",
+                        "test.post_blast_and_promiscuity_filter.EMadj:md5,d0d7849496bb1579ca5bc6e87c8b2921",
+                        "test.post_blast_and_promiscuity_filter.EMadj.FFPM:md5,0adc8c263fe9f596ff52111b0a7f6027",
+                        "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH:md5,ac3f6599a5f01beec0ac9ed8e1837e31",
+                        "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated:md5,31bd0b83ec77de19a5b38467ef22957b",
+                        "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated.coding_effect:md5,d460c0d7fa555fcf0db9615228b4c90f",
+                        "test.star.cSorted.dupsMarked.bam:md5,8744a27f874ad01ee159d588a482f29d",
+                        "test.star.cSorted.dupsMarked.bam.bai:md5,07b2313770d96851c54b224daeb9f5eb",
+                        "test.star.cSorted.dupsMarked.bam.failed_reads_during_span_analysis:md5,a1a0daca698e0ff4141f820c9fe64360",
+                        "test.star.cSorted.dupsMarked.bam.fusion_junc_reads.sam:md5,7585d76d73eacfc222ce76cdb4e22d0c",
+                        "test.star.cSorted.dupsMarked.bam.fusion_junction_info:md5,3a56cfc29fee2bdb0171adf0d0df5829",
+                        "test.star.cSorted.dupsMarked.bam.fusion_span_reads.sam:md5,c9e99bbe81bdbadf5fa56176828540ae",
+                        "test.star.cSorted.dupsMarked.bam.fusion_spanning_info:md5,d92895bbc30299eb0cdcc8669e3cd9ff",
+                        "test.star.cSorted.dupsMarked.bam.read_align_counts.idx:md5,e08aab8e6ce7ebcadb2554b8336e0fd1",
+                        "test.star.cSorted.dupsMarked.bam.read_align_counts.idx.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.star.cSorted.dupsMarked.bam.spanning_reads_want.idx:md5,15c9b83f36e30cf6f8fe039a2597e597",
+                        "test.star.sortedByCoord.out.bam:md5,5e933b7b3914d249988094953f01e67c",
+                        "test.star.sortedByCoord.out.bam.bai:md5,76c0b5b0ff34a612afbc2b5f684653a2",
+                        "test.star.sortedByCoord.out.bam.bai.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.star.sortedByCoord.out.bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    [
+                        "EM_adj_counts.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "add_FFPM.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "add_splice_info.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "append_microH_info.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "blast_filter.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "coalesce_junc_n_span.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cp_consol_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cp_contigs_file_workdir:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cp_final.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cp_gtf_file_workdir.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cp_tracks_json.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "create_fi_igvjs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "cytoband.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "filter_by_frag_threshs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final.abridged.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "fusion_annotator.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "fusion_coding_region_effect.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "fusion_contigs.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "fusion_reports_html.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "get_fusion_JUNCTION_reads_from_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "get_fusion_SPANNING_reads_from_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "index_consol_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "init_EM_adj_counts.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "init_spanning_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "mark_dup_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "mark_dups_reads.index.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "merged_contig_fai.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "merged_contig_gtf_to_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "microH.dat.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_igv_extract_junc_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_igv_junc_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_igv_pfam_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_igv_pfam_gff3.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_igv_seqsim_bed.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_igv_seqsim_gff3.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "prep_spanning_reads.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "run_STAR.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "samtools_idx_junc_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "samtools_index_span_reads_bam.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "span_reads_acc.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.bed.bedsort.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.bed.bgzip.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.bed.tabix.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            ],
             [
                 "versions.yml:md5,ad8d0da5929dfa70794bccf8765ddb23"
             ]
@@ -114,6 +562,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-26T23:12:44.532760924"
+        "timestamp": "2024-12-30T14:11:16.244098341"
     }
 }
