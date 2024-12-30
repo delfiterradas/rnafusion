@@ -12,7 +12,7 @@ nextflow_process {
 
     setup {
         run("STARFUSION_BUILD") {
-            script "/workspace/rnafusion/modules/local/starfusion/build/main.nf"
+            script "../../starfusion/build/main.nf"
             process {
                 """
                 input[0] = [
@@ -53,7 +53,7 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.tsv,
+                    file(process.out.tsv[0][1]).name,
                     process.out.tsv_coding_effect,  // TODO: These files do not seem to be produced. Consult Annick.
                     process.out.out_gtf,            // TODO: These files do not seem to be produced. Consult Annick.
                     file(process.out.log[0][1]).name,

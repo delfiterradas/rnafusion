@@ -12,10 +12,10 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
                     [
@@ -359,7 +359,7 @@
                     ]
                 ],
                 "out_gtf": [
-                    
+
                 ],
                 "tsv": [
                     [
@@ -371,7 +371,7 @@
                     ]
                 ],
                 "tsv_coding_effect": [
-                    
+
                 ],
                 "versions": [
                     "versions.yml:md5,ad8d0da5929dfa70794bccf8765ddb23"
@@ -396,10 +396,10 @@
                 ]
             ],
             [
-                
+
             ],
             [
-                
+
             ],
             "FusionInspector.log",
             "test.fusion_inspector_web.html",
