@@ -54,12 +54,13 @@ nextflow_process {
             def unstableFiles = [
                 "test.bed",
                 "test.consolidated.bam",
+                "test.consolidated.bam.bai",
                 "test.junction_reads.bam",
+                "test.junction_reads.bam.bai",
                 "test.spanning_reads.bam",
                 "Log.final.out",
                 "Log.out",
                 "microH.dat",
-                "pipeliner.456.cmds",
                 "test.fusion_preds.coalesced.summary",
                 "test.fusion_preds.coalesced.summary.EMadj",
                 "test.fusion_preds.coalesced.summary.min_frag_thresh",
@@ -75,11 +76,20 @@ nextflow_process {
                 "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated",
                 "test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated.coding_effect",
                 "test.star.cSorted.dupsMarked.bam",
+                "test.star.cSorted.dupsMarked.bam.bai",
+                "test.star.cSorted.dupsMarked.bam.fusion_junction_info",
                 "test.star.cSorted.dupsMarked.bam.fusion_spanning_info",
                 "test.star.cSorted.dupsMarked.bam.read_align_counts",
+                "test.star.cSorted.dupsMarked.bam.read_align_counts.idx",
                 "test.star.cSorted.dupsMarked.bam.spanning_reads_want.idx",
                 "test.star.sortedByCoord.out.bam",
-                "test.star.sortedByCoord.out.bam.bai"
+                "test.star.sortedByCoord.out.bam.bai",
+                "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh",
+                "test.fusion_preds.coalesced.summary.fusion_junction_read_accs",
+                "test.fusion_preds.coalesced.summary.fusion_spanning_read_accs",
+                "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo",
+                "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter",
+                "test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter"
             ]
 
             assertAll(
@@ -90,19 +100,48 @@ nextflow_process {
                     process.out.out_gtf,            // TODO: These files do not seem to be produced. Consult Annick.
                     file(process.out.log[0][1]).name,
                     file(process.out.html[0][1]).name,
-                    process.out.abridged_tsv,
+                    file(process.out.abridged_tsv[0][1]).name,
                     file(process.out.igv_inputs[0][1]).listFiles().findAll { file -> !unstableFiles.contains(file.name) },
                     file(process.out.fi_workdir[0][1]).listFiles().findAll { file -> !unstableFiles.contains(file.name) },
                     file(process.out.igv_inputs[0][1]).list().findAll { file -> !unstableFiles.contains(file) },
-                    file(process.out.igv_inputs[0][1]).list().findAll { file -> !unstableFiles.contains(file) },
+                    file(process.out.fi_workdir[0][1]).list().findAll { file -> !unstableFiles.contains(file) },
                     process.out.chckpts_dir,
                     process.out.versions
-                    ).match() },
+                    ).match() }
             )
         }
 
     }
 
+    test("FUSIONINSPECTOR stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    [
+                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_1.fastq.gz"),
+                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_2.fastq.gz")
+                    ], // reads
+                    [
+                        file("https://github.com/FusionInspector/FusionInspector/raw/master/test/fusion_targets.A.txt")
+                    ]
+                ]
+                input[1] = []
+                """
+            }
+        }
 
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out
+                    ).match() }
+            )
+        }
+
+    }
 
 }
