@@ -16,9 +16,9 @@ workflow FUSIONREPORT_WORKFLOW {
 
         if (!params.fusioninspector_only) {
             reads_fusions = reads
-            .join(arriba_fusions, remainder: true)
-            .join(starfusion_fusions, remainder: true)
-            .join(fusioncatcher_fusions, remainder: true)
+            .join(arriba_fusions, failOnMismatch:true, failOnDuplicate:true)
+            .join(starfusion_fusions, failOnMismatch:true, failOnDuplicate:true)
+            .join(fusioncatcher_fusions, failOnMismatch:true, failOnDuplicate:true)
 
             FUSIONREPORT(reads_fusions, fusionreport_ref, params.tools_cutoff)
             ch_fusion_list = FUSIONREPORT.out.fusion_list
@@ -28,7 +28,7 @@ workflow FUSIONREPORT_WORKFLOW {
             ch_csv = FUSIONREPORT.out.csv
         } else {
             ch_fusion_list = reads.combine(Channel.value(file(params.fusioninspector_fusions, checkIfExists:true)))
-                            .map { meta, reads, fusions -> [ meta, fusions ] }
+                            .map { it -> [ it[0], it[1] ] }
 
             ch_fusion_list_filtered  = ch_fusion_list
         }

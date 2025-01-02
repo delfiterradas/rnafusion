@@ -30,10 +30,8 @@ workflow PIPELINE_INITIALISATION {
     take:
     version           // boolean: Display version and exit
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
 
     main:
 
@@ -114,6 +112,7 @@ workflow PIPELINE_COMPLETION {
     outdir          //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
     hook_url        //  string: hook URL for notifications
+    multiqc_report  //  string: Path to MultiQC report
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -157,8 +156,12 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters() {
     genomeExistsError()
 
-    if (params.build_references && params.no_cosmic) {
-            log.warn("No cosmic credentials were provided. Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD`")
+    if (params.no_cosmic) {
+            log.warn("Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD` and skip using it in `FUSIONREPORT`")
+    }
+
+    if (params.starfusion_build && !params.fusion_annot_lib) {
+            error("No fusion annotation library provided. `STARFUSION_BUILD` is unable to run.")
     }
 
 }

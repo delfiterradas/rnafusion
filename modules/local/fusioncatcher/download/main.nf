@@ -2,8 +2,10 @@ process FUSIONCATCHER_DOWNLOAD {
     tag "fusioncatcher_download"
     label 'process_medium'
 
-    conda "${moduleDir}/environment.yml"
-    container "community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f"
+    container "docker.io/rannickscilifelab/fusioncatcher:1.34"
+
+    input:
+    val genome_gencode_version
 
     output:
     tuple env(meta), path("*"), emit: reference
@@ -16,23 +18,14 @@ process FUSIONCATCHER_DOWNLOAD {
 
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
-    def human_version = "v102"
-    def url = "http://sourceforge.net/projects/fusioncatcher/files/data/human_${human_version}.tar.gz.aa"
-    meta = [ id: "human_${human_version}" ]
+    meta = [ id: "human_${genome_gencode_version}" ]
     """
-    if wget --spider "$url" 2>/dev/null; then
-        wget $args $url
-        wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${human_version}.tar.gz.ab
-        wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${human_version}.tar.gz.ac
-        wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${human_version}.tar.gz.ad
-        cat human_${human_version}.tar.gz.* | tar xz
-        rm human_${human_version}.tar*
-    else
-        fusioncatcher-build \\
-            -g homo_sapiens \\
-            -o human_${human_version} \\
-            $args2
-    fi
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.aa
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ab
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ac
+    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ad
+    cat human_${genome_gencode_version}.tar.gz.* | tar xz
+    rm human_${genome_gencode_version}.tar*
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -41,9 +34,9 @@ process FUSIONCATCHER_DOWNLOAD {
     """
 
     stub:
-    def human_version = "v102"
     """
-    mkdir human_${human_version}
+    mkdir human_v${genome_gencode_version}
+    touch human_v${genome_gencode_version}/ensembl_fully_overlapping_genes.txt
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         fusioncatcher: \$(echo \$(fusioncatcher --version 2>&1))

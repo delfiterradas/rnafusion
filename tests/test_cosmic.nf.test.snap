@@ -1,141 +1,58 @@
 {
     "test cosmic no fastp trim build": {
         "content": [
-            9,
-            null,
+            0,
+            {
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
             [
-                "bedops",
-                "bedops/Homo_sapiens.GRCh38.102_rrna_intervals.gtf.bed",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.102.dna.primary_assembly.dict",
-                "gffread",
-                "gffread/Homo_sapiens.GRCh38.102.fasta",
                 "pipeline_info",
-                "references",
-                "references/ensembl",
-                "references/ensembl/Homo_sapiens.GRCh38.102.chr.gtf",
-                "references/ensembl/Homo_sapiens.GRCh38.102.dna.primary_assembly.fa",
-                "references/ensembl/Homo_sapiens.GRCh38.102.dna.primary_assembly.fa.fai",
-                "references/ensembl/Homo_sapiens.GRCh38.102.genepred",
-                "references/ensembl/Homo_sapiens.GRCh38.102.gtf",
-                "references/ensembl/Homo_sapiens.GRCh38.102.refflat",
-                "references/ensembl/Homo_sapiens.GRCh38.102_rrna_intervals.gtf.interval_list",
-                "references/hgnc",
-                "references/hgnc/HGNC-DB-timestamp.txt",
-                "references/hgnc/hgnc_complete_set.txt",
-                "rrnatranscripts",
-                "rrnatranscripts/Homo_sapiens.GRCh38.102_rrna_intervals.gtf"
+                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml"
             ],
             [
-                "Homo_sapiens.GRCh38.102_rrna_intervals.gtf.bed:md5,5bc3ccc76735ae46699a75269f0ea65b",
-                "Homo_sapiens.GRCh38.102.dna.primary_assembly.dict:md5,092f1bf29fce906ff7b5ece02b4b21c8",
-                "Homo_sapiens.GRCh38.102.fasta:md5,d1f17b045dc60c49f2cc29e30006afc0",
-                "Homo_sapiens.GRCh38.102.chr.gtf:md5,0069687307852c63596b4d2ebdbbaf0c",
-                "Homo_sapiens.GRCh38.102.dna.primary_assembly.fa.fai:md5,d527f3eb6b664020cf4d882b5820056f",
-                "Homo_sapiens.GRCh38.102.genepred:md5,59c577ca4ab033c0ce1feac1e387bcab",
-                "Homo_sapiens.GRCh38.102.gtf:md5,defac755cd9aa4e82ec33398c27745ef",
-                "Homo_sapiens.GRCh38.102.refflat:md5,ef095e13743811c31d44752c32e9673e",
-                "Homo_sapiens.GRCh38.102_rrna_intervals.gtf.interval_list:md5,0abf61877f65247b15c438d605d85599",
-                "hgnc_complete_set.txt:md5,a563a2f8432ec0ab7d3dc74d769102b8",
-                "Homo_sapiens.GRCh38.102_rrna_intervals.gtf:md5,744bf505deb50837b15441e808cad345"
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-19T14:45:08.191019"
+        "timestamp": "2024-12-10T12:42:49.558429"
     },
     "test cosmic no fastp trim": {
         "content": [
-            1,
-            {
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "Workflow": {
-                    "nf-core/rnafusion": "v4.0.0dev"
-                }
-            },
+            0,
+            null,
             [
-                "fastqc",
-                "fastqc/test_1_fastqc.html",
-                "fastqc/test_1_fastqc.zip",
-                "fastqc/test_2_fastqc.html",
-                "fastqc/test_2_fastqc.zip",
-                "pipeline_info",
-                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml"
+                "pipeline_info"
             ],
             [
-                "test_1_fastqc.html:md5,413a6e28e6dd182616fb5859822e288e",
-                "test_1_fastqc.zip:md5,793d81ea4349817b15ff37f6b053f870",
-                "test_2_fastqc.html:md5,820795d75b698565195c6a20c492c9fb",
-                "test_2_fastqc.zip:md5,179dee147c92fed9b552a2f2f82b7367"
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-19T12:51:54.89817"
+        "timestamp": "2024-12-10T15:09:53.130295"
     },
     "test cosmic with fastp trim": {
         "content": [
-            3,
-            {
-                "FASTP": {
-                    "fastp": "0.23.4"
-                },
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "FASTQC_FOR_FASTP": {
-                    "fastqc": "0.12.1"
-                },
-                "Workflow": {
-                    "nf-core/rnafusion": "v4.0.0dev"
-                }
-            },
+            0,
+            null,
             [
-                "fastp",
-                "fastp/test.fastp.html",
-                "fastp/test.fastp.json",
-                "fastp/test.fastp.log",
-                "fastp/test_1.fastp.fastq.gz",
-                "fastp/test_2.fastp.fastq.gz",
-                "fastqc",
-                "fastqc/test_1_fastqc.html",
-                "fastqc/test_1_fastqc.zip",
-                "fastqc/test_2_fastqc.html",
-                "fastqc/test_2_fastqc.zip",
-                "fastqc_for_fastp",
-                "fastqc_for_fastp/test_trimmed_1_fastqc.html",
-                "fastqc_for_fastp/test_trimmed_1_fastqc.zip",
-                "fastqc_for_fastp/test_trimmed_2_fastqc.html",
-                "fastqc_for_fastp/test_trimmed_2_fastqc.zip",
-                "pipeline_info",
-                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml"
+                "pipeline_info"
             ],
             [
-                "test.fastp.html:md5,4a1627af1a54b4f7b2dcf43c34369f04",
-                "test.fastp.json:md5,ebf549d5793aa40efcd9e1ca41504f26",
-                "test.fastp.log:md5,1c04b14e212aac5ace51f9bd25859f23",
-                "test_1.fastp.fastq.gz:md5,2a5519a03fb226ae2379b1150b02ff0b",
-                "test_2.fastp.fastq.gz:md5,4b8d3865b857e6bfae0035a45b2cdc27",
-                "test_1_fastqc.html:md5,413a6e28e6dd182616fb5859822e288e",
-                "test_1_fastqc.zip:md5,f4c865fd4ae054f2a98ae971ffdef576",
-                "test_2_fastqc.html:md5,820795d75b698565195c6a20c492c9fb",
-                "test_2_fastqc.zip:md5,67466d294966125f9e4e11333a231080",
-                "test_trimmed_1_fastqc.html:md5,6919dace995f86210c983eff554c43e7",
-                "test_trimmed_1_fastqc.zip:md5,069fd1c49854f8aea29acf5d870fa9cf",
-                "test_trimmed_2_fastqc.html:md5,6b567bc53367bb126896d7aa27e0c6f4",
-                "test_trimmed_2_fastqc.zip:md5,a65ef7a18c69fb6d8b3d0a2f9f87d938"
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-19T12:51:19.311692"
+        "timestamp": "2024-12-10T15:09:29.277399"
     }
 }

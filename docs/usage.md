@@ -10,13 +10,13 @@ The pipeline is divided into two parts:
 
 1. Download and build references
 
-- specified with `--build_references` parameter
+- specified with `--references_only` parameter
 - required only once before running the pipeline
 - **Important**: has to be run with each new release
 
 2. Detecting fusions
 
-- Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, and `StringTie`
+- Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, `StringTie` and `CTAT-SPLICING`
 - QC: `Fastqc`, `MultiQC`, and `Picard CollectInsertSize`, `Picard CollectWgsMetrics`, `Picard Markduplicates`
 - Fusions visualization: `Arriba`, `fusion-report`, `FusionInspector`, and `vcf_collect`
 
@@ -32,7 +32,7 @@ The rnafusion pipeline needs references for the fusion detection tools, so downl
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --build_references --all \
+  --references_only --all \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <PATH/TO/REFERENCES>
@@ -43,7 +43,7 @@ References for each tools can also be downloaded separately with:
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --build_references --<tool1> --<tool2> ... \
+  --references_only --<tool1> --<tool2> ... \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
@@ -64,7 +64,7 @@ Use credentials from QIAGEN and add `--qiagen`
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --build_references --<tool1> --<tool2> ... \
+  --references_only --<tool1> --<tool2> ... \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH> --qiagen
@@ -81,7 +81,7 @@ If process `FUSIONREPORT_DOWNLOAD` times out, it could be due to network restric
 ```bash
 nextflow run nf-core/rnafusion  \
   -profile <docker/singularity/.../institute> \
-  --build_references \
+  --references_only \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --fusionreport \
   --genomes_base <PATH/TO/REFERENCES> \
@@ -93,7 +93,7 @@ Where the custom configuration could look like (adaptation to local machine nece
 
 ```text
 process {
-  withName:  'NFCORE_RNAFUSION:BUILD_REFERENCES:FUSIONREPORT_DOWNLOAD' {
+  withName:  'NFCORE_RNAFUSION:RNAFUSION:BUILD_REFERENCES:FUSIONREPORT_DOWNLOAD' {
     memory = '8.GB'
     cpus = 4
   }
@@ -136,7 +136,7 @@ As you can see above for multiple runs of the same sample, the `sample` name has
 
 ### Starting commands
 
-The pipeline can either be run using all fusion detection tools or specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `fusioncatcher`, `starfusion`, `stringtie`) use the `--all` parameter:
+The pipeline can either be run using all fusion detection tools or specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `fusioncatcher`, `starfusion`, `stringtie`, `ctat-splicing`) use the `--all` parameter:
 
 ```bash
 nextflow run nf-core/rnafusion \
@@ -162,7 +162,7 @@ If you are not covered by the research COSMIC license and want to avoid using CO
 
 > **IMPORTANT: Either `--all` or `--<tool>`** is necessary to run detection tools
 
-`--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--build_references`.
+`--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--references_only`.
 
 Note that the pipeline will create the following files in your working directory:
 
@@ -397,7 +397,6 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `test`
   - A profile with a complete configuration for automated testing
   - Includes links to test data so needs no other parameters
-  - Needs to run in two steps: with `--build_references` first and then without `--build_references` to run the analysis
   - !!!! Run with `-stub` as all references need to be downloaded otherwise !!!!
 
 ### `-resume`

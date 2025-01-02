@@ -2,8 +2,7 @@ process FUSIONCATCHER_DETECT {
     tag "$meta.id"
     label 'process_high'
 
-    conda "${moduleDir}/environment.yml"
-    container "community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f"
+    container "docker.io/rannickscilifelab/fusioncatcher:1.34"
 
     input:
     tuple val(meta), path(fastqs, stageAs: "input/*")
