@@ -2,7 +2,10 @@ process FUSIONCATCHER_DOWNLOAD {
     tag "fusioncatcher_download"
     label 'process_medium'
 
-    container "docker.io/rannickscilifelab/fusioncatcher:1.34"
+    conda "${projectDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/d5/d53f36e9e01d14a0ae8e15f8046f52b2883c970c27fe43fdfbd9440a55f5403f/data' :
+        'community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f' }"
 
     input:
     val genome_gencode_version
@@ -17,8 +20,7 @@ process FUSIONCATCHER_DOWNLOAD {
     script:
 
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
-    meta = [ id: "human_${genome_gencode_version}" ]
+    meta = [ id: "human_v${genome_gencode_version}" ]
     """
     wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.aa
     wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ab

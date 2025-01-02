@@ -116,11 +116,14 @@ workflow RNAFUSION {
     ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
 
 
-    //Run fusioncatcher
+    //R un fusioncatcher
     // TODO: check this inputs!
+    ch_fustioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref, checkIfExists: true)
+        .map{ [ [id: it.name], it] }
+
     FUSIONCATCHER_WORKFLOW (
-        ch_reads_fusioncatcher,
-        params.fusioncatcher_ref,       // channel [ meta, path       ]
+        ch_reads,
+        ch_fustioncatcher_ref,       // channel [ meta, path       ]
         params.run_fusioncatcher,
         params.all,
         params.fusioninspector_only,
