@@ -29,7 +29,7 @@ process FUSIONCATCHER_BUILD {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusioncatcher: \$(echo \$(fusioncatcher --version 2>&1))
+        fusioncatcher: "\$(fusioncatcher --version 2>&1 | awk '{print \$2}')"
     END_VERSIONS
     """
 
@@ -39,7 +39,7 @@ process FUSIONCATCHER_BUILD {
     touch human_v${genome_gencode_version}/ensembl_fully_overlapping_genes.txt
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusioncatcher: \$(echo \$(fusioncatcher --version 2>&1))
+        fusioncatcher: "\$(fusioncatcher --version 2>&1 | awk '{print \$2}')"
     END_VERSIONS
     """
 }

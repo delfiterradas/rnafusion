@@ -17,7 +17,7 @@ nextflow_workflow {
                 script "../../../../modules/local/fusioncatcher/build/main.nf"
                 process {
                 """
-                input[0] = Channel.value('102')
+                input[0] = Channel.value('46')
                 """
                 }
             }

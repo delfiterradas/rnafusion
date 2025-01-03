@@ -40,7 +40,7 @@ process FUSIONCATCHER_DETECT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusioncatcher: \$(echo \$(fusioncatcher.py --version 2>&1)| sed 's/fusioncatcher.py //')
+        fusioncatcher: "\$(fusioncatcher.py --version 2>&1 | awk '{print \$2}')"
     END_VERSIONS
     """
 
@@ -53,7 +53,7 @@ process FUSIONCATCHER_DETECT {
     touch ${prefix}.fusioncatcher.log
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusioncatcher: \$(echo \$(fusioncatcher.py --version 2>&1)| sed 's/fusioncatcher.py //')
+        fusioncatcher: "\$(fusioncatcher.py --version 2>&1 | awk '{print \$2}')"
     END_VERSIONS
     """
 }
