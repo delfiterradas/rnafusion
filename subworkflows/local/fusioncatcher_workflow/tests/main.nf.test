@@ -22,7 +22,7 @@ nextflow_workflow {
                 }
             }
         }
-        
+
         // TODO: get smaller reference files for fusioncatcher
         when {
             workflow {
@@ -38,7 +38,7 @@ nextflow_workflow {
                     ] )
 
                 // ch_references
-                input[1] = FUSIONCATCHER_BUILD.out.reference 
+                input[1] = FUSIONCATCHER_BUILD.out.reference
 
                 // fusioncatcher (boolean)
                 input[2] = true
