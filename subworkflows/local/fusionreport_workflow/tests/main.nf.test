@@ -26,23 +26,23 @@ nextflow_workflow {
                 // Input channels
                 input[0] = Channel.of(
                     [ [ id:'test_sample' ],
-                      file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/reads_1.fq.gz") ]
+                    file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/reads_1.fq.gz") ]
                 )
 
                 input[1] = FUSIONREPORT_DOWNLOAD.out.fusionreport_ref
 
                 input[2] = Channel.of(
-                      [[ id:'test_sample' ],
+                    [[ id:'test_sample' ],
                         file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/arriba.tsv") ]
                 )
 
                 input[3] =  Channel.of(
-                      [[ id:'test_sample' ],
+                    [[ id:'test_sample' ],
                         file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/starfusion.tsv") ]
                 )
 
                 input[4] =  Channel.of(
-                      [[ id:'test_sample' ],
+                    [[ id:'test_sample' ],
                         file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/fusioncatcher.txt") ]
                 )
 
@@ -51,6 +51,10 @@ nextflow_workflow {
             params {
                 fusioninspector_only = false
                 tools_cutoff = 1
+                arriba          = true
+                starfusion      = true
+                fusioncatcher   = true
+                no_cosmic       = true
                 outdir               = "$outputDir"
             }
         }
@@ -69,5 +73,5 @@ nextflow_workflow {
         }
     }
 
-    
+
 }
