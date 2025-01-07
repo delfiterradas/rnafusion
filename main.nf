@@ -18,7 +18,6 @@
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_rnafusion_pipeline'
-include { BUILD_REFERENCES        } from './workflows/build_references'
 include { RNAFUSION               } from './workflows/rnafusion'
 
 
@@ -51,13 +50,10 @@ workflow NFCORE_RNAFUSION {
     // WORKFLOW: Run pipeline
     //
 
-    if (params.build_references) {
-        BUILD_REFERENCES ()
-    } else {
-        RNAFUSION(samplesheet)
-    }
+    RNAFUSION(samplesheet)
+
     emit:
-    RNAFUSION.out.multiqc_report
+    multiqc_report = RNAFUSION.out.multiqc_report
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,9 +77,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_RNAFUSION (
-        PIPELINE_INITIALISATION.out.samplesheet
-    )
+    NFCORE_RNAFUSION (PIPELINE_INITIALISATION.out.samplesheet)
 
     //
     // SUBWORKFLOW: Run completion tasks
