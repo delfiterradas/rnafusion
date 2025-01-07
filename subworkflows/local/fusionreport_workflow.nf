@@ -28,7 +28,7 @@ workflow FUSIONREPORT_WORKFLOW {
             ch_csv = FUSIONREPORT.out.csv
         } else {
             ch_fusion_list = reads.combine(Channel.value(file(params.fusioninspector_fusions, checkIfExists:true)))
-                            .map { meta, reads, fusions -> [ meta, fusions ] }
+                            .map { it -> [ it[0], it[1] ] }
 
             ch_fusion_list_filtered  = ch_fusion_list
         }

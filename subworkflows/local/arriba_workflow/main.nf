@@ -8,14 +8,14 @@ include { CTATSPLICING_WORKFLOW         }   from '../ctatsplicing_workflow'
 
 workflow ARRIBA_WORKFLOW {
     take:
-        reads                           // channel [ meta, [ fastqs ]          ]
-        ch_gtf                          // channel [ meta, path_gtf            ]
-        ch_fasta                        // channel [ meta, path_fasta          ]
-        ch_starindex_ref                // channel [ meta, path_index          ]
-        ch_arriba_ref_blacklist         // channel [ meta, path_blacklist      ]
-        ch_arriba_ref_known_fusions     // channel [ meta, path_known_fusions  ]
-        ch_arriba_ref_cytobands         // channel [ meta, path_cytobands      ]
-        ch_arriba_ref_protein_domains   // channel [ meta, path_proteins       ]
+        reads                           // channel [ meta, [ fastqs ]         ]
+        ch_gtf                          // channel [ meta, path_gtf           ]
+        ch_fasta                        // channel [ meta, path_fasta         ]
+        ch_starindex_ref                // channel [ meta, path_index         ]
+        ch_arriba_ref_blacklist         // channel [ meta, path_blacklist     ]
+        ch_arriba_ref_cytobands         // channel [ meta, path_cytobands     ]
+        ch_arriba_ref_known_fusions     // channel [ meta, path_known_fusions ]
+        ch_arriba_ref_protein_domains   // channel [ meta, path_proteins      ]
         ch_starfusion_ref               // channel [ meta, path_starfusion_ref ]
         arriba                          // boolean
         all                             // boolean
@@ -27,6 +27,7 @@ workflow ARRIBA_WORKFLOW {
         cram                            // array
 
     main:
+
         def ch_versions   = Channel.empty()
         def ch_cram_index = Channel.empty()
         def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
@@ -56,7 +57,7 @@ workflow ARRIBA_WORKFLOW {
             if ( arriba_fusions ) {
 
                 ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
-                    .map { meta, reads, fusions -> [ meta, fusions ] }
+                    .map { it -> [ it[0], it[2] ] }
                 ch_arriba_fusion_fail = ch_dummy_file
 
             } else {
@@ -65,16 +66,16 @@ workflow ARRIBA_WORKFLOW {
                     STAR_FOR_ARRIBA.out.bam,
                     ch_fasta,
                     ch_gtf,
-                    ch_arriba_ref_blacklist.map{ it[1] },
-                    ch_arriba_ref_known_fusions.map{ it[1] },
-                    ch_arriba_ref_cytobands.map{ it[1] },
-                    ch_arriba_ref_protein_domains.map{ it[1] }
+                    ch_arriba_ref_blacklist,
+                    ch_arriba_ref_known_fusions,
+                    ch_arriba_ref_cytobands,
+                    ch_arriba_ref_protein_domains
                 )
 
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
 
                 ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
-                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ meta, file -> return file }
+                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> return it[1] }
             }
 
             if ( cram.contains('arriba') ) {
@@ -96,7 +97,7 @@ workflow ARRIBA_WORKFLOW {
 
             ch_arriba_fusions = reads
                 .combine(Channel.value( file(ch_dummy_file, checkIfExists: true ) ) )
-                .map { meta, reads, fusions -> [ meta, fusions ] }
+                .map { it -> [ it[0], it[2] ] }
 
             ch_arriba_fusion_fail = ch_dummy_file
         }
