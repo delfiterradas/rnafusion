@@ -20,7 +20,7 @@ process GET_RRNA_TRANSCRIPTS {
 
     script:
     """
-    $baseDir/bin/get_rrna_transcripts.py --gtf ${gtf} --output rrna.gtf
+    $baseDir/bin/get_rrna_transcripts.py ${gtf} rrna.gtf
 
     $baseDir/bin/gtf2bed rrna.gtf > rrna.bed
 
