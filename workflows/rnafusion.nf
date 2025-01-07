@@ -118,7 +118,12 @@ workflow RNAFUSION {
 
     //Run fusioncatcher
     FUSIONCATCHER_WORKFLOW (
-        ch_reads
+        ch_reads,
+        BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
+        params.run_fusioncatcher,
+        params.all,
+        params.fusioninspector_only,
+        params.fusioncatcher_fusions
     )
     ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
 
