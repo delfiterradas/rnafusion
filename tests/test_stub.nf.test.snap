@@ -2,7 +2,105 @@
     "stub test no fastp trim": {
         "content": [
             31,
-            null,
+            {
+                "ARRIBA_ARRIBA": {
+                    "arriba": "2.4.0"
+                },
+                "ARRIBA_DOWNLOAD": {
+                    "arriba_download": "2.4.0"
+                },
+                "CTATSPLICING_STARTOCANCERINTRONS": {
+                    "ctat-splicing": "0.0.2"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FUSIONCATCHER": {
+                    "fusioncatcher": 1.35
+                },
+                "FUSIONCATCHER_BUILD": {
+                    "fusioncatcher": "fusioncatcher.py 1.35"
+                },
+                "FUSIONREPORT": {
+                    "fusion_report": "2.1.5"
+                },
+                "FUSIONREPORT_DOWNLOAD": {
+                    "fusion_report": "2.1.5"
+                },
+                "GATK4_BEDTOINTERVALLIST": {
+                    "gatk4": "4.6.1.0"
+                },
+                "GATK4_CREATESEQUENCEDICTIONARY": {
+                    "gatk4": "4.6.1.0"
+                },
+                "GATK4_MARKDUPLICATES": {
+                    "gatk4": "4.5.0.0",
+                    "samtools": "1.19.2"
+                },
+                "GENCODE_DOWNLOAD": {
+                    "wget": null
+                },
+                "GET_RRNA_TRANSCRIPTS": {
+                    "get_rrna_transcripts": "v1.0"
+                },
+                "GFFREAD": {
+                    "gffread": "0.12.7"
+                },
+                "GTF_TO_REFFLAT": {
+                    "gtfToGenePred": 377
+                },
+                "HGNC_DOWNLOAD": {
+                    "wget": null
+                },
+                "PICARD_COLLECTINSERTSIZEMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "PICARD_COLLECTRNASEQMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "SALMON_INDEX": {
+                    "salmon": "1.10.3"
+                },
+                "SALMON_QUANT": {
+                    "salmon": "1.10.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_INDEX_FOR_STARFUSION": {
+                    "samtools": 1.21
+                },
+                "STARFUSION": {
+                    "STAR-Fusion": "1.14.0"
+                },
+                "STARFUSION_BUILD": {
+                    "STAR-Fusion": "1.14.0"
+                },
+                "STAR_FOR_ARRIBA": {
+                    "star": null,
+                    "samtools": 1.2,
+                    "gawk": "5.1.0"
+                },
+                "STAR_FOR_STARFUSION": {
+                    "star": null,
+                    "samtools": 1.2,
+                    "gawk": "5.1.0"
+                },
+                "STAR_GENOMEGENERATE": {
+                    "star": null,
+                    "samtools": 1.2,
+                    "gawk": "5.1.0"
+                },
+                "STRINGTIE_MERGE": {
+                    "stringtie": "2.2.1"
+                },
+                "STRINGTIE_STRINGTIE": {
+                    "stringtie": "2.2.3"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
             [
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
@@ -259,12 +357,116 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2025-01-07T10:53:09.572584"
+        "timestamp": "2025-01-07T13:16:02.754052"
     },
     "stub test with fastp trim": {
         "content": [
             33,
-            null,
+            {
+                "ARRIBA_ARRIBA": {
+                    "arriba": "2.4.0"
+                },
+                "ARRIBA_DOWNLOAD": {
+                    "arriba_download": "2.4.0"
+                },
+                "CTATSPLICING_STARTOCANCERINTRONS": {
+                    "ctat-splicing": "0.0.2"
+                },
+                "FASTP": {
+                    "fastp": "0.23.4"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQC_FOR_FASTP": {
+                    "fastqc": "0.12.1"
+                },
+                "FUSIONCATCHER": {
+                    "fusioncatcher": 1.35
+                },
+                "FUSIONCATCHER_BUILD": {
+                    "fusioncatcher": "fusioncatcher.py 1.35"
+                },
+                "FUSIONREPORT": {
+                    "fusion_report": "2.1.5"
+                },
+                "FUSIONREPORT_DOWNLOAD": {
+                    "fusion_report": "2.1.5"
+                },
+                "GATK4_BEDTOINTERVALLIST": {
+                    "gatk4": "4.6.1.0"
+                },
+                "GATK4_CREATESEQUENCEDICTIONARY": {
+                    "gatk4": "4.6.1.0"
+                },
+                "GATK4_MARKDUPLICATES": {
+                    "gatk4": "4.5.0.0",
+                    "samtools": "1.19.2"
+                },
+                "GENCODE_DOWNLOAD": {
+                    "wget": null
+                },
+                "GET_RRNA_TRANSCRIPTS": {
+                    "get_rrna_transcripts": "v1.0"
+                },
+                "GFFREAD": {
+                    "gffread": "0.12.7"
+                },
+                "GTF_TO_REFFLAT": {
+                    "gtfToGenePred": 377
+                },
+                "HGNC_DOWNLOAD": {
+                    "wget": null
+                },
+                "PICARD_COLLECTINSERTSIZEMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "PICARD_COLLECTRNASEQMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "SALMON_INDEX": {
+                    "salmon": "1.10.3"
+                },
+                "SALMON_QUANT": {
+                    "salmon": "1.10.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_INDEX_FOR_STARFUSION": {
+                    "samtools": 1.21
+                },
+                "STARFUSION": {
+                    "STAR-Fusion": "1.14.0"
+                },
+                "STARFUSION_BUILD": {
+                    "STAR-Fusion": "1.14.0"
+                },
+                "STAR_FOR_ARRIBA": {
+                    "star": null,
+                    "samtools": 1.2,
+                    "gawk": "5.1.0"
+                },
+                "STAR_FOR_STARFUSION": {
+                    "star": null,
+                    "samtools": 1.2,
+                    "gawk": "5.1.0"
+                },
+                "STAR_GENOMEGENERATE": {
+                    "star": null,
+                    "samtools": 1.2,
+                    "gawk": "5.1.0"
+                },
+                "STRINGTIE_MERGE": {
+                    "stringtie": "2.2.1"
+                },
+                "STRINGTIE_STRINGTIE": {
+                    "stringtie": "2.2.3"
+                },
+                "Workflow": {
+                    "nf-core/rnafusion": "v4.0.0dev"
+                }
+            },
             [
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
@@ -530,6 +732,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2025-01-07T10:50:24.959026"
+        "timestamp": "2025-01-07T13:13:38.690939"
     }
 }
