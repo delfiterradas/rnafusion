@@ -2,17 +2,7 @@
     "stub test no fastp trim": {
         "content": [
             4,
-            {
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
-                },
-                "Workflow": {
-                    "nf-core/rnafusion": "v4.0.0dev"
-                }
-            },
+            null,
             [
                 "fastqc",
                 "fastqc/test.html",
@@ -30,7 +20,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "salmon",
                 "salmon/test",
                 "salmon/test_lib_format_counts.json",
@@ -41,28 +31,12 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T19:27:00.717876194"
+        "timestamp": "2024-12-20T15:40:14.297437"
     },
     "stub test with fastp trim": {
         "content": [
             6,
-            {
-                "FASTP": {
-                    "fastp": "0.23.4"
-                },
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "FASTQC_FOR_FASTP": {
-                    "fastqc": "0.12.1"
-                },
-                "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
-                },
-                "Workflow": {
-                    "nf-core/rnafusion": "v4.0.0dev"
-                }
-            },
+            null,
             [
                 "fastp",
                 "fastp/test.fastp.html",
@@ -89,7 +63,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "salmon",
                 "salmon/test",
                 "salmon/test_lib_format_counts.json",
@@ -100,6 +74,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T19:26:43.375635514"
+        "timestamp": "2024-12-20T15:39:20.981018"
     }
 }
