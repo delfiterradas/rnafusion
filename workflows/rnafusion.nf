@@ -117,11 +117,17 @@ workflow RNAFUSION {
         ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
 
 
-        //Run fusioncatcher
-        FUSIONCATCHER_WORKFLOW (
-            ch_reads
-        )
-        ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+
+    //Run fusioncatcher
+    FUSIONCATCHER_WORKFLOW (
+        ch_reads,
+        BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
+        params.run_fusioncatcher,
+        params.all,
+        params.fusioninspector_only,
+        params.fusioncatcher_fusions
+    )
+    ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
 
 
         //Run stringtie
@@ -176,7 +182,7 @@ workflow RNAFUSION {
     softwareVersionsToYAML(ch_versions)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_pipeline_software_mqc_versions.yml',
+            name: 'nf_core_'  +  'rnafusion_software_'  + 'mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
         ).set { ch_collated_versions }
