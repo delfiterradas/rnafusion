@@ -15,11 +15,11 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "FUSIONCATCHER": {
-                    "fusioncatcher": 1.35
-                },
                 "FUSIONCATCHER_BUILD": {
-                    "fusioncatcher": "fusioncatcher.py 1.35"
+                    "fusioncatcher": "1.33"
+                },
+                "FUSIONCATCHER_DETECT": {
+                    "fusioncatcher": "1.33"
                 },
                 "FUSIONREPORT": {
                     "fusion_report": "2.1.5"
@@ -166,7 +166,7 @@
                 "picard/test_collectinsertsize.pdf",
                 "picard/test_collectinsertsize.txt",
                 "pipeline_info",
-                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
                 "references/arriba",
                 "references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
@@ -354,10 +354,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-20T14:00:19.311265"
+        "timestamp": "2025-01-07T13:16:02.754052"
     },
     "stub test with fastp trim": {
         "content": [
@@ -381,11 +381,11 @@
                 "FASTQC_FOR_FASTP": {
                     "fastqc": "0.12.1"
                 },
-                "FUSIONCATCHER": {
-                    "fusioncatcher": 1.35
-                },
                 "FUSIONCATCHER_BUILD": {
-                    "fusioncatcher": "fusioncatcher.py 1.35"
+                    "fusioncatcher": "1.33"
+                },
+                "FUSIONCATCHER_DETECT": {
+                    "fusioncatcher": "1.33"
                 },
                 "FUSIONREPORT": {
                     "fusion_report": "2.1.5"
@@ -541,7 +541,7 @@
                 "picard/test_collectinsertsize.pdf",
                 "picard/test_collectinsertsize.txt",
                 "pipeline_info",
-                "pipeline_info/nf_core_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
                 "references/arriba",
                 "references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
@@ -729,9 +729,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-20T13:57:10.179877"
+        "timestamp": "2025-01-07T13:13:38.690939"
     }
 }
