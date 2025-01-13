@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add parameter `--references_only` when no data should be analysed, but only the references should be built [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Add nf-test to local subworkflow: `FUSIONCATCHER_WORKFLOW` [#591](https://github.com/nf-core/rnafusion/pull/591)
 - Add nf-test to local subworkflow: `STARFUSION_WORKFLOW`. [#597](https://github.com/nf-core/rnafusion/pull/597)
+- Add nf-test to local module: `FUSIONINSPECTOR`. [#601](https://github.com/nf-core/rnafusion/pull/601)
 
 ### Changed
 
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Integrate reference building in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Move from ensembl to gencode base [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Update from ensembl 102 to gencode 46 default references [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Update`FUSIONINSPECTOR` to v2.10.0. [#601](https://github.com/nf-core/rnafusion/pull/601)
 - Remove local module `STARFUSION_DOWNLOAD` [#598](https://github.com/nf-core/rnafusion/pull/598)
 
 ### Fixed
