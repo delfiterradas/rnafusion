@@ -3,6 +3,7 @@ references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz
 references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz
 references/ensembl/Homo_sapiens.GRCh38.102.dna.primary_assembly.fa
 references/hgnc/HGNC-DB-timestamp.txt
+references/hgnc/hgnc_complete_set.txt
 references/fusion_report_db/DB-timestamp.txt
 references/salmon/salmon/ctable.bin
 references/salmon/salmon/pos.bin
