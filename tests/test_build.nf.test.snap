@@ -191,8 +191,6 @@
                 "cytobands_hg38_GRCh38_v2.4.0.tsv:md5,7bd504feefb33fcfc9be0517439a423c",
                 "protein_domains_hg38_GRCh38_v2.4.0.gff3:md5,43c387a784ebeed71b4147076cebf978",
                 "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "fusiongdb2.db:md5,715b52d8fa4270c510240c48fb88e9c7",
-                "mitelman.db:md5,51e307dbf4c35c425a3473baa44939c0",
                 "minigenome.fa.fai:md5,e3f74a27219b33ae80fd5de5cbeaf32b",
                 "minigenome.gtf.interval_list:md5,9111fe876b17e5c18314206e9f985b8c",
                 "minigenome.gtf.refflat:md5,ed76bc063c98087f1100a928923758c7",
