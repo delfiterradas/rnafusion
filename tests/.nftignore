@@ -33,3 +33,5 @@ starfusion/ctat_genome_lib_build_dir/ref_genome.fa.star.idx/Log.out
 starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm
 references/star/genomeParameters.txt
 starfusion/ctat_genome_lib_build_dir/ref_genome.fa.star.idx/genomeParameters.txt
+references/fusion_report_db/mitelman.db
+references/fusion_report_db/fusiongdb2.db
