@@ -145,7 +145,8 @@ workflow BUILD_REFERENCES {
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (params.ctatsplicing || params.all) {
                 CTATSPLICING_PREPGENOMELIB(
-                    STARFUSION_BUILD.out.reference
+                    STARFUSION_BUILD.out.reference,
+                    params.ctatsplicing_cancer_introns
                 )
                 ch_versions = ch_versions.mix(CTATSPLICING_PREPGENOMELIB.out.versions)
                 ch_starfusion_ref = CTATSPLICING_PREPGENOMELIB.out.reference

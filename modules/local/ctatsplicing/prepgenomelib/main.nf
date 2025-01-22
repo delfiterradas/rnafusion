@@ -8,6 +8,7 @@ process CTATSPLICING_PREPGENOMELIB {
 
     input:
     tuple val(meta), path(genome_lib)
+    path(cancer_intron_tsv)
 
     output:
     tuple val(meta), path(genome_lib, includeInputs:true), emit: reference
@@ -16,8 +17,6 @@ process CTATSPLICING_PREPGENOMELIB {
     script:
     def VERSION = '0.0.2' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
     """
-    wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/CANCER_SPLICING_LIB_SUPPLEMENT/cancer_introns.GRCh38.Jun232020.tsv.gz
-
     /usr/local/src/CTAT-SPLICING/prep_genome_lib/ctat-splicing-lib-integration.py \\
         --cancer_introns_tsv cancer_introns.*.tsv.gz \\
         --genome_lib_dir $genome_lib
