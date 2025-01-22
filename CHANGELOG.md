@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update from ensembl 102 to gencode 46 default references [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Update`FUSIONINSPECTOR` to v2.10.0. [#601](https://github.com/nf-core/rnafusion/pull/601)
 - Remove local module `STARFUSION_DOWNLOAD` [#598](https://github.com/nf-core/rnafusion/pull/598)
+- Fix error message when parameter outdir is missing [#611](https://github.com/nf-core/rnafusion/pull/611)
 
 ### Fixed
 
