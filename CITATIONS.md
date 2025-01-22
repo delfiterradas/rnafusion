@@ -24,7 +24,9 @@
 
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-> Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].- [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
+> Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
+
+- [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 
 - [FusionCatcher](https://github.com/ndaniel/fusioncatcher)
 
