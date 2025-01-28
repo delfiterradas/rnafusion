@@ -1,0 +1,63 @@
+{
+    "Download fusionreport databases": {
+        "content": [
+            "fusiongdb2.db:md5,e1ac123a744e515d3e5f85b8344d526a",
+            "mitelman.db:md5,1363795c97f77c641065ecd9ad0e484a",
+            true,
+            true,
+            [
+                "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-05T19:27:38.99855171"
+    },
+    "Create stub files": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "fusion_report_db"
+                        },
+                        [
+                            "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cosmic.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
+                ],
+                "fusionreport_ref": [
+                    [
+                        {
+                            "id": "fusion_report_db"
+                        },
+                        [
+                            "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "cosmic.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "fusiongdb2.db:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "mitelman.db:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-10T15:05:22.781845"
+    }
+}
