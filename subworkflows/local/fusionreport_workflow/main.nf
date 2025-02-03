@@ -1,4 +1,4 @@
-include { FUSIONREPORT      }     from '../../modules/local/fusionreport/detect/main'
+include { FUSIONREPORT      }     from '../../../modules/local/fusionreport/detect/main'
 
 
 workflow FUSIONREPORT_WORKFLOW {
