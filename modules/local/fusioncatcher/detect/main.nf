@@ -2,10 +2,7 @@ process FUSIONCATCHER_DETECT {
     tag "$meta.id"
     label 'process_high'
 
-    conda "${projectDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/d5/d53f36e9e01d14a0ae8e15f8046f52b2883c970c27fe43fdfbd9440a55f5403f/data' :
-        'community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f' }"
+    container "docker.io/clinicalgenomics/fusioncatcher:1.33"
 
     input:
     tuple val(meta), path(fastqs, stageAs: "input/*")

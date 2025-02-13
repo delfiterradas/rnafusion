@@ -87,7 +87,7 @@ workflow BUILD_REFERENCES {
     }
 
     if (!file(params.salmon_index).exists() || file(params.salmon_index).isEmpty() ||
-        !file(params.salmon_index_stub_check).exists() || file(params.salmon_index_stub_check).isEmpty()){ // add condition for qc
+        !file(params.salmon_index_stub_check).exists() || file(params.salmon_index_stub_check).isEmpty()){
         GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
         ch_versions = ch_versions.mix(GFFREAD.out.versions)
         SALMON_INDEX(ch_fasta.map{ it -> it[1] }, GFFREAD.out.gffread_fasta.map{ it -> it[1] })
@@ -149,7 +149,7 @@ workflow BUILD_REFERENCES {
     }
 
 
-    if ((params.fusionreport || params.all) &&
+    if ((params.fusionreport || params.all || params.fusioncatcher || params.arriba || params.starfusion) &&
             (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
             !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
         if (!params.no_cosmic && (!params.cosmic_username || !params.cosmic_passwd)) { exit 1, 'COSMIC username and/or password missing' }

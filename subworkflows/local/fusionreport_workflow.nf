@@ -13,7 +13,6 @@ workflow FUSIONREPORT_WORKFLOW {
         ch_versions = Channel.empty()
         ch_report = Channel.empty()
         ch_csv = Channel.empty()
-
         if (!params.fusioninspector_only) {
             reads_fusions = reads
             .join(arriba_fusions, failOnMismatch:true, failOnDuplicate:true)

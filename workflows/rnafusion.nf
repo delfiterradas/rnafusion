@@ -48,7 +48,7 @@ workflow RNAFUSION {
     BUILD_REFERENCES()
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
 
-    if (!params.references_only) { // TODO: Remove this temporary parameter when we have a full-working GitHub nf-test
+    if (!params.references_only) {
 
         //
         // QC from FASTQ files
@@ -118,16 +118,16 @@ workflow RNAFUSION {
 
 
 
-    //Run fusioncatcher
-    FUSIONCATCHER_WORKFLOW (
-        ch_reads,
-        BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
-        params.fusioncatcher,
-        params.all,
-        params.fusioninspector_only,
-        params.fusioncatcher_fusions
-    )
-    ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+        //Run fusioncatcher
+        FUSIONCATCHER_WORKFLOW (
+            ch_reads,
+            BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
+            params.fusioncatcher,
+            params.all,
+            params.fusioninspector_only,
+            params.fusioncatcher_fusions
+        )
+        ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
 
 
         //Run stringtie
@@ -139,31 +139,35 @@ workflow RNAFUSION {
 
 
         //Run fusion-report
-        FUSIONREPORT_WORKFLOW (
-            ch_reads,
-            BUILD_REFERENCES.out.ch_fusionreport_ref,
-            ARRIBA_WORKFLOW.out.fusions,
-            STARFUSION_WORKFLOW.out.fusions,
-            FUSIONCATCHER_WORKFLOW.out.fusions
-        )
-        ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
+        if (params.fusioncatcher || params.starfusion || params.arriba || params.all) {
+            FUSIONREPORT_WORKFLOW (
+                ch_reads,
+                BUILD_REFERENCES.out.ch_fusionreport_ref,
+                ARRIBA_WORKFLOW.out.fusions,
+                STARFUSION_WORKFLOW.out.fusions,
+                FUSIONCATCHER_WORKFLOW.out.fusions
+            )
+            ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
+        }
 
         //Run fusionInpector
-        FUSIONINSPECTOR_WORKFLOW (
-            ch_reads,
-            FUSIONREPORT_WORKFLOW.out.fusion_list,
-            FUSIONREPORT_WORKFLOW.out.fusion_list_filtered,
-            FUSIONREPORT_WORKFLOW.out.report,
-            FUSIONREPORT_WORKFLOW.out.csv,
-            STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
-            BUILD_REFERENCES.out.ch_gtf,
-            BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
-            BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
-            BUILD_REFERENCES.out.ch_hgnc_ref,
-            BUILD_REFERENCES.out.ch_hgnc_date
-        )
-        ch_versions = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
-
+        if (params.fusioncatcher || params.starfusion || params.arriba || params.all) {
+            FUSIONINSPECTOR_WORKFLOW (
+                ch_reads,
+                FUSIONREPORT_WORKFLOW.out.fusion_list,
+                FUSIONREPORT_WORKFLOW.out.fusion_list_filtered,
+                FUSIONREPORT_WORKFLOW.out.report,
+                FUSIONREPORT_WORKFLOW.out.csv,
+                STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
+                BUILD_REFERENCES.out.ch_gtf,
+                BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
+                BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
+                BUILD_REFERENCES.out.ch_hgnc_ref,
+                BUILD_REFERENCES.out.ch_hgnc_date
+            )
+            ch_multiqc_files = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
+            ch_versions = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
+        }
 
         //QC
         QC_WORKFLOW (
@@ -175,7 +179,19 @@ workflow RNAFUSION {
         )
         ch_versions = ch_versions.mix(QC_WORKFLOW.out.versions)
 
+
+        ch_multiqc_files                      = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_stats.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_gene_count.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.rnaseq_metrics.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.duplicate_metrics.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.insertsize_metrics.collect{it[1]}.ifEmpty([]))
+
     }
+
     //
     // Collate and save software versions
     //
@@ -219,19 +235,6 @@ workflow RNAFUSION {
         )
     )
 
-    if (!params.references_only) { // TODO: Remove this temporary parameter when we have a full-working GitHub nf-test
-        ch_multiqc_files                      = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_stats.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(STARFUSION_WORKFLOW.out.star_gene_count.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.rnaseq_metrics.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.duplicate_metrics.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(QC_WORKFLOW.out.insertsize_metrics.collect{it[1]}.ifEmpty([]))
-        ch_multiqc_files                      = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
-    }
-
     MULTIQC (
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
@@ -240,8 +243,6 @@ workflow RNAFUSION {
         [],
         []
     )
-
-
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html

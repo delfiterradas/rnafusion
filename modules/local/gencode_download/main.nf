@@ -37,8 +37,8 @@ process GENCODE_DOWNLOAD {
 
     stub:
     """
-    touch Homo_sapiens.${genome}.${genome_gencode_version}_dna_primary_assembly.fa
-    touch Homo_sapiens.${genome}.${genome_gencode_version}.gtf
+    touch Homo_sapiens_${genome}_${genome_gencode_version}_dna_primary_assembly.fa
+    touch Homo_sapiens_${genome}_${genome_gencode_version}.gtf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
