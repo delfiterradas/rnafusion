@@ -267,6 +267,7 @@ The weights for databases are as follows:
 The score is calculated using two components:
 
 1. Tool Detection (80% of total score)
+
    - Calculated as: (number of tools detecting the fusion) / (number of tools actually used)
    - This reflects how many of the active tools found the fusion
 
