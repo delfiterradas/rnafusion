@@ -264,13 +264,18 @@ The weights for databases are as follows:
 - MITELMAN (50)
 - FusionGDB2 (0)
 
-The final formula for calculating score is:
+The score is calculated using two components:
 
-$$
-score = 0.5 * \sum_{tool}^{tools} f(fusion, tool)*w(tool) + 0.5 * \sum_{db}^{dbs} g(fusion, db)*w(db)
-$$
+1. Tool Detection (80% of total score)
 
-All tools have the same weight.
+   - Calculated as: (number of tools detecting the fusion) / (number of tools actually used)
+   - This reflects how many of the active tools found the fusion
+
+2. Database Hits (20% of total score)
+   - Based on database matches using weights above
+   - Calculated as: (number of database hits) / (total possible database hits)
+
+Final score = (0.8 × Tool Detection Score) + (0.2 × Database Hits Score)
 
 ### Salmon
 
