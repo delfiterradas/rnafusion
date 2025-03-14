@@ -140,7 +140,9 @@ workflow BUILD_REFERENCES {
     if ((params.starfusion || params.all) &&
             (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
             !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
-            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
+            //STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
+            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, ch_dfam, ch_pfam)
+
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             ch_starfusion_ref = STARFUSION_BUILD.out.reference
     }

@@ -49,7 +49,7 @@ nextflow_process {
                     file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p", checkIfExists: true)
                 ]
                 input[4] = GUNZIP.out.gunzip
-                        .join(HMMER_HMMPRESS.out.compressed_db, by: 0)
+                        .join(HMMER_HMMPRESS.out.compressed_db).flatten().collect().map{it -> it[1..-1]}
                 """
             }
         }
@@ -159,6 +159,7 @@ nextflow_process {
                     file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m", checkIfExists: true),
                     file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p", checkIfExists: true)
                 ]
+                input [4] = [[]]
 
                 """
             }
