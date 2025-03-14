@@ -11,7 +11,8 @@ process STARFUSION_BUILD {
     tuple val(meta), path(fasta)
     tuple val(meta2), path(gtf)
     path fusion_annot_lib
-    val dfam_species
+    path dfam_db
+    //path pfam_db
 
     output:
     tuple val(meta), path("ctat_genome_lib_build_dir"), emit: reference
@@ -23,8 +24,8 @@ process STARFUSION_BUILD {
     prep_genome_lib.pl \\
         --genome_fa $fasta \\
         --gtf $gtf \\
-        --dfam_db ${dfam_species} \\
-        --pfam_db current \\
+        --dfam_db *.hmm \\
+        --pfam_db current\\
         --fusion_annot_lib $fusion_annot_lib \\
         --CPU $task.cpus \\
         ${args}

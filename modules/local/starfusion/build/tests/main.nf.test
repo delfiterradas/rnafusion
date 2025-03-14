@@ -11,15 +11,22 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'minigenome fasta' ],
-                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa", checkIfExists: true)
                 ]
                 input[1] = [
                     [ id:'minigenome gtf' ],
-                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf", checkIfExists: true)
                 ]
 
-                input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
-                input [3] = "human"
+                input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz", checkIfExists: true)
+                input[3] = [
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3f", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3i", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p", checkIfExists: true)
+                ]
+
 
                 """
             }
