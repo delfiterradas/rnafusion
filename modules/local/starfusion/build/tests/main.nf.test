@@ -6,6 +6,28 @@ nextflow_process {
 
     test("STARFUSION_BUILD - human - minigenome") {
 
+        setup {
+            run("GUNZIP") {
+                script "../../../../nf-core/gunzip/main.nf"
+                process {
+                    """
+                    input[0] = [
+                    [ id:'pfam_database' ],
+                    file("http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam34.0/Pfam-A.hmm.gz", checkIfExists: true)
+                    ]
+                    """
+                }
+            }
+            run("HMMER_HMMPRESS") {
+                script "../../../../nf-core/hmmer/hmmpress/main.nf"
+                process {
+                    """
+                    input[0] = GUNZIP.out.gunzip
+                    """
+                }
+            }
+        }
+
         when {
             process {
                 """
@@ -26,8 +48,8 @@ nextflow_process {
                     file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m", checkIfExists: true),
                     file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p", checkIfExists: true)
                 ]
-
-
+                input[4] = GUNZIP.out.gunzip
+                        .join(HMMER_HMMPRESS.out.compressed_db, by: 0)
                 """
             }
         }
@@ -122,15 +144,21 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'minigenome fasta' ],
-                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa", checkIfExists: true)
                 ]
                 input[1] = [
                     [ id:'minigenome gtf' ],
-                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf", checkIfExists: true)
                 ]
 
-                input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
-                input [3] = "human"
+                input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz", checkIfExists: true)
+                input[3] = [
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3f", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3i", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m", checkIfExists: true),
+                    file("https://www.dfam.org/releases/Dfam_3.4/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p", checkIfExists: true)
+                ]
 
                 """
             }
