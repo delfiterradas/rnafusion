@@ -27,17 +27,17 @@ workflow FASTQ_ALIGN_STAR {
     ch_versions = ch_versions.mix(STAR_ALIGN.out.versions.first())
 
     SAMTOOLS_INDEX(
-        STAR_ALIGN.out.bam_sorted
+        STAR_ALIGN.out.bam_sorted_aligned
     )
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
 
-    ch_bam_bai = STAR_ALIGN.out.bam_sorted
+    ch_bam_bai = STAR_ALIGN.out.bam_sorted_aligned
         .join(SAMTOOLS_INDEX.out.bai, failOnMismatch:true, failOnDuplicate:true)
 
     def ch_cram_crai = Channel.empty()
     if(cram) {
         SAMTOOLS_CONVERT(
-            STAR_ALIGN.out.bam_sorted.map { meta, bam -> [ meta, bam, []] },
+            STAR_ALIGN.out.bam_sorted_aligned.map { meta, bam -> [ meta, bam, []] },
             fasta,
             fai
         )

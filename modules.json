@@ -98,7 +98,7 @@
                     },
                     "samtools/convert": {
                         "branch": "master",
-                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "git_sha": "b823b7220bac94079f9ea65113401956ca7d633e",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
