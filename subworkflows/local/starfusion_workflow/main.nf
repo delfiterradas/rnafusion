@@ -6,7 +6,7 @@ include { CTATSPLICING_WORKFLOW                                 }   from '../cta
 
 workflow STARFUSION_WORKFLOW {
     take:
-        reads               // channel: [ meta, bam, bai ]
+        reads               // channel: [ meta, bam ]
         junctions           // channel: [ meta, junctions ]
         ch_starfusion_ref
 

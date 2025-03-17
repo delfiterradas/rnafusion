@@ -143,7 +143,7 @@ workflow RNAFUSION {
 
         //Run STAR fusion
         STARFUSION_WORKFLOW (
-            ch_aligned_reads,
+            ch_aligned_reads.map { meta, bam, _bai -> [ meta, bam ]},
             ch_star_junctions,
             BUILD_REFERENCES.out.ch_starfusion_ref
         )
