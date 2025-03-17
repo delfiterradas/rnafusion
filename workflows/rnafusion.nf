@@ -163,7 +163,7 @@ workflow RNAFUSION {
 
         //Run stringtie
         STRINGTIE_WORKFLOW (
-            STARFUSION_WORKFLOW.out.ch_bam_sorted,
+            ch_aligned_reads.map { meta, bam, _bai -> [meta, bam]},
             BUILD_REFERENCES.out.ch_gtf
         )
         ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
@@ -198,7 +198,7 @@ workflow RNAFUSION {
 
         //QC
         QC_WORKFLOW (
-            STARFUSION_WORKFLOW.out.ch_bam_sorted,
+            ch_aligned_reads,
             BUILD_REFERENCES.out.ch_refflat,
             BUILD_REFERENCES.out.ch_fasta,
             BUILD_REFERENCES.out.ch_fai,
