@@ -47,7 +47,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update`FUSIONINSPECTOR` to v2.10.0. [#601](https://github.com/nf-core/rnafusion/pull/601)
 - Remove local module `STARFUSION_DOWNLOAD` [#598](https://github.com/nf-core/rnafusion/pull/598)
 - Fix error message when parameter outdir is missing [#611](https://github.com/nf-core/rnafusion/pull/611)
-- Updated documentation for fusion-report score calculation to reflect 80/20 weight distribution between tool detection and database hits [#620](https://github.com/nf-core/rnafusion/pull/620)
+- Updated documentation for fusion-report score calculation to reflect 80/20 weight distribution between thttps://github.com/nf-core/rnafusion/pull/633ool detection and database hits [#620](https://github.com/nf-core/rnafusion/pull/620)
+- The STAR alignment now only runs once instead of multiple times when using `--arriba` and `--starfusion` [#633](https://github.com/nf-core/rnafusion/pull/633)
+- The `--cram` parameter has been converted to a boolean value instead of the comma-separated list of values. Use this parameter if you also want to create CRAM files from the BAM files created with STAR [#633](https://github.com/nf-core/rnafusion/pull/633)
 
 ### Fixed
 

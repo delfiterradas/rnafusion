@@ -85,7 +85,7 @@ workflow RNAFUSION {
         def ch_aligned_reads = Channel.empty()
         def ch_star_junctions = Channel.empty()
         def ch_star_split_junctions = Channel.empty()
-        if((params.arriba || params.all || params.ctatsplicing || params.starfusion) && !params.fusioninspector_only) {
+        if((params.arriba || params.ctatsplicing || params.starfusion || params.all) && !params.fusioninspector_only) {
             FASTQ_ALIGN_STAR(
                 ch_reads,
                 BUILD_REFERENCES.out.ch_starindex_ref,
@@ -121,7 +121,6 @@ workflow RNAFUSION {
         // SUBWORKFLOW:  Run STAR alignment and Arriba
         //
 
-        // TODO: add params.seq_platform and pass it as argument to arriba_workflow
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
         // TODO: same as above, but with ch_arriba_fusion_fail. It's currently replaces by a dummy file
 
