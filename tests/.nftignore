@@ -3,7 +3,10 @@ references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz
 references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz
 references/ensembl/Homo_sapiens.GRCh38.102.dna.primary_assembly.fa
 references/hgnc/HGNC-DB-timestamp.txt
+references/hgnc/hgnc_complete_set.txt
 references/fusion_report_db/DB-timestamp.txt
+references/fusion_report_db/fusiongdb2.db
+references/fusion_report_db/mitelman.db
 references/salmon/salmon/ctable.bin
 references/salmon/salmon/pos.bin
 references/salmon/salmon/pre_indexing.log
@@ -30,3 +33,5 @@ starfusion/ctat_genome_lib_build_dir/ref_genome.fa.star.idx/Log.out
 starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm
 references/star/genomeParameters.txt
 starfusion/ctat_genome_lib_build_dir/ref_genome.fa.star.idx/genomeParameters.txt
+references/fusion_report_db/mitelman.db
+references/fusion_report_db/fusiongdb2.db
