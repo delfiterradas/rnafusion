@@ -31,7 +31,7 @@ process CTATSPLICING_PREPGENOMELIB {
     def VERSION = '0.0.2' // WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
     """
     touch $genome_lib/refGene.bed
-    touch $genome_lib/refGene.sort.bed.gz
+    echo | gzip > $genome_lib/refGene.sort.bed.gz
     touch $genome_lib/refGene.sort.bed.gz.tbi
     mkdir $genome_lib/cancer_splicing_lib
     touch $genome_lib/cancer_splicing_lib/cancer_splicing.idx
