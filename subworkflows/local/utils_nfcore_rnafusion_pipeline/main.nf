@@ -2,8 +2,6 @@
 // Subworkflow with functionality specific to the nf-core/rnafusion pipeline
 //
 
-import groovy.json.JsonSlurper
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
