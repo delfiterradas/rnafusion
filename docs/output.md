@@ -72,8 +72,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 {outdir}
 ├── arriba
 ├── arriba_visualisation
-├── cram_arriba
-├── cram_starfusion
 ├── fastp
 ├── fastqc
 ├── fusioncatcher
@@ -85,8 +83,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 ├── picard
 ├── pipeline_info
 ├── samtools_sort_for_arriba
-├── star_for_arriba
-├── star_for_starfusion
+├── star
 ├── starfusion
 └── work
 .nextflow.log
@@ -348,112 +345,32 @@ Picard CollectRnaMetrics and picard MarkDuplicates share the same output directo
 
 </details>
 
-### Samtools
-
-#### Samtools sort
-
-Samtools sort is used to sort BAM files from STAR_FOR_STARFUSION (for arriba visualisation)
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `samtools_sort_for_<arriba>`
-  - `<sample>(_chimeric)_sorted.bam` - sorted BAM file
-
-</details>
-
-#### Samtools index
-
-Samtools index is used to index BAM files from STAR_FOR_ARRIBA (for arriba visualisation) and STAR_FOR_STARFUSION (for QC)
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `samtools_for_<arriba/qc>`
-  - `<sample>.(Aligned.sortedByCoord).out.bam.bai` -
-
-</details>
-
 ### STAR
 
-STAR is used to align to genome reference
+STAR is used to align FASTQ files to the genome reference.
 
-STAR is run for 3 tools:
-
-For `arriba` with the parameters:
-
-```bash
---readFilesCommand zcat \
---outSAMtype BAM Unsorted \
---outSAMunmapped Within \
---outBAMcompression 0 \
---outFilterMultimapNmax 50 \
---peOverlapNbasesMin 10 \
---alignSplicedMateMapLminOverLmate 0.5 \
---alignSJstitchMismatchNmax 5 -1 5 5 \
---chimSegmentMin 10 \
---chimOutType WithinBAM HardClip \
---chimJunctionOverhangMin 10 \
---chimScoreDropMax 30 \
---chimScoreJunctionNonGTAG 0 \
---chimScoreSeparation 1 \
---chimSegmentReadGapMax 3 \
---chimMultimapNmax 50
-```
-
-For `STAR-fusion` with the parameters:
-
-```bash
---twopassMode Basic \
---outReadsUnmapped None \
---readFilesCommand zcat \
---outSAMstrandField intronMotif \
---outSAMunmapped Within \
---chimSegmentMin 12 \
---chimJunctionOverhangMin 8 \
---chimOutJunctionFormat 1 \
---alignSJDBoverhangMin 10 \
---alignMatesGapMax 100000 \
---alignIntronMax 100000 \
---alignSJstitchMismatchNmax 5 -1 5 5 \
---chimMultimapScoreRange 3 \
---chimScoreJunctionNonGTAG -4 \
---chimMultimapNmax 20 \
---chimNonchimScoreDropMin 10 \
---peOverlapNbasesMin 12 \
---peOverlapMMp 0.1 \
---alignInsertionFlush Right \
---alignSplicedMateMapLminOverLmate 0 \
---alignSplicedMateMapLmin 30 \
---chimOutType Junctions \
---quantMode GeneCounts
-```
-
-> STAR_FOR_STARFUSION uses `${params.ensembl}/Homo_sapiens.GRCh38.${params.ensembl_version}.chr.gtf` whereas STAR_FOR_ARRIBA uses `${params.ensembl_ref}/Homo_sapiens.GRCh38.${params.ensembl_version}.gtf`
+Additionally, CRAM files can also be created when passing the `--cram` option. The CRAM conversion is done with a combination of `samtools view` and `samtools index`.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 **Common**
 
-- `star_for_<tool>`
-- `<sample>.Log.final.out`
-- `<sample>.Log.progress.out`
-- `<sample>.SJ.out.tab`
-
-**For arriba:**
-
-- `<sample>.Aligned.out.bam`
-
-  **For starfusion:**
-
-- `<sample>.Aligned.sortedByCoord.out.bam`
-- `<sample>.Chimeric.out.junction`
-- `<sample>.ReadsPerGene.out.tab`
+- `star`
+  - `<sample>.Aligned.sortedByCoord.out.bam`
+  - `<sample>.Aligned.sortedByCoord.out.bam.bai`
+  - `<sample>.Aligned.sortedByCoord.out.cram` - when `--cram` is used
+  - `<sample>.Aligned.sortedByCoord.out.cram.crai` - when `--cram` is used
+  - `<sample>.Chimeric.out.junction`
+  - `<sample>.Log.final.out`
+  - `<sample>.Log.out`
+  - `<sample>.Log.progress.out`
+  - `<sample>.ReadsPerGene.out.tab`
+  - `<sample>.SJ.out.tab`
 
 </details>
 
-The STAR index is generated with `--sjdbOverhang ${params.read_length - 1}`, params.read_length default is 100.
+The STAR index is generated with `--sjdbOverhang ${params.read_length - 1}`, `params.read_length` default is 100.
 
 ### STAR-fusion
 
