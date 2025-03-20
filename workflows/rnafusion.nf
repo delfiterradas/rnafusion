@@ -197,7 +197,7 @@ workflow RNAFUSION {
 
         //QC
         QC_WORKFLOW (
-            ch_aligned_reads,
+            ch_aligned_reads.map { meta, bam, _bai -> [meta, bam] },
             BUILD_REFERENCES.out.ch_refflat,
             BUILD_REFERENCES.out.ch_fasta,
             BUILD_REFERENCES.out.ch_fai,
