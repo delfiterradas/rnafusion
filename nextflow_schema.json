@@ -111,7 +111,6 @@
                 "arriba_ref_blacklist": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.tsv\\.gz$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
@@ -119,7 +118,6 @@
                 "arriba_ref_cytobands": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference cytobands"
@@ -127,7 +125,6 @@
                 "arriba_ref_known_fusions": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.tsv\\.gz$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference known fusions"
@@ -135,7 +132,6 @@
                 "arriba_ref_protein_domains": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.gff3$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference protein domain"
@@ -181,7 +177,6 @@
                 "fusioncatcher_ref": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },
@@ -219,7 +214,6 @@
                 "fusionreport_ref": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusionreport references"
                 },
@@ -232,7 +226,6 @@
                 "hgnc_ref": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.txt$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to HGNC database file"
@@ -240,7 +233,6 @@
                 "hgnc_date": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.txt$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to HGNC timestamp file for database retrieval"
@@ -253,7 +245,6 @@
                 "salmon_index": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "fa_icon": "far fa-file-code",
                     "description": "Path to salmon index"
                 },
@@ -279,7 +270,6 @@
                 "starfusion_ref": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "fa_icon": "far fa-file-code",
                     "description": "Path to starfusion references"
                 },
@@ -305,7 +295,6 @@
                 "starindex_ref": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "fa_icon": "far fa-file-code",
                     "description": "Path to starindex references"
                 },
@@ -391,7 +380,6 @@
                 "fasta": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
@@ -401,7 +389,6 @@
                     "type": "string",
                     "format": "file-path",
                     "mimetype": "text/plain",
-                    "exists": true,
                     "pattern": "^\\S+\\.fn?ai(\\.gz)?$",
                     "description": "Path to FASTA genome index file.",
                     "fa_icon": "far fa-file-code"
@@ -414,7 +401,6 @@
                 "gtf": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "^\\S+\\.gtf?(\\.gz)?$",
                     "description": "Path to GTF genome file.",
                     "fa_icon": "far fa-file-code"
@@ -422,7 +408,6 @@
                 "refflat": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "^\\S+\\.refflat?$",
                     "description": "Path to GTF genome file.",
                     "fa_icon": "far fa-file-code"
@@ -430,7 +415,6 @@
                 "rrna_intervals": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "^\\S+\\.interval_list?$",
                     "description": "Path to ribosomal interval list.",
                     "fa_icon": "far fa-file-code"
