@@ -2,8 +2,6 @@
 // Subworkflow with functionality specific to the nf-core/rnafusion pipeline
 //
 
-import groovy.json.JsonSlurper
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
@@ -163,6 +161,11 @@ def validateInputParameters() {
 
     if (params.starfusion_build && !params.fusion_annot_lib) {
             error("No fusion annotation library provided. `STARFUSION_BUILD` is unable to run.")
+    }
+
+    def profiles = workflow.profile
+    if ((profiles.contains("conda") || profiles.contains("mamba")) && (params.ctatsplicing || params.all)) {
+        error("Conda or Mamba runs are not supported when using --ctatsplicing or --all")
     }
 
 }

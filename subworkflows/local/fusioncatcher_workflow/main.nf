@@ -22,7 +22,7 @@ workflow FUSIONCATCHER_WORKFLOW {
             if (fusioncatcher_fusions){
 
                 ch_fusioncatcher_fusions = reads.combine(Channel.value(file(fusioncatcher_fusions, checkIfExists:true)))
-                                            .map { meta, reads, fusions -> [ meta, fusions ] }
+                                            .map { meta, _reads, fusions -> [ meta, fusions ] }
             } else {
 
                 FUSIONCATCHER_DETECT (
@@ -35,7 +35,7 @@ workflow FUSIONCATCHER_WORKFLOW {
         }
         else {
             ch_fusioncatcher_fusions = reads.combine(Channel.value(file(ch_dummy_file, checkIfExists:true)))
-                                        .map { meta, reads, fusions -> [ meta, fusions ] }
+                                        .map { meta, _reads, fusions -> [ meta, fusions ] }
         }
 
     emit:

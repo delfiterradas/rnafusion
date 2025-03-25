@@ -11,6 +11,7 @@ include { HGNC_DOWNLOAD }                   from '../../modules/local/hgnc/main'
 include { STARFUSION_BUILD }                from '../../modules/local/starfusion/build/main'
 include { GTF_TO_REFFLAT }                  from '../../modules/local/uscs/custom_gtftogenepred/main'
 include { GET_RRNA_TRANSCRIPTS }            from '../../modules/local/get_rrna_transcript/main'
+include { CTATSPLICING_PREPGENOMELIB }      from '../../modules/local/ctatsplicing/prepgenomelib/main.nf'
 
 /*
 ========================================================================================
@@ -142,7 +143,16 @@ workflow BUILD_REFERENCES {
             !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
-            ch_starfusion_ref = STARFUSION_BUILD.out.reference
+            if (params.ctatsplicing || params.all) {
+                CTATSPLICING_PREPGENOMELIB(
+                    STARFUSION_BUILD.out.reference,
+                    params.ctatsplicing_cancer_introns
+                )
+                ch_versions = ch_versions.mix(CTATSPLICING_PREPGENOMELIB.out.versions)
+                ch_starfusion_ref = CTATSPLICING_PREPGENOMELIB.out.reference
+            } else {
+                ch_starfusion_ref = STARFUSION_BUILD.out.reference
+            }
     }
     else {
         ch_starfusion_ref = Channel.fromPath(params.starfusion_ref)

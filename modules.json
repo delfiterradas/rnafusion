@@ -12,7 +12,7 @@
                     },
                     "arriba/arriba": {
                         "branch": "master",
-                        "git_sha": "7741dfc830e77a8ead2fcb50b01461ee09d0cdfe",
+                        "git_sha": "1719e20e3881b37b9e1e8498ea669a2b92e54b9a",
                         "installed_by": ["modules"]
                     },
                     "arriba/download": {
@@ -93,7 +93,7 @@
                     },
                     "salmon/quant": {
                         "branch": "master",
-                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "git_sha": "85b5f8a0d9df9ce7587af50e2ee75b37c97515c6",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
