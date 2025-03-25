@@ -163,6 +163,11 @@ def validateInputParameters() {
             error("No fusion annotation library provided. `STARFUSION_BUILD` is unable to run.")
     }
 
+    def profiles = workflow.profile
+    if ((profiles.contains("conda") || profiles.contains("mamba")) && (params.ctatsplicing || params.all)) {
+        error("Conda or Mamba runs are not supported when using --ctatsplicing or --all")
+    }
+
 }
 
 //
