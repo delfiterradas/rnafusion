@@ -10,13 +10,13 @@ The pipeline is divided into two parts:
 
 1. Download and build references
 
-- specified with `--build_references` parameter
+- specified with `--references_only` parameter
 - required only once before running the pipeline
 - **Important**: has to be run with each new release
 
 2. Detecting fusions
 
-- Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, and `StringTie`
+- Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, `StringTie` and `CTAT-SPLICING`
 - QC: `Fastqc`, `MultiQC`, and `Picard CollectInsertSize`, `Picard CollectWgsMetrics`, `Picard Markduplicates`
 - Fusions visualization: `Arriba`, `fusion-report`, `FusionInspector`, and `vcf_collect`
 
@@ -31,7 +31,8 @@ The rnafusion pipeline needs references for the fusion detection tools, so downl
 
 ```bash
 nextflow run nf-core/rnafusion \
-  --build_references --all \
+  -profile <docker/singularity/.../institute> \
+  --references_only --all \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <PATH/TO/REFERENCES>
@@ -41,11 +42,14 @@ References for each tools can also be downloaded separately with:
 
 ```bash
 nextflow run nf-core/rnafusion \
-  --build_references --<tool1> --<tool2> ... \
+  -profile <docker/singularity/.../institute> \
+  --references_only --<tool1> --<tool2> ... \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
 ```
+
+If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
 
 ### Downloading the cosmic database with SANGER or QUIAGEN
 
@@ -59,7 +63,8 @@ Use credentials from QIAGEN and add `--qiagen`
 
 ```bash
 nextflow run nf-core/rnafusion \
-  --build_references --<tool1> --<tool2> ... \
+  -profile <docker/singularity/.../institute> \
+  --references_only --<tool1> --<tool2> ... \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH> --qiagen
@@ -75,7 +80,8 @@ If process `FUSIONREPORT_DOWNLOAD` times out, it could be due to network restric
 
 ```bash
 nextflow run nf-core/rnafusion  \
-  --build_references \
+  -profile <docker/singularity/.../institute> \
+  --references_only \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --fusionreport \
   --genomes_base <PATH/TO/REFERENCES> \
@@ -87,14 +93,14 @@ Where the custom configuration could look like (adaptation to local machine nece
 
 ```text
 process {
-  withName:  'NFCORE_RNAFUSION:BUILD_REFERENCES:FUSIONREPORT_DOWNLOAD' {
+  withName:  'NFCORE_RNAFUSION:RNAFUSION:BUILD_REFERENCES:FUSIONREPORT_DOWNLOAD' {
     memory = '8.GB'
     cpus = 4
   }
 }
 ```
 
-The four `fusion-report` files: `cosmic.db`, `fusiongdb.db`, `fusiongdb2.db`, `mitelman.db`
+The four `fusion-report` files: `cosmic.db`, `fusiongdb2.db`, `mitelman.db`
 should then be copied into the HPC `<REFERENCE_PATH>/references/fusion_report_db`.
 
 #### Note about fusioncatcher references
@@ -130,10 +136,11 @@ As you can see above for multiple runs of the same sample, the `sample` name has
 
 ### Starting commands
 
-The pipeline can either be run using all fusion detection tools or specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `fusioncatcher`, `starfusion`, `stringtie`) use the `--all` parameter:
+The pipeline can either be run using all fusion detection tools or specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `fusioncatcher`, `starfusion`, `stringtie`, `ctat-splicing`) use the `--all` parameter:
 
 ```bash
 nextflow run nf-core/rnafusion \
+  -profile <docker/singularity/.../institute> \
   --all \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
@@ -144,15 +151,18 @@ To run only a specific detection tool use: `--tool`:
 
 ```bash
 nextflow run nf-core/rnafusion \
+  -profile <docker/singularity/.../institute> \
   --<tool1> --<tool2> ... \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
 ```
 
+If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
+
 > **IMPORTANT: Either `--all` or `--<tool>`** is necessary to run detection tools
 
-`--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--build_references`.
+`--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--references_only`.
 
 Note that the pipeline will create the following files in your working directory:
 
@@ -167,9 +177,8 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
-:::warning
-Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
-:::
+> [!WARNING]
+> Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
 
 The above pipeline run specified with a params file in yaml format:
 
@@ -177,9 +186,9 @@ The above pipeline run specified with a params file in yaml format:
 nextflow run nf-core/rnafusion -profile docker -params-file params.yaml
 ```
 
-with `params.yaml` containing:
+with:
 
-```yaml
+```yaml title="params.yaml"
 input: './samplesheet.csv'
 outdir: './results/'
 <...>
@@ -200,6 +209,7 @@ When the flag `--fastp_trim` is used, `fastp` is used to provide all tools with 
 
 ```bash
 nextflow run nf-core/rnafusion \
+-profile <docker/singularity/.../institute> \
 --<tool1> --<tool2> ... \
 --input <SAMPLE_SHEET.CSV> \
 --genomes_base <PATH/TO/REFERENCES> \
@@ -213,6 +223,7 @@ nextflow run nf-core/rnafusion \
 
 ```bash
 nextflow run nf-core/rnafusion \
+  -profile <docker/singularity/.../institute> \
   --<tool1> --<tool2> ... \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
@@ -226,6 +237,7 @@ nextflow run nf-core/rnafusion \
 
 ```bash
 nextflow run nf-core/rnafusion \
+  -profile <docker/singularity/.../institute> \
   --<tool1> --<tool2> ... \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
@@ -246,6 +258,7 @@ FusionInspector can be run as a standalone with:
 
 ```bash
 nextflow run nf-core/rnafusion \
+-profile <docker/singularity/.../institute> \
 --fusioninspector_only \
 --fusioninspector_fusions <PATH_TO_CUSTOM_FUSION_FILE> \
 --input <SAMPLE_SHEET.CSV> \
@@ -263,6 +276,7 @@ GENE3--GENE4
 
 ```bash
 nextflow run nf-core/rnafusion \
+-profile <docker/singularity/.../institute> \
 --skip_qc \
 --all OR <--tool>
 --input <SAMPLE_SHEET.CSV> \
@@ -276,6 +290,7 @@ This will skip all QC-related processes (picard metrics collection)
 
 ```bash
 nextflow run nf-core/rnafusion \
+-profile <docker/singularity/.../institute> \
 --skip_vis \
 --all OR <--tool>
 --input <SAMPLE_SHEET.CSV> \
@@ -324,23 +339,21 @@ nextflow pull nf-core/rnafusion
 
 ### Reproducibility
 
-It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
+It is a good idea to specify the pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
 First, go to the [nf-core/rnafusion releases page](https://github.com/nf-core/rnafusion/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
-To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
+To further assist in reproducibility, you can use share and reuse [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-:::tip
-If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
-:::
+> [!TIP]
+> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
-:::note
-These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
-:::
+> [!NOTE]
+> These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen)
 
 ### `-profile`
 
@@ -348,16 +361,15 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
-:::info
-We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
-:::
+> [!IMPORTANT]
+> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
 
-The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
+The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to check if your system is supported, please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
 Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
-If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer enviroment.
+If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
 - `test`
   - A profile with a complete configuration for automated testing
@@ -374,12 +386,13 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
   - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
+- `wave`
+  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow ` 24.03.0-edge` or later).
 - `conda`
   - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
 - `test`
   - A profile with a complete configuration for automated testing
   - Includes links to test data so needs no other parameters
-  - Needs to run in two steps: with `--build_references` first and then without `--build_references` to run the analysis
   - !!!! Run with `-stub` as all references need to be downloaded otherwise !!!!
 
 ### `-resume`
@@ -396,13 +409,13 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 ### Resource requests
 
-Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the steps in the pipeline, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher requests (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
+Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the pipeline steps, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher resources request (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
 
 To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
 
 ### Custom Containers
 
-In some cases you may wish to change which container or conda environment a step of the pipeline uses for a particular tool. By default nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However in some cases the pipeline specified version maybe out of date.
+In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
 
 To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
 
@@ -419,14 +432,6 @@ In most cases, you will only need to create a custom config as a one-off but if 
 See the main [Nextflow documentation](https://www.nextflow.io/docs/latest/config.html) for more information about creating your own configuration files.
 
 If you have any questions or issues please send us a message on [Slack](https://nf-co.re/join/slack) on the [`#configs` channel](https://nfcore.slack.com/channels/configs). -->
-
-## Azure Resource Requests
-
-To be used with the `azurebatch` profile by specifying the `-profile azurebatch`.
-We recommend providing a compute `params.vm_type` of `Standard_D16_v3` VMs by default but these options can be changed if required.
-
-Note that the choice of VM size depends on your quota and the overall workload during the analysis.
-For a thorough list, please refer the [Azure Sizes for virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes).
 
 ## Running in the background
 

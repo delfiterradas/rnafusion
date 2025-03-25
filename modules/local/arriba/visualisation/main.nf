@@ -22,17 +22,18 @@ process ARRIBA_VISUALISATION {
 
     script:
     def args = task.ext.args ?: ''
-    def cytobands = cytobands ? " --cytobands=$cytobands" : ""
+    def arg_cytobands = cytobands ? " --cytobands=$cytobands" : ""
+    def arg_alignment = bam ? " --alignments=$bam" : ""
+    def arg_protein_domains = protein_domains ? "--proteinDomains=$protein_domains" : ""
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def protein_domains = protein_domains ? "--proteinDomains=$protein_domains" : ""
     """
     draw_fusions.R \\
         --fusions=$fusions \\
-        --alignments=$bam \\
         --output=${prefix}.pdf \\
         --annotation=${gtf} \\
-        $cytobands \\
-        $protein_domains \\
+        $arg_alignment \\
+        $arg_cytobands \\
+        $arg_protein_domains \\
         $args
 
     cat <<-END_VERSIONS > versions.yml
