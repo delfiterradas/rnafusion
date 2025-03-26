@@ -47,7 +47,7 @@ nextflow run nf-core/rnafusion \
   --outdir <OUTPUT/PATH>
 ```
 
-### Downloading the cosmic database with SANGER or QUIAGEN
+### Downloading the cosmic database with SANGER or QIAGEN
 
 #### For academic users
 
