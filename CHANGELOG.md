@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local subworkflow: `FUSIONCATCHER_WORKFLOW` [#591](https://github.com/nf-core/rnafusion/pull/591)
 - Add nf-test to local subworkflow: `STARFUSION_WORKFLOW`. [#597](https://github.com/nf-core/rnafusion/pull/597)
 - Add nf-test to local module: `FUSIONINSPECTOR`. [#601](https://github.com/nf-core/rnafusion/pull/601)
+- Added `CTATSPLICING_PREPGENOMELIB` to update the starfusion genome library directory with a cancer splicing index. [#610](https://github.com/nf-core/rnafusion/pull/610)
 - Add nf-test to local subworkflow: `FUSIONREPORT_WORKFLOW`. [#607](https://github.com/nf-core/rnafusion/pull/607)
 - Add nf-test to local module: `ARRIBA_VISUALISATION`. [#625](https://github.com/nf-core/rnafusion/pull/625)
 
@@ -51,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The STAR alignment now only runs once instead of multiple times when using `--arriba` and `--starfusion` [#633](https://github.com/nf-core/rnafusion/pull/633)
 - The `--cram` parameter has been converted to a boolean value instead of the comma-separated list of values. Use this parameter if you also want to create CRAM files from the BAM files created with STAR [#633](https://github.com/nf-core/rnafusion/pull/633)
 - Update htslib and samtools version in `star/align` to 1.21 [#634](https://github.com/nf-core/rnafusion/pull/634)
+- `--run_fusioncatcher` back to `fusioncatcher` [#641](https://github.com/nf-core/rnafusion/pull/641)
 
 ### Fixed
 

@@ -247,6 +247,13 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to file in starfusion references"
                 },
+                "ctatsplicing_cancer_introns": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "description": "Path to the cancer introns CSV file to create the CTAT-SPLICING reference with",
+                    "default": "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/CANCER_SPLICING_LIB_SUPPLEMENT/cancer_introns.GRCh38.Jun232020.tsv.gz"
+                },
                 "starindex": {
                     "type": "boolean",
                     "fa_icon": "far fa-file-code",
