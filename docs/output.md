@@ -17,13 +17,15 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [STAR-fusion](#starfusion) - STAR-fusion fusion detection
 - [StringTie](#stringtie) - StringTie assembly
 - [FusionCatcher](#fusioncatcher) - Fusion catcher fusion detection
+- [CTAT-SPLICING](#ctat-splicing) - Detection and annotation of cancer splicing aberrations
 - [Samtools](#samtools) - SAM/BAM file manipulation
-- [Fusion-report](#fusion-report) - Summary of the findings of each tool and comparison to COSMIC, Mitelman, FusionGBD and FusionGDB2 databases
+- [Fusion-report](#fusion-report) - Summary of the findings of each tool and comparison to COSMIC, Mitelman, and FusionGDB2 databases
 - [FusionInspector](#fusionInspector) - Supervised analysis of fusion predictions from fusion-report, recover and re-score evidence for such predictions
 - [Arriba visualisation](#arriba-visualisation) - Arriba visualisation report for FusionInspector fusions
 - [Picard](#picard) - Collect QC metrics
-- [FastQC](#fastqc) - Raw read quality control
-- [MultiQC](#multiqc) - Aggregate reports describing QC results from the whole pipeline
+- [FastQC](#fastqc) - Raw read QC
+- [Salmon](#salmon) - Normalized gene expression calculation
+- [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
 ## Download and build references
@@ -49,7 +51,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
     - `human_v<version>` - dir with all references for fusioncatcher
   - `fusion_report_db`
     - `cosmic.db`
-    - `fusiongdb.db`
     - `fusiongdb2.db`
     - `mitelman.db`
   - `star` - dir with STAR index
@@ -162,6 +163,8 @@ If `--trim_fastp` is selected, [fastp](https://github.com/OpenGene/fastp) will f
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
+### MultiQC
+
 ![MultiQC - FastQC sequence counts plot](images/mqc_fastqc_counts.png)
 
 ![MultiQC - FastQC mean quality scores plot](images/mqc_fastqc_quality.png)
@@ -185,6 +188,41 @@ The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They m
 </details>
 
 [FusionCatcher](https://github.com/ndaniel/fusioncatcher) searches for novel/known somatic fusion genes translocations, and chimeras in RNA-seq data. Possibility to use parameter `--fusioncatcher_limitSjdbInsertNsj` to modify limitSjdbInsertNsj.
+
+### CTAT-SPLICING
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `ctatsplicing`
+  - `arriba`
+    - `<sample>.cancer_intron_reads.sorted.bam`
+    - `<sample>.cancer_intron_reads.sorted.bam.bai`
+    - `<sample>.cancer.introns`
+    - `<sample>.cancer.introns.prelim`
+    - `<sample>.chckpts`
+    - `<sample>.ctat-splicing.igv.html`
+    - `<sample>.gene_reads.sorted.sifted.bam`
+    - `<sample>.gene_reads.sorted.sifted.bam.bai`
+    - `<sample>.igv.tracks`
+    - `<sample>.introns`
+    - `<sample>.introns.for_IGV.bed`
+  - `starfusion`
+    - `<sample>.cancer_intron_reads.sorted.bam`
+    - `<sample>.cancer_intron_reads.sorted.bam.bai`
+    - `<sample>.cancer.introns`
+    - `<sample>.cancer.introns.prelim`
+    - `<sample>.chckpts`
+    - `<sample>.ctat-splicing.igv.html`
+    - `<sample>.gene_reads.sorted.sifted.bam`
+    - `<sample>.gene_reads.sorted.sifted.bam.bai`
+    - `<sample>.igv.tracks`
+    - `<sample>.introns`
+    - `<sample>.introns.for_IGV.bed`
+
+</details>
+
+[CTAT-SPLICING](https://github.com/TrinityCTAT/CTAT-SPLICING/wiki) detects and annotates of aberrant splicing isoforms in cancer. This is run on the input files for `arriba` and/or `starfusion`.
 
 ### FusionInspector
 
@@ -226,13 +264,30 @@ The weights for databases are as follows:
 - MITELMAN (50)
 - FusionGDB2 (0)
 
-The final formula for calculating score is:
+The score is calculated using two components:
 
-$$
-score = 0.5 * \sum_{tool}^{tools} f(fusion, tool)*w(tool) + 0.5 * \sum_{db}^{dbs} g(fusion, db)*w(db)
-$$
+1. Tool Detection (80% of total score)
 
-All tools have the same weight.
+   - Calculated as: (number of tools detecting the fusion) / (number of tools actually used)
+   - This reflects how many of the active tools found the fusion
+
+2. Database Hits (20% of total score)
+   - Based on database matches using weights above
+   - Calculated as: (number of database hits) / (total possible database hits)
+
+Final score = (0.8 × Tool Detection Score) + (0.2 × Database Hits Score)
+
+### Salmon
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `salmon`
+  - `<sample>`
+
+</details>
+
+Folder containing the quantification results
 
 ### Kallisto
 
@@ -275,6 +330,8 @@ Vcf-collect takes as input the results of fusion-report and fusioninspector. Tha
 [MultiQC](http://multiqc.info) is a visualization tool that generates a single HTML report summarising all samples in your project. Most of the pipeline QC results are visualised in the report and further statistics are available in the report data directory.
 
 Results generated by MultiQC collate pipeline QC from supported tools e.g. FastQC. The pipeline has special steps which also allow the software versions to be reported in the MultiQC output for future traceability. For more information about how to use MultiQC reports, see <http://multiqc.info>.
+
+### Pipeline information
 
 ### Picard
 

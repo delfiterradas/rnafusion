@@ -1,4 +1,5 @@
 process GTF_TO_REFFLAT {
+    tag "$meta.id"
     label 'process_low'
 
     conda "bioconda::ucsc-gtftogenepred=377"
@@ -10,7 +11,8 @@ process GTF_TO_REFFLAT {
     tuple val(meta), path (gtf)
 
     output:
-    path('*.refflat'), emit: refflat
+    path('*.refflat')    , emit: refflat
+    path "versions.yml"  , emit: versions
 
     script:
     def genepred = gtf + '.genepred'
