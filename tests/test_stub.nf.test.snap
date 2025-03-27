@@ -1,7 +1,7 @@
 {
     "stub test no fastp trim": {
         "content": [
-            32,
+            30,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -330,11 +330,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-17T17:40:40.562156411"
+        "timestamp": "2025-03-27T10:23:24.571345349"
     },
     "stub test with fastp trim": {
         "content": [
-            34,
+            32,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -678,6 +678,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-17T17:38:45.56378377"
+        "timestamp": "2025-03-27T10:22:34.410397222"
     }
 }
