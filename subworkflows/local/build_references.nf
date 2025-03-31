@@ -34,11 +34,13 @@ include { GFFREAD }                         from '../../modules/nf-core/gffread/
 
 workflow BUILD_REFERENCES {
 
+    take:
+    tools // list of all the tools to create references from
+
     main:
     ch_versions = Channel.empty()
 
-    if (!file(params.fasta).exists() || file(params.fasta).isEmpty() ||
-            !file(params.gtf).exists() || file(params.gtf).isEmpty()){
+    if (!exists_not_empty(params.fasta) || !exists_not_empty(params.gtf)){
         GENCODE_DOWNLOAD(params.genome_gencode_version, params.genome)
         ch_versions = ch_versions.mix(GENCODE_DOWNLOAD.out.versions)
         ch_fasta = GENCODE_DOWNLOAD.out.fasta.map { that -> [[id:that.Name], that] }
@@ -48,7 +50,7 @@ workflow BUILD_REFERENCES {
         ch_gtf = Channel.fromPath(params.gtf).map { that -> [[id:that.Name], that] }
     }
 
-    if (!file(params.fai).exists() || file(params.fai).isEmpty()){
+    if (!exists_not_empty(params.fai)){
         SAMTOOLS_FAIDX(ch_fasta, [[],[]])
         ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
         ch_fai = SAMTOOLS_FAIDX.out.fai
@@ -56,8 +58,7 @@ workflow BUILD_REFERENCES {
         ch_fai = Channel.fromPath(params.fai).map { that -> [[id:that.Name], that] }
     }
 
-    if ((!file(params.hgnc_ref).exists() || file(params.hgnc_ref).isEmpty() ||
-            !file(params.hgnc_date).exists() || file(params.hgnc_date).isEmpty()) && !params.skip_vcf){
+    if ((!exists_not_empty(params.hgnc_ref) || !exists_not_empty(params.hgnc_date)) && !params.skip_vcf){
         HGNC_DOWNLOAD( )
         ch_versions = ch_versions.mix(HGNC_DOWNLOAD.out.versions)
         ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref
@@ -67,7 +68,7 @@ workflow BUILD_REFERENCES {
         ch_hgnc_date = Channel.fromPath(params.hgnc_date).map { that -> [[id:that.Name], that] }
     }
 
-    if (!file(params.rrna_intervals).exists() || file(params.rrna_intervals).isEmpty()){
+    if (!exists_not_empty(params.rrna_intervals)){
         GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
         ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
         GET_RRNA_TRANSCRIPTS(ch_gtf)
@@ -79,7 +80,7 @@ workflow BUILD_REFERENCES {
         ch_rrna_interval = Channel.fromPath(params.rrna_intervals).map { that -> [[id:that.Name], that] }
     }
 
-    if (!file(params.refflat).exists() || file(params.refflat).isEmpty()){
+    if (!exists_not_empty(params.refflat)){
         GTF_TO_REFFLAT(ch_gtf)
         ch_versions = ch_versions.mix(GTF_TO_REFFLAT.out.versions)
         ch_refflat = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
@@ -87,8 +88,7 @@ workflow BUILD_REFERENCES {
         ch_refflat = Channel.fromPath(params.refflat).map { that -> [[id:that.Name], that] }
     }
 
-    if (!file(params.salmon_index).exists() || file(params.salmon_index).isEmpty() ||
-        !file(params.salmon_index_stub_check).exists() || file(params.salmon_index_stub_check).isEmpty()){ // add condition for qc
+    if (!exists_not_empty(params.salmon_index) || !exists_not_empty(params.salmon_index_stub_check)){ // add condition for qc
         GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
         ch_versions = ch_versions.mix(GFFREAD.out.versions)
         SALMON_INDEX(ch_fasta.map{ it -> it[1] }, GFFREAD.out.gffread_fasta.map{ it -> it[1] })
@@ -98,9 +98,8 @@ workflow BUILD_REFERENCES {
         ch_salmon_index = Channel.fromPath({params.salmon_index})
     }
 
-    if ((params.starindex || params.all || params.starfusion || params.arriba) &&
-            (!file(params.starindex_ref).exists() || file(params.starindex_ref).isEmpty() ||
-            !file(params.starindex_ref_stub_check).exists() || file(params.starindex_ref_stub_check).isEmpty() )) {
+    def star_index_tools = tools.intersect(["starindex", "starfusion", "arriba", "ctatsplicing"])
+    if (star_index_tools.size() > 0 && (!exists_not_empty(params.starindex_ref) || !exists_not_empty(params.starindex_ref_stub_check))) {
         STAR_GENOMEGENERATE(ch_fasta, ch_gtf)
         ch_versions = ch_versions.mix(STAR_GENOMEGENERATE.out.versions)
         ch_starindex_ref = STAR_GENOMEGENERATE.out.index
@@ -108,10 +107,12 @@ workflow BUILD_REFERENCES {
         ch_starindex_ref = Channel.fromPath(params.starindex_ref).map { that -> [[id:that.Name], that] }
     }
 
-    if ((params.arriba || params.all) &&
-            (!file(params.arriba_ref_blacklist).exists() || file(params.arriba_ref_blacklist).isEmpty() ||
-            !file(params.arriba_ref_known_fusions).exists() || file(params.arriba_ref_known_fusions).isEmpty() ||
-            !file(params.arriba_ref_protein_domains).exists() || file(params.arriba_ref_protein_domains).isEmpty())) {
+    if (tools.contains("arriba") && (
+            !exists_not_empty(params.arriba_ref_blacklist) ||
+            !exists_not_empty(params.arriba_ref_known_fusions) ||
+            !exists_not_empty(params.arriba_ref_protein_domains)
+        )
+    ) {
         ARRIBA_DOWNLOAD(params.genome)
         ch_versions = ch_versions.mix(ARRIBA_DOWNLOAD.out.versions)
         ch_arriba_ref_blacklist = ARRIBA_DOWNLOAD.out.blacklist
@@ -126,9 +127,7 @@ workflow BUILD_REFERENCES {
     }
 
 
-    if ((params.fusioncatcher || params.all) &&
-            (!file(params.fusioncatcher_ref).exists() || file(params.fusioncatcher_ref).isEmpty() ||
-            !file(params.fusioncatcher_ref_stub_check).exists() || file(params.fusioncatcher_ref_stub_check).isEmpty() )) {
+    if (tools.contains("fusioncatcher") && (!exists_not_empty(params.fusioncatcher_ref) || !exists_not_empty(params.fusioncatcher_ref_stub_check))) {
             FUSIONCATCHER_BUILD(params.genome_gencode_version)
             ch_versions = ch_versions.mix(FUSIONCATCHER_BUILD.out.versions)
             ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference
@@ -137,13 +136,11 @@ workflow BUILD_REFERENCES {
         ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref)
     }
 
-
-    if ((params.starfusion || params.all) &&
-            (!file(params.starfusion_ref).exists() || file(params.starfusion_ref).isEmpty() ||
-            !file(params.starfusion_ref_stub_check).exists() || file(params.starfusion_ref_stub_check).isEmpty() )) {
+    def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing"])
+    if (starfusion_tools.size() > 0 && (!exists_not_empty(params.starfusion_ref) || !exists_not_empty(params.starfusion_ref_stub_check))) {
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
-            if (params.ctatsplicing || params.all) {
+            if (tools.contains("ctatsplicing")) {
                 CTATSPLICING_PREPGENOMELIB(
                     STARFUSION_BUILD.out.reference,
                     params.ctatsplicing_cancer_introns
@@ -159,10 +156,10 @@ workflow BUILD_REFERENCES {
     }
 
 
-    if ((params.fusionreport || params.all) &&
-            (!file(params.fusionreport_ref).exists() || file(params.fusionreport_ref).isEmpty() ||
-            !file(params.fusionreport_ref_stub_check).exists() || file(params.fusionreport_ref_stub_check).isEmpty())) {
-        if (!params.no_cosmic && (!params.cosmic_username || !params.cosmic_passwd)) { exit 1, 'COSMIC username and/or password missing' }
+    if (tools.contains("fusionreport") && (!exists_not_empty(params.fusionreport_ref) || !exists_not_empty(params.fusionreport_ref_stub_check))) {
+        if (!params.no_cosmic && (!params.cosmic_username || !params.cosmic_passwd)) {
+            error('COSMIC username and/or password missing, this is needed to download the fusionreport reference')
+        }
         FUSIONREPORT_DOWNLOAD()
         ch_versions = ch_versions.mix(FUSIONREPORT_DOWNLOAD.out.versions)
         ch_fusionreport_ref = FUSIONREPORT_DOWNLOAD.out.fusionreport_ref
@@ -192,6 +189,11 @@ workflow BUILD_REFERENCES {
 
 /*
 ========================================================================================
-    THE END
+    FUNCTIONS
 ========================================================================================
 */
+
+def exists_not_empty(path) {
+    def path_to_check = file(path)
+    return path_to_check.exists() && !path_to_check.isEmpty()
+}

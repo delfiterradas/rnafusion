@@ -20,41 +20,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_rnaf
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { RNAFUSION               } from './workflows/rnafusion'
 
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    GENOME PARAMETER VALUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-
-
-
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOWS FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-//
-// WORKFLOW: Run main analysis pipeline depending on type of input
-//
-workflow NFCORE_RNAFUSION {
-    take:
-    samplesheet
-
-    main:
-
-    //
-    // WORKFLOW: Run pipeline
-    //
-
-    RNAFUSION(samplesheet)
-
-    emit:
-    multiqc_report = RNAFUSION.out.multiqc_report
-}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -74,10 +39,29 @@ workflow {
         params.outdir,
     )
 
+    // A list of all tools available in the pipeline. Add tools here when a new tool has been added
+    def all_tools = [
+        "arriba",
+        "ctatsplicing",
+        "fusioncatcher",
+        "starindex",
+        "starfusion",
+        "stringtie",
+        "fusion_report",
+        "fusioninspector_only"
+    ]
+
+    def tools = params.all ? all_tools : all_tools.findAll { tool ->
+        params.get(tool)
+    }
+
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_RNAFUSION (PIPELINE_INITIALISATION.out.samplesheet)
+    RNAFUSION(
+        PIPELINE_INITIALISATION.out.samplesheet,
+        tools
+    )
 
     //
     // SUBWORKFLOW: Run completion tasks
@@ -89,7 +73,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NFCORE_RNAFUSION.out.multiqc_report
+        RNAFUSION.out.multiqc_report
     )
 }
 
