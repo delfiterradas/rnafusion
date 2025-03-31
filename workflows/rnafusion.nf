@@ -217,7 +217,8 @@ workflow RNAFUSION {
             BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
             BUILD_REFERENCES.out.ch_hgnc_ref,
             BUILD_REFERENCES.out.ch_hgnc_date,
-            params.skip_vis
+            params.skip_vis,
+            params.skip_vcf
         )
         ch_versions      = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
