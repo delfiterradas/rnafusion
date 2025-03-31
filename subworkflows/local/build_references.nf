@@ -88,7 +88,8 @@ workflow BUILD_REFERENCES {
         ch_refflat = Channel.fromPath(params.refflat).map { that -> [[id:that.Name], that] }
     }
 
-    if (!exists_not_empty(params.salmon_index) || !exists_not_empty(params.salmon_index_stub_check)){ // add condition for qc
+    def run_salmon = tools.contains("salmon")
+    if (run_salmon && (!exists_not_empty(params.salmon_index) || !exists_not_empty(params.salmon_index_stub_check))){ // add condition for qc
         GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
         ch_versions = ch_versions.mix(GFFREAD.out.versions)
         SALMON_INDEX(ch_fasta.map{ it -> it[1] }, GFFREAD.out.gffread_fasta.map{ it -> it[1] })

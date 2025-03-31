@@ -69,7 +69,7 @@ workflow RNAFUSION {
         // SUBWORKFLOW: Trimming
         //
 
-        def ch_reads = ch_samplesheet // Use non-trimmed reads by default
+        def ch_reads = Channel.empty()
         if(tools.contains("fastp")) {
             def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
             TRIM_WORKFLOW (
@@ -82,12 +82,15 @@ workflow RNAFUSION {
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]})
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]})
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]})
+        } else {
+            ch_reads = ch_samplesheet
         }
 
-        SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
-        ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
-        ch_versions = ch_versions.mix(SALMON_QUANT.out.versions)
-
+        if(tools.contains("salmon")) {
+            SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
+            ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
+            ch_versions      = ch_versions.mix(SALMON_QUANT.out.versions)
+        }
 
         //
         // SUBWORKFLOW: Run STAR alignment and Arriba
