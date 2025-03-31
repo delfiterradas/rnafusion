@@ -56,26 +56,33 @@ workflow RNAFUSION {
         //
         // QC from FASTQ files
         //
-        FASTQC (
-            ch_samplesheet
-        )
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-        ch_versions = ch_versions.mix(FASTQC.out.versions)
 
+        if(!params.skip_qc) {
+            FASTQC (
+                ch_samplesheet
+            )
+            ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
+            ch_versions = ch_versions.mix(FASTQC.out.versions)
+        }
 
         //
-        // Trimming
+        // SUBWORKFLOW: Trimming
         //
-        TRIM_WORKFLOW (
-            ch_samplesheet,
-            Channel.value(params.adapter_fasta),
-            params.fastp_trim
-        )
-        def ch_reads     = TRIM_WORKFLOW.out.ch_reads_all
-        ch_versions      = ch_versions.mix(TRIM_WORKFLOW.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]})
-        ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]})
-        ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]})
+
+        def ch_reads = ch_samplesheet // Use non-trimmed reads by default
+        if(tools.contains("fastp")) {
+            def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
+            TRIM_WORKFLOW (
+                ch_samplesheet,
+                ch_adapter_fasta,
+                params.skip_qc
+            )
+            ch_reads = TRIM_WORKFLOW.out.ch_reads_all
+            ch_versions      = ch_versions.mix(TRIM_WORKFLOW.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]})
+            ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]})
+            ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]})
+        }
 
         SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
         ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})

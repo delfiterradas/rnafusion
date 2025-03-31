@@ -193,11 +193,6 @@
                     "default": 1000000,
                     "minimum": 1
                 },
-                "fusioninspector_only": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Skip fusion-report. --fusioninspector_fusions PATH needed to provide a fusion list as input"
-                },
                 "fusioninspector_fusions": {
                     "type": "string",
                     "format": "file-path",
@@ -332,7 +327,7 @@
             "fa_icon": "fas fa-cut",
             "description": "Options to adjust read trimming criteria.",
             "properties": {
-                "fastp_trim": {
+                "fastp": {
                     "type": "boolean",
                     "description": "Preform fastp trimming of reads, default: false",
                     "fa_icon": "fas fa-cut"
