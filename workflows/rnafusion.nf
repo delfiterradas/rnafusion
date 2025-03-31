@@ -22,6 +22,8 @@ include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_
 include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
+include { ARRIBA_ARRIBA } from '../modules/nf-core/arriba/arriba/main.nf'
+include { FUSIONREPORT } from '../modules/local/fusionreport/detect/main.nf'
 
 
 /*
@@ -69,7 +71,7 @@ workflow RNAFUSION {
             Channel.value(params.adapter_fasta),
             params.fastp_trim
         )
-        ch_reads = TRIM_WORKFLOW.out.ch_reads_all
+        def ch_reads = TRIM_WORKFLOW.out.ch_reads_all
         ch_versions = ch_versions.mix(TRIM_WORKFLOW.out.versions)
 
         SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
@@ -85,6 +87,7 @@ workflow RNAFUSION {
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
         // TODO: same as above, but with ch_arriba_fusion_fail. It's currently replaces by a dummy file
 
+        def ch_arriba_fusions = ch_reads.map { it -> [it[0], []] } // Set arriba fusions to empty by default
         if(tools.intersect(["arriba", "ctatsplicing"])) {
             ARRIBA_WORKFLOW (
                 ch_reads,
@@ -103,12 +106,15 @@ workflow RNAFUSION {
                 params.cram                      // array
             )
             ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
+            ch_arriba_fusions = ARRIBA_WORKFLOW.out.fusions
         }
 
         //
         // SUBWORKFLOW: Run STAR alignment and StarFusion
         //
 
+        def ch_starfusion_fusions = ch_reads.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
+        def ch_starfusion_bams = Channel.empty()
         if(tools.intersect(["starfusion", "ctatsplicing", "stringtie"])) {
             STARFUSION_WORKFLOW (
                 ch_reads,
@@ -119,12 +125,15 @@ workflow RNAFUSION {
                 tools
             )
             ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
+            ch_starfusion_fusions = STARFUSION_WORKFLOW.out.fusions
+            ch_starfusion_bams = STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed
         }
 
         //
         // SUBWORKFLOW: Run FusionCatcher
         //
 
+        def ch_fusioncatcher_fusions = ch_reads.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
         if(tools.contains("fusioncatcher")) {
             FUSIONCATCHER_WORKFLOW (
                 ch_reads,
@@ -150,31 +159,49 @@ workflow RNAFUSION {
         // SUBWORKFLOW: Run FusionReport
         //
 
-        FUSIONREPORT_WORKFLOW (
-            ch_reads,
-            BUILD_REFERENCES.out.ch_fusionreport_ref,
-            ARRIBA_WORKFLOW.out.fusions,
-            STARFUSION_WORKFLOW.out.fusions,
-            FUSIONCATCHER_WORKFLOW.out.fusions
-        )
-        ch_versions = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
+        def ch_fusion_list = Channel.empty()
+        def ch_fusion_list_filtered = Channel.empty()
+        def ch_fusionreport_report = Channel.empty()
+        def ch_fusionreport_csv = Channel.empty()
+        if(tools.intersect(["arriba", "starfusion", "fusioncatcher"])) {
+            FUSIONREPORT_WORKFLOW (
+                ch_reads,
+                BUILD_REFERENCES.out.ch_fusionreport_ref,
+                ch_arriba_fusions,
+                ch_starfusion_fusions,
+                ch_fusioncatcher_fusions
+            )
+            ch_versions             = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
+            ch_fusion_list          = FUSIONREPORT_WORKFLOW.out.fusion_list
+            ch_fusion_list_filtered = FUSIONREPORT_WORKFLOW.out.fusion_list_filtered
+            ch_fusionreport_report  = FUSIONREPORT_WORKFLOW.out.report
+            ch_fusionreport_csv     = FUSIONREPORT_WORKFLOW.out.csv
+        } else if(params.fusioninspector_fusions) {
+            def input_fusions = file(params.fusioninspector_fusions, checkIfExists:true)
+            ch_fusion_list = ch_reads.map { it -> [ it[0], input_fusions ] }
+        } else {
+            error("Could not find any valid fusions for fusioninspector input. Please provide some via --fusioninspector_fusions or generate them with --arriba, --starfusion and/or --fusioncatcher")
+        }
 
-        //Run fusionInpector
+        //
+        // SUBWORKFLOW: Run FusionInspector
+        //
+
         FUSIONINSPECTOR_WORKFLOW (
             ch_reads,
-            FUSIONREPORT_WORKFLOW.out.fusion_list,
-            FUSIONREPORT_WORKFLOW.out.fusion_list_filtered,
-            FUSIONREPORT_WORKFLOW.out.report,
-            FUSIONREPORT_WORKFLOW.out.csv,
-            STARFUSION_WORKFLOW.out.ch_bam_sorted_indexed,
+            ch_fusion_list,
+            ch_fusion_list_filtered,
+            ch_fusionreport_report,
+            ch_fusionreport_csv,
+            ch_starfusion_bams,
             BUILD_REFERENCES.out.ch_gtf,
             BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
             BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
             BUILD_REFERENCES.out.ch_hgnc_ref,
-            BUILD_REFERENCES.out.ch_hgnc_date
+            BUILD_REFERENCES.out.ch_hgnc_date,
+            params.skip_vis
         )
         ch_versions = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
-
 
         //QC
         QC_WORKFLOW (

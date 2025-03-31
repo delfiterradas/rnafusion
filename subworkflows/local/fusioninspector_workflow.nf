@@ -17,6 +17,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         ch_arriba_ref_cytobands
         ch_hgnc_ref
         ch_hgnc_date
+        skip_vis
 
     main:
         ch_versions = Channel.empty()
@@ -51,7 +52,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
         ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)
 
-        if ((params.starfusion || params.all || params.stringtie) && !params.fusioninspector_only && !params.skip_vis) {
+        if (!skip_vis) {
             ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(FUSIONINSPECTOR.out.tsv)
             ARRIBA_VISUALISATION(ch_bam_sorted_indexed_fusions, ch_gtf, ch_arriba_ref_protein_domains, ch_arriba_ref_cytobands)
             ch_versions = ch_versions.mix(ARRIBA_VISUALISATION.out.versions)
