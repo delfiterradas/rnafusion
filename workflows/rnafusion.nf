@@ -78,7 +78,7 @@ workflow RNAFUSION {
 
 
         //
-        // SUBWORKFLOW:  Run STAR alignment and Arriba
+        // SUBWORKFLOW: Run STAR alignment and Arriba
         //
 
         // TODO: add params.seq_platform and pass it as argument to arriba_workflow
@@ -105,39 +105,51 @@ workflow RNAFUSION {
             ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
         }
 
-        //Run STAR fusion
-        STARFUSION_WORKFLOW (
-            ch_reads,
-            BUILD_REFERENCES.out.ch_gtf,
-            BUILD_REFERENCES.out.ch_starindex_ref,
-            BUILD_REFERENCES.out.ch_fasta,
-            BUILD_REFERENCES.out.ch_starfusion_ref
-        )
-        ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
+        //
+        // SUBWORKFLOW: Run STAR alignment and StarFusion
+        //
 
+        if(tools.intersect(["starfusion", "ctatsplicing", "stringtie"])) {
+            STARFUSION_WORKFLOW (
+                ch_reads,
+                BUILD_REFERENCES.out.ch_gtf,
+                BUILD_REFERENCES.out.ch_starindex_ref,
+                BUILD_REFERENCES.out.ch_fasta,
+                BUILD_REFERENCES.out.ch_starfusion_ref,
+                tools
+            )
+            ch_versions = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
+        }
 
+        //
+        // SUBWORKFLOW: Run FusionCatcher
+        //
 
-    //Run fusioncatcher
-    FUSIONCATCHER_WORKFLOW (
-        ch_reads,
-        BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
-        params.fusioncatcher,
-        params.all,
-        params.fusioninspector_only,
-        params.fusioncatcher_fusions
-    )
-    ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+        if(tools.contains("fusioncatcher")) {
+            FUSIONCATCHER_WORKFLOW (
+                ch_reads,
+                BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
+                params.fusioncatcher_fusions
+            )
+            ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+        }
 
+        //
+        // SUBWORKFLOW: Run Stringtie
+        //
 
-        //Run stringtie
-        STRINGTIE_WORKFLOW (
-            STARFUSION_WORKFLOW.out.ch_bam_sorted,
-            BUILD_REFERENCES.out.ch_gtf
-        )
-        ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
+        if(tools.contains("stringtie")) {
+            STRINGTIE_WORKFLOW (
+                STARFUSION_WORKFLOW.out.ch_bam_sorted,
+                BUILD_REFERENCES.out.ch_gtf
+            )
+            ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
+        }
 
+        //
+        // SUBWORKFLOW: Run FusionReport
+        //
 
-        //Run fusion-report
         FUSIONREPORT_WORKFLOW (
             ch_reads,
             BUILD_REFERENCES.out.ch_fusionreport_ref,

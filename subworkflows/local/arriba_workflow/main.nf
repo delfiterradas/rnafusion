@@ -27,7 +27,6 @@ workflow ARRIBA_WORKFLOW {
 
         def ch_versions   = Channel.empty()
         def ch_cram_index = Channel.empty()
-        def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
         STAR_FOR_ARRIBA(
             reads,
@@ -53,7 +52,6 @@ workflow ARRIBA_WORKFLOW {
 
             ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
                 .map { it -> [ it[0], it[2] ] }
-            ch_arriba_fusion_fail = ch_dummy_file
 
         } else {
 
