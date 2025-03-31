@@ -17,11 +17,8 @@ workflow ARRIBA_WORKFLOW {
         ch_arriba_ref_known_fusions     // channel [ meta, path_known_fusions ]
         ch_arriba_ref_protein_domains   // channel [ meta, path_proteins      ]
         ch_starfusion_ref               // channel [ meta, path_starfusion_ref ]
-        arriba                          // boolean
-        all                             // boolean
-        fusioninspector_only            // boolean
+        tools                           // list    A list of all tools to run
         star_ignore_sjdbgtf             // boolean
-        ctatsplicing                    // boolean
         seq_center                      // string
         arriba_fusions                  // path
         cram                            // array
@@ -32,74 +29,63 @@ workflow ARRIBA_WORKFLOW {
         def ch_cram_index = Channel.empty()
         def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
-        if (( arriba || all ) && !fusioninspector_only) {
+        STAR_FOR_ARRIBA(
+            reads,
+            ch_starindex_ref,
+            ch_gtf,
+            star_ignore_sjdbgtf,
+            '',
+            seq_center
+        )
+        ch_versions = ch_versions.mix(STAR_FOR_ARRIBA.out.versions)
 
-            STAR_FOR_ARRIBA(
-                reads,
-                ch_starindex_ref,
-                ch_gtf,
-                star_ignore_sjdbgtf,
-                '',
-                seq_center
+        if ( tools.contains("ctatsplicing") ) {
+            CTATSPLICING_WORKFLOW(
+                STAR_FOR_ARRIBA.out.spl_junc_tab,
+                STAR_FOR_ARRIBA.out.junction,
+                STAR_FOR_ARRIBA.out.bam,
+                ch_starfusion_ref
             )
-            ch_versions = ch_versions.mix(STAR_FOR_ARRIBA.out.versions)
+            ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
+        }
 
-            if ( ctatsplicing || all ) {
-                CTATSPLICING_WORKFLOW(
-                    STAR_FOR_ARRIBA.out.spl_junc_tab,
-                    STAR_FOR_ARRIBA.out.junction,
-                    STAR_FOR_ARRIBA.out.bam,
-                    ch_starfusion_ref
-                )
-                ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
-            }
+        if ( arriba_fusions ) {
 
-            if ( arriba_fusions ) {
-
-                ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
-                    .map { it -> [ it[0], it[2] ] }
-                ch_arriba_fusion_fail = ch_dummy_file
-
-            } else {
-
-                ARRIBA_ARRIBA (
-                    STAR_FOR_ARRIBA.out.bam,
-                    ch_fasta,
-                    ch_gtf,
-                    ch_arriba_ref_blacklist,
-                    ch_arriba_ref_known_fusions,
-                    ch_arriba_ref_cytobands,
-                    ch_arriba_ref_protein_domains
-                )
-
-                ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
-
-                ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
-                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> return it[1] }
-            }
-
-            if ( cram.contains('arriba') ) {
-
-                SAMTOOLS_SORT_FOR_ARRIBA(STAR_FOR_ARRIBA.out.bam, ch_fasta)
-                ch_versions = ch_versions.mix(SAMTOOLS_SORT_FOR_ARRIBA.out.versions )
-
-                SAMTOOLS_VIEW_FOR_ARRIBA(SAMTOOLS_SORT_FOR_ARRIBA.out.bam.map { meta, bam -> [ meta, bam, [] ] }, ch_fasta, [])
-                ch_versions = ch_versions.mix(SAMTOOLS_VIEW_FOR_ARRIBA.out.versions )
-
-                SAMTOOLS_INDEX_FOR_ARRIBA(SAMTOOLS_VIEW_FOR_ARRIBA.out.cram)
-                ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_ARRIBA.out.versions )
-
-                // Join cram and index files
-                ch_cram_index = SAMTOOLS_VIEW_FOR_ARRIBA.out.cram.join(SAMTOOLS_INDEX_FOR_ARRIBA.out.crai)
-            }
+            ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
+                .map { it -> [ it[0], it[2] ] }
+            ch_arriba_fusion_fail = ch_dummy_file
 
         } else {
 
-            ch_arriba_fusions = reads
-                .combine(Channel.value( file(ch_dummy_file, checkIfExists: true ) ) )
-                .map { it -> [ it[0], it[2] ] }
+            ARRIBA_ARRIBA (
+                STAR_FOR_ARRIBA.out.bam,
+                ch_fasta,
+                ch_gtf,
+                ch_arriba_ref_blacklist,
+                ch_arriba_ref_known_fusions,
+                ch_arriba_ref_cytobands,
+                ch_arriba_ref_protein_domains
+            )
 
-            ch_arriba_fusion_fail = ch_dummy_file
+            ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
+
+            ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
+            ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> return it[1] }
+        }
+
+        if ( cram.contains('arriba') ) {
+
+            SAMTOOLS_SORT_FOR_ARRIBA(STAR_FOR_ARRIBA.out.bam, ch_fasta)
+            ch_versions = ch_versions.mix(SAMTOOLS_SORT_FOR_ARRIBA.out.versions )
+
+            SAMTOOLS_VIEW_FOR_ARRIBA(SAMTOOLS_SORT_FOR_ARRIBA.out.bam.map { meta, bam -> [ meta, bam, [] ] }, ch_fasta, [])
+            ch_versions = ch_versions.mix(SAMTOOLS_VIEW_FOR_ARRIBA.out.versions )
+
+            SAMTOOLS_INDEX_FOR_ARRIBA(SAMTOOLS_VIEW_FOR_ARRIBA.out.cram)
+            ch_versions = ch_versions.mix(SAMTOOLS_INDEX_FOR_ARRIBA.out.versions )
+
+            // Join cram and index files
+            ch_cram_index = SAMTOOLS_VIEW_FOR_ARRIBA.out.cram.join(SAMTOOLS_INDEX_FOR_ARRIBA.out.crai)
         }
 
     emit:

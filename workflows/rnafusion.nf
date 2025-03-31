@@ -85,27 +85,25 @@ workflow RNAFUSION {
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
         // TODO: same as above, but with ch_arriba_fusion_fail. It's currently replaces by a dummy file
 
-        ARRIBA_WORKFLOW (
-            ch_reads,
-            BUILD_REFERENCES.out.ch_gtf,
-            BUILD_REFERENCES.out.ch_fasta,
-            BUILD_REFERENCES.out.ch_starindex_ref,
-            BUILD_REFERENCES.out.ch_arriba_ref_blacklist,
-            BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
-            BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
-            BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
-            BUILD_REFERENCES.out.ch_starfusion_ref,
-            params.arriba,                   // boolean
-            params.all,                      // boolean
-            params.fusioninspector_only,     // boolean
-            params.star_ignore_sjdbgtf,      // boolean
-            params.ctatsplicing,             // boolean
-            params.seq_center ?: '',         // string
-            params.arriba_fusions,           // path
-            params.cram                      // array
-        )
-        ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
-
+        if(tools.intersect(["arriba", "ctatsplicing"])) {
+            ARRIBA_WORKFLOW (
+                ch_reads,
+                BUILD_REFERENCES.out.ch_gtf,
+                BUILD_REFERENCES.out.ch_fasta,
+                BUILD_REFERENCES.out.ch_starindex_ref,
+                BUILD_REFERENCES.out.ch_arriba_ref_blacklist,
+                BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
+                BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
+                BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
+                BUILD_REFERENCES.out.ch_starfusion_ref,
+                tools,
+                params.star_ignore_sjdbgtf,      // boolean
+                params.seq_center ?: '',         // string
+                params.arriba_fusions,           // path
+                params.cram                      // array
+            )
+            ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
+        }
 
         //Run STAR fusion
         STARFUSION_WORKFLOW (
