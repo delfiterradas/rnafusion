@@ -31,7 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `CTATSPLICING_PREPGENOMELIB` to update the starfusion genome library directory with a cancer splicing index. [#610](https://github.com/nf-core/rnafusion/pull/610)
 - Add nf-test to local subworkflow: `FUSIONREPORT_WORKFLOW`. [#607](https://github.com/nf-core/rnafusion/pull/607)
 - Add nf-test to local module: `ARRIBA_VISUALISATION`. [#625](https://github.com/nf-core/rnafusion/pull/625)
-- Added a new parameter `salmon` to enable the Salmon tool (default is `false`) [#]()
+- Added a new parameter `salmon` to enable the Salmon tool (default is `false`) [#645](https://github.com/nf-core/rnafusion/pull/645)
+- Added a new parameter `fusioninspector` to enable the Fusioninspector tool (default is `false`) [#645](https://github.com/nf-core/rnafusion/pull/645)
 
 ### Changed
 
@@ -52,8 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated documentation for fusion-report score calculation to reflect 80/20 weight distribution between tool detection and database hits [#620](https://github.com/nf-core/rnafusion/pull/620)
 - Update htslib and samtools version in `star/align` to 1.21 [#634](https://github.com/nf-core/rnafusion/pull/634)
 - `--run_fusioncatcher` back to `fusioncatcher` [#641](https://github.com/nf-core/rnafusion/pull/641)
-- Removed the `--fusioninspector_only` parameter, this is now the default behaviour of the pipeline [#]()
-- Renamed `--fastp_trim` to `--fastp` to be more uniform across with other tool parameters [#]()
+- Removed the `--fusioninspector_only` parameter, this is now the case when only `--fusionreport` is used together with `--skip_qc`, `--skip_vis` and `--skip_vcf` [#645](https://github.com/nf-core/rnafusion/pull/645)
+- Renamed `--fastp_trim` to `--fastp` to be more uniform across with other tool parameters [#645](https://github.com/nf-core/rnafusion/pull/645)
 
 ### Fixed
 
