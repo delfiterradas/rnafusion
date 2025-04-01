@@ -275,7 +275,7 @@ workflow RNAFUSION {
     //
 
     def ch_multiqc_output = Channel.empty()
-    if(!params.skip_qc) {
+    if(!params.skip_qc && !params.references_only) {
         ch_multiqc_config        = Channel.fromPath(
             "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
         ch_multiqc_custom_config = params.multiqc_config ?

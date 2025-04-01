@@ -12,9 +12,9 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir          = "$outputDir"
-                fastp_trim      = true
-                fusion_annot_lib           = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                outdir           = "$outputDir"
+                fastp            = true
+                fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
             }
         }
 
@@ -44,8 +44,8 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir          = "$outputDir"
-                fusion_annot_lib           = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                outdir           = "$outputDir"
+                fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
             }
         }
 
