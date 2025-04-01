@@ -39,22 +39,19 @@ workflow {
         params.outdir,
     )
 
-    // A list of all tools available in the pipeline. Add tools here when a new tool has been added
-    def all_tools = [
-        "arriba",
-        "ctatsplicing",
-        "fusioncatcher",
-        "starindex",
-        "starfusion",
-        "stringtie",
-        "fusionreport",
-        "fastp",
-        "salmon",
-        "fusioninspector"
-    ]
+    def tools = params.tools.tokenize(",")
+    if (tools.contains("all")) {
+        def json = new groovy.json.JsonSlurper().parseText(file("${projectDir}/nextflow_schema.json").text)
+        def pattern = json.get('$defs')?.get('input_output_options')?.get('properties')?.get('tools')?.get('pattern')
+        if (!pattern) {
+            error("Could not fetch the allowed tools from the JSON schema, please check the code. If you see this as a pipeline user, please contact the developers instead.")
+        }
+        tools = pattern.replace('^((', "").replace(')?,?)*(?<!,)$', "").tokenize("|") - "all"
+    }
 
-    def tools = params.all ? all_tools : all_tools.findAll { tool ->
-        params.get(tool)
+    def profiles = workflow.profile
+    if ((profiles.contains("conda") || profiles.contains("mamba")) && (tools.contains("ctatsplicing"))) {
+        error("Conda or Mamba runs are not supported when ctatsplicing is in `--tools`")
     }
 
     //

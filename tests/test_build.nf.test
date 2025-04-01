@@ -12,8 +12,7 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
-                salmon = true
-                fusioninspector = true
+                tools  = "salmon,fusioninspector"
             }
         }
 
