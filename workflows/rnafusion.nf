@@ -88,7 +88,7 @@ workflow RNAFUSION {
 
         if(tools.contains("salmon")) {
             SALMON_QUANT(
-                ch_reads.view(),
+                ch_reads,
                 BUILD_REFERENCES.out.salmon_index,
                 BUILD_REFERENCES.out.gtf.map{ it -> it[1] },
                 [],

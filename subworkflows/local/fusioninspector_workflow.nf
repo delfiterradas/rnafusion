@@ -54,7 +54,12 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
         if (!skip_vis) {
             ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(FUSIONINSPECTOR.out.tsv)
-            ARRIBA_VISUALISATION(ch_bam_sorted_indexed_fusions, ch_gtf, ch_arriba_ref_protein_domains, ch_arriba_ref_cytobands)
+            ARRIBA_VISUALISATION(
+                ch_bam_sorted_indexed_fusions,
+                ch_gtf,
+                ch_arriba_ref_protein_domains.map { it -> [[id:it.name], it]},
+                ch_arriba_ref_cytobands.map { it -> [[id:it.name], it]}
+            )
             ch_versions = ch_versions.mix(ARRIBA_VISUALISATION.out.versions)
             ch_arriba_visualisation = ARRIBA_VISUALISATION.out.pdf
         }

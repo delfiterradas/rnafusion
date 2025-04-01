@@ -104,21 +104,21 @@ workflow BUILD_REFERENCES {
 
     def ch_salmon_index = Channel.empty()
     if (tools.contains("salmon")) {
-        if (!exists_not_empty(params.salmon_index) || !exists_not_empty(params.salmon_index_stub_check)){ // add condition for qc
+        if (!exists_not_empty(params.salmon_index)){ // add condition for qc
             GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
             ch_versions = ch_versions.mix(GFFREAD.out.versions)
             SALMON_INDEX(ch_fasta.map{ it -> it[1] }, GFFREAD.out.gffread_fasta.map{ it -> it[1] })
             ch_versions = ch_versions.mix(SALMON_INDEX.out.versions)
             ch_salmon_index = SALMON_INDEX.out.index
         } else {
-            ch_salmon_index = Channel.fromPath({params.salmon_index})
+            ch_salmon_index = Channel.fromPath(params.salmon_index).map { it -> [[id:it.name], it] }
         }
     }
 
     def ch_starindex_ref = Channel.empty()
     def star_index_tools = tools.intersect(["starindex", "starfusion", "arriba", "ctatsplicing", "stringtie"])
     if (star_index_tools) {
-        if (!exists_not_empty(params.starindex_ref) || !exists_not_empty(params.starindex_ref_stub_check)) {
+        if (!exists_not_empty(params.starindex_ref)) {
             STAR_GENOMEGENERATE(ch_fasta, ch_gtf)
             ch_versions = ch_versions.mix(STAR_GENOMEGENERATE.out.versions)
             ch_starindex_ref = STAR_GENOMEGENERATE.out.index
@@ -150,20 +150,20 @@ workflow BUILD_REFERENCES {
 
     def ch_fusioncatcher_ref = Channel.empty()
     if (tools.contains("fusioncatcher")) {
-        if (!exists_not_empty(params.fusioncatcher_ref) || !exists_not_empty(params.fusioncatcher_ref_stub_check)) {
+        if (!exists_not_empty(params.fusioncatcher_ref)) {
                 FUSIONCATCHER_BUILD(params.genome_gencode_version)
                 ch_versions = ch_versions.mix(FUSIONCATCHER_BUILD.out.versions)
                 ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference
         }
         else {
-            ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref)
+            ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] }
         }
     }
 
     def ch_starfusion_ref = Channel.empty()
     def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing", "fusioninspector", "stringtie"])
     if (starfusion_tools) {
-        if (!exists_not_empty(params.starfusion_ref) || !exists_not_empty(params.starfusion_ref_stub_check)) {
+        if (!exists_not_empty(params.starfusion_ref)) {
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {
@@ -178,13 +178,13 @@ workflow BUILD_REFERENCES {
             }
         }
         else {
-            ch_starfusion_ref = Channel.fromPath(params.starfusion_ref)
+            ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { it -> [[id:it.name], it] }
         }
     }
 
     def ch_fusionreport_ref = Channel.empty()
     if (tools.contains("fusionreport")) {
-        if (!exists_not_empty(params.fusionreport_ref) || !exists_not_empty(params.fusionreport_ref_stub_check)) {
+        if (!exists_not_empty(params.fusionreport_ref)) {
             if (!params.no_cosmic && (!params.cosmic_username || !params.cosmic_passwd)) {
                 error('COSMIC username and/or password missing, this is needed to download the fusionreport reference')
             }
