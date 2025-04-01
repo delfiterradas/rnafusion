@@ -47,7 +47,7 @@ workflow {
         "starindex",
         "starfusion",
         "stringtie",
-        "fusion_report",
+        "fusionreport",
         "fastp",
         "salmon"
     ]
