@@ -87,7 +87,7 @@ workflow RNAFUSION {
         }
 
         if(tools.contains("salmon")) {
-            SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.ch_salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.ch_gtf.map{ it -> it[1] }, [], false, 'A')
+            SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.gtf.map{ it -> it[1] }, [], false, 'A')
             ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
             ch_versions      = ch_versions.mix(SALMON_QUANT.out.versions)
         }
@@ -100,18 +100,20 @@ workflow RNAFUSION {
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
         // TODO: same as above, but with ch_arriba_fusion_fail. It's currently replaces by a dummy file
 
+        def fusions_created = false
         def ch_arriba_fusions = ch_reads.map { it -> [it[0], []] } // Set arriba fusions to empty by default
         if(tools.intersect(["arriba", "ctatsplicing"])) {
+            fusions_created = true
             ARRIBA_WORKFLOW (
                 ch_reads,
-                BUILD_REFERENCES.out.ch_gtf,
-                BUILD_REFERENCES.out.ch_fasta,
-                BUILD_REFERENCES.out.ch_starindex_ref,
-                BUILD_REFERENCES.out.ch_arriba_ref_blacklist,
-                BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
-                BUILD_REFERENCES.out.ch_arriba_ref_known_fusions,
-                BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
-                BUILD_REFERENCES.out.ch_starfusion_ref,
+                BUILD_REFERENCES.out.gtf,
+                BUILD_REFERENCES.out.fasta,
+                BUILD_REFERENCES.out.starindex_ref,
+                BUILD_REFERENCES.out.arriba_ref_blacklist,
+                BUILD_REFERENCES.out.arriba_ref_cytobands,
+                BUILD_REFERENCES.out.arriba_ref_known_fusions,
+                BUILD_REFERENCES.out.arriba_ref_protein_domains,
+                BUILD_REFERENCES.out.starfusion_ref,
                 tools,
                 params.star_ignore_sjdbgtf,      // boolean
                 params.seq_center ?: '',         // string
@@ -129,12 +131,13 @@ workflow RNAFUSION {
         def ch_starfusion_fusions = ch_reads.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
         def ch_starfusion_bams = Channel.empty()
         if(tools.intersect(["starfusion", "ctatsplicing", "stringtie"])) {
+            fusions_created = true
             STARFUSION_WORKFLOW (
                 ch_reads,
-                BUILD_REFERENCES.out.ch_gtf,
-                BUILD_REFERENCES.out.ch_starindex_ref,
-                BUILD_REFERENCES.out.ch_fasta,
-                BUILD_REFERENCES.out.ch_starfusion_ref,
+                BUILD_REFERENCES.out.gtf,
+                BUILD_REFERENCES.out.starindex_ref,
+                BUILD_REFERENCES.out.fasta,
+                BUILD_REFERENCES.out.starfusion_ref,
                 tools
             )
             ch_versions             = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
@@ -150,9 +153,10 @@ workflow RNAFUSION {
 
         def ch_fusioncatcher_fusions = ch_reads.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
         if(tools.contains("fusioncatcher")) {
+            fusions_created = true
             FUSIONCATCHER_WORKFLOW (
                 ch_reads,
-                BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
+                BUILD_REFERENCES.out.fusioncatcher_ref,       // channel [ meta, path       ]
                 params.fusioncatcher_fusions
             )
             ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
@@ -165,7 +169,7 @@ workflow RNAFUSION {
         if(tools.contains("stringtie")) {
             STRINGTIE_WORKFLOW (
                 STARFUSION_WORKFLOW.out.ch_bam_sorted,
-                BUILD_REFERENCES.out.ch_gtf
+                BUILD_REFERENCES.out.gtf
             )
             ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
         }
@@ -178,10 +182,10 @@ workflow RNAFUSION {
         def ch_fusion_list_filtered = Channel.empty()
         def ch_fusionreport_report = Channel.empty()
         def ch_fusionreport_csv = Channel.empty()
-        if(tools.intersect(["arriba", "starfusion", "fusioncatcher"]) && !params.skip_vis) {
+        if(fusions_created && !params.skip_vis) {
             FUSIONREPORT_WORKFLOW (
                 ch_reads,
-                BUILD_REFERENCES.out.ch_fusionreport_ref,
+                BUILD_REFERENCES.out.fusionreport_ref,
                 ch_arriba_fusions,
                 ch_starfusion_fusions,
                 ch_fusioncatcher_fusions
@@ -212,11 +216,11 @@ workflow RNAFUSION {
             ch_fusionreport_report,
             ch_fusionreport_csv,
             ch_starfusion_bams,
-            BUILD_REFERENCES.out.ch_gtf,
-            BUILD_REFERENCES.out.ch_arriba_ref_protein_domains,
-            BUILD_REFERENCES.out.ch_arriba_ref_cytobands,
-            BUILD_REFERENCES.out.ch_hgnc_ref,
-            BUILD_REFERENCES.out.ch_hgnc_date,
+            BUILD_REFERENCES.out.gtf,
+            BUILD_REFERENCES.out.arriba_ref_protein_domains,
+            BUILD_REFERENCES.out.arriba_ref_cytobands,
+            BUILD_REFERENCES.out.hgnc_ref,
+            BUILD_REFERENCES.out.hgnc_date,
             params.skip_vis,
             params.skip_vcf
         )
@@ -230,10 +234,10 @@ workflow RNAFUSION {
         if(!params.skip_qc) {
             QC_WORKFLOW (
                 STARFUSION_WORKFLOW.out.ch_bam_sorted,
-                BUILD_REFERENCES.out.ch_refflat,
-                BUILD_REFERENCES.out.ch_fasta,
-                BUILD_REFERENCES.out.ch_fai,
-                BUILD_REFERENCES.out.ch_rrna_interval
+                BUILD_REFERENCES.out.refflat,
+                BUILD_REFERENCES.out.fasta,
+                BUILD_REFERENCES.out.fai,
+                BUILD_REFERENCES.out.rrna_interval
             )
             ch_versions      = ch_versions.mix(QC_WORKFLOW.out.versions)
             ch_multiqc_files = ch_multiqc_files.mix(QC_WORKFLOW.out.rnaseq_metrics.collect{it[1]})
