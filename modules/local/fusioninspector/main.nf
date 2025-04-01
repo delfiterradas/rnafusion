@@ -9,7 +9,7 @@ process FUSIONINSPECTOR {
 
     input:
     tuple val(meta), path(reads), path(fusion_list)
-    path reference
+    tuple val(meta2), path(reference)
 
     output:
     tuple val(meta), path("*FusionInspector.fusions.tsv")                  , emit: tsv

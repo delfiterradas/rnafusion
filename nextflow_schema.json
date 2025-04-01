@@ -186,6 +186,11 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to file in fusioncatcher references"
                 },
+                "fusioninspector": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Run fusioninspector"
+                },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",

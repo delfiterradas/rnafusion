@@ -49,7 +49,8 @@ workflow {
         "stringtie",
         "fusionreport",
         "fastp",
-        "salmon"
+        "salmon",
+        "fusioninspector"
     ]
 
     def tools = params.all ? all_tools : all_tools.findAll { tool ->

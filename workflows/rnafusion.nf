@@ -87,7 +87,14 @@ workflow RNAFUSION {
         }
 
         if(tools.contains("salmon")) {
-            SALMON_QUANT( ch_reads, BUILD_REFERENCES.out.salmon_index.map{ it -> it[1] }, BUILD_REFERENCES.out.gtf.map{ it -> it[1] }, [], false, 'A')
+            SALMON_QUANT(
+                ch_reads.view(),
+                BUILD_REFERENCES.out.salmon_index,
+                BUILD_REFERENCES.out.gtf.map{ it -> it[1] },
+                [],
+                false,
+                'A'
+            )
             ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
             ch_versions      = ch_versions.mix(SALMON_QUANT.out.versions)
         }
@@ -168,7 +175,7 @@ workflow RNAFUSION {
 
         if(tools.contains("stringtie")) {
             STRINGTIE_WORKFLOW (
-                STARFUSION_WORKFLOW.out.ch_bam_sorted,
+                ch_starfusion_bams,
                 BUILD_REFERENCES.out.gtf
             )
             ch_versions = ch_versions.mix(STRINGTIE_WORKFLOW.out.versions)
@@ -182,7 +189,10 @@ workflow RNAFUSION {
         def ch_fusion_list_filtered = Channel.empty()
         def ch_fusionreport_report = Channel.empty()
         def ch_fusionreport_csv = Channel.empty()
-        if(fusions_created && !params.skip_vis) {
+        if(!params.skip_vis && tools.contains("fusionreport")) {
+            if (!fusions_created) {
+                error("Could not find any fusion files. Please generate some with --arriba, --starfusion and/or --fusioncatcher")
+            }
             FUSIONREPORT_WORKFLOW (
                 ch_reads,
                 BUILD_REFERENCES.out.fusionreport_ref,
@@ -201,31 +211,34 @@ workflow RNAFUSION {
             ch_fusion_list_filtered = ch_fusion_list
             ch_fusionreport_csv     = null
             ch_fusionreport_report  = null
-        } else {
-            error("Could not find any valid fusions for fusioninspector input. Please provide some via --fusioninspector_fusions or generate them with --arriba, --starfusion and/or --fusioncatcher with --skip_vis disabled")
+        } else if(tools.contains("fusioninspector")) {
+            error("Could not find any valid fusions for fusioninspector input. Please provide some via --fusioninspector_fusions or generate them with --arriba, --starfusion and/or --fusioncatcher with --skip_vis disabled and --fusionreport enabled")
         }
 
         //
         // SUBWORKFLOW: Run FusionInspector
         //
 
-        FUSIONINSPECTOR_WORKFLOW (
-            ch_reads,
-            ch_fusion_list,
-            ch_fusion_list_filtered,
-            ch_fusionreport_report,
-            ch_fusionreport_csv,
-            ch_starfusion_bams,
-            BUILD_REFERENCES.out.gtf,
-            BUILD_REFERENCES.out.arriba_ref_protein_domains,
-            BUILD_REFERENCES.out.arriba_ref_cytobands,
-            BUILD_REFERENCES.out.hgnc_ref,
-            BUILD_REFERENCES.out.hgnc_date,
-            params.skip_vis,
-            params.skip_vcf
-        )
-        ch_versions      = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
+        if (tools.contains("fusioninspector")) {
+            FUSIONINSPECTOR_WORKFLOW (
+                ch_reads,
+                ch_fusion_list,
+                ch_fusion_list_filtered,
+                ch_fusionreport_report,
+                ch_fusionreport_csv,
+                ch_starfusion_bams,
+                BUILD_REFERENCES.out.gtf,
+                BUILD_REFERENCES.out.arriba_ref_protein_domains,
+                BUILD_REFERENCES.out.arriba_ref_cytobands,
+                BUILD_REFERENCES.out.hgnc_ref,
+                BUILD_REFERENCES.out.hgnc_date,
+                BUILD_REFERENCES.out.starfusion_ref,
+                params.skip_vis,
+                params.skip_vcf
+            )
+            ch_versions      = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
+        }
 
         //
         // SUBWORKFLOW: Run QC
@@ -233,7 +246,7 @@ workflow RNAFUSION {
 
         if(!params.skip_qc) {
             QC_WORKFLOW (
-                STARFUSION_WORKFLOW.out.ch_bam_sorted,
+                ch_starfusion_bams,
                 BUILD_REFERENCES.out.refflat,
                 BUILD_REFERENCES.out.fasta,
                 BUILD_REFERENCES.out.fai,

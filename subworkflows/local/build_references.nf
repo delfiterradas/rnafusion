@@ -63,41 +63,47 @@ workflow BUILD_REFERENCES {
 
     def ch_hgnc_date = Channel.empty()
     def ch_hgnc_ref  = Channel.empty()
-    if ((!exists_not_empty(params.hgnc_ref) || !exists_not_empty(params.hgnc_date)) && !params.skip_vcf){
-        HGNC_DOWNLOAD( )
-        ch_versions = ch_versions.mix(HGNC_DOWNLOAD.out.versions)
-        ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref
-        ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date
-    } else {
-        ch_hgnc_ref = Channel.fromPath(params.hgnc_ref).map { that -> [[id:that.Name], that] }
-        ch_hgnc_date = Channel.fromPath(params.hgnc_date).map { that -> [[id:that.Name], that] }
+    def run_fusioninspector = tools.contains("fusioninspector")
+    if(run_fusioninspector) {
+        if ((!exists_not_empty(params.hgnc_ref) || !exists_not_empty(params.hgnc_date)) && !params.skip_vcf){
+            HGNC_DOWNLOAD( )
+            ch_versions = ch_versions.mix(HGNC_DOWNLOAD.out.versions)
+            ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref
+            ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date
+        } else {
+            ch_hgnc_ref = Channel.fromPath(params.hgnc_ref).map { that -> [[id:that.Name], that] }
+            ch_hgnc_date = Channel.fromPath(params.hgnc_date).map { that -> [[id:that.Name], that] }
+        }
     }
 
     def ch_rrna_interval = Channel.empty()
-    if (!exists_not_empty(params.rrna_intervals)){
-        GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
-        ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
-        GET_RRNA_TRANSCRIPTS(ch_gtf)
-        ch_versions = ch_versions.mix(GET_RRNA_TRANSCRIPTS.out.versions)
-        GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
-        ch_versions = ch_versions.mix(GATK4_BEDTOINTERVALLIST.out.versions)
-        ch_rrna_interval = GATK4_BEDTOINTERVALLIST.out.interval_list
-    } else {
-        ch_rrna_interval = Channel.fromPath(params.rrna_intervals).map { that -> [[id:that.Name], that] }
+    if (!params.skip_qc) {
+        if (!exists_not_empty(params.rrna_intervals)){
+            GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
+            ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
+            GET_RRNA_TRANSCRIPTS(ch_gtf)
+            ch_versions = ch_versions.mix(GET_RRNA_TRANSCRIPTS.out.versions)
+            GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
+            ch_versions = ch_versions.mix(GATK4_BEDTOINTERVALLIST.out.versions)
+            ch_rrna_interval = GATK4_BEDTOINTERVALLIST.out.interval_list
+        } else {
+            ch_rrna_interval = Channel.fromPath(params.rrna_intervals).map { that -> [[id:that.Name], that] }
+        }
     }
 
     def ch_refflat = Channel.empty()
-    if (!exists_not_empty(params.refflat)){
-        GTF_TO_REFFLAT(ch_gtf)
-        ch_versions = ch_versions.mix(GTF_TO_REFFLAT.out.versions)
-        ch_refflat = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
-    } else {
-        ch_refflat = Channel.fromPath(params.refflat).map { that -> [[id:that.Name], that] }
+    if (!params.skip_qc) {
+        if (!exists_not_empty(params.refflat)){
+            GTF_TO_REFFLAT(ch_gtf)
+            ch_versions = ch_versions.mix(GTF_TO_REFFLAT.out.versions)
+            ch_refflat = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
+        } else {
+            ch_refflat = Channel.fromPath(params.refflat).map { that -> [[id:that.Name], that] }
+        }
     }
 
-    def run_salmon = tools.contains("salmon")
     def ch_salmon_index = Channel.empty()
-    if (run_salmon) {
+    if (tools.contains("salmon")) {
         if (!exists_not_empty(params.salmon_index) || !exists_not_empty(params.salmon_index_stub_check)){ // add condition for qc
             GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
             ch_versions = ch_versions.mix(GFFREAD.out.versions)
@@ -110,7 +116,7 @@ workflow BUILD_REFERENCES {
     }
 
     def ch_starindex_ref = Channel.empty()
-    def star_index_tools = tools.intersect(["starindex", "starfusion", "arriba", "ctatsplicing"])
+    def star_index_tools = tools.intersect(["starindex", "starfusion", "arriba", "ctatsplicing", "stringtie"])
     if (star_index_tools) {
         if (!exists_not_empty(params.starindex_ref) || !exists_not_empty(params.starindex_ref_stub_check)) {
             STAR_GENOMEGENERATE(ch_fasta, ch_gtf)
@@ -125,7 +131,8 @@ workflow BUILD_REFERENCES {
     def ch_arriba_ref_cytobands       = Channel.empty()
     def ch_arriba_ref_known_fusions   = Channel.empty()
     def ch_arriba_ref_protein_domains = Channel.empty()
-    if (tools.contains("arriba")) {
+    def arriba_tools = tools.intersect(["arriba", "fusioninspector"])
+    if (arriba_tools) {
         if (!exists_not_empty(params.arriba_ref_blacklist) || !exists_not_empty(params.arriba_ref_known_fusions) || !exists_not_empty(params.arriba_ref_protein_domains)) {
             ARRIBA_DOWNLOAD(params.genome)
             ch_versions = ch_versions.mix(ARRIBA_DOWNLOAD.out.versions)
@@ -154,7 +161,7 @@ workflow BUILD_REFERENCES {
     }
 
     def ch_starfusion_ref = Channel.empty()
-    def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing"])
+    def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing", "fusioninspector", "stringtie"])
     if (starfusion_tools) {
         if (!exists_not_empty(params.starfusion_ref) || !exists_not_empty(params.starfusion_ref_stub_check)) {
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
@@ -190,22 +197,22 @@ workflow BUILD_REFERENCES {
     }
 
     emit:
-    fasta                       = ch_fasta
-    gtf                         = ch_gtf
-    fai                         = ch_fai
-    hgnc_ref                    = ch_hgnc_ref
-    hgnc_date                   = ch_hgnc_date
-    rrna_interval               = ch_rrna_interval
-    refflat                     = ch_refflat
-    salmon_index                = ch_salmon_index
-    starindex_ref               = ch_starindex_ref
-    arriba_ref_blacklist        = ch_arriba_ref_blacklist
-    arriba_ref_cytobands        = ch_arriba_ref_cytobands
-    arriba_ref_known_fusions    = ch_arriba_ref_known_fusions
-    arriba_ref_protein_domains  = ch_arriba_ref_protein_domains
-    fusioncatcher_ref           = ch_fusioncatcher_ref
-    starfusion_ref              = ch_starfusion_ref
-    fusionreport_ref            = ch_fusionreport_ref
+    fasta                       = ch_fasta.collect()
+    gtf                         = ch_gtf.collect()
+    fai                         = ch_fai.collect()
+    hgnc_ref                    = ch_hgnc_ref.collect()
+    hgnc_date                   = ch_hgnc_date.collect()
+    rrna_interval               = ch_rrna_interval.collect()
+    refflat                     = ch_refflat.collect()
+    salmon_index                = ch_salmon_index.collect()
+    starindex_ref               = ch_starindex_ref.collect()
+    arriba_ref_blacklist        = ch_arriba_ref_blacklist.collect()
+    arriba_ref_cytobands        = ch_arriba_ref_cytobands.collect()
+    arriba_ref_known_fusions    = ch_arriba_ref_known_fusions.collect()
+    arriba_ref_protein_domains  = ch_arriba_ref_protein_domains.collect()
+    fusioncatcher_ref           = ch_fusioncatcher_ref.collect()
+    starfusion_ref              = ch_starfusion_ref.collect()
+    fusionreport_ref            = ch_fusionreport_ref.collect()
     versions                    = ch_versions
 }
 
