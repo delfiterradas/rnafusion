@@ -35,7 +35,7 @@ include { GFFREAD }                         from '../../modules/nf-core/gffread/
 workflow BUILD_REFERENCES {
 
     take:
-    tools // list of all the tools to create references from
+    tools // list of all the tools to create references for
 
     main:
     def ch_versions = Channel.empty()
