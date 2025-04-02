@@ -22,11 +22,6 @@
                 "skip_vis": {
                     "type": "boolean",
                     "description": "Skip visualisation steps"
-                },
-                "skip_salmon_index": {
-                    "type": "boolean",
-                    "description": "Skip salmon index generation step",
-                    "hidden": true
                 }
             },
             "fa_icon": "fas fa-fast-forward"
