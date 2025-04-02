@@ -51,7 +51,7 @@ workflow RNAFUSION {
     BUILD_REFERENCES(tools)
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
 
-    if (!params.references_only) { // TODO: Remove this temporary parameter when we have a full-working GitHub nf-test
+    if (!params.references_only) {
 
         //
         // QC from FASTQ files
