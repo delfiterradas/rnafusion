@@ -136,7 +136,7 @@ workflow BUILD_REFERENCES {
     def ch_arriba_ref_known_fusions   = Channel.empty()
     def ch_arriba_ref_protein_domains = Channel.empty()
     if (tools.contains("arriba")) {
-        if (!exists_not_empty(params.arriba_ref_blacklist) || !exists_not_empty(params.arriba_ref_known_fusions) || !exists_not_empty(params.arriba_ref_protein_domains)) {
+        if (!exists_not_empty(params.arriba_ref_blacklist) || !exists_not_empty(params.arriba_ref_known_fusions) || !exists_not_empty(params.arriba_ref_protein_domains) || !exists_not_empty(params.arriba_ref_cytobands)) {
             ARRIBA_DOWNLOAD(params.genome)
             ch_versions = ch_versions.mix(ARRIBA_DOWNLOAD.out.versions)
             ch_arriba_ref_blacklist       = ARRIBA_DOWNLOAD.out.blacklist
