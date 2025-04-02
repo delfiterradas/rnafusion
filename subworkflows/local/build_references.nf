@@ -25,6 +25,7 @@ include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../modules/nf-core/gatk4/cr
 include { GATK4_BEDTOINTERVALLIST }         from '../../modules/nf-core/gatk4/bedtointervallist/main'
 include { SALMON_INDEX }                    from '../../modules/nf-core/salmon/index/main'
 include { GFFREAD }                         from '../../modules/nf-core/gffread/main'
+include { getFileSuffix } from '../../modules/nf-core/cat/cat/main.nf'
 
 /*
 ========================================================================================
@@ -228,5 +229,21 @@ workflow BUILD_REFERENCES {
 
 def exists_not_empty(path) {
     def path_to_check = file(path as String)
-    return path_to_check.exists() && !path_to_check.isEmpty()
+    // Return false if the path does not exist
+    if(!path_to_check.exists()) {
+        return false
+    }
+
+    // Check if the file is not a directory and return whether it's empty or not
+    if(!path_to_check.toFile().isDirectory()) {
+        return !path_to_check.isEmpty()
+    }
+
+    // Get the first file in a directory and return whether it is empty or not
+    def first_file = null
+    path_to_check.toFile().eachFileRecurse(groovy.io.FileType.FILES) { file ->
+        first_file = file
+        return
+    }
+    return !first_file.toPath().isEmpty()
 }
