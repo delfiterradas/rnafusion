@@ -109,7 +109,7 @@ workflow BUILD_REFERENCES {
             if (!exists_not_empty(params.salmon_index)){
                 GFFREAD(ch_gtf, ch_fasta.map{ it -> it[1] })
                 ch_versions = ch_versions.mix(GFFREAD.out.versions)
-            
+
                 SALMON_INDEX(ch_fasta.map{ it -> it[1] }, GFFREAD.out.gffread_fasta.map{ it -> it[1] })
                 ch_versions = ch_versions.mix(SALMON_INDEX.out.versions)
                 ch_salmon_index = SALMON_INDEX.out.index
@@ -135,8 +135,7 @@ workflow BUILD_REFERENCES {
     def ch_arriba_ref_cytobands       = Channel.empty()
     def ch_arriba_ref_known_fusions   = Channel.empty()
     def ch_arriba_ref_protein_domains = Channel.empty()
-    def arriba_tools = tools.intersect(["arriba", "fusioninspector"])
-    if (arriba_tools) {
+    if (tools.contains("arriba")) {
         if (!exists_not_empty(params.arriba_ref_blacklist) || !exists_not_empty(params.arriba_ref_known_fusions) || !exists_not_empty(params.arriba_ref_protein_domains)) {
             ARRIBA_DOWNLOAD(params.genome)
             ch_versions = ch_versions.mix(ARRIBA_DOWNLOAD.out.versions)
