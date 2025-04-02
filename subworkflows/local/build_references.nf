@@ -164,7 +164,7 @@ workflow BUILD_REFERENCES {
     }
 
     def ch_starfusion_ref = Channel.empty()
-     //TODO update list once alignment is done in a single step
+    //TODO update list once alignment is done in a single step
     def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing", "fusioninspector", "stringtie"])
     if (starfusion_tools) {
         if (!exists_not_empty(params.starfusion_ref)) {
