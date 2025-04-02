@@ -86,7 +86,7 @@ workflow RNAFUSION {
             ch_reads = ch_samplesheet
         }
 
-        if(tools.contains("salmon")) {
+        if(tools.contains("salmon") && !params.skip_qc) {
             SALMON_QUANT(
                 ch_reads,
                 BUILD_REFERENCES.out.salmon_index,
