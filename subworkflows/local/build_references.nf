@@ -169,6 +169,9 @@ workflow BUILD_REFERENCES {
     def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing", "fusioninspector", "stringtie"])
     if (starfusion_tools) {
         if (!exists_not_empty(params.starfusion_ref)) {
+            if(!params.fusion_annot_lib) {
+                error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
+            }
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {
