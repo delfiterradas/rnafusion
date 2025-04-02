@@ -51,7 +51,7 @@ workflow RNAFUSION {
     BUILD_REFERENCES(tools)
     ch_versions = ch_versions.mix(BUILD_REFERENCES.out.versions)
 
-    if (!params.references_only) { // TODO: Remove this temporary parameter when we have a full-working GitHub nf-test
+    if (!params.references_only) {
 
         //
         // QC from FASTQ files
@@ -86,7 +86,7 @@ workflow RNAFUSION {
             ch_reads = ch_samplesheet
         }
 
-        if(tools.contains("salmon")) {
+        if(tools.contains("salmon") && !params.skip_qc) {
             SALMON_QUANT(
                 ch_reads,
                 BUILD_REFERENCES.out.salmon_index,
