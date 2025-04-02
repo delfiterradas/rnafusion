@@ -238,7 +238,7 @@ def exists_not_empty(path) {
     }
 
     // Check if the file is not a directory or is a URL and return whether it's empty or not
-    if(path_to_check.startswith("http://") || path_to_check.startswith("https://") || !path_to_check.toFile().isDirectory()) {
+    if(path_to_check.startsWith("http://") || path_to_check.startsWith("https://") || !path_to_check.toFile().isDirectory()) {
         return !path_to_check.isEmpty()
     }
 
