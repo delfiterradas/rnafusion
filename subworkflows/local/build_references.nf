@@ -63,6 +63,7 @@ workflow BUILD_REFERENCES {
 
     def ch_hgnc_date = Channel.empty()
     def ch_hgnc_ref  = Channel.empty()
+//TODO: unify as if(tools.contains("fusioninspector")) once nextflow bug fixed
     def run_fusioninspector = tools.contains("fusioninspector")
     if(run_fusioninspector) {
         if ((!exists_not_empty(params.hgnc_ref) || !exists_not_empty(params.hgnc_date)) && !params.skip_vcf){
