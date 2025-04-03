@@ -129,7 +129,7 @@ workflow RNAFUSION {
         // Run CTAT-SPLICING
         //
 
-        if((tools.contains("ctatsplicing"))) {
+        if(tools.contains("ctatsplicing")) {
             CTATSPLICING_WORKFLOW(
                 ch_star_split_junctions,
                 ch_star_junctions,
