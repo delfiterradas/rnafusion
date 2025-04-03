@@ -32,7 +32,7 @@ The rnafusion pipeline needs references for the fusion detection tools, so downl
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --references_only --all \
+  --references_only --tools all \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <PATH/TO/REFERENCES>
@@ -43,7 +43,7 @@ References for each tools can also be downloaded separately with:
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --references_only --<tool1> --<tool2> ... \
+  --references_only --tools <comma-separated-list-of-tools> \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
@@ -64,15 +64,15 @@ Use credentials from QIAGEN and add `--qiagen`
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --references_only --<tool1> --<tool2> ... \
+  --references_only --tools <comma-separated-list-of-tools> \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH> --qiagen
 ```
 
-#### STAR-Fusion references downloaded vs built
+<!-- #### STAR-Fusion references downloaded vs built
 
-By default STAR-Fusion references are **built**. You can also download them from [CTAT](https://github.com/NCIP/Trinity_CTAT/wiki) by using the flag `--starfusion_build FALSE` for both reference building and fusion detection. This allows more flexibility for different organisms but **be aware that STAR-Fusion reference download is not recommended as not fully tested!**
+By default STAR-Fusion references are **built**. You can also download them from [CTAT](https://github.com/NCIP/Trinity_CTAT/wiki) by using the flag `--starfusion_build FALSE` for both reference building and fusion detection. This allows more flexibility for different organisms but **be aware that STAR-Fusion reference download is not recommended as not fully tested!** -->
 
 #### Issues with building references
 
@@ -136,23 +136,23 @@ As you can see above for multiple runs of the same sample, the `sample` name has
 
 ### Starting commands
 
-The pipeline can either be run using all fusion detection tools or specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `fusioncatcher`, `starfusion`, `stringtie`, `ctat-splicing`) use the `--all` parameter:
+The pipeline can either be run using all fusion detection tools or by specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `ctatsplicing`, `fusioncatcher`, `starfusion`, `stringtie`, `fusionreport`, `fastp`, `salmon`, `fusioninspector`) use the `all` option for the `--tools` parameter:
 
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --all \
+  --tools all \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
 ```
 
-To run only a specific detection tool use: `--tool`:
+To run only a set of specific tools use `--tools` with a comma separated list of requested tools:
 
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --<tool1> --<tool2> ... \
+  --tools <comma-separated-list-of-tools> \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
@@ -160,7 +160,7 @@ nextflow run nf-core/rnafusion \
 
 If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
 
-> **IMPORTANT: Either `--all` or `--<tool>`** is necessary to run detection tools
+> **IMPORTANT: `--tools`** is necessary to run detection tools
 
 `--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--references_only`.
 
@@ -205,12 +205,12 @@ Supported genome is currently only GRCh38.
 
 #### Trimming
 
-When the flag `--fastp_trim` is used, `fastp` is used to provide all tools with trimmed reads. Quality and adapter trimming by default. In addition, tail trimming and adapter_fastq specification are possible. Example usage:
+When the flag `fastp` tool is used in `--tools`, `fastp` is used to provide all tools with trimmed reads. Quality and adapter trimming by default. In addition, tail trimming and adapter_fastq specification are possible. Example usage:
 
 ```bash
 nextflow run nf-core/rnafusion \
 -profile <docker/singularity/.../institute> \
---<tool1> --<tool2> ... \
+--tools fastp,... \
 --input <SAMPLE_SHEET.CSV> \
 --genomes_base <PATH/TO/REFERENCES> \
 --outdir <OUTPUT/PATH> \
@@ -224,7 +224,7 @@ nextflow run nf-core/rnafusion \
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --<tool1> --<tool2> ... \
+  --tools <comma-separated-list-of-tools> \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
@@ -238,7 +238,7 @@ nextflow run nf-core/rnafusion \
 ```bash
 nextflow run nf-core/rnafusion \
   -profile <docker/singularity/.../institute> \
-  --<tool1> --<tool2> ... \
+  --tools <comma-separated-list-of-tools> \
   --input <SAMPLE_SHEET.CSV> \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
@@ -259,7 +259,10 @@ FusionInspector can be run as a standalone with:
 ```bash
 nextflow run nf-core/rnafusion \
 -profile <docker/singularity/.../institute> \
---fusioninspector_only \
+--tools fusioninspector \
+--skip_qc \
+--skip_vis \
+--skip_vcf \
 --fusioninspector_fusions <PATH_TO_CUSTOM_FUSION_FILE> \
 --input <SAMPLE_SHEET.CSV> \
 --outdir <PATH>
@@ -278,7 +281,7 @@ GENE3--GENE4
 nextflow run nf-core/rnafusion \
 -profile <docker/singularity/.../institute> \
 --skip_qc \
---all OR <--tool>
+--tools <comma-separated-list-of-tools> \
 --input <SAMPLE_SHEET.CSV> \
 --genomes_base <PATH/TO/REFERENCES> \
 --outdir <PATH>
@@ -292,7 +295,7 @@ This will skip all QC-related processes (picard metrics collection)
 nextflow run nf-core/rnafusion \
 -profile <docker/singularity/.../institute> \
 --skip_vis \
---all OR <--tool>
+--tools <comma-separated-list-of-tools> \
 --input <SAMPLE_SHEET.CSV> \
 --genomes_base <PATH/TO/REFERENCES> \
 --outdir <PATH>
@@ -302,7 +305,7 @@ This will skip all visualisation processes, including `fusion-report`, `FusionIn
 
 #### Optional manual feed-in of fusion files
 
-It is possible to give the output of each tool manually using the argument: `--<tool>_fusions PATH/TO/FUSION/FILE`: this feature need more testing, don't hesitate to open an issue if you encounter problems.
+It is possible to give the output of each fusion detection tool manually using the argument: `--<tool>_fusions PATH/TO/FUSION/FILE`: this feature needs more testing, don't hesitate to open an issue if you encounter problems.
 
 #### Set different `--limitSjdbInsertNsj` parameter
 

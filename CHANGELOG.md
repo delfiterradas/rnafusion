@@ -51,6 +51,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated documentation for fusion-report score calculation to reflect 80/20 weight distribution between tool detection and database hits [#620](https://github.com/nf-core/rnafusion/pull/620)
 - Update htslib and samtools version in `star/align` to 1.21 [#634](https://github.com/nf-core/rnafusion/pull/634)
 - `--run_fusioncatcher` back to `fusioncatcher` [#641](https://github.com/nf-core/rnafusion/pull/641)
+- Removed `--fastp_trim`, `--arriba`, `--ctatsplicing`, `--fusioncatcher`, `--starfusion`, `--stringtie` and `--all` and replaced these parameters with the `--tools` parameter. This parameter takes a comma-delimited list of tool names to run for the pipeline and is a required parameter. Following tools are supported by this parameter [#645](https://github.com/nf-core/rnafusion/pull/645):
+  - `arriba`
+  - `ctatsplicing`
+  - `fusioncatcher`
+  - `starfusion`
+  - `stringtie`
+  - `fusionreport`
+  - `fastp`
+  - `salmon`
+  - `fusioninspector`
+  - `all` => This will automatically run all of the above tools
 
 ### Fixed
 

@@ -9,33 +9,23 @@ workflow FUSIONCATCHER_WORKFLOW {
     take:
         reads                   // channel [ meta, [ fastqs ] ]
         fusioncatcher_ref       // channel [ meta, path       ]
-        fusioncatcher          // boolean
-        all                     // boolean
-        fusioninspector_only    // boolean
         fusioncatcher_fusions   // path, string
 
     main:
         ch_versions   = Channel.empty()
-        ch_dummy_file = file("$baseDir/assets/dummy_file_fusioncatcher.txt", checkIfExists: true)
 
-        if (( fusioncatcher || all) && !fusioninspector_only ) {
-            if (fusioncatcher_fusions){
+        if (fusioncatcher_fusions){
 
-                ch_fusioncatcher_fusions = reads.combine(Channel.value(file(fusioncatcher_fusions, checkIfExists:true)))
-                                            .map { meta, _reads, fusions -> [ meta, fusions ] }
-            } else {
-
-                FUSIONCATCHER_DETECT (
-                    reads,
-                    fusioncatcher_ref
-                )
-                ch_fusioncatcher_fusions = FUSIONCATCHER_DETECT.out.fusions
-                ch_versions              = ch_versions.mix(FUSIONCATCHER_DETECT.out.versions)
-            }
-        }
-        else {
-            ch_fusioncatcher_fusions = reads.combine(Channel.value(file(ch_dummy_file, checkIfExists:true)))
+            ch_fusioncatcher_fusions = reads.combine(Channel.value(file(fusioncatcher_fusions, checkIfExists:true)))
                                         .map { meta, _reads, fusions -> [ meta, fusions ] }
+        } else {
+
+            FUSIONCATCHER_DETECT (
+                reads,
+                fusioncatcher_ref
+            )
+            ch_fusioncatcher_fusions = FUSIONCATCHER_DETECT.out.fusions
+            ch_versions              = ch_versions.mix(FUSIONCATCHER_DETECT.out.versions)
         }
 
     emit:

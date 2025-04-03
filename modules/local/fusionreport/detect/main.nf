@@ -28,9 +28,9 @@ process FUSIONREPORT {
     script:
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
-    def tools = params.arriba || params.all         ? "--arriba ${arriba_fusions} " : ''
-    tools    += params.starfusion  || params.all    ? "--starfusion ${starfusion_fusions} " : ''
-    tools    += params.fusioncatcher  || params.all ? "--fusioncatcher ${fusioncatcher_fusions} " : ''
+    def tools = arriba_fusions        ? "--arriba ${arriba_fusions} " : ''
+    tools    += starfusion_fusions    ? "--starfusion ${starfusion_fusions} " : ''
+    tools    += fusioncatcher_fusions ? "--fusioncatcher ${fusioncatcher_fusions} " : ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     fusion_report run $meta.id . $fusionreport_ref $tools --allow-multiple-gene-symbols --tool-cutoff $tools_cutoff $args $args2
