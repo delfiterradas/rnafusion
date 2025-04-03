@@ -13,15 +13,14 @@ workflow ARRIBA_WORKFLOW {
 
     main:
 
-        def ch_versions   = Channel.empty()
+        def ch_versions           = Channel.empty()
+        def ch_arriba_fusions     = Channel.empty()
+        def ch_arriba_fusion_fail = Channel.empty()
 
-        if ( arriba_fusions ) {
-
+        if (arriba_fusions) {
             ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
                 .map { it -> [ it[0], it[2] ] }
-
         } else {
-
             ARRIBA_ARRIBA (
                 reads,
                 ch_fasta,
@@ -31,7 +30,6 @@ workflow ARRIBA_WORKFLOW {
                 ch_arriba_ref_cytobands,
                 ch_arriba_ref_protein_domains
             )
-
             ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
 
             ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
