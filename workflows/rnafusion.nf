@@ -122,7 +122,7 @@ workflow RNAFUSION {
     FUSIONCATCHER_WORKFLOW (
         ch_reads,
         BUILD_REFERENCES.out.ch_fusioncatcher_ref,       // channel [ meta, path       ]
-        params.run_fusioncatcher,
+        params.fusioncatcher,
         params.all,
         params.fusioninspector_only,
         params.fusioncatcher_fusions

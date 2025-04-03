@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated documentation for fusion-report score calculation to reflect 80/20 weight distribution between tool detection and database hits [#620](https://github.com/nf-core/rnafusion/pull/620)
 - Update htslib and samtools version in `star/align` to 1.21 [#634](https://github.com/nf-core/rnafusion/pull/634)
 - Updated Zenodo DOI in badge [#639](https://github.com/nf-core/rnafusion/pull/639)
+- `--run_fusioncatcher` back to `fusioncatcher` [#641](https://github.com/nf-core/rnafusion/pull/641)
 
 ### Fixed
 
@@ -63,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug in `FUSIONCATCHER_DOWNLOAD` that caused an error when running with singularity profile [#573](https://github.com/nf-core/rnafusion/issues/573)
 - Fixed missing script `gtf2bed` which caused local module `GET_RRNA_TRANSCRIPTS` to fail [#602](https://github.com/nf-core/rnafusion/issues/602)
 - Fixed the codebase to be compatible with the Nextflow language server [#634](https://github.com/nf-core/rnafusion/pull/634)
+- Updated the input validation to be more strict. This will prevent more errors down the line in the pipeline [#640](https://github.com/nf-core/rnafusion/pull/640)
 
 ### Removed
 
