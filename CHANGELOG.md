@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add nf-test to local subworkflow: `FUSIONCATCHER_WORKFLOW` [#591](https://github.com/nf-core/rnafusion/pull/591)
 - Add nf-test to local subworkflow: `STARFUSION_WORKFLOW`. [#597](https://github.com/nf-core/rnafusion/pull/597)
 - Add nf-test to local module: `FUSIONINSPECTOR`. [#601](https://github.com/nf-core/rnafusion/pull/601)
+- Added `CTATSPLICING_PREPGENOMELIB` to update the starfusion genome library directory with a cancer splicing index. [#610](https://github.com/nf-core/rnafusion/pull/610)
 - Add nf-test to local subworkflow: `FUSIONREPORT_WORKFLOW`. [#607](https://github.com/nf-core/rnafusion/pull/607)
 - Add nf-test to local module: `ARRIBA_VISUALISATION`. [#625](https://github.com/nf-core/rnafusion/pull/625)
 
@@ -51,6 +52,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The STAR alignment now only runs once instead of multiple times when using `--arriba` and `--starfusion` [#633](https://github.com/nf-core/rnafusion/pull/633)
 - The `--cram` parameter has been converted to a boolean value instead of the comma-separated list of values. Use this parameter if you also want to create CRAM files from the BAM files created with STAR [#633](https://github.com/nf-core/rnafusion/pull/633)
 - Update htslib and samtools version in `star/align` to 1.21 [#634](https://github.com/nf-core/rnafusion/pull/634)
+- `--run_fusioncatcher` back to `fusioncatcher` [#641](https://github.com/nf-core/rnafusion/pull/641)
+- Removed `--fastp_trim`, `--arriba`, `--ctatsplicing`, `--fusioncatcher`, `--starfusion`, `--stringtie` and `--all` and replaced these parameters with the `--tools` parameter. This parameter takes a comma-delimited list of tool names to run for the pipeline and is a required parameter. Following tools are supported by this parameter [#645](https://github.com/nf-core/rnafusion/pull/645):
+  - `arriba`
+  - `ctatsplicing`
+  - `fusioncatcher`
+  - `starfusion`
+  - `stringtie`
+  - `fusionreport`
+  - `fastp`
+  - `salmon`
+  - `fusioninspector`
+  - `all` => This will automatically run all of the above tools
 
 ### Fixed
 
@@ -63,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug in `FUSIONCATCHER_DOWNLOAD` that caused an error when running with singularity profile [#573](https://github.com/nf-core/rnafusion/issues/573)
 - Fixed missing script `gtf2bed` which caused local module `GET_RRNA_TRANSCRIPTS` to fail [#602](https://github.com/nf-core/rnafusion/issues/602)
 - Fixed the codebase to be compatible with the Nextflow language server [#634](https://github.com/nf-core/rnafusion/pull/634)
+- Updated the input validation to be more strict. This will prevent more errors down the line in the pipeline [#640](https://github.com/nf-core/rnafusion/pull/640)
 
 ### Removed
 

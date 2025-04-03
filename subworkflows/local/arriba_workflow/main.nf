@@ -9,49 +9,33 @@ workflow ARRIBA_WORKFLOW {
         ch_arriba_ref_cytobands         // channel [ meta, path_cytobands     ]
         ch_arriba_ref_known_fusions     // channel [ meta, path_known_fusions ]
         ch_arriba_ref_protein_domains   // channel [ meta, path_proteins      ]
-        arriba                          // boolean
-        all                             // boolean
-        fusioninspector_only            // boolean
         arriba_fusions                  // path
 
     main:
 
         def ch_versions   = Channel.empty()
-        def ch_dummy_file = file("$projectDir/assets/dummy_file_arriba.txt", checkIfExists: true)
 
-        if (( arriba || all ) && !fusioninspector_only) {
+        if ( arriba_fusions ) {
 
-            if ( arriba_fusions ) {
-
-                ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
-                    .map { it -> [ it[0], it[2] ] }
-                ch_arriba_fusion_fail = ch_dummy_file
-
-            } else {
-
-                ARRIBA_ARRIBA (
-                    reads,
-                    ch_fasta,
-                    ch_gtf,
-                    ch_arriba_ref_blacklist,
-                    ch_arriba_ref_known_fusions,
-                    ch_arriba_ref_cytobands,
-                    ch_arriba_ref_protein_domains
-                )
-
-                ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
-
-                ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
-                ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> return it[1] }
-            }
+            ch_arriba_fusions = reads.combine( Channel.value( file( arriba_fusions, checkIfExists: true ) ) )
+                .map { it -> [ it[0], it[2] ] }
 
         } else {
 
-            ch_arriba_fusions = reads
-                .combine(Channel.value( file(ch_dummy_file, checkIfExists: true ) ) )
-                .map { it -> [ it[0], it[2] ] }
+            ARRIBA_ARRIBA (
+                reads,
+                ch_fasta,
+                ch_gtf,
+                ch_arriba_ref_blacklist,
+                ch_arriba_ref_known_fusions,
+                ch_arriba_ref_cytobands,
+                ch_arriba_ref_protein_domains
+            )
 
-            ch_arriba_fusion_fail = ch_dummy_file
+            ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
+
+            ch_arriba_fusions     = ARRIBA_ARRIBA.out.fusions
+            ch_arriba_fusion_fail = ARRIBA_ARRIBA.out.fusions_fail.map{ it -> return it[1] }
         }
 
     emit:
