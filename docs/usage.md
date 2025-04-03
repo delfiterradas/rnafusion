@@ -51,7 +51,7 @@ nextflow run nf-core/rnafusion \
 
 If you are not covered by the research COSMIC license and want to avoid using COSMIC, you can provide the additional option `--no_cosmic`.
 
-### Downloading the cosmic database with SANGER or QUIAGEN
+### Downloading the cosmic database with SANGER or QIAGEN
 
 #### For academic users
 
