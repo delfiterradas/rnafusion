@@ -1,7 +1,11 @@
 {
     "stub test starfusion": {
         "content": [
-            31,
+<<<<<<<<< Temporary merge branch 1
+            29,
+=========
+            32,
+>>>>>>>>> Temporary merge branch 2
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -763,11 +767,15 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-19T09:52:40.993862676"
+        "timestamp": "2025-03-17T17:40:40.562156411"
     },
     "stub test fastp": {
         "content": [
-            33,
+<<<<<<<<< Temporary merge branch 1
+            31,
+=========
+            34,
+>>>>>>>>> Temporary merge branch 2
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -1238,6 +1246,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-19T09:51:49.095272949"
+        "timestamp": "2025-03-17T17:38:45.56378377"
     }
 }
