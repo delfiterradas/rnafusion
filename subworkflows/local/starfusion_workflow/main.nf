@@ -1,8 +1,4 @@
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FOR_STARFUSION       }   from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FOR_STARFUSION_CRAM  }   from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_VIEW as SAMTOOLS_VIEW_FOR_STARFUSION         }   from '../../../modules/nf-core/samtools/view/main'
 include { STARFUSION                                            }   from '../../../modules/local/starfusion/detect/main'
-include { CTATSPLICING_WORKFLOW                                 }   from '../ctatsplicing_workflow'
 
 workflow STARFUSION_WORKFLOW {
     take:
