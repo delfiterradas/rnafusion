@@ -12,7 +12,7 @@ workflow STRINGTIE_WORKFLOW {
         ch_stringtie_gtf = Channel.empty()
 
         STRINGTIE_STRINGTIE(
-            bam_sorted.map { meta, bam, _bai -> [ meta, bam ]},
+            bam_sorted,
             ch_chrgtf.map { _meta, gtf -> [ gtf ]}
         )
         ch_versions = ch_versions.mix(STRINGTIE_STRINGTIE.out.versions)

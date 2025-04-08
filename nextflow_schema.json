@@ -276,8 +276,8 @@
             "description": "Option to compress BAM files to CRAM.",
             "properties": {
                 "cram": {
-                    "type": "string",
-                    "description": "List of tools for which to compress BAM file to CRAM,default: [], options: arriba, starfusion. Leave no space between options",
+                    "type": "boolean",
+                    "description": "Output CRAM files instead of BAM files.",
                     "fa_icon": "fas fa-cut"
                 }
             }
@@ -502,14 +502,12 @@
                 "seq_center": {
                     "type": "string",
                     "description": "Sequencing center",
-                    "hidden": true,
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "This will reported in the BAM header as CN"
                 },
                 "seq_platform": {
                     "type": "string",
                     "description": "Sequencing platform",
-                    "hidden": true,
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "This will reported in the BAM header as PL."
                 },

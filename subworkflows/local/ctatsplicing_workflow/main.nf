@@ -4,7 +4,7 @@ workflow CTATSPLICING_WORKFLOW {
     take:
     split_junctions // [ val(meta), path(split_junctions.SJ.out.tab) ]
     junctions       // [ val(meta), path(junctions.Chimeric.out.junction) ]
-    aligned_bams    // [ val(meta), path(aligned_bams.Aligned.sortedByCoord.out.bam) ]
+    aligned_bams    // [ val(meta), path(aligned_bams.Aligned.sortedByCoord.out.bam), path(aligned_bams.Aligned.sortedByCoord.out.bam.bai) ]
     ctat_genome_lib // [ val(meta2), path(path/to/ctat_genome_lib) ]
 
     main:
@@ -13,8 +13,8 @@ workflow CTATSPLICING_WORKFLOW {
     def ch_ctatsplicing_input = split_junctions
         .join(junctions, failOnMismatch:true, failOnDuplicate:true)
         .join(aligned_bams, failOnMismatch:true, failOnDuplicate:true)
-        .map { meta, split_junction, junction, bam ->
-            [ meta, split_junction, junction, bam, [] ]
+        .map { meta, split_junction, junction, bam, bai ->
+            [ meta, split_junction, junction, bam, bai ]
         }
 
     CTATSPLICING_STARTOCANCERINTRONS(

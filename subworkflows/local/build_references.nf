@@ -165,9 +165,7 @@ workflow BUILD_REFERENCES {
     }
 
     def ch_starfusion_ref = Channel.empty()
-    //TODO update list once alignment is done in a single step
-    def starfusion_tools = tools.intersect(["starfusion", "ctatsplicing", "fusioninspector", "stringtie"])
-    if (starfusion_tools) {
+    if (tools.intersect(["starfusion", "ctatsplicing"])) {
         if (!exists_not_empty(params.starfusion_ref)) {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
