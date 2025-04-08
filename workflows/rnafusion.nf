@@ -18,6 +18,7 @@ include { FASTQC                        }   from '../modules/nf-core/fastqc/main
 include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
 include { STAR_ALIGN                    }   from '../modules/nf-core/star/align/main'
 include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
+include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
 include { FASTQ_ALIGN_STAR              }   from '../subworkflows/local/fastq_align_star'
 include { CTATSPLICING_WORKFLOW         }   from '../subworkflows/local/ctatsplicing_workflow'
@@ -93,6 +94,22 @@ workflow RNAFUSION {
             not_found: !fastqs
         }
 
+        // Convert CRAM to BAM when needed (when tools that don't support CRAM are used and when the sample isn't aligned)
+        def only_bam_tools = ["ctatsplicing", "stringtie", "fusioninspector"]
+        def ch_aligned_inputs = ch_input.bam.filter { meta, file, _bai -> file && !meta.align }
+        if(tools.intersect(only_bam_tools)) {
+            SAMTOOLS_CONVERT(
+                ch_input.cram.filter { meta, file, _crai -> file && !meta.align },
+                BUILD_REFERENCES.out.fasta,
+                BUILD_REFERENCES.out.fai
+            )
+            ch_aligned_inputs = ch_aligned_inputs.mix(
+                SAMTOOLS_CONVERT.out.bam.join(SAMTOOLS_CONVERT.out.bai, failOnMismatch:true, failOnDuplicate:true)
+            )
+        } else {
+            ch_aligned_inputs = ch_aligned_inputs.mix(ch_input.cram.filter { meta, file, _crai -> file && !meta.align })
+        }
+
         //
         // QC from FASTQ files
         //
@@ -152,7 +169,7 @@ workflow RNAFUSION {
             .filter { meta, _fastqs -> meta.align }
 
         // Add the alignment files to the correct channel if their fastqs aren't aligned
-        def ch_aligned_reads        = ch_input.bam.mix(ch_input.cram).filter { meta, file, _index -> file && !meta.align }
+        def ch_aligned_reads        = ch_aligned_inputs
         def ch_star_junctions       = ch_input.junctions.filter { meta, file -> file && !meta.align }
         def ch_star_split_junctions = ch_input.split_junctions.filter { meta, file -> file && !meta.align }
         if(tools.intersect(["ctatsplicing", "arriba", "starfusion", "stringtie"])) {
