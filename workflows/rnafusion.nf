@@ -172,7 +172,6 @@ workflow RNAFUSION {
         if(tools.contains("starfusion")) {
             fusions_created = true
             STARFUSION_WORKFLOW (
-                ch_aligned_reads.map { meta, bam, _bai -> [ meta, bam ]},
                 ch_star_junctions,
                 BUILD_REFERENCES.out.starfusion_ref,
                 params.starfusion_fusions
