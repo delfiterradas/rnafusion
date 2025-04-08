@@ -73,7 +73,7 @@ workflow RNAFUSION {
 
                 // Check if there are fastqs when we need to align
                 if (align && !fastqs) {
-                    error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file and a junctions file.")
+                    error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file, a junctions file and a split junctions file.")
                 }
             def new_meta = meta + [align:align]
             fastqs:             [ new_meta, fastqs ]
