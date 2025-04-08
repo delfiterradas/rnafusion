@@ -54,10 +54,10 @@ workflow RNAFUSION {
 
     if (!params.references_only) {
 
-        def ch_input = ch_samplesheet.multiMap { meta, fastqs, bam, bai, cram, crai, junctions, split_junctions ->
+        def ch_input = ch_samplesheet.multiMap { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
             def align = false
                 // Check if we need split junctions
-                if (tools.contains("ctatsplicing") && !split_junctions) {
+                if (tools.contains("ctatsplicing") && !splice_junctions) {
                     align = true
                 }
 
@@ -67,7 +67,7 @@ workflow RNAFUSION {
                 }
 
                 // Check if we need BAM or CRAM files
-                if (tools.intersect(["ctatsplicing", "arriba", "stringtie"]) && !bam && !cram) {
+                if (tools.intersect(["ctatsplicing", "arriba", "stringtie", "fusioninspector"]) && !bam && !cram) {
                     align = true
                 }
 
@@ -80,7 +80,7 @@ workflow RNAFUSION {
             bam:                [ new_meta, bam, bai ]
             cram:               [ new_meta, cram, crai ]
             junctions:          [ new_meta, junctions ]
-            split_junctions:    [ new_meta, split_junctions ]
+            splice_junctions:    [ new_meta, splice_junctions ]
         }
 
         // Define which fastqs need to be processes (all analysis that's not aligning)
@@ -171,7 +171,7 @@ workflow RNAFUSION {
         // Add the alignment files to the correct channel if their fastqs aren't aligned
         def ch_aligned_reads        = ch_aligned_inputs
         def ch_star_junctions       = ch_input.junctions.filter { meta, file -> file && !meta.align }
-        def ch_star_split_junctions = ch_input.split_junctions.filter { meta, file -> file && !meta.align }
+        def ch_star_splice_junctions = ch_input.splice_junctions.filter { meta, file -> file && !meta.align }
         if(tools.intersect(["ctatsplicing", "arriba", "starfusion", "stringtie"])) {
             FASTQ_ALIGN_STAR(
                 ch_fastqs_to_align,
@@ -187,7 +187,7 @@ workflow RNAFUSION {
             ch_versions             = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
             ch_aligned_reads        = ch_aligned_reads.mix(FASTQ_ALIGN_STAR.out.bam_bai)
             ch_star_junctions       = ch_star_junctions.mix(FASTQ_ALIGN_STAR.out.junctions)
-            ch_star_split_junctions = ch_star_split_junctions.mix(FASTQ_ALIGN_STAR.out.spl_junc_tabs)
+            ch_star_splice_junctions = ch_star_splice_junctions.mix(FASTQ_ALIGN_STAR.out.spl_junc_tabs)
             ch_multiqc_files        = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.log_final.collect{it[1]}.ifEmpty([]))
             ch_multiqc_files        = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.gene_count.collect{it[1]}.ifEmpty([]))
         }
@@ -198,7 +198,7 @@ workflow RNAFUSION {
 
         if(tools.contains("ctatsplicing")) {
             CTATSPLICING_WORKFLOW(
-                ch_star_split_junctions,
+                ch_star_splice_junctions,
                 ch_star_junctions,
                 ch_aligned_reads,
                 BUILD_REFERENCES.out.starfusion_ref

@@ -83,7 +83,7 @@ nextflow run nf-core/rnafusion  \
   -profile <docker/singularity/.../institute> \
   --references_only \
   --cosmic_username <EMAIL> --cosmic_passwd <PASSWORD> \
-  --fusionreport \
+  --tools fusionreport \
   --genomes_base <PATH/TO/REFERENCES> \
   --outdir <OUTPUT/PATH>
 ```
@@ -111,7 +111,7 @@ The references are only built based on ensembl version 102. It is not possible c
 
 ### Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. The pipeline will detect whether a sample is single- or paired-end from the samplesheet - the `fastq_2` column is empty for single-end. The samplesheet has to be a comma-separated file (.csv) but can have as many columns as you desire. There is a strict requirement for the first 4 columns to match those defined in the table below with the header row included.
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. The pipeline will detect whether a sample is single- or paired-end from the samplesheet - the `fastq_2` column is empty for single-end. The samplesheet has to be a comma-separated (.csv), tab-separated (.tsv), yaml (.yaml or .yml) or json (.json) file but can have as many columns as you desire. There is a strict requirement for the `sample` and `strandedness` columns. One or more of these columns should be provided too: `fastq_1`, `bam`, `cram`, `junctions` and `splice_junctions`
 A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
 
 ```csv title="samplesheet.csv"
@@ -125,14 +125,24 @@ TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,,forward
 TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,,forward
 ```
 
-As you can see above for multiple runs of the same sample, the `sample` name has to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis.
+As you can see above for multiple runs of the same sample, the `sample` name has to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Note that multiple rows per sample are not supported for samples that contain `bam`, `cram`, `junctions` and/or `splice_junctions` files.
 
-| Column         | Description                                                                                                                                                                            |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`       | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1`      | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2`      | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `strandedness` | Strandedness: forward or reverse.                                                                                                                                                      |
+| Column             | Description                                                                                                                                                                                                                                                                                                                                                | Required           |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `sample`           | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`).                                                                                                                                                                     | :white_check_mark: |
+| `strandedness`     | Strandedness: forward or reverse.                                                                                                                                                                                                                                                                                                                          | :white_check_mark: |
+| `fastq_1`          | Full path to FastQ file for Illumina short reads 1. File must exist, has to be gzipped and have the extension ".fastq.gz" or ".fq.gz". It's recommended to always provide the FASTQ file(s) because the pipeline will be able to create any missing files from these. The FASTQ files are required to run `salmon`, `fusioninspector` and `fusioncatcher`. | :grey_question:    |
+| `fastq_2`          | Full path to FastQ file for Illumina short reads 2. File must exist, has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                                                                                                                                                                                     | :x:                |
+| `bam`              | Full path to the BAM file created with STAR. File has to exist and must have the extension ".bam". It's the responsibility of the pipeline user to make sure this file has been correctly created. The BAM file is required to run `ctatsplicing`, `stringtie`, `fusioninspector` and `arriba` when the `fastq_1` and `cram` fields are empty.             | :grey_question:    |
+| `bai`              | Full path to the index of the BAM file. File has to exist and must have the extension ".bai".                                                                                                                                                                                                                                                              | :x:                |
+| `cram`             | Full path to the CRAM file created with STAR. File has to exist and must have the extension ".cram". It's the responsibility of the pipeline user to make sure this file has been correctly created. The CRAM file is required to run `ctatsplicing`, `stringtie`, `fusioninspector` and `arriba` when the `fastq_1` and `bam` fields are empty.           | :grey_question:    |
+| `crai`             | Full path to the index of the CRAM file. File has to exist and must have the extension ".crai".                                                                                                                                                                                                                                                            | :x:                |
+| `junctions`        | Full path to the file containing chimeric junctions determined by STAR. File has to exist and must have the extension ".junction". It's the responsibility of the pipeline user to make sure this file has been correctly created. The junctions file is required to run `starfusion` and `ctatsplicing` when the `fastq_1` field is empty.                | :grey_question:    |
+| `splice_junctions` | Full path to the file containing splice junctions determined by STAR. File has to exist and must have the extension ".SJ.out.tab". It's the responsibility of the pipeline user to make sure this file has been correctly created. The splice junctions file is required to run `ctatsplicing` when the `fastq_1` field is empty.                          | :grey_question:    |
+
+:white_check_mark: = Required
+:x: = Not required
+:grey_question: = One of these columns should be provided
 
 ### Starting commands
 
