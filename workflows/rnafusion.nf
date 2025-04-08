@@ -83,13 +83,14 @@ workflow RNAFUSION {
         }
 
         // Define which fastqs need to be processes (all analysis that's not aligning)
-        def fastq_tools = ["salmon", "fusioninspector"]
+        def fastq_tools = ["salmon", "fusioninspector", "fusioncatcher"]
         selected_fastq_tools = tools.intersect(fastq_tools)
-        def ch_fastqs_to_process = ch_input.fastqs.filter { meta, fastqs ->
+        def ch_fastqs_to_process = ch_input.fastqs.branch { meta, fastqs ->
             if (!fastqs && selected_fastq_tools) {
-                log.warn("Fastq files not found for ${meta.id}. Skipping the following tools for this sample: ${selected_fastq_tools.join(', ')}")
+                log.warn("Fastq files not found for sample '${meta.id}'. Skipping the following tools for this sample: ${selected_fastq_tools.join(', ')}")
             }
-            return fastqs
+            found: fastqs
+            not_found: !fastqs
         }
 
         //
@@ -98,7 +99,7 @@ workflow RNAFUSION {
 
         if(!params.skip_qc) {
             FASTQC (
-                ch_fastqs_to_process,
+                ch_fastqs_to_process.found,
             )
             ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
             ch_versions = ch_versions.mix(FASTQC.out.versions)
@@ -112,7 +113,7 @@ workflow RNAFUSION {
         if(tools.contains("fastp")) {
             def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
             TRIM_WORKFLOW (
-                ch_fastqs_to_process,
+                ch_fastqs_to_process.found,
                 ch_adapter_fasta,
                 params.skip_qc
             )
@@ -122,7 +123,7 @@ workflow RNAFUSION {
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]})
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]})
         } else {
-            ch_reads = ch_fastqs_to_process
+            ch_reads = ch_fastqs_to_process.found
         }
 
         //
@@ -195,7 +196,7 @@ workflow RNAFUSION {
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
 
         def fusions_created = false
-        def ch_arriba_fusions = ch_reads.map { it -> [it[0], []] } // Set arriba fusions to empty by default
+        def ch_arriba_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set arriba fusions to empty by default
         if(tools.contains("arriba")) {
             fusions_created = true
             ARRIBA_WORKFLOW (
@@ -216,7 +217,7 @@ workflow RNAFUSION {
         // SUBWORKFLOW: Run STAR alignment and StarFusion
         //
 
-        def ch_starfusion_fusions = ch_reads.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
+        def ch_starfusion_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
         if(tools.contains("starfusion")) {
             fusions_created = true
             STARFUSION_WORKFLOW (
@@ -232,7 +233,7 @@ workflow RNAFUSION {
         // SUBWORKFLOW: Run FusionCatcher
         //
 
-        def ch_fusioncatcher_fusions = ch_reads.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
+        def ch_fusioncatcher_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
         if(tools.contains("fusioncatcher")) {
             fusions_created = true
             FUSIONCATCHER_WORKFLOW (
@@ -241,6 +242,8 @@ workflow RNAFUSION {
                 params.fusioncatcher_fusions
             )
             ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+            // Add output of fusioncatcher to a channel + add empty entries for the samples that could not be run
+            ch_fusioncatcher_fusions = FUSIONCATCHER_WORKFLOW.out.fusions.mix(ch_fastqs_to_process.not_found)
         }
 
         //

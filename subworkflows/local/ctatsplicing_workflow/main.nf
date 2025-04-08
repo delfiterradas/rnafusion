@@ -10,9 +10,9 @@ workflow CTATSPLICING_WORKFLOW {
     main:
     def ch_versions = Channel.empty()
 
-    def ch_ctatsplicing_input = split_junctions.view()
-        .join(junctions.view(), failOnMismatch:true, failOnDuplicate:true)
-        .join(aligned_bams.view(), failOnMismatch:true, failOnDuplicate:true)
+    def ch_ctatsplicing_input = split_junctions
+        .join(junctions, failOnMismatch:true, failOnDuplicate:true)
+        .join(aligned_bams, failOnMismatch:true, failOnDuplicate:true)
         .map { meta, split_junction, junction, bam, bai ->
             [ meta, split_junction, junction, bam, bai ]
         }

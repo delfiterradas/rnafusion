@@ -172,7 +172,7 @@ def validateInputSamplesheet(input) {
 
     def bam_list = bam.findAll { it -> it != [] }
     def cram_list = cram.findAll { it -> it != [] }
-    def junctions_list = bai.findAll { it -> it != [] }
+    def junctions_list = junctions.findAll { it -> it != [] }
     def split_junctions_list = split_junctions.findAll { it -> it != [] }
     // Check alignment and junction files (input is a list)
     if (bam_list.size() > 1 || cram_list.size() > 1 || junctions_list.size() > 1 || split_junctions_list.size() > 1) {

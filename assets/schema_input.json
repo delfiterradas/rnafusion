@@ -81,7 +81,7 @@
             "crai": ["cram"]
         },
         "required": ["sample", "strandedness"],
-        "oneOf": [
+        "anyOf": [
             {
                 "required": ["fastq_1", "fastq_2"]
             },
@@ -93,6 +93,9 @@
             },
             {
                 "required": ["junctions"]
+            },
+            {
+                "required": ["split_junctions"]
             }
         ]
     }
