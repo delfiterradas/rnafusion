@@ -56,25 +56,25 @@ workflow RNAFUSION {
 
         def ch_input = ch_samplesheet_input.map { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
             def align = false
-                // Check if we need split junctions
-                if (tools.contains("ctatsplicing") && !splice_junctions) {
-                    align = true
-                }
+            // Check if we need split junctions
+            if (tools.contains("ctatsplicing") && !splice_junctions) {
+                align = true
+            }
 
-                // Check if we need junctions
-                if (tools.intersect(["starfusion", "ctatsplicing"]) && !junctions) {
-                    align = true
-                }
+            // Check if we need junctions
+            if (tools.intersect(["starfusion", "ctatsplicing"]) && !junctions) {
+                align = true
+            }
 
-                // Check if we need BAM or CRAM files
-                if (tools.intersect(["ctatsplicing", "arriba", "stringtie", "fusioninspector"]) && !bam && !cram) {
-                    align = true
-                }
+            // Check if we need BAM or CRAM files
+            if (tools.intersect(["ctatsplicing", "arriba", "stringtie", "fusioninspector"]) && !bam && !cram) {
+                align = true
+            }
 
-                // Check if there are fastqs when we need to align
-                if (align && !fastqs) {
-                    error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file, a junctions file and a split junctions file.")
-                }
+            // Check if there are fastqs when we need to align
+            if (align && !fastqs) {
+                error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file, a junctions file and a split junctions file.")
+            }
             def new_meta = meta + [align:align]
             return [ new_meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ]
         }
