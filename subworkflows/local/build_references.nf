@@ -64,14 +64,14 @@ workflow BUILD_REFERENCES {
 
     def ch_hgnc_date = Channel.empty()
     def ch_hgnc_ref  = Channel.empty()
-//TODO: unify as if(tools.contains("fusioninspector")) once nextflow bug fixed
+    //TODO: unify as if(tools.contains("fusioninspector")) once nextflow bug fixed
     def run_fusioninspector = tools.contains("fusioninspector")
-    if(run_fusioninspector) {
+    if(run_fusioninspector && !params.skip_vcf) {
         if ((!exists_not_empty(params.hgnc_ref) || !exists_not_empty(params.hgnc_date)) && !params.skip_vcf){
             HGNC_DOWNLOAD( )
             ch_versions = ch_versions.mix(HGNC_DOWNLOAD.out.versions)
-            ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref
-            ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date
+            ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref.map { that -> [[id:that.Name], that] }
+            ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date.map { that -> [[id:that.Name], that] }
         } else {
             ch_hgnc_ref = Channel.fromPath(params.hgnc_ref).map { that -> [[id:that.Name], that] }
             ch_hgnc_date = Channel.fromPath(params.hgnc_date).map { that -> [[id:that.Name], that] }
