@@ -19,6 +19,8 @@ process VCF_COLLECT {
     when:
     task.ext.when == null || task.ext.when
 
+    // TODO use BGZIP to compress the VCF file instead of GZIP
+
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
@@ -35,7 +37,7 @@ process VCF_COLLECT {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.vcf
+    touch ${prefix}.vcf.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

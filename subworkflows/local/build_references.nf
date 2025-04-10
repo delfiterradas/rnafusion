@@ -165,7 +165,7 @@ workflow BUILD_REFERENCES {
     }
 
     def ch_starfusion_ref = Channel.empty()
-    if (tools.intersect(["starfusion", "ctatsplicing"])) {
+    if (tools.intersect(["starfusion", "ctatsplicing", "fusioninspector"])) {
         if (!exists_not_empty(params.starfusion_ref)) {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")

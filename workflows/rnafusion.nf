@@ -37,8 +37,8 @@ workflow RNAFUSION {
 
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
-    tools          // list: a list of tools to run
+    ch_samplesheet_input    // channel: samplesheet read in from --input
+    tools                   // list: a list of tools to run
 
     main:
 
@@ -54,7 +54,7 @@ workflow RNAFUSION {
 
     if (!params.references_only) {
 
-        def ch_input = ch_samplesheet.multiMap { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
+        def ch_input = ch_samplesheet_input.map { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
             def align = false
                 // Check if we need split junctions
                 if (tools.contains("ctatsplicing") && !splice_junctions) {
@@ -76,11 +76,15 @@ workflow RNAFUSION {
                     error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file, a junctions file and a split junctions file.")
                 }
             def new_meta = meta + [align:align]
-            fastqs:             [ new_meta, fastqs ]
-            bam:                [ new_meta, bam, bai ]
-            cram:               [ new_meta, cram, crai ]
-            junctions:          [ new_meta, junctions ]
-            splice_junctions:    [ new_meta, splice_junctions ]
+            return [ new_meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ]
+        }
+        .tap { ch_samplesheet }
+        .multiMap { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
+            fastqs:             [ meta, fastqs ]
+            bam:                [ meta, bam, bai ]
+            cram:               [ meta, cram, crai ]
+            junctions:          [ meta, junctions ]
+            splice_junctions:   [ meta, splice_junctions ]
         }
 
         // Define which fastqs need to be processes (all analysis that's not aligning)
