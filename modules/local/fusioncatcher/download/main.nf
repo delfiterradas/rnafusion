@@ -11,8 +11,8 @@ process FUSIONCATCHER_DOWNLOAD {
     val genome_gencode_version
 
     output:
-    tuple env(meta), path("*"), emit: reference
-    path "versions.yml"       , emit: versions
+    tuple env(meta), path("human_v*"), emit: reference
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
