@@ -54,8 +54,6 @@ process FUSIONINSPECTOR {
     touch ${prefix}.FusionInspector.fusions.abridged.tsv
     touch ${prefix}.FusionInspector.fusions.tsv
     touch ${prefix}.fusion_inspector_web.html
-    touch ${prefix}.gtf
-    touch ${prefix}.coding_effect
     mkdir -p chckpts_dir
     touch chckpts_dir/add_FFPM.ok
     touch chckpts_dir/add_splice_info.ok
