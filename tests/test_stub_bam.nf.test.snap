@@ -417,11 +417,8 @@
     },
     "stub test fusioninspector": {
         "content": [
-            23,
+            21,
             {
-                "AGAT_CONVERTSPGFF2TSV": {
-                    "agat": "v1.4.0"
-                },
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
@@ -482,16 +479,11 @@
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
-                "VCF_COLLECT": {
-                    "python": "3.11.0"
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
             },
             [
-                "agat",
-                "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
@@ -618,9 +610,7 @@
                 "fusioninspector/test.FusionInspector.fusions.abridged.tsv",
                 "fusioninspector/test.FusionInspector.fusions.tsv",
                 "fusioninspector/test.FusionInspector.log",
-                "fusioninspector/test.coding_effect",
                 "fusioninspector/test.fusion_inspector_web.html",
-                "fusioninspector/test.gtf",
                 "fusionreport",
                 "fusionreport/test",
                 "fusionreport/test/AAA_BBB.html",
@@ -765,16 +755,14 @@
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
                 "star",
                 "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "vcf",
-                "vcf/test_fusion_data.vcf.gz"
+                "star/test.Aligned.sortedByCoord.out.bam.bai"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T11:06:49.393745077"
+        "timestamp": "2025-04-11T09:25:46.143222996"
     },
     "stub test salmon": {
         "content": [
@@ -1508,11 +1496,8 @@
     },
     "stub test all": {
         "content": [
-            35,
+            33,
             {
-                "AGAT_CONVERTSPGFF2TSV": {
-                    "agat": "v1.4.0"
-                },
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
@@ -1609,16 +1594,11 @@
                 "STRINGTIE_STRINGTIE": {
                     "stringtie": "2.2.3"
                 },
-                "VCF_COLLECT": {
-                    "python": "3.11.0"
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
             },
             [
-                "agat",
-                "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
@@ -1772,9 +1752,7 @@
                 "fusioninspector/test.FusionInspector.fusions.abridged.tsv",
                 "fusioninspector/test.FusionInspector.fusions.tsv",
                 "fusioninspector/test.FusionInspector.log",
-                "fusioninspector/test.coding_effect",
                 "fusioninspector/test.fusion_inspector_web.html",
-                "fusioninspector/test.gtf",
                 "fusionreport",
                 "fusionreport/test",
                 "fusionreport/test/AAA_BBB.html",
@@ -1958,15 +1936,13 @@
                 "stringtie/test.ballgown",
                 "stringtie/test.coverage.gtf",
                 "stringtie/test.gene.abundance.txt",
-                "stringtie/test.transcripts.gtf",
-                "vcf",
-                "vcf/test_fusion_data.vcf.gz"
+                "stringtie/test.transcripts.gtf"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T11:01:03.888007671"
+        "timestamp": "2025-04-11T09:18:32.616357228"
     }
 }
