@@ -156,6 +156,10 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },
+                "fusioncatcher_build": {
+                    "type": "boolean",
+                    "description": "Build fusioncatcher references instead of downloading them"
+                },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",

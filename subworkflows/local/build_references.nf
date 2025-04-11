@@ -5,7 +5,7 @@
 */
 
 include { GENCODE_DOWNLOAD }                from '../../modules/local/gencode_download/main'
-include { FUSIONCATCHER_BUILD }             from '../../modules/local/fusioncatcher/build/main'
+include { FUSIONCATCHER_DOWNLOAD }          from '../../modules/local/fusioncatcher/download/main'
 include { FUSIONREPORT_DOWNLOAD }           from '../../modules/local/fusionreport/download/main'
 include { HGNC_DOWNLOAD }                   from '../../modules/local/hgnc/main'
 include { STARFUSION_BUILD }                from '../../modules/local/starfusion/build/main'
@@ -18,6 +18,8 @@ include { CTATSPLICING_PREPGENOMELIB }      from '../../modules/local/ctatsplici
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ========================================================================================
 */
+
+include { FUSIONCATCHER_BUILD }             from '../../modules/nf-core/fusioncatcher/build/main'
 include { ARRIBA_DOWNLOAD }                 from '../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../modules/nf-core/samtools/faidx/main'
 include { STAR_GENOMEGENERATE }             from '../../modules/nf-core/star/genomegenerate/main'
@@ -155,9 +157,15 @@ workflow BUILD_REFERENCES {
     def ch_fusioncatcher_ref = Channel.empty()
     if (tools.contains("fusioncatcher")) {
         if (!exists_not_empty(params.fusioncatcher_ref)) {
-                FUSIONCATCHER_BUILD(params.genome_gencode_version)
+            if(params.fusioncatcher_build) {
+                FUSIONCATCHER_BUILD(Channel.value([id:"human_v${params.genome_gencode_version}"]))
                 ch_versions = ch_versions.mix(FUSIONCATCHER_BUILD.out.versions)
                 ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference
+            } else {
+                FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
+                ch_versions = ch_versions.mix(FUSIONCATCHER_DOWNLOAD.out.versions)
+                ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference
+            }
         }
         else {
             ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] }

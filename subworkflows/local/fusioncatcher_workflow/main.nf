@@ -1,9 +1,8 @@
-include { FUSIONCATCHER_DETECT } from '../../../modules/local/fusioncatcher/detect/main'
+include { FUSIONCATCHER_FUSIONCATCHER } from '../../../modules/nf-core/fusioncatcher/fusioncatcher/main'
 
 // TODO: Remove fusioncatcher_fusions as parameter.
 // TODO: remove dummy file. Work with Channel.empty()
 // TODO: if the files were already produced and the user want to skip the module because of this, they should be taken them from the sample sheet
-// TODO: harmonize `fusioncatcher` and `fusioncatcher_only` parameters at main workflow level to activate/skip this one.
 
 workflow FUSIONCATCHER_WORKFLOW {
     take:
@@ -20,12 +19,12 @@ workflow FUSIONCATCHER_WORKFLOW {
                                         .map { meta, _reads, fusions -> [ meta, fusions ] }
         } else {
 
-            FUSIONCATCHER_DETECT (
+            FUSIONCATCHER_FUSIONCATCHER (
                 reads,
                 fusioncatcher_ref
             )
-            ch_fusioncatcher_fusions = FUSIONCATCHER_DETECT.out.fusions
-            ch_versions              = ch_versions.mix(FUSIONCATCHER_DETECT.out.versions)
+            ch_fusioncatcher_fusions = FUSIONCATCHER_FUSIONCATCHER.out.fusions
+            ch_versions              = ch_versions.mix(FUSIONCATCHER_FUSIONCATCHER.out.versions)
         }
 
     emit:
