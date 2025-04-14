@@ -4,8 +4,8 @@ process FUSIONCATCHER_DOWNLOAD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/d5/d53f36e9e01d14a0ae8e15f8046f52b2883c970c27fe43fdfbd9440a55f5403f/data' :
-        'community.wave.seqera.io/library/fusioncatcher:1.33--4733482b637ef92f' }"
+        'https://depot.galaxyproject.org/singularity/fusioncatcher:1.33--hdfd78af_5':
+        'biocontainers/fusioncatcher:1.33--hdfd78af_5' }"
 
     input:
     val genome_gencode_version
