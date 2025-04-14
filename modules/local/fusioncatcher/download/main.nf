@@ -22,10 +22,9 @@ process FUSIONCATCHER_DOWNLOAD {
     def args = task.ext.args ?: ''
     meta = [ id: "human_v${genome_gencode_version}" ]
     """
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.aa
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ab
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ac
-    wget $args http://sourceforge.net/projects/fusioncatcher/files/data/human_${genome_gencode_version}.tar.gz.ad
+    wget $args ${params.fusioncatcher_download_link}/human_v${genome_gencode_version}.tar.gz.partaa?viasf=1
+    wget $args ${params.fusioncatcher_download_link}/human_v${genome_gencode_version}.tar.gz.partab?viasf=1
+    wget $args ${params.fusioncatcher_download_link}/human_v${genome_gencode_version}.tar.gz.partac?viasf=1
     cat human_${genome_gencode_version}.tar.gz.* | tar xz
     rm human_${genome_gencode_version}.tar*
 

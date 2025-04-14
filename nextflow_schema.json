@@ -156,9 +156,16 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },
-                "fusioncatcher_build": {
+                "fusioncatcher_download": {
                     "type": "boolean",
-                    "description": "Build fusioncatcher references instead of downloading them"
+                    "description": "Download fusioncatcher references instead of building them. This is only supported for human gencode v46 at the moment."
+                },
+                "fusioncatcher_download_link": {
+                    "type": "string",
+                    "description": "Fusioncatcher download link",
+                    "fa_icon": "far fa-file-code",
+                    "pattern": "^https?://.*$",
+                    "default": "https://master.dl.sourceforge.net/project/rnafusion/fusioncatcher"
                 },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
