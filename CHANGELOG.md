@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `CTATSPLICING_PREPGENOMELIB` to update the starfusion genome library directory with a cancer splicing index. [#610](https://github.com/nf-core/rnafusion/pull/610)
 - Add nf-test to local subworkflow: `FUSIONREPORT_WORKFLOW`. [#607](https://github.com/nf-core/rnafusion/pull/607)
 - Add nf-test to local module: `ARRIBA_VISUALISATION`. [#625](https://github.com/nf-core/rnafusion/pull/625)
+- Added `--fusioncatcher_download` and `--fusioncatcher_download_link`. These parameters can be used to download the fusioncatcher references from a repository, which is significantly faster than building the reference. This is only supported for human references for gencode v46.
 
 ### Changed
 
@@ -88,10 +89,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter        | New parameter       |
-| -------------------- | ------------------- |
-|                      | `--no_cosmic`       |
-| `--build_references` | `--references_only` |
+| Old parameter         | New parameter                   |
+| --------------------- | ------------------------------- |
+|                       | `--no_cosmic`                   |
+| `--build_references`  | `--references_only`             |
+| `--fastp_trim`        | `--tools`                       |
+| `--arriba`            | `--tools`                       |
+| `--ctatsplicing`      | `--tools`                       |
+| `--run_fusioncatcher` | `--tools`                       |
+| `--starfusion`        | `--tools`                       |
+| `--stringtie`         | `--tools`                       |
+| `--all`               | `--tools`                       |
+|                       | `--fusioncatcher_download`      |
+|                       | `--fusioncatcher_download_link` |
 
 ## v3.0.2 - [2024-04-10]
 
