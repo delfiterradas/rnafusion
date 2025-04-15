@@ -350,7 +350,7 @@
                 },
                 "species": {
                     "type": "string",
-                    "description": "Which species dfam should automatically download, default: human.",
+                    "description": "Which species dfam should automatically download, default: homo_sapiens.",
                     "fa_icon": "far fa-file-code",
                     "default": "human"
                 }
