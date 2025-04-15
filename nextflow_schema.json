@@ -156,9 +156,9 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },
-                "fusioncatcher_download": {
+                "fusioncatcher_build": {
                     "type": "boolean",
-                    "description": "Download fusioncatcher references instead of building them. This is only supported for human gencode v46 at the moment."
+                    "description": "Build fusioncatcher references instead of downloading them. This is required for any references other than for human gencode v46 at the moment."
                 },
                 "fusioncatcher_download_link": {
                     "type": "string",
