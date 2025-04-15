@@ -352,7 +352,7 @@
                     "type": "string",
                     "description": "Which species dfam should automatically download, default: homo_sapiens.",
                     "fa_icon": "far fa-file-code",
-                    "default": "human"
+                    "default": "homo_sapiens"
                 }
             }
         },
@@ -543,5 +543,11 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "dfam_version": {
+            "type": "number",
+            "default": 3.4
+        }
+    }
 }
