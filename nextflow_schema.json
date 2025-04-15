@@ -546,7 +546,7 @@
     ],
     "properties": {
         "dfam_version": {
-            "type": "number",
+            "type": "string",
             "default": 3.4
         }
     }
