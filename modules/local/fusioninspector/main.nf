@@ -41,6 +41,9 @@ process FUSIONINSPECTOR {
         --out_prefix $prefix \\
         --vis $args $args2
 
+    # Create the TSV file to avoid output file missing error when the TSV file hasn't been created (when no fusions have been found)
+    touch ${prefix}.FusionInspector.fusions.tsv
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         STAR-Fusion: \$(STAR-Fusion --version 2>&1 | grep -i 'version' | sed 's/STAR-Fusion version: //')
