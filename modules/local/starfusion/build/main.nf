@@ -21,7 +21,6 @@ process STARFUSION_BUILD {
     script:
     def args = task.ext.args ?: ''
     """
-    export TMPDIR=/tmp
     wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam34.0/Pfam-A.hmm.gz --no-check-certificate
 
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm --no-check-certificate
