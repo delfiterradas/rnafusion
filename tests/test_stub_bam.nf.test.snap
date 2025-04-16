@@ -1,7 +1,7 @@
 {
     "stub test starfusion": {
         "content": [
-            16,
+            14,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -34,19 +34,11 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
                 "STARFUSION": {
                     "STAR-Fusion": "1.14.0"
                 },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.14.0"
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -181,25 +173,6 @@
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat",
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm",
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
-                "star",
-                "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam",
                 "starfusion",
                 "starfusion/test.starfusion.abridged.coding_effect.tsv",
                 "starfusion/test.starfusion.abridged.tsv",
@@ -210,11 +183,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:41:41.407790326"
+        "timestamp": "2025-04-10T10:09:48.999599917"
     },
     "stub test stringtie": {
         "content": [
-            16,
+            15,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -246,14 +219,6 @@
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
-                },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -321,22 +286,6 @@
                 "star",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam",
                 "stringtie",
                 "stringtie/[:]",
                 "stringtie/[:]/stringtie.merged.gtf",
@@ -350,11 +299,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:50:39.921183013"
+        "timestamp": "2025-04-10T10:10:23.893097743"
     },
     "stub test arriba": {
         "content": [
-            16,
+            14,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -392,14 +341,6 @@
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
-                },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -465,37 +406,18 @@
                 "references/star/sjdbInfo.txt",
                 "references/star/sjdbList.fromGTF.out.tab",
                 "references/star/sjdbList.out.tab",
-                "references/star/transcriptInfo.tab",
-                "star",
-                "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam"
+                "references/star/transcriptInfo.tab"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:39:53.022836825"
+        "timestamp": "2025-04-10T10:07:56.264754749"
     },
     "stub test fusioninspector": {
         "content": [
-            22,
+            21,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -549,16 +471,8 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.14.0"
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -841,34 +755,18 @@
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
                 "star",
                 "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam"
+                "star/test.Aligned.sortedByCoord.out.bam.bai"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-11T09:17:30.682830486"
+        "timestamp": "2025-04-11T09:25:46.143222996"
     },
     "stub test salmon": {
         "content": [
-            11,
+            14,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -878,6 +776,10 @@
                 },
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
+                },
+                "GATK4_MARKDUPLICATES": {
+                    "gatk4": "4.5.0.0",
+                    "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": null
@@ -890,6 +792,12 @@
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
+                },
+                "PICARD_COLLECTINSERTSIZEMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "PICARD_COLLECTRNASEQMETRICS": {
+                    "picard": "3.3.0"
                 },
                 "SALMON_INDEX": {
                     "salmon": "1.10.3"
@@ -917,6 +825,15 @@
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
+                "picard",
+                "picard/test.bai",
+                "picard/test.bam",
+                "picard/test.bam.metrics",
+                "picard/test.cram",
+                "picard/test.cram.crai",
+                "picard/test.rna_metrics",
+                "picard/test_collectinsertsize.pdf",
+                "picard/test_collectinsertsize.txt",
                 "pipeline_info",
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
@@ -955,11 +872,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:44:11.204966248"
+        "timestamp": "2025-04-10T10:12:30.758487268"
     },
     "stub test ctatsplicing": {
         "content": [
-            17,
+            16,
             {
                 "CTATSPLICING_PREPGENOMELIB": {
                     "ctat-splicing": "0.0.2"
@@ -998,16 +915,8 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.14.0"
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -1161,34 +1070,18 @@
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
                 "star",
                 "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam"
+                "star/test.Aligned.sortedByCoord.out.bam.bai"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T16:59:53.744205313"
+        "timestamp": "2025-04-10T10:08:38.341565744"
     },
     "stub test fusionreport": {
         "content": [
-            22,
+            20,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -1239,19 +1132,11 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
                 "STARFUSION": {
                     "STAR-Fusion": "1.14.0"
                 },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.14.0"
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -1414,25 +1299,6 @@
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat",
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm",
                 "references/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
-                "star",
-                "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam",
                 "starfusion",
                 "starfusion/test.starfusion.abridged.coding_effect.tsv",
                 "starfusion/test.starfusion.abridged.tsv",
@@ -1443,11 +1309,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:43:02.916057311"
+        "timestamp": "2025-04-10T10:11:07.156105951"
     },
     "stub test fastp": {
         "content": [
-            10,
+            13,
             {
                 "FASTP": {
                     "fastp": "0.23.4"
@@ -1464,6 +1330,10 @@
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
                 },
+                "GATK4_MARKDUPLICATES": {
+                    "gatk4": "4.5.0.0",
+                    "samtools": "1.19.2"
+                },
                 "GENCODE_DOWNLOAD": {
                     "wget": null
                 },
@@ -1472,6 +1342,12 @@
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
+                },
+                "PICARD_COLLECTINSERTSIZEMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "PICARD_COLLECTRNASEQMETRICS": {
+                    "picard": "3.3.0"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
@@ -1502,6 +1378,15 @@
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
+                "picard",
+                "picard/test.bai",
+                "picard/test.bam",
+                "picard/test.bam.metrics",
+                "picard/test.cram",
+                "picard/test.cram.crai",
+                "picard/test.rna_metrics",
+                "picard/test_collectinsertsize.pdf",
+                "picard/test_collectinsertsize.txt",
                 "pipeline_info",
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
@@ -1517,11 +1402,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:43:33.740487484"
+        "timestamp": "2025-04-10T10:11:47.209265436"
     },
     "stub test fusioncatcher": {
         "content": [
-            10,
+            13,
             {
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1538,6 +1423,10 @@
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
                 },
+                "GATK4_MARKDUPLICATES": {
+                    "gatk4": "4.5.0.0",
+                    "samtools": "1.19.2"
+                },
                 "GENCODE_DOWNLOAD": {
                     "wget": null
                 },
@@ -1546,6 +1435,12 @@
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
+                },
+                "PICARD_COLLECTINSERTSIZEMETRICS": {
+                    "picard": "3.3.0"
+                },
+                "PICARD_COLLECTRNASEQMETRICS": {
+                    "picard": "3.3.0"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
@@ -1573,6 +1468,15 @@
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
+                "picard",
+                "picard/test.bai",
+                "picard/test.bam",
+                "picard/test.bam.metrics",
+                "picard/test.cram",
+                "picard/test.cram.crai",
+                "picard/test.rna_metrics",
+                "picard/test_collectinsertsize.pdf",
+                "picard/test_collectinsertsize.txt",
                 "pipeline_info",
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
@@ -1588,11 +1492,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-03T15:40:58.774714515"
+        "timestamp": "2025-04-10T10:09:12.170433159"
     },
     "stub test all": {
         "content": [
-            34,
+            33,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
@@ -1673,19 +1577,11 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
                 "STARFUSION": {
                     "STAR-Fusion": "1.14.0"
                 },
                 "STARFUSION_BUILD": {
                     "STAR-Fusion": "1.14.0"
-                },
-                "STAR_ALIGN": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -2030,22 +1926,6 @@
                 "star",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "star/test.Aligned.unsort.out.bam",
-                "star/test.Chimeric.out.junction",
-                "star/test.Log.final.out",
-                "star/test.Log.out",
-                "star/test.Log.progress.out",
-                "star/test.ReadsPerGene.out.tab",
-                "star/test.SJ.out.tab",
-                "star/test.Signal.UniqueMultiple.str1.out.bg",
-                "star/test.Signal.UniqueMultiple.str1.out.wig",
-                "star/test.out.sam",
-                "star/test.sortedByCoord.out.bam",
-                "star/test.tab",
-                "star/test.toTranscriptome.out.bam",
-                "star/test.unmapped_1.fastq.gz",
-                "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam",
                 "starfusion",
                 "starfusion/test.starfusion.abridged.coding_effect.tsv",
                 "starfusion/test.starfusion.abridged.tsv",
@@ -2063,6 +1943,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-11T09:09:47.739799535"
+        "timestamp": "2025-04-11T09:18:32.616357228"
     }
 }

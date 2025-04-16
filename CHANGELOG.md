@@ -31,6 +31,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `CTATSPLICING_PREPGENOMELIB` to update the starfusion genome library directory with a cancer splicing index. [#610](https://github.com/nf-core/rnafusion/pull/610)
 - Add nf-test to local subworkflow: `FUSIONREPORT_WORKFLOW`. [#607](https://github.com/nf-core/rnafusion/pull/607)
 - Add nf-test to local module: `ARRIBA_VISUALISATION`. [#625](https://github.com/nf-core/rnafusion/pull/625)
+- Added the following fields to the samplesheet [#647](https://github.com/nf-core/rnafusion/pull/647):
+  - `bam`: A BAM file aligned with STAR, it's the responsibility of the pipeline user to make sure this file has been correctly called.
+  - `bai`: The index of the BAM file, this is not required when a `bam` file has been given but can increase the pipeline speed a bit.
+  - `cram`: A CRAM file aligned with STAR, it's the responsibility of the pipeline user to make sure this file has been correctly called.
+  - `crai`: The index of the CRAM file, this is not required when a `cram` file has been given but can increase the pipeline speed a bit.
+  - `junctions`: A file containing the junctions determined by STAR (needed by `starfusion` and `ctatsplicing`)
+  - `splice_junctions` A file containing the splice junctions determined by STAR (needed by `ctatsplicing`)
 
 ### Changed
 
