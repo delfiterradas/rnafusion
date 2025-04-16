@@ -18,6 +18,7 @@ include { FASTQC                        }   from '../modules/nf-core/fastqc/main
 include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
 include { STAR_ALIGN                    }   from '../modules/nf-core/star/align/main'
 include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
+include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
 include { FASTQ_ALIGN_STAR              }   from '../subworkflows/local/fastq_align_star'
 include { CTATSPLICING_WORKFLOW         }   from '../subworkflows/local/ctatsplicing_workflow'
@@ -36,8 +37,8 @@ workflow RNAFUSION {
 
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
-    tools          // list: a list of tools to run
+    ch_samplesheet_input    // channel: samplesheet read in from --input
+    tools                   // list: a list of tools to run
 
     main:
 
@@ -53,13 +54,73 @@ workflow RNAFUSION {
 
     if (!params.references_only) {
 
+        def ch_input = ch_samplesheet_input.map { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
+            def align = false
+            // Check if we need split junctions
+            if (tools.contains("ctatsplicing") && !splice_junctions) {
+                align = true
+            }
+
+            // Check if we need junctions
+            if (tools.intersect(["starfusion", "ctatsplicing"]) && !junctions) {
+                align = true
+            }
+
+            // Check if we need BAM or CRAM files
+            if (tools.intersect(["ctatsplicing", "arriba", "stringtie", "fusioninspector"]) && !bam && !cram) {
+                align = true
+            }
+
+            // Check if there are fastqs when we need to align
+            if (align && !fastqs) {
+                error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file, a junctions file and a split junctions file.")
+            }
+            def new_meta = meta + [align:align]
+            return [ new_meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ]
+        }
+        .tap { ch_samplesheet }
+        .multiMap { meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ->
+            fastqs:             [ meta, fastqs ]
+            bam:                [ meta, bam, bai ]
+            cram:               [ meta, cram, crai ]
+            junctions:          [ meta, junctions ]
+            splice_junctions:   [ meta, splice_junctions ]
+        }
+
+        // Define which fastqs need to be processes (all analysis that's not aligning)
+        def fastq_tools = ["salmon", "fusioninspector", "fusioncatcher"]
+        selected_fastq_tools = tools.intersect(fastq_tools)
+        def ch_fastqs_to_process = ch_input.fastqs.branch { meta, fastqs ->
+            if (!fastqs && selected_fastq_tools) {
+                log.warn("Fastq files not found for sample '${meta.id}'. Skipping the following tools for this sample: ${selected_fastq_tools.join(', ')}")
+            }
+            found: fastqs
+            not_found: !fastqs
+        }
+
+        // Convert CRAM to BAM when needed (when tools that don't support CRAM are used and when the sample isn't aligned)
+        def only_bam_tools = ["ctatsplicing", "stringtie", "fusioninspector"]
+        def ch_aligned_inputs = ch_input.bam.filter { meta, file, _bai -> file && !meta.align }
+        if(tools.intersect(only_bam_tools)) {
+            SAMTOOLS_CONVERT(
+                ch_input.cram.filter { meta, file, _crai -> file && !meta.align },
+                BUILD_REFERENCES.out.fasta,
+                BUILD_REFERENCES.out.fai
+            )
+            ch_aligned_inputs = ch_aligned_inputs.mix(
+                SAMTOOLS_CONVERT.out.bam.join(SAMTOOLS_CONVERT.out.bai, failOnMismatch:true, failOnDuplicate:true)
+            )
+        } else {
+            ch_aligned_inputs = ch_aligned_inputs.mix(ch_input.cram.filter { meta, file, _crai -> file && !meta.align })
+        }
+
         //
         // QC from FASTQ files
         //
 
         if(!params.skip_qc) {
             FASTQC (
-                ch_samplesheet
+                ch_fastqs_to_process.found,
             )
             ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
             ch_versions = ch_versions.mix(FASTQC.out.versions)
@@ -73,7 +134,7 @@ workflow RNAFUSION {
         if(tools.contains("fastp")) {
             def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
             TRIM_WORKFLOW (
-                ch_samplesheet,
+                ch_fastqs_to_process.found,
                 ch_adapter_fasta,
                 params.skip_qc
             )
@@ -83,8 +144,12 @@ workflow RNAFUSION {
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]})
             ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]})
         } else {
-            ch_reads = ch_samplesheet
+            ch_reads = ch_fastqs_to_process.found
         }
+
+        //
+        // MODULE: SALMON_QUANT
+        //
 
         if(tools.contains("salmon") && !params.skip_qc) {
             SALMON_QUANT(
@@ -98,16 +163,22 @@ workflow RNAFUSION {
             ch_multiqc_files = ch_multiqc_files.mix(SALMON_QUANT.out.json_info.collect{it[1]})
             ch_versions      = ch_versions.mix(SALMON_QUANT.out.versions)
         }
+
         //
-        // Run STAR alignment
+        // SUBWORKFLOW: Run STAR alignment
         //
 
-        def ch_aligned_reads = Channel.empty()
-        def ch_star_junctions = Channel.empty()
-        def ch_star_split_junctions = Channel.empty()
+        // Define which fastqs need to be aligned
+        def ch_fastqs_to_align = ch_reads
+            .filter { meta, _fastqs -> meta.align }
+
+        // Add the alignment files to the correct channel if their fastqs aren't aligned
+        def ch_aligned_reads        = ch_aligned_inputs
+        def ch_star_junctions       = ch_input.junctions.filter { meta, file -> file && !meta.align }
+        def ch_star_splice_junctions = ch_input.splice_junctions.filter { meta, file -> file && !meta.align }
         if(tools.intersect(["ctatsplicing", "arriba", "starfusion", "stringtie"])) {
             FASTQ_ALIGN_STAR(
-                ch_reads,
+                ch_fastqs_to_align,
                 BUILD_REFERENCES.out.starindex_ref,
                 BUILD_REFERENCES.out.gtf,
                 BUILD_REFERENCES.out.fasta,
@@ -117,21 +188,21 @@ workflow RNAFUSION {
                 params.seq_center,
                 params.cram
             )
-            ch_versions = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
-            ch_aligned_reads = FASTQ_ALIGN_STAR.out.bam_bai
-            ch_star_junctions = FASTQ_ALIGN_STAR.out.junctions
-            ch_star_split_junctions = FASTQ_ALIGN_STAR.out.spl_junc_tabs
-            ch_multiqc_files = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.log_final.collect{it[1]}.ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.gene_count.collect{it[1]}.ifEmpty([]))
+            ch_versions             = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
+            ch_aligned_reads        = ch_aligned_reads.mix(FASTQ_ALIGN_STAR.out.bam_bai)
+            ch_star_junctions       = ch_star_junctions.mix(FASTQ_ALIGN_STAR.out.junctions)
+            ch_star_splice_junctions = ch_star_splice_junctions.mix(FASTQ_ALIGN_STAR.out.spl_junc_tabs)
+            ch_multiqc_files        = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.log_final.collect{it[1]}.ifEmpty([]))
+            ch_multiqc_files        = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.gene_count.collect{it[1]}.ifEmpty([]))
         }
 
         //
-        // Run CTAT-SPLICING
+        // SUBWORKFLOW: Run CTAT-SPLICING
         //
 
         if(tools.contains("ctatsplicing")) {
             CTATSPLICING_WORKFLOW(
-                ch_star_split_junctions,
+                ch_star_splice_junctions,
                 ch_star_junctions,
                 ch_aligned_reads,
                 BUILD_REFERENCES.out.starfusion_ref
@@ -140,14 +211,13 @@ workflow RNAFUSION {
         }
 
         //
-        // SUBWORKFLOW: Run STAR alignment and Arriba
+        // SUBWORKFLOW: Run Arriba
         //
 
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
-        // TODO: same as above, but with ch_arriba_fusion_fail. It's currently replaces by a dummy file
 
         def fusions_created = false
-        def ch_arriba_fusions = ch_reads.map { it -> [it[0], []] } // Set arriba fusions to empty by default
+        def ch_arriba_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set arriba fusions to empty by default
         if(tools.contains("arriba")) {
             fusions_created = true
             ARRIBA_WORKFLOW (
@@ -168,11 +238,10 @@ workflow RNAFUSION {
         // SUBWORKFLOW: Run STAR alignment and StarFusion
         //
 
-        def ch_starfusion_fusions = ch_reads.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
+        def ch_starfusion_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
         if(tools.contains("starfusion")) {
             fusions_created = true
             STARFUSION_WORKFLOW (
-                ch_aligned_reads.map { meta, bam, _bai -> [ meta, bam ]},
                 ch_star_junctions,
                 BUILD_REFERENCES.out.starfusion_ref,
                 params.starfusion_fusions
@@ -185,7 +254,7 @@ workflow RNAFUSION {
         // SUBWORKFLOW: Run FusionCatcher
         //
 
-        def ch_fusioncatcher_fusions = ch_reads.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
+        def ch_fusioncatcher_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
         if(tools.contains("fusioncatcher")) {
             fusions_created = true
             FUSIONCATCHER_WORKFLOW (
@@ -194,6 +263,8 @@ workflow RNAFUSION {
                 params.fusioncatcher_fusions
             )
             ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
+            // Add output of fusioncatcher to a channel + add empty entries for the samples that could not be run
+            ch_fusioncatcher_fusions = FUSIONCATCHER_WORKFLOW.out.fusions.mix(ch_fastqs_to_process.not_found)
         }
 
         //
@@ -221,7 +292,6 @@ workflow RNAFUSION {
                 error("Could not find any fusion files. Please generate some with --arriba, --starfusion and/or --fusioncatcher")
             }
             FUSIONREPORT_WORKFLOW (
-                ch_reads,
                 BUILD_REFERENCES.out.fusionreport_ref,
                 ch_arriba_fusions,
                 ch_starfusion_fusions,

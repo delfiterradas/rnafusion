@@ -4,28 +4,28 @@
 ========================================================================================
 */
 
-include { GENCODE_DOWNLOAD }                from '../../modules/local/gencode_download/main'
-include { FUSIONCATCHER_BUILD }             from '../../modules/local/fusioncatcher/build/main'
-include { FUSIONREPORT_DOWNLOAD }           from '../../modules/local/fusionreport/download/main'
-include { HGNC_DOWNLOAD }                   from '../../modules/local/hgnc/main'
-include { STARFUSION_BUILD }                from '../../modules/local/starfusion/build/main'
-include { GTF_TO_REFFLAT }                  from '../../modules/local/uscs/custom_gtftogenepred/main'
-include { GET_RRNA_TRANSCRIPTS }            from '../../modules/local/get_rrna_transcript/main'
-include { CTATSPLICING_PREPGENOMELIB }      from '../../modules/local/ctatsplicing/prepgenomelib/main.nf'
+include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode_download/main'
+include { FUSIONCATCHER_BUILD }             from '../../../modules/local/fusioncatcher/build/main'
+include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/local/fusionreport/download/main'
+include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
+include { STARFUSION_BUILD }                from '../../../modules/local/starfusion/build/main'
+include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
+include { GET_RRNA_TRANSCRIPTS }            from '../../../modules/local/get_rrna_transcript/main'
+include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatsplicing/prepgenomelib/main.nf'
 
 /*
 ========================================================================================
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ========================================================================================
 */
-include { ARRIBA_DOWNLOAD }                 from '../../modules/nf-core/arriba/download/main'
-include { SAMTOOLS_FAIDX }                  from '../../modules/nf-core/samtools/faidx/main'
-include { STAR_GENOMEGENERATE }             from '../../modules/nf-core/star/genomegenerate/main'
-include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../modules/nf-core/gatk4/createsequencedictionary/main'
-include { GATK4_BEDTOINTERVALLIST }         from '../../modules/nf-core/gatk4/bedtointervallist/main'
-include { SALMON_INDEX }                    from '../../modules/nf-core/salmon/index/main'
-include { GFFREAD }                         from '../../modules/nf-core/gffread/main'
-include { getFileSuffix } from '../../modules/nf-core/cat/cat/main.nf'
+include { ARRIBA_DOWNLOAD }                 from '../../../modules/nf-core/arriba/download/main'
+include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'
+include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/genomegenerate/main'
+include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../../modules/nf-core/gatk4/createsequencedictionary/main'
+include { GATK4_BEDTOINTERVALLIST }         from '../../../modules/nf-core/gatk4/bedtointervallist/main'
+include { SALMON_INDEX }                    from '../../../modules/nf-core/salmon/index/main'
+include { GFFREAD }                         from '../../../modules/nf-core/gffread/main'
+include { getFileSuffix } from '../../../modules/nf-core/cat/cat/main.nf'
 
 /*
 ========================================================================================
@@ -64,14 +64,14 @@ workflow BUILD_REFERENCES {
 
     def ch_hgnc_date = Channel.empty()
     def ch_hgnc_ref  = Channel.empty()
-//TODO: unify as if(tools.contains("fusioninspector")) once nextflow bug fixed
+    //TODO: unify as if(tools.contains("fusioninspector")) once nextflow bug fixed
     def run_fusioninspector = tools.contains("fusioninspector")
-    if(run_fusioninspector) {
+    if(run_fusioninspector && !params.skip_vcf) {
         if ((!exists_not_empty(params.hgnc_ref) || !exists_not_empty(params.hgnc_date)) && !params.skip_vcf){
             HGNC_DOWNLOAD( )
             ch_versions = ch_versions.mix(HGNC_DOWNLOAD.out.versions)
-            ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref
-            ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date
+            ch_hgnc_ref = HGNC_DOWNLOAD.out.hgnc_ref.map { that -> [[id:that.Name], that] }
+            ch_hgnc_date = HGNC_DOWNLOAD.out.hgnc_date.map { that -> [[id:that.Name], that] }
         } else {
             ch_hgnc_ref = Channel.fromPath(params.hgnc_ref).map { that -> [[id:that.Name], that] }
             ch_hgnc_date = Channel.fromPath(params.hgnc_date).map { that -> [[id:that.Name], that] }
@@ -165,7 +165,7 @@ workflow BUILD_REFERENCES {
     }
 
     def ch_starfusion_ref = Channel.empty()
-    if (tools.intersect(["starfusion", "ctatsplicing"])) {
+    if (tools.intersect(["starfusion", "ctatsplicing", "fusioninspector"])) {
         if (!exists_not_empty(params.starfusion_ref)) {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
@@ -235,9 +235,9 @@ def exists_not_empty(path) {
         return false
     }
 
-    // Check if the file is not a directory or is a URL and return whether it's empty or not
-    def is_url = ["https://", "ftp://", "http://"].findAll { it -> path.startsWith(it) }.size() > 0
-    if(is_url || !path_to_check.toFile().isDirectory()) {
+    // Don't check directories if the path is not local
+    def is_local = path_to_check.getScheme() == "file"
+    if(!is_local || !path_to_check.toFile().isDirectory()) {
         return !path_to_check.isEmpty()
     }
 

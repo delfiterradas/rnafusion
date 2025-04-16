@@ -3,7 +3,6 @@ include { FUSIONREPORT      }     from '../../../modules/local/fusionreport/dete
 
 workflow FUSIONREPORT_WORKFLOW {
     take:
-        reads
         fusionreport_ref
         arriba_fusions
         starfusion_fusions
@@ -14,12 +13,11 @@ workflow FUSIONREPORT_WORKFLOW {
         ch_report = Channel.empty()
         ch_csv = Channel.empty()
 
-        reads_fusions = reads
-            .join(arriba_fusions, failOnMismatch:true, failOnDuplicate:true)
+        def ch_fusions = arriba_fusions
             .join(starfusion_fusions, failOnMismatch:true, failOnDuplicate:true)
             .join(fusioncatcher_fusions, failOnMismatch:true, failOnDuplicate:true)
 
-        FUSIONREPORT(reads_fusions, fusionreport_ref, params.tools_cutoff)
+        FUSIONREPORT(ch_fusions, fusionreport_ref, params.tools_cutoff)
         ch_fusion_list = FUSIONREPORT.out.fusion_list
         ch_fusion_list_filtered = FUSIONREPORT.out.fusion_list_filtered
         ch_versions = ch_versions.mix(FUSIONREPORT.out.versions)
