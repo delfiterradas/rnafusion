@@ -4,8 +4,8 @@ process FUSIONCATCHER_DOWNLOAD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/fusioncatcher:1.33--hdfd78af_5':
-        'biocontainers/fusioncatcher:1.33--hdfd78af_5' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/3b/3b54fa9135194c72a18d00db6b399c03248103f87e43ca75e4b50d61179994b3/data':
+        'community.wave.seqera.io/library/wget:1.21.4--8b0fcde81c17be5e' }"
 
     input:
     val genome_gencode_version
@@ -30,7 +30,7 @@ process FUSIONCATCHER_DOWNLOAD {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusioncatcher: "\$(fusioncatcher --version 2>&1 | awk '{print \$2}')"
+        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
     END_VERSIONS
     """
 
@@ -40,7 +40,7 @@ process FUSIONCATCHER_DOWNLOAD {
     touch human_v${genome_gencode_version}/ensembl_fully_overlapping_genes.txt
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fusioncatcher: "\$(fusioncatcher --version 2>&1 | awk '{print \$2}')"
+        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
     END_VERSIONS
     """
 }
