@@ -31,6 +31,7 @@ process FUSIONCATCHER_DOWNLOAD {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
+        tar: \$(tar --version | head -1 | sed -e 's/tar (GNU tar) //')
     END_VERSIONS
     """
 
@@ -41,6 +42,7 @@ process FUSIONCATCHER_DOWNLOAD {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
+        tar: \$(tar --version | head -1 | sed -e 's/tar (GNU tar) //')
     END_VERSIONS
     """
 }
