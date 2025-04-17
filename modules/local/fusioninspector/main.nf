@@ -41,6 +41,15 @@ process FUSIONINSPECTOR {
         --out_prefix $prefix \\
         --vis $args $args2
 
+    # Touch the output files to make sure they exist
+    touch ${prefix}.FusionInspector.log
+    touch ${prefix}.FusionInspector.fusions.abridged.tsv
+    touch ${prefix}.FusionInspector.fusions.tsv
+    touch ${prefix}.fusion_inspector_web.html
+    mkdir -p IGV_inputs
+    mkdir -p fi_workdir
+    mkdir -p chckpts_dir
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         STAR-Fusion: \$(STAR-Fusion --version 2>&1 | grep -i 'version' | sed 's/STAR-Fusion version: //')
