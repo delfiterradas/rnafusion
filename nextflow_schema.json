@@ -31,7 +31,7 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": ["genomes_base", "outdir", "tools"],
+            "required": ["outdir", "genomes_base", "tools"],
             "properties": {
                 "input": {
                     "type": "string",
@@ -361,9 +361,14 @@
                 },
                 "species": {
                     "type": "string",
-                    "description": "Which species dfam should automatically download, default: human.",
+                    "description": "Which species dfam should automatically download, default: homo_sapiens.",
                     "fa_icon": "far fa-file-code",
-                    "default": "human"
+                    "default": "homo_sapiens"
+                },
+                "dfam_version": {
+                    "type": "string",
+                    "default": "3.4",
+                    "description": "Version of dfam to use"
                 }
             }
         },
@@ -534,10 +539,10 @@
     },
     "allOf": [
         {
-            "$ref": "#/$defs/input_output_options"
+            "$ref": "#/$defs/skip_steps"
         },
         {
-            "$ref": "#/$defs/skip_steps"
+            "$ref": "#/$defs/input_output_options"
         },
         {
             "$ref": "#/$defs/read_trimming_options"
