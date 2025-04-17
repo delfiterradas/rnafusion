@@ -19,7 +19,8 @@ nextflow_process {
                 ]
 
                 input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
-                input [3] = "human"
+                input [3] = "homo_sapiens"
+                input [4] = "3.4"
 
                 """
             }
@@ -123,7 +124,8 @@ nextflow_process {
                 ]
 
                 input [2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
-                input [3] = "human"
+                input [3] = "homo_sapiens"
+                input [4] = "3.4"
 
                 """
             }
