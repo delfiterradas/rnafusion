@@ -157,15 +157,9 @@ workflow BUILD_REFERENCES {
     def ch_fusioncatcher_ref = Channel.empty()
     if (tools.contains("fusioncatcher")) {
         if (!exists_not_empty(params.fusioncatcher_ref)) {
-            if(params.fusioncatcher_build) {
-                FUSIONCATCHER_BUILD(Channel.value([id:"human_v${params.genome_gencode_version}"]))
-                ch_versions = ch_versions.mix(FUSIONCATCHER_BUILD.out.versions)
-                ch_fusioncatcher_ref = FUSIONCATCHER_BUILD.out.reference
-            } else {
-                FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
-                ch_versions = ch_versions.mix(FUSIONCATCHER_DOWNLOAD.out.versions)
-                ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference
-            }
+            FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
+            ch_versions = ch_versions.mix(FUSIONCATCHER_DOWNLOAD.out.versions)
+            ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference
         }
         else {
             ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] }

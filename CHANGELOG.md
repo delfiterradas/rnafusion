@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `crai`: The index of the CRAM file, this is not required when a `cram` file has been given but can increase the pipeline speed a bit.
   - `junctions`: A file containing the junctions determined by STAR (needed by `starfusion` and `ctatsplicing`)
   - `splice_junctions` A file containing the splice junctions determined by STAR (needed by `ctatsplicing`)
-- Added `--fusioncatcher_build` and `--fusioncatcher_download_link`. [#650](https://github.com/nf-core/rnafusion/pull/650)
+- Added `--fusioncatcher_download_link`. [#650](https://github.com/nf-core/rnafusion/pull/650)
 
 ### Changed
 
