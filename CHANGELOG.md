@@ -86,7 +86,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed missing script `gtf2bed` which caused local module `GET_RRNA_TRANSCRIPTS` to fail [#602](https://github.com/nf-core/rnafusion/issues/602)
 - Fixed the codebase to be compatible with the Nextflow language server [#634](https://github.com/nf-core/rnafusion/pull/634)
 - Updated the input validation to be more strict. This will prevent more errors down the line in the pipeline [#640](https://github.com/nf-core/rnafusion/pull/640)
-- Fusioncatcher build should now work again [#650](https://github.com/nf-core/rnafusion/pull/650)
 - The `FUSIONINSPECTOR` process will no longer fail when no fusions have been found. [#651](https://github.com/nf-core/rnafusion/pull/651)
 - Fixed STAR-Fusion build would fail when downloading Pfam and Dfam resources behind SSL. [#653](https://github.com/nf-core/rnafusion/pull/653)
 
@@ -95,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove fusionGDB from documentation and fusion-report download stubs [#503](https://github.com/nf-core/rnafusion/pull/503)
 - Removed test-build as reference building gets integrated in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Removed parameter `--build_references`
+- Removed fusioncatcher build [#650](https://github.com/nf-core/rnafusion/pull/650)
 
 ### Parameters
 
@@ -102,14 +102,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | --------------------- | ------------------------------- |
 |                       | `--no_cosmic`                   |
 | `--build_references`  | `--references_only`             |
-| `--fastp_trim`        | `--tools`                       |
-| `--arriba`            | `--tools`                       |
-| `--ctatsplicing`      | `--tools`                       |
-| `--run_fusioncatcher` | `--tools`                       |
-| `--starfusion`        | `--tools`                       |
-| `--stringtie`         | `--tools`                       |
-| `--all`               | `--tools`                       |
-|                       | `--fusioncatcher_build`         |
+| `--fastp_trim`        | `--tools fastp`                 |
+| `--arriba`            | `--tools arriba`                |
+| `--run_fusioncatcher` | `--tools fusioncatcher`         |
+| `--starfusion`        | `--tools starfusion`            |
+| `--stringtie`         | `--tools stringtie`             |
+| `--all`               | `--tools all`                   |
 |                       | `--fusioncatcher_download_link` |
 
 ## v3.0.2 - [2024-04-10]
