@@ -19,7 +19,6 @@ include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatspl
 ========================================================================================
 */
 
-include { FUSIONCATCHER_BUILD }             from '../../../modules/nf-core/fusioncatcher/build/main'
 include { ARRIBA_DOWNLOAD }                 from '../../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'
 include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/genomegenerate/main'
