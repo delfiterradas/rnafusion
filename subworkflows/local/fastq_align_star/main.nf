@@ -10,8 +10,6 @@ workflow FASTQ_ALIGN_STAR {
     fasta           // channel: [ meta, fasta ]
     fai             // channel: [ meta, fai ]
     ignore_sjdbgtf  // boolean
-    seq_platform    // string
-    seq_center      // string
     cram            // boolean: Create CRAM files
 
     main:
@@ -21,8 +19,8 @@ workflow FASTQ_ALIGN_STAR {
         index,
         gtf,
         ignore_sjdbgtf,
-        seq_platform,
-        seq_center
+        "", // seq_platform is handled in the config
+        ""  // seq_center is handled in the config
     )
     ch_versions = ch_versions.mix(STAR_ALIGN.out.versions.first())
 
