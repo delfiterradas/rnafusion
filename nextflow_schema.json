@@ -156,6 +156,13 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },
+                "fusioncatcher_download_link": {
+                    "type": "string",
+                    "description": "Fusioncatcher download link",
+                    "fa_icon": "far fa-file-code",
+                    "pattern": "^https?://.*$",
+                    "default": "https://master.dl.sourceforge.net/project/rnafusion/fusioncatcher"
+                },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",

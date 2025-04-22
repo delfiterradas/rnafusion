@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `crai`: The index of the CRAM file, this is not required when a `cram` file has been given but can increase the pipeline speed a bit.
   - `junctions`: A file containing the junctions determined by STAR (needed by `starfusion` and `ctatsplicing`)
   - `splice_junctions` A file containing the splice junctions determined by STAR (needed by `ctatsplicing`)
+- Added `--fusioncatcher_download_link`. [#650](https://github.com/nf-core/rnafusion/pull/650)
 
 ### Changed
 
@@ -93,13 +94,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove fusionGDB from documentation and fusion-report download stubs [#503](https://github.com/nf-core/rnafusion/pull/503)
 - Removed test-build as reference building gets integrated in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Removed parameter `--build_references`
+- Removed fusioncatcher build [#650](https://github.com/nf-core/rnafusion/pull/650)
 
 ### Parameters
 
-| Old parameter        | New parameter       |
-| -------------------- | ------------------- |
-|                      | `--no_cosmic`       |
-| `--build_references` | `--references_only` |
+| Old parameter         | New parameter                   |
+| --------------------- | ------------------------------- |
+|                       | `--no_cosmic`                   |
+| `--build_references`  | `--references_only`             |
+| `--fastp_trim`        | `--tools fastp`                 |
+| `--arriba`            | `--tools arriba`                |
+| `--run_fusioncatcher` | `--tools fusioncatcher`         |
+| `--starfusion`        | `--tools starfusion`            |
+| `--stringtie`         | `--tools stringtie`             |
+| `--all`               | `--tools all`                   |
+|                       | `--fusioncatcher_download_link` |
 
 ## v3.0.2 - [2024-04-10]
 
