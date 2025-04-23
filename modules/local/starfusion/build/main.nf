@@ -41,7 +41,7 @@ process STARFUSION_BUILD {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        wget: \$(echo wget -V 2>&1 | grep "GNU Wget" | cut -d" " -f3)
+        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
         STAR-Fusion: \$(STAR-Fusion --version 2>&1 | grep -i 'version' | sed 's/STAR-Fusion version: //')
     END_VERSIONS
     """
@@ -133,7 +133,7 @@ process STARFUSION_BUILD {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        wget: \$(echo wget -V 2>&1 | grep "GNU Wget" | cut -d" " -f3)
+        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
         STAR-Fusion: \$(STAR-Fusion --version 2>&1 | grep -i 'version' | sed 's/STAR-Fusion version: //')
     END_VERSIONS
     """

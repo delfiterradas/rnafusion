@@ -20,7 +20,7 @@ process HGNC_DOWNLOAD {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        wget: \$(echo wget -V 2>&1 | grep "GNU Wget" | cut -d" " -f3)
+        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
     END_VERSIONS
     """
 
@@ -31,7 +31,7 @@ process HGNC_DOWNLOAD {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        wget: \$(echo wget -V 2>&1 | grep "GNU Wget" | cut -d" " -f3)
+        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
     END_VERSIONS
     """
 
