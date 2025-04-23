@@ -17,7 +17,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -38,6 +38,7 @@
                     "STAR-Fusion": "1.14.0"
                 },
                 "STARFUSION_BUILD": {
+                    "wget": "1.21.4",
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_GENOMEGENERATE": {
@@ -183,7 +184,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T10:09:48.999599917"
+        "timestamp": "2025-04-23T11:16:16.851201431"
     },
     "stub test stringtie": {
         "content": [
@@ -203,7 +204,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -299,7 +300,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T10:10:23.893097743"
+        "timestamp": "2025-04-23T11:16:59.945308111"
     },
     "stub test arriba": {
         "content": [
@@ -325,7 +326,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -413,7 +414,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T10:07:56.264754749"
+        "timestamp": "2025-04-23T11:14:09.827324661"
     },
     "stub test fusioninspector": {
         "content": [
@@ -451,7 +452,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -460,7 +461,7 @@
                     "gtfToGenePred": 377
                 },
                 "HGNC_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
@@ -472,6 +473,7 @@
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
+                    "wget": "1.21.4",
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_GENOMEGENERATE": {
@@ -762,7 +764,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-11T09:25:46.143222996"
+        "timestamp": "2025-04-23T11:20:00.302967276"
     },
     "stub test salmon": {
         "content": [
@@ -782,7 +784,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -872,7 +874,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T10:12:30.758487268"
+        "timestamp": "2025-04-23T11:19:13.383274003"
     },
     "stub test ctatsplicing": {
         "content": [
@@ -898,7 +900,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -916,6 +918,7 @@
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
+                    "wget": "1.21.4",
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_GENOMEGENERATE": {
@@ -1077,7 +1080,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T10:08:38.341565744"
+        "timestamp": "2025-04-23T11:14:53.085896038"
     },
     "stub test fusionreport": {
         "content": [
@@ -1116,7 +1119,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -1137,6 +1140,7 @@
                     "STAR-Fusion": "1.14.0"
                 },
                 "STARFUSION_BUILD": {
+                    "wget": "1.21.4",
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_GENOMEGENERATE": {
@@ -1311,7 +1315,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-16T10:51:50.320939135"
+        "timestamp": "2025-04-23T11:17:44.757543251"
     },
     "stub test fastp": {
         "content": [
@@ -1337,7 +1341,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -1404,7 +1408,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-10T10:11:47.209265436"
+        "timestamp": "2025-04-23T11:18:29.048528226"
     },
     "stub test fusioncatcher": {
         "content": [
@@ -1431,7 +1435,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -1496,7 +1500,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-16T10:48:04.746178504"
+        "timestamp": "2025-04-23T11:15:34.335857758"
     },
     "stub test all": {
         "content": [
@@ -1553,7 +1557,7 @@
                     "samtools": "1.19.2"
                 },
                 "GENCODE_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "GET_RRNA_TRANSCRIPTS": {
                     "get_rrna_transcripts": "v1.0"
@@ -1565,7 +1569,7 @@
                     "gtfToGenePred": 377
                 },
                 "HGNC_DOWNLOAD": {
-                    "wget": null
+                    "wget": "1.21.4"
                 },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
@@ -1586,6 +1590,7 @@
                     "STAR-Fusion": "1.14.0"
                 },
                 "STARFUSION_BUILD": {
+                    "wget": "1.21.4",
                     "STAR-Fusion": "1.14.0"
                 },
                 "STAR_GENOMEGENERATE": {
@@ -1949,6 +1954,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-16T10:44:36.932311827"
+        "timestamp": "2025-04-23T11:13:24.397441064"
     }
 }
