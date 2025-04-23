@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `junctions`: A file containing the junctions determined by STAR (needed by `starfusion` and `ctatsplicing`)
   - `splice_junctions` A file containing the splice junctions determined by STAR (needed by `ctatsplicing`)
 - Added `--fusioncatcher_download_link`. [#650](https://github.com/nf-core/rnafusion/pull/650)
+- Added the `seq_platform` and `seq_center` fields to the samplesheet. These values can be used to overwrite the value of `--seq_platform` and `--seq_center` on a sample-by-sample basis [#654](https://github.com/nf-core/rnafusion/pull/654)
 
 ### Changed
 

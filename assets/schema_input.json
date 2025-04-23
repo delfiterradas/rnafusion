@@ -73,6 +73,18 @@
                 "type": "string",
                 "enum": ["forward", "reverse", "unstranded", "unknown"],
                 "errorMessage": "Strandedness has to be 'forward', 'reverse', 'unstranded' or 'unknown'"
+            },
+            "seq_platform": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sequencing platform has to be a string and cannot contain spaces",
+                "meta": "seq_platform"
+            },
+            "seq_center": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sequencing center has to be a string and cannot contain spaces",
+                "meta": "seq_center"
             }
         },
         "dependentRequired": {

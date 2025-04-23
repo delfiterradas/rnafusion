@@ -75,7 +75,7 @@ workflow RNAFUSION {
             if (align && !fastqs) {
                 error("No fastq files found for ${meta.id}. Either provide fastq files to align or provide a BAM/CRAM file, a junctions file and a split junctions file.")
             }
-            def new_meta = meta + [align:align]
+            def new_meta = meta + [align:align, seq_center:meta.seq_center ?: params.seq_center, seq_platform:meta.seq_platform ?: params.seq_platform]
             return [ new_meta, fastqs, bam, bai, cram, crai, junctions, splice_junctions ]
         }
         .tap { ch_samplesheet }
@@ -184,8 +184,6 @@ workflow RNAFUSION {
                 BUILD_REFERENCES.out.fasta,
                 BUILD_REFERENCES.out.fai,
                 params.star_ignore_sjdbgtf,
-                params.seq_platform,
-                params.seq_center,
                 params.cram
             )
             ch_versions             = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
