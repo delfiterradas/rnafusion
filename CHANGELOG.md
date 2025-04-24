@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `--fusioncatcher_download_link`. [#650](https://github.com/nf-core/rnafusion/pull/650)
 - Added the `seq_platform` and `seq_center` fields to the samplesheet. These values can be used to overwrite the value of `--seq_platform` and `--seq_center` on a sample-by-sample basis [#654](https://github.com/nf-core/rnafusion/pull/654)
 - Moved strandedness determination for picard collectrnaseqmetrics into modules.config [#658](https://github.com/nf-core/rnafusion/pull/658)
+- Using option `--human_gencode_filter` while building STARFusion references for human species [#657](https://github.com/nf-core/rnafusion/pull/657)
 
 ### Changed
 
@@ -119,7 +120,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update to nf-tools 2.11.1 [#457] (https://github.com/nf-core/rnafusion/pull/457)
+- Update to nf-tools 2.11.1 [#457](https://github.com/nf-core/rnafusion/pull/457)
 - Update picard collectrnaseqmetrics memory requirements to 0.8x what is provided [#474](https://github.com/nf-core/rnafusion/pull/474)
 
 ### Fixed
