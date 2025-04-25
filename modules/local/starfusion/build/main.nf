@@ -21,14 +21,15 @@ process STARFUSION_BUILD {
     script:
     def args = task.ext.args ?: ''
     """
-    wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam34.0/Pfam-A.hmm.gz --no-check-certificate
-
+    wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm.h3f --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm.h3i --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm.h3m --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm.h3p --no-check-certificate
     gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
+    wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm -O AnnotFilterRule.pm --no-check-certificate
+
 
     prep_genome_lib.pl \\
         --genome_fa $fasta \\
@@ -36,6 +37,7 @@ process STARFUSION_BUILD {
         --dfam_db ${dfam_species}_dfam.hmm \\
         --pfam_db Pfam-A.hmm \\
         --fusion_annot_lib $fusion_annot_lib \\
+        --annot_filter_rule AnnotFilterRule.pm \\
         --CPU $task.cpus \\
         ${args}
 
