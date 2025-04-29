@@ -31,7 +31,7 @@ process STARFUSION_BUILD {
     wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm -O AnnotFilterRule.pm --no-check-certificate
 
 
-    prep_genome_lib.pl \\
+    /usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl \\
         --genome_fa $fasta \\
         --gtf $gtf \\
         --dfam_db ${dfam_species}_dfam.hmm \\
