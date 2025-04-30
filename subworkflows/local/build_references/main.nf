@@ -116,7 +116,7 @@ workflow BUILD_REFERENCES {
                 ch_versions = ch_versions.mix(SALMON_INDEX.out.versions)
                 ch_salmon_index = SALMON_INDEX.out.index
             } else {
-                ch_salmon_index = Channel.fromPath(params.salmon_index).map { it -> [[id:it.name], it] }
+                ch_salmon_index = Channel.fromPath(params.salmon_index)
             }
         }
     }
