@@ -21,13 +21,17 @@ jobs:
           workdir: s3://${{ secrets.AWS_S3_BUCKET }}/work/rnafusion/work-${{ github.sha }}
           parameters: |
             {
-              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-test-${{ github.sha }}"
+              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ github.sha }}",
+              "genomes_base": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ github.sha }}/references",
+              "cosmic_username": "${{ secrets.cosmic_username }}",
+              "cosmic_passwd": "${{ secrets.cosmic_passwd }}",
+              "all": true,
+              "stub": true
             }
-          profiles: test
-
+          profiles: test,aws_tower
       - uses: actions/upload-artifact@v4
         with:
-          name: Seqera Platform debug log file
+          name: Tower debug log file
           path: |
-            seqera_platform_action_*.log
-            seqera_platform_action_*.json
+            tower_action_*.log
+            tower_action_*.json
