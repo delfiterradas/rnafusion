@@ -363,7 +363,6 @@
                 },
                 "dfam_version": {
                     "type": "string",
-                    "default": "3.9",
                     "description": "Version of dfam to use"
                 }
             }
