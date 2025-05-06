@@ -14,9 +14,8 @@ process FUSIONREPORT_DOWNLOAD {
     script:
     meta = [id: 'fusion_report_db']
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
     """
-    fusion_report download $args $args2 ./
+    fusion_report download $args ./
     mkdir fusion_report_db
     mv *.txt *.log *.db fusion_report_db/
 
