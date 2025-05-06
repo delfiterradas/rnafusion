@@ -16,7 +16,7 @@ process FUSIONREPORT_DOWNLOAD {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     """
-    fusion_report download $args ./
+    fusion_report download $args $args2 ./
     mkdir fusion_report_db
     mv *.txt *.log *.db fusion_report_db/
 
