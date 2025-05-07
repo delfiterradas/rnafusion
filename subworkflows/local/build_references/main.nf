@@ -56,7 +56,7 @@ workflow BUILD_REFERENCES {
 
     def ch_fai = Channel.empty()
     if (!exists_not_empty(params.fai)){
-        SAMTOOLS_FAIDX(ch_fasta, [[],[]])
+        SAMTOOLS_FAIDX(ch_fasta, [[],[]], false)
         ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
         ch_fai = SAMTOOLS_FAIDX.out.fai
     } else {
