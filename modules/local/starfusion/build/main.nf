@@ -13,6 +13,7 @@ process STARFUSION_BUILD {
     path fusion_annot_lib
     val dfam_species
     val dfam_version
+    val pfam_version
 
     output:
     tuple val(meta), path("ctat_genome_lib_build_dir"), emit: reference
@@ -21,7 +22,7 @@ process STARFUSION_BUILD {
     script:
     def args = task.ext.args ?: ''
     """
-    wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz --no-check-certificate
+    wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${pfam_version}/Pfam-A.hmm.gz --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm.h3f --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm.h3i --no-check-certificate
