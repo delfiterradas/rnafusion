@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the `seq_platform` and `seq_center` fields to the samplesheet. These values can be used to overwrite the value of `--seq_platform` and `--seq_center` on a sample-by-sample basis [#654](https://github.com/nf-core/rnafusion/pull/654)
 - Moved strandedness determination for picard collectrnaseqmetrics into modules.config [#658](https://github.com/nf-core/rnafusion/pull/658)
 - Using option `--human_gencode_filter` while building STARFusion references for human species [#657](https://github.com/nf-core/rnafusion/pull/657)
+- Added `--star_limit_bam_sort_ram` to set the maximum memory for sorting the BAM files in STAR. [#668](https://github.com/nf-core/rnafusion/pull/668)
 
 ### Changed
 
