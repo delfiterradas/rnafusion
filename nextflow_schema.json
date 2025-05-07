@@ -529,6 +529,12 @@
                     "hidden": true,
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "Setting false will use GTF file for STAR alignment"
+                },
+                "star_limit_bam_sort_ram": {
+                    "type": "integer",
+                    "description": "The maximum amount of RAM to use for sorting the BAM file in STAR. Should by in bits",
+                    "fa_icon": "fas fa-toolbox",
+                    "minimum": 0
                 }
             }
         }
