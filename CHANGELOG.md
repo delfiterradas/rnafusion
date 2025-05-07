@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved strandedness determination for picard collectrnaseqmetrics into modules.config [#658](https://github.com/nf-core/rnafusion/pull/658)
 - Using option `--human_gencode_filter` while building STARFusion references for human species [#657](https://github.com/nf-core/rnafusion/pull/657)
 - Update STAR-Fusion to 1.15.0 and update nf-core modules [#664](https://github.com/nf-core/rnafusion/pull/664)
+- Update fusionreport 4.0.0 that replaces the score of a fusion with a Fusion Indication Index [#667](https://github.com/nf-core/rnafusion/pull/667)
 
 ### Changed
 
