@@ -436,10 +436,10 @@
                     "STAR-Fusion": null
                 },
                 "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
+                    "fusion_report": "4.0.0"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "2.1.5"
+                    "fusion_report": "4.0.0"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -1103,10 +1103,10 @@
                     "fusioncatcher": "1.33"
                 },
                 "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
+                    "fusion_report": "4.0.0"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "2.1.5"
+                    "fusion_report": "4.0.0"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -1541,10 +1541,10 @@
                     "STAR-Fusion": null
                 },
                 "FUSIONREPORT": {
-                    "fusion_report": "2.1.5"
+                    "fusion_report": "4.0.0"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "2.1.5"
+                    "fusion_report": "4.0.0"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
