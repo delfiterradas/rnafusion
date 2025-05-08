@@ -56,7 +56,7 @@ workflow BUILD_REFERENCES {
 
     def ch_fai = Channel.empty()
     if (!exists_not_empty(params.fai)){
-        SAMTOOLS_FAIDX(ch_fasta, [[],[]])
+        SAMTOOLS_FAIDX(ch_fasta, [[],[]], false)
         ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
         ch_fai = SAMTOOLS_FAIDX.out.fai
     } else {
@@ -171,7 +171,7 @@ workflow BUILD_REFERENCES {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
             }
-            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, params.dfam_version)
+            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, params.dfam_version, params.pfam_version)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {
                 CTATSPLICING_PREPGENOMELIB(

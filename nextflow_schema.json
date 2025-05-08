@@ -363,8 +363,11 @@
                 },
                 "dfam_version": {
                     "type": "string",
-                    "default": "3.4",
                     "description": "Version of dfam to use"
+                },
+                "pfam_version": {
+                    "type": "string",
+                    "description": "Version of pfam to use"
                 }
             }
         },

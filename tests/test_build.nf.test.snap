@@ -35,11 +35,11 @@
                 },
                 "STARFUSION_BUILD": {
                     "wget": "1.21.4",
-                    "STAR-Fusion": "1.14.0"
+                    "STAR-Fusion": "1.15.0"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
-                    "samtools": 1.2,
+                    "samtools": 1.21,
                     "gawk": "5.1.0"
                 },
                 "Workflow": {
@@ -220,7 +220,7 @@
                 "sjdbList.fromGTF.out.tab:md5,8f3e8604b00d4067e4eb80aa476a8113",
                 "sjdbList.out.tab:md5,5d78dd49d5db24ca2c056b7ebe5c2059",
                 "transcriptInfo.tab:md5,b758c0ccaddcf0453bab5905b3cec4a2",
-                "AnnotFilterRule.pm:md5,5391fcc58d9c71cd1f0e45668c5ec597",
+                "AnnotFilterRule.pm:md5,f94966013cd0df9624a6dda0b75fefa0",
                 "_fusion_annot_lib.idx.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "_prot_info_db.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "annotfiltrule_cp.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -277,9 +277,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nf-test": "0.8.4",
+            "nextflow": "24.10.6"
         },
-        "timestamp": "2025-04-23T10:08:10.68706064"
+        "timestamp": "2025-05-07T14:33:25.428259571"
     }
 }
