@@ -80,6 +80,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `fusioninspector`
   - `all` => This will automatically run all of the above tools
 - Updated all `wget` containers to `conda-forge::wget=1.21.4` [#655](https://github.com/nf-core/rnafusion/pull/655)
+- Updated STAR-Fusion container for version 1.15 [#669](https://github.com/nf-core/rnafusion/pull/669)
+- Fix bug in argument handling for FusionInspector [#669](https://github.com/nf-core/rnafusion/pull/669)
 
 ### Fixed
 
