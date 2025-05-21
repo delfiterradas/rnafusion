@@ -46,7 +46,7 @@ nextflow_process {
                         file("https://github.com/FusionInspector/FusionInspector/raw/master/test/fusion_targets.A.txt")
                     ]
                 ]
-                input[1] = [[id:'minigenome_refs'],[STARFUSION_BUILD.out.reference.map { it[1] }]]
+                input[1] = STARFUSION_BUILD.out.reference
                 """
             }
         }
