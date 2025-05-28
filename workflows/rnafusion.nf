@@ -257,7 +257,7 @@ workflow RNAFUSION {
             fusions_created = true
             FUSIONCATCHER_WORKFLOW (
                 ch_reads,
-                params.tools?.contains('sth') ?: false,
+                params.tools?.contains('fusioncatcher_trim') ?: false,
                 params.adapter_fasta,
                 BUILD_REFERENCES.out.fusioncatcher_ref,       // channel [ meta, path       ]
                 params.fusioncatcher_fusions
