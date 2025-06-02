@@ -255,7 +255,7 @@ workflow RNAFUSION {
         def ch_fusioncatcher_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
         if(tools.contains("fusioncatcher")) {
             fusions_created = true
-            fusioncatcher_trimming = { params.tools?.contains('fusioncatcher_trim') ?: false }
+            fusioncatcher_trimming = { params.tools.contains('fusioncatcher_trim') ?: false }
             FUSIONCATCHER_WORKFLOW (
                 ch_reads,
                 fusioncatcher_trimming,
