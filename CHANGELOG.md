@@ -80,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `fusioninspector`
   - `all` => This will automatically run all of the above tools
 - Updated all `wget` containers to `conda-forge::wget=1.21.4` [#655](https://github.com/nf-core/rnafusion/pull/655)
+- Using FusionInspector abridged output (that now contains coding effects) for downstream analysis [#669](https://github.com/nf-core/rnafusion/pull/669)
 
 ### Fixed
 
@@ -95,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the input validation to be more strict. This will prevent more errors down the line in the pipeline [#640](https://github.com/nf-core/rnafusion/pull/640)
 - The `FUSIONINSPECTOR` process will no longer fail when no fusions have been found. [#651](https://github.com/nf-core/rnafusion/pull/651)
 - Fixed STAR-Fusion build would fail when downloading Pfam and Dfam resources behind SSL. [#653](https://github.com/nf-core/rnafusion/pull/653)
+- Fix bug in argument handling for FusionInspector [#669](https://github.com/nf-core/rnafusion/pull/669)
 
 ### Removed
 
