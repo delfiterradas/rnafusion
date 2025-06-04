@@ -113,8 +113,8 @@ For more details about the output files and reports, please refer to the
 
 nf-core/rnafusion was written by Martin Proks ([@matq007](https://github.com/matq007)), Maxime Garcia ([@maxulysse](https://github.com/maxulysse)) and Annick Renevey ([@rannick](https://github.com/rannick))
 
-We thank the following people for their help in the development of this pipeline:
--
+## We thank the following people for their help in the development of this pipeline:
+
 - [Phil Ewels](https://github.com/ewels)
 - [Rickard Hammarén](https://github.com/Hammarn)
 - [Alexander Peltzer](https://github.com/apeltzer)
