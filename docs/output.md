@@ -149,7 +149,7 @@ If `--tools fastp` is present, [fastp](https://github.com/OpenGene/fastp) will f
 
 ### Fastp for fusioncatcher
 
-If `--tools fusioncatcher_trim` is present, [fastp](https://github.com/OpenGene/fastp) will be run again as above. This to potentially shorten the reads fed into fusioncatcher further with `--trim_tail_fusioncatcher` if the reads are above 100 bp.
+If `--tools fusioncatcher_trim` is present, [fastp](https://github.com/OpenGene/fastp) will be run again as above. This is to potentially shorten the reads fed into `fusioncatcher` further with `--trim_tail_fusioncatcher` if the reads are above 100 bp.
 
 <details markdown="1">
 <summary>Output files</summary>
