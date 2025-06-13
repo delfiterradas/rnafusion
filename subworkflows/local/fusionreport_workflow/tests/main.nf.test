@@ -11,10 +11,19 @@ nextflow_workflow {
     test("FUSIONREPORT_WORKFLOW - Full Test") {
 
         setup {
-            run("FUSIONREPORT_DOWNLOAD") {
-                script "../../../../modules/local/fusionreport/download/main.nf"
+            run("FUSIONCATCHER_FUSIONCATCHER") {
+                script "../../../../modules/nf-core/fusioncatcher/detect/main.nf"
                 process {
                     """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_2.fastq.gz', checkIfExists: true),
+                ]
+                input[1] = [
+                    [ id:'reference'],
+                    []
+                ]
                     """
                 }
             }
@@ -50,12 +59,12 @@ nextflow_workflow {
             }
             params {
                 fusioninspector_only = false
-                tools_cutoff = 1
+                tools_cutoff    = 1
                 arriba          = true
                 starfusion      = true
                 fusioncatcher   = true
                 no_cosmic       = true
-                outdir               = "$outputDir"
+                outdir          = "$outputDir"
             }
         }
 

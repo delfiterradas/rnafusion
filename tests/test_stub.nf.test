@@ -109,7 +109,6 @@ nextflow_pipeline {
             params {
                 outdir           = "$outputDir"
                 tools            = "fusioncatcher"
-                fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
             }
         }
 
@@ -134,6 +133,17 @@ nextflow_pipeline {
             )
         }
     }
+
+    test("stub test fusioncatcher") {
+
+            when {
+                params {
+                    outdir           = "$outputDir"
+                    tools            = "fusioncatcher,fusioncatcher_trim"
+                    trim_tail_fusioncatcher = 50
+                }
+            }
+        }
 
     test("stub test starfusion") {
 
