@@ -5,7 +5,7 @@ process STARFUSION_BUILD {
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'docker://trinityctat/starfusion:1.15.0' :
-        'trinityctat/starfusion:1.15.0'}"
+        'docker.io/trinityctat/starfusion:1.15.0'}"
 
     input:
     tuple val(meta), path(fasta)
