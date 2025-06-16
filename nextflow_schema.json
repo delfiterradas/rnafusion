@@ -263,13 +263,13 @@
                 "trim_tail": {
                     "type": "integer",
                     "description": "The amount of bases to trim at the tail of each read, none will be trimmed by default",
-                    "minimum": 1,
+                    "minimum": 0,
                     "fa_icon": "fas fa-cut"
                 },
                 "trim_tail_fusioncatcher": {
                     "type": "integer",
                     "description": "The amount of bases to trim at the tail of each read for fusioncatcher, none will be trimmed by default",
-                    "minimum": 1,
+                    "minimum": 0,
                     "fa_icon": "fas fa-cut"
                 },
                 "adapter_fasta": {
