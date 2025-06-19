@@ -11,19 +11,10 @@ nextflow_workflow {
     test("FUSIONREPORT_WORKFLOW - Full Test") {
 
         setup {
-            run("FUSIONCATCHER_FUSIONCATCHER") {
-                script "../../../../modules/nf-core/fusioncatcher/detect/main.nf"
+            run("FUSIONREPORT_DOWNLOAD") {
+                script "../../../../modules/local/fusionreport/download/main.nf"
                 process {
                     """
-                input[0] = [
-                    [ id:'test', single_end:false ], // meta map
-                    file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true),
-                    file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_2.fastq.gz', checkIfExists: true),
-                ]
-                input[1] = [
-                    [ id:'reference'],
-                    []
-                ]
                     """
                 }
             }
@@ -32,25 +23,19 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                // Input channels
-                input[0] = Channel.of(
-                    [ [ id:'test_sample' ],
-                    file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/reads_1.fq.gz") ]
-                )
+                input[0] = FUSIONREPORT_DOWNLOAD.out.fusionreport_ref
 
-                input[1] = FUSIONREPORT_DOWNLOAD.out.fusionreport_ref
-
-                input[2] = Channel.of(
+                input[1] = Channel.of(
                     [[ id:'test_sample' ],
                         file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/arriba.tsv") ]
                 )
 
-                input[3] =  Channel.of(
+                input[2] =  Channel.of(
                     [[ id:'test_sample' ],
                         file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/starfusion.tsv") ]
                 )
 
-                input[4] =  Channel.of(
+                input[3] =  Channel.of(
                     [[ id:'test_sample' ],
                         file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/fusioncatcher.txt") ]
                 )
