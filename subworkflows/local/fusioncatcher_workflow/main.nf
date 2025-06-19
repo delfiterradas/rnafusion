@@ -8,8 +8,8 @@ include { FUSIONCATCHER_FUSIONCATCHER }      from '../../../modules/nf-core/fusi
 workflow FUSIONCATCHER_WORKFLOW {
     take:
         reads                   // channel [ meta, [ fastqs ] ]
-        fusioncatcher_trimming     // boolean
-        adapter_fasta         // channel [ path ]
+        fusioncatcher_trimming  // boolean
+        adapter_fasta           // channel [ path ]
         fusioncatcher_ref       // channel [ meta, path       ]
         fusioncatcher_fusions   // path, string
 
