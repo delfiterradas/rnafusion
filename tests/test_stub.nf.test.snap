@@ -1191,13 +1191,16 @@
     },
     "stub test fusionreport": {
         "content": [
-            22,
+            23,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.4.0"
+                },
+                "FASTP_FOR_FUSIONCATCHER": {
+                    "fastp": "0.24.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1271,6 +1274,12 @@
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "fastp_for_fusioncatcher",
+                "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher.fastp.html",
+                "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher.fastp.json",
+                "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher.fastp.log",
+                "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher_1.fastp.fastq.gz",
+                "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher_2.fastp.fastq.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -1449,7 +1458,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-16T12:57:56.061136"
+        "timestamp": "2025-06-19T11:14:43.400962"
     },
     "stub test fastp": {
         "content": [
@@ -1526,79 +1535,6 @@
         "timestamp": "2025-06-16T09:26:06.949386"
     },
     "stub test fusioncatcher": {
-        "content": [
-            10,
-            {
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "FUSIONCATCHER_DOWNLOAD": {
-                    "wget": "1.21.4",
-                    "tar": 1.35
-                },
-                "FUSIONCATCHER_FUSIONCATCHER": {
-                    "fusioncatcher": "1.33"
-                },
-                "GATK4_BEDTOINTERVALLIST": {
-                    "gatk4": "4.6.1.0"
-                },
-                "GATK4_CREATESEQUENCEDICTIONARY": {
-                    "gatk4": "4.6.1.0"
-                },
-                "GENCODE_DOWNLOAD": {
-                    "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
-                },
-                "Workflow": {
-                    "nf-core/rnafusion": "v4.0.0dev"
-                }
-            },
-            [
-                "fastqc",
-                "fastqc/test.html",
-                "fastqc/test.zip",
-                "fusioncatcher",
-                "fusioncatcher/test.fusion-genes.txt",
-                "fusioncatcher/test.log",
-                "fusioncatcher/test.summary.txt",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
-                "pipeline_info",
-                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
-                "references",
-                "references/fusioncatcher",
-                "references/fusioncatcher/human_v46",
-                "references/fusioncatcher/human_v46/ensembl_fully_overlapping_genes.txt",
-                "references/gencode",
-                "references/gencode/Homo_sapiens.GRCh38.46.gtf",
-                "references/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
-                "references/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
-                "references/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
-                "references/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
-        },
-        "timestamp": "2025-06-13T19:51:03.177928"
-    },
-    "stub test fusioncatcher trim": {
         "content": [
             11,
             {
@@ -1678,7 +1614,21 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-16T13:27:39.239583"
+        "timestamp": "2025-06-19T11:08:43.632179"
+    },
+    "stub test fusioncatcher trim": {
+        "content": [
+            0,
+            null,
+            [
+                "pipeline_info"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-06-19T11:09:09.500124"
     },
     "stub test all": {
         "content": [

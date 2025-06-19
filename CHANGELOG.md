@@ -119,7 +119,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--stringtie`         | `--tools stringtie`             |
 | `--all`               | `--tools all`                   |
 |                       | `--fusioncatcher_download_link` |
-|                       | `--tools fusioncatcher_trim`    |
 |                       | `--trim_tail_fusioncatcher`     |
 
 ## v3.0.2 - [2024-04-10]

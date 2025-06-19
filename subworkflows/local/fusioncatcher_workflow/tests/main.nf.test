@@ -35,7 +35,7 @@ nextflow_workflow {
                 """
             }
             params {
-                tools                   = 'fusioncatcher,fusioncatcher_trim'
+                tools                   = 'fusioncatcher'
                 trim_tail_fusioncatcher = 50
                 outdir                  = "$outputDir"
             }

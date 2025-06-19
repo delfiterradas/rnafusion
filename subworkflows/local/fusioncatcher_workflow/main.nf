@@ -8,7 +8,7 @@ include { FUSIONCATCHER_FUSIONCATCHER }      from '../../../modules/nf-core/fusi
 workflow FUSIONCATCHER_WORKFLOW {
     take:
         reads                   // channel [ meta, [ fastqs ] ]
-        fusioncatcher_trim     // boolean
+        fusioncatcher_trimming     // boolean
         adapter_fasta         // channel [ path ]
         fusioncatcher_ref       // channel [ meta, path       ]
         fusioncatcher_fusions   // path, string
@@ -21,7 +21,7 @@ workflow FUSIONCATCHER_WORKFLOW {
             ch_fusioncatcher_fusions = reads.combine(Channel.value(file(fusioncatcher_fusions, checkIfExists:true)))
                                         .map { meta, _reads, fusions -> [ meta, fusions ] }
         } else {
-            if (fusioncatcher_trim) {
+            if (fusioncatcher_trimming) {
                 FASTP_FOR_FUSIONCATCHER(
                     reads,
                     adapter_fasta,

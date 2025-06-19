@@ -149,7 +149,7 @@ If `--tools fastp` is present, [fastp](https://github.com/OpenGene/fastp) will f
 
 ### Fastp for fusioncatcher
 
-If `--tools fusioncatcher_trim` is present, [fastp](https://github.com/OpenGene/fastp) will be run again as above. This is to potentially shorten the reads fed into `fusioncatcher` further with `--trim_tail_fusioncatcher` if the reads are above 100 bp.
+If `trim_tail_fusioncatcher` is present, [fastp](https://github.com/OpenGene/fastp) will be run again as above. This allows for additional trimming of read tails before running FusionCatcher. For example if reads are 150bp, using --trim_tail_fusioncatcher 50 will shorten reads to 100 bp  by 50 bases from the 3′ end. 100 bp is the recommended read length to feed into FusionCatcher.
 
 <details markdown="1">
 <summary>Output files</summary>

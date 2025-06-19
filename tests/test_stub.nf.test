@@ -140,7 +140,7 @@ nextflow_pipeline {
         when {
             params {
                 outdir           = "$outputDir"
-                tools            = "fusioncatcher,fusioncatcher_trim"
+                tools            = "fusioncatcher"
                 trim_tail_fusioncatcher = 50
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
 
