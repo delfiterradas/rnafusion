@@ -98,8 +98,9 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     file(process.out.tsv[0][1]).name,
-                    process.out.tsv_coding_effect,  // TODO: These files do not seem to be produced. Consult Annick.
-                    process.out.out_gtf,            // TODO: These files do not seem to be produced. Consult Annick.
+                    process.out.tsv,
+                    process.out.out_gtf,
+                    process.out.abridged_tsv,
                     file(process.out.log[0][1]).name,
                     file(process.out.html[0][1]).name,
                     file(process.out.abridged_tsv[0][1]).name,
@@ -109,7 +110,7 @@ nextflow_process {
                     file(process.out.fi_workdir[0][1]).list().findAll { file -> !unstableFiles.contains(file) },
                     process.out.chckpts_dir,
                     process.out.versions
-                    ).match() }
+                ).match() }
             )
         }
 

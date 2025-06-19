@@ -13,7 +13,7 @@ process FUSIONINSPECTOR {
 
     output:
     tuple val(meta), path("*FusionInspector.fusions.tsv")                  , emit: tsv
-    tuple val(meta), path("*.gtf")                          , optional:true, emit: out_gtf
+    tuple val(meta), path("fi_workdir/*.gtf")                              , optional:true, emit: out_gtf
     tuple val(meta), path("*FusionInspector.log")                          , emit: log
     tuple val(meta), path("*html")                                         , emit: html
     tuple val(meta), path("*abridged.tsv")                                 , emit: abridged_tsv
