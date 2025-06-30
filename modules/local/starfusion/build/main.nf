@@ -3,9 +3,7 @@ process STARFUSION_BUILD {
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/3f/3f616513213e4f4f71ff5a70022f2a8f19e3d581afbe7a3f21fe30b7ed2d6d2a/data' :
-        'community.wave.seqera.io/library/minimap2_star-fusion:6156774e85366463'}"
+    container 'docker.io/trinityctat/starfusion:1.15.0'
 
 
     input:
