@@ -1601,16 +1601,13 @@
     },
     "stub test all": {
         "content": [
-            34,
+            33,
             {
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.4.0"
                 },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.4.0"
-                },
-                "ARRIBA_VISUALISATION": {
-                    "arriba": "2.4.0"
                 },
                 "CTATSPLICING_PREPGENOMELIB": {
                     "ctat-splicing": "0.0.2"
@@ -1880,10 +1877,6 @@
                 "get",
                 "get/rrna.bed",
                 "get/rrna.gtf",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
                 "picard",
                 "picard/test.bai",
                 "picard/test.bam",
@@ -2076,6 +2069,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-19T13:51:57.84272"
+        "timestamp": "2025-06-19T15:22:04.26107"
     }
 }
