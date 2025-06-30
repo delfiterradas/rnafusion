@@ -94,7 +94,6 @@ nextflow_process {
                     path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/genomeParameters.txt").exists(),
                     path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/Log.out").exists(),
                     path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/SA"),
-                    path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/SAindex"),
                     path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/sjdbInfo.txt"),
                     path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/sjdbList.fromGTF.out.tab"),
                     path(process.out.reference[0][1]).resolve("ref_genome.fa.star.idx/sjdbList.out.tab"),

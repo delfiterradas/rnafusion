@@ -26,7 +26,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.FusionInspector.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "FusionInspector.log:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -358,7 +358,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.FusionInspector.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "FusionInspector.log:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "out_gtf": [
@@ -388,18 +388,51 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-19T15:26:31.711939"
+        "timestamp": "2025-06-30T15:11:46.208438"
     },
     "FUSIONINSPECTOR": {
         "content": [
             [
-                "versions.yml:md5,ad8d0da5929dfa70794bccf8765ddb23"
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.FusionInspector.fusions.tsv:md5,01a2578b59f112d23a1475cd75b9af0b"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.gtf:md5,d523061bd8b443a014d4cca9406ec772"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.FusionInspector.fusions.abridged.tsv:md5,98d99b567527d990086689e4f7f8cc12"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "FusionInspector.log:md5,6cdafdbfe281ca9bb92c484e5a001d41"
+                ]
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-06-19T11:55:09.238503"
+        "timestamp": "2025-06-30T15:11:10.528898"
     }
 }

@@ -20,6 +20,7 @@ process STARFUSION_BUILD {
 
     script:
     def args = task.ext.args ?: ''
+    def binPath = (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1)  ? "prep_genome_lib.pl" : "/usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl"
     """
     wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${pfam_version}/Pfam-A.hmm.gz --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm --no-check-certificate
@@ -30,8 +31,7 @@ process STARFUSION_BUILD {
     gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
     wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm -O AnnotFilterRule.pm --no-check-certificate
 
-
-    prep_genome_lib.pl \\
+    $binPath \\
         --genome_fa $fasta \\
         --gtf $gtf \\
         --dfam_db ${dfam_species}_dfam.hmm \\
