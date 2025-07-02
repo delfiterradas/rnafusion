@@ -7,7 +7,6 @@ process STARFUSION_BUILD {
         'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/75/75d085bf2a8e40c6693b357800eef0f9568f661226d0888339bc77f7852234bb/data' :
         'community.wave.seqera.io/library/dfam_hmmer_minimap2_star-fusion:e285bb3eb373b9a7'}"
 
-
     input:
     tuple val(meta), path(fasta)
     tuple val(meta2), path(gtf)
@@ -22,7 +21,6 @@ process STARFUSION_BUILD {
 
     script:
     def args = task.ext.args ?: ''
-    def binPath = (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1)  ? "prep_genome_lib.pl" : "/usr/local/src/STAR-Fusion/ctat-genome-lib-builder/prep_genome_lib.pl"
     """
     wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${pfam_version}/Pfam-A.hmm.gz --no-check-certificate
     wget https://www.dfam.org/releases/Dfam_${dfam_version}/infrastructure/dfamscan/${dfam_species}_dfam.hmm --no-check-certificate
@@ -33,7 +31,7 @@ process STARFUSION_BUILD {
     gunzip Pfam-A.hmm.gz && hmmpress Pfam-A.hmm
     wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm -O AnnotFilterRule.pm --no-check-certificate
 
-    $binPath \\
+    prep_genome_lib.pl \\
         --genome_fa $fasta \\
         --gtf $gtf \\
         --dfam_db ${dfam_species}_dfam.hmm \\
