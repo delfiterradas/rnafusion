@@ -104,7 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed test-build as reference building gets integrated in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
 - Removed parameter `--build_references`
 - Removed fusioncatcher build [#650](https://github.com/nf-core/rnafusion/pull/650)
-- Removed subworkflow with less than two modules: `ARRIBA_WORKFLOW` [#xxx](https://github.com/nf-core/rnafusion/pull/xxx)
+- Removed subworkflow with less than two modules: `ARRIBA_WORKFLOW` [#692](https://github.com/nf-core/rnafusion/pull/692)
 
 ### Parameters
 
