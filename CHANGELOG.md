@@ -97,6 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `FUSIONINSPECTOR` process will no longer fail when no fusions have been found. [#651](https://github.com/nf-core/rnafusion/pull/651)
 - Fixed STAR-Fusion build would fail when downloading Pfam and Dfam resources behind SSL. [#653](https://github.com/nf-core/rnafusion/pull/653)
 - Fix bug in argument handling for FusionInspector [#669](https://github.com/nf-core/rnafusion/pull/669)
+- Upgrade STAR-Fusion to 1.15.1 to solve problem building STAR-Fusion references with `--human_gencode_filter` [#683](https://github.com/nf-core/rnafusion/pull/683)
 
 ### Removed
 
