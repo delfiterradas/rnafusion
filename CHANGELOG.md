@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `--star_limit_bam_sort_ram` to set the maximum memory for sorting the BAM files in STAR. [#668](https://github.com/nf-core/rnafusion/pull/668)
 - Update STAR-Fusion to 1.15.0 and update nf-core modules [#664](https://github.com/nf-core/rnafusion/pull/664)
 - Update fusionreport 4.0.0 that replaces the score of a fusion with a Fusion Indication Index [#667](https://github.com/nf-core/rnafusion/pull/667)
+- Added a extra trimming step for fusioncatcher in case a different read-length is wished for this tool only [#674](https://github.com/nf-core/rnafusion/pull/674)
 
 ### Changed
 
@@ -97,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `FUSIONINSPECTOR` process will no longer fail when no fusions have been found. [#651](https://github.com/nf-core/rnafusion/pull/651)
 - Fixed STAR-Fusion build would fail when downloading Pfam and Dfam resources behind SSL. [#653](https://github.com/nf-core/rnafusion/pull/653)
 - Fix bug in argument handling for FusionInspector [#669](https://github.com/nf-core/rnafusion/pull/669)
+- Fix missing memory unit for fusioncatcher [#674](https://github.com/nf-core/rnafusion/pull/674)
 
 ### Removed
 
@@ -118,6 +120,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--stringtie`         | `--tools stringtie`             |
 | `--all`               | `--tools all`                   |
 |                       | `--fusioncatcher_download_link` |
+|                       | `--trim_tail_fusioncatcher`     |
 
 ## v3.0.2 - [2024-04-10]
 
