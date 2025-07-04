@@ -42,7 +42,7 @@
                     },
                     "fusioncatcher/fusioncatcher": {
                         "branch": "master",
-                        "git_sha": "2a227f75f33415f74a884ef8b33555b151e33de9",
+                        "git_sha": "1037205706929921360f57e8042eae6819825e31",
                         "installed_by": ["modules"]
                     },
                     "gatk4/bedtointervallist": {

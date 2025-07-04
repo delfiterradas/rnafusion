@@ -133,7 +133,7 @@ If multiple libraries or runs have been provided for the same sample in the inpu
 
 ### Fastp
 
-If `--trim_fastp` is selected, [fastp](https://github.com/OpenGene/fastp) will filter low quality reads as well as bases at the 5' and 3' ends, trim adapters (automatically detected, but input with parameter `--adapter_fasta` is possible). 3' trimming is also possible via parameter `--trim_tail`.
+If `--tools fastp` is present, [fastp](https://github.com/OpenGene/fastp) will filter low quality reads as well as bases at the 5' and 3' ends, trim adapters (automatically detected, but input with parameter `--adapter_fasta` is possible). 3' trimming is also possible via parameter `--trim_tail`.
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -144,6 +144,22 @@ If `--trim_fastp` is selected, [fastp](https://github.com/OpenGene/fastp) will f
   - `<sample>.fastp.html`
   - `<sample>.fastp.json`
   - `<sample>.fastp.log`
+
+</details>
+
+### Fastp for fusioncatcher
+
+If `trim_tail_fusioncatcher` has any value other than 0, [fastp](https://github.com/OpenGene/fastp) will be run again as above. This allows for additional trimming of read tails before running FusionCatcher. For example if reads are 150bp, using `--trim_tail_fusioncatcher 50` will shorten reads to 100 bp by 50 bases from the 3′ end. 100 bp is the recommended read length to feed into FusionCatcher. The default for `--trim_tail_fusioncatcher` is 0 (no trimming).
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `fastp/`
+  - `<sample>_trimmed_for_fusioncatcher_1.fastp.fastq.gz`
+  - `<sample>_trimmed_for_fusioncatcher_2.fastp.fastq.gz`
+  - `<sample>_trimmed_for_fusioncatcher.fastp.html`
+  - `<sample>_trimmed_for_fusioncatcher.fastp.json`
+  - `<sample>_trimmed_for_fusioncatcher.fastp.log`
 
 </details>
 
