@@ -15,6 +15,9 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 input            = "${projectDir}/tests/yml/bam.yml"
+                tools            = "all"
+                no_cosmic        = true
+
             }
         }
 
@@ -48,6 +51,8 @@ nextflow_pipeline {
                 tools            = "arriba"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 input            = "${projectDir}/tests/yml/bam.yml"
+                no_cosmic        = true
+
             }
         }
 
@@ -213,6 +218,7 @@ nextflow_pipeline {
                 tools            = "fusionreport,arriba,starfusion,fusioncatcher"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 input            = "${projectDir}/tests/yml/bam.yml"
+                no_cosmic        = true
             }
         }
 
