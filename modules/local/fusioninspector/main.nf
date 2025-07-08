@@ -12,15 +12,15 @@ process FUSIONINSPECTOR {
     tuple val(meta2), path(reference)
 
     output:
-    tuple val(meta), path("*FusionInspector.fusions.tsv")                  , emit: tsv
-    tuple val(meta), path("fi_workdir/*.gtf")                              , optional:true, emit: out_gtf
-    tuple val(meta), path("*FusionInspector.log")                          , emit: log
-    tuple val(meta), path("*html")                                         , emit: html
-    tuple val(meta), path("*abridged.tsv")                                 , emit: abridged_tsv
-    tuple val(meta), path("IGV_inputs")                                    , emit: igv_inputs
-    tuple val(meta), path("fi_workdir")                                    , emit: fi_workdir
-    tuple val(meta), path("chckpts_dir")                                   , emit: chckpts_dir
-    path "versions.yml"                                                    , emit: versions
+    tuple val(meta), path("*FusionInspector.fusions.tsv")   , emit: tsv
+    tuple val(meta), path("fi_workdir/*.gtf")               , emit: out_gtf, optional:true
+    tuple val(meta), path("*FusionInspector.log")           , emit: log
+    tuple val(meta), path("*html")                          , emit: html
+    tuple val(meta), path("*abridged.tsv")                  , emit: abridged_tsv
+    tuple val(meta), path("IGV_inputs")                     , emit: igv_inputs
+    tuple val(meta), path("fi_workdir")                     , emit: fi_workdir
+    tuple val(meta), path("chckpts_dir")                    , emit: chckpts_dir
+    path "versions.yml"                                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -51,7 +51,7 @@ process FUSIONINSPECTOR {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        STAR-Fusion: \$(STAR-Fusion --version 2>&1 | grep -i 'version' | sed 's/STAR-Fusion version: //')
+        FusionInspector: \$(FusionInspector --version 2>&1 | grep -i 'version' | sed -e 's/FusionInspector version: //' -e 's/[[:space:]]//g')
     END_VERSIONS
     """
 
@@ -178,7 +178,7 @@ process FUSIONINSPECTOR {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        STAR-Fusion: \$(STAR-Fusion --version 2>&1 | grep -i 'version' | sed 's/STAR-Fusion version: //')
+        FusionInspector: \$(FusionInspector --version 2>&1 | grep -i 'version' | sed -e 's/FusionInspector version: //' -e 's/[[:space:]]//g')
     END_VERSIONS
     """
 }

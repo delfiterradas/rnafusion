@@ -36,7 +36,7 @@ process VCF_COLLECT {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}_fusion_data.vcf.gz
+    echo | gzip > ${prefix}_fusion_data.vcf.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
