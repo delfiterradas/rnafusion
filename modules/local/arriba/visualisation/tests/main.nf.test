@@ -25,11 +25,11 @@ nextflow_process {
                 ]
                 input[2] = [
                     [ id:'test_protein_domains' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3", checkIfExists: true)
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/protein_domains_hg38_GRCh38_v2.5.0.gff3", checkIfExists: true)
                 ]
                 input[3] = [
                     [ id:'test_cytobands' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv", checkIfExists: true)
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv", checkIfExists: true)
                 ]
                 """
             }
@@ -63,11 +63,11 @@ nextflow_process {
                 ]
                 input[2] = [
                     [ id:'test_protein_domains' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3", checkIfExists: true)
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/protein_domains_hg38_GRCh38_v2.5.0.gff3", checkIfExists: true)
                 ]
                 input[3] = [
                     [ id:'test_cytobands' ],
-                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv", checkIfExists: true)
+                    file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/rnafusion/testdata/reference/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv", checkIfExists: true)
                 ]
                 """
             }
