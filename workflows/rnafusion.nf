@@ -7,7 +7,6 @@
 include { BUILD_REFERENCES              }   from '../subworkflows/local/build_references'
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow/main'
-include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
 include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
@@ -26,6 +25,7 @@ include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_
 include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
+include { ARRIBA_ARRIBA                 }   from '../modules/nf-core/arriba/arriba/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -209,28 +209,36 @@ workflow RNAFUSION {
         }
 
         //
-        // SUBWORKFLOW: Run Arriba
+        // MODULE: Run Arriba
         //
 
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
 
         def fusions_created = false
         def ch_arriba_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set arriba fusions to empty by default
-        if(tools.contains("arriba")) {
+
+        if (tools.contains("arriba")) {
             fusions_created = true
-            ARRIBA_WORKFLOW (
-                ch_aligned_reads.map { meta, bam, _bai -> [ meta, bam ]},
-                BUILD_REFERENCES.out.gtf,
-                BUILD_REFERENCES.out.fasta,
-                BUILD_REFERENCES.out.arriba_ref_blacklist,
-                BUILD_REFERENCES.out.arriba_ref_cytobands,
-                BUILD_REFERENCES.out.arriba_ref_known_fusions,
-                BUILD_REFERENCES.out.arriba_ref_protein_domains,
-                params.arriba_fusions
-            )
-            ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
-            ch_arriba_fusions = ARRIBA_WORKFLOW.out.fusions
+
+            if (params.arriba_fusions) {
+                ch_arriba_fusions = ch_aligned_reads.map { meta, _bam, _bai -> meta }
+                    .combine(Channel.value(file(params.arriba_fusions, checkIfExists: true)))
+                    .map { meta, fusion_file -> [meta, fusion_file] }
+            } else {
+                ARRIBA_ARRIBA(
+                    ch_aligned_reads.map { meta, bam, _bai -> [meta, bam] },
+                    BUILD_REFERENCES.out.fasta,
+                    BUILD_REFERENCES.out.gtf,
+                    BUILD_REFERENCES.out.arriba_ref_blacklist,
+                    BUILD_REFERENCES.out.arriba_ref_known_fusions,
+                    BUILD_REFERENCES.out.arriba_ref_cytobands,
+                    BUILD_REFERENCES.out.arriba_ref_protein_domains
+                )
+
+                ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
+            }
         }
+
 
         //
         // SUBWORKFLOW: Run STAR alignment and StarFusion
