@@ -358,10 +358,10 @@
             16,
             {
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.4.0"
+                    "arriba": "2.5.0"
                 },
                 "ARRIBA_DOWNLOAD": {
-                    "arriba_download": "2.4.0"
+                    "arriba_download": "2.5.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -440,10 +440,10 @@
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
                 "references/arriba",
-                "references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv",
-                "references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3",
+                "references/arriba/blacklist_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv",
+                "references/arriba/known_fusions_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/protein_domains_hg38_GRCh38_v2.5.0.gff3",
                 "references/gencode",
                 "references/gencode/Homo_sapiens.GRCh38.46.gtf",
                 "references/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
@@ -490,9 +490,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-13T16:44:25.412602"
+        "timestamp": "2025-07-08T11:31:30.841349"
     },
     "stub test fusioninspector": {
         "content": [
@@ -502,10 +502,10 @@
                     "agat": "v1.4.1"
                 },
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.4.0"
+                    "arriba": "2.5.0"
                 },
                 "ARRIBA_DOWNLOAD": {
-                    "arriba_download": "2.4.0"
+                    "arriba_download": "2.5.0"
                 },
                 "ARRIBA_VISUALISATION": {
                     "arriba": "2.4.0"
@@ -738,10 +738,10 @@
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
                 "references/arriba",
-                "references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv",
-                "references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3",
+                "references/arriba/blacklist_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv",
+                "references/arriba/known_fusions_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/protein_domains_hg38_GRCh38_v2.5.0.gff3",
                 "references/fusion_report_db",
                 "references/fusion_report_db/DB-timestamp.txt",
                 "references/fusion_report_db/cosmic.db",
@@ -875,9 +875,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-02T14:33:17.006992"
+        "timestamp": "2025-07-08T11:48:14.166006"
     },
     "stub test salmon": {
         "content": [
@@ -1205,10 +1205,10 @@
             22,
             {
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.4.0"
+                    "arriba": "2.5.0"
                 },
                 "ARRIBA_DOWNLOAD": {
-                    "arriba_download": "2.4.0"
+                    "arriba_download": "2.5.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1319,10 +1319,10 @@
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
                 "references/arriba",
-                "references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv",
-                "references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3",
+                "references/arriba/blacklist_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv",
+                "references/arriba/known_fusions_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/protein_domains_hg38_GRCh38_v2.5.0.gff3",
                 "references/fusion_report_db",
                 "references/fusion_report_db/DB-timestamp.txt",
                 "references/fusion_report_db/cosmic.db",
@@ -1460,7 +1460,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-03T11:12:10.068978"
+        "timestamp": "2025-07-08T11:42:59.015299"
     },
     "stub test fastp": {
         "content": [
@@ -1699,10 +1699,10 @@
                     "agat": "v1.4.1"
                 },
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.4.0"
+                    "arriba": "2.5.0"
                 },
                 "ARRIBA_DOWNLOAD": {
-                    "arriba_download": "2.4.0"
+                    "arriba_download": "2.5.0"
                 },
                 "ARRIBA_VISUALISATION": {
                     "arriba": "2.4.0"
@@ -1997,10 +1997,10 @@
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
                 "references/arriba",
-                "references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/cytobands_hg38_GRCh38_v2.4.0.tsv",
-                "references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz",
-                "references/arriba/protein_domains_hg38_GRCh38_v2.4.0.gff3",
+                "references/arriba/blacklist_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv",
+                "references/arriba/known_fusions_hg38_GRCh38_v2.5.0.tsv.gz",
+                "references/arriba/protein_domains_hg38_GRCh38_v2.5.0.gff3",
                 "references/fusion_report_db",
                 "references/fusion_report_db/DB-timestamp.txt",
                 "references/fusion_report_db/cosmic.db",
@@ -2176,8 +2176,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-02T14:19:12.460594"
+        "timestamp": "2025-07-08T11:29:35.207225"
     }
 }
