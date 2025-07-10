@@ -20,12 +20,12 @@ include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quan
 include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
 include { FASTQ_ALIGN_STAR              }   from '../subworkflows/local/fastq_align_star'
-include { CTATSPLICING_WORKFLOW         }   from '../subworkflows/local/ctatsplicing_workflow'
 include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { ARRIBA_ARRIBA                 }   from '../modules/nf-core/arriba/arriba/main'
+include { CTATSPLICING_STARTOCANCERINTRONS } from '../modules/local/ctatsplicing/startocancerintrons'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,17 +195,23 @@ workflow RNAFUSION {
         }
 
         //
-        // SUBWORKFLOW: Run CTAT-SPLICING
+        // MODULE: Run CTAT-SPLICING
         //
 
         if(tools.contains("ctatsplicing")) {
-            CTATSPLICING_WORKFLOW(
-                ch_star_splice_junctions,
-                ch_star_junctions,
-                ch_aligned_reads,
+            def ch_ctatsplicing_input = ch_star_splice_junctions
+                .join(ch_star_junctions, failOnMismatch:true, failOnDuplicate:true)
+                .join(ch_aligned_reads, failOnMismatch:true, failOnDuplicate:true)
+                .map { meta, split_junction, junction, bam, bai ->
+                    [ meta, split_junction, junction, bam, bai ]
+                }
+
+            CTATSPLICING_STARTOCANCERINTRONS(
+                ch_ctatsplicing_input,
                 BUILD_REFERENCES.out.starfusion_ref
             )
-            ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
+
+            ch_versions = ch_versions.mix(CTATSPLICING_STARTOCANCERINTRONS.out.versions.first())
         }
 
         //
