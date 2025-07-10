@@ -12,6 +12,11 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                outdir           = "$outputDir"
+                fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                input            = "${projectDir}/tests/yml/bam.yml"
+                tools            = "ctatsplicing,starfusion,arriba,fusionreport,salmon"
+                no_cosmic        = true
             }
         }
 
