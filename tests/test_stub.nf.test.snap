@@ -508,7 +508,7 @@
                     "arriba_download": "2.5.0"
                 },
                 "ARRIBA_VISUALISATION": {
-                    "arriba": "2.4.0"
+                    "arriba": "2.5.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -877,7 +877,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-08T11:48:14.166006"
+        "timestamp": "2025-07-11T15:18:18.890499282"
     },
     "stub test salmon": {
         "content": [
@@ -1705,7 +1705,7 @@
                     "arriba_download": "2.5.0"
                 },
                 "ARRIBA_VISUALISATION": {
-                    "arriba": "2.4.0"
+                    "arriba": "2.5.0"
                 },
                 "CTATSPLICING_PREPGENOMELIB": {
                     "ctat-splicing": "0.0.2"
@@ -2178,6 +2178,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-08T11:29:35.207225"
+        "timestamp": "2025-07-11T15:05:16.899145218"
     }
 }
