@@ -725,9 +725,9 @@
                 {
                     "directory": false,
                     "file": true,
-                    "freeSpace": 1219570667520,
+                    "freeSpace": 1152950960128,
                     "canonicalPath": "/workspace/rnafusion/.nf-test/tests/c2df4400e7ec2c7cf284bfa4ce0ed5c2/output/vcf/test_fusion_data.vcf.gz",
-                    "usableSpace": 1219570667520,
+                    "usableSpace": 1152950960128,
                     "hidden": false,
                     "totalSpace": 1288479703040,
                     "path": "/workspace/rnafusion/.nf-test/tests/c2df4400e7ec2c7cf284bfa4ce0ed5c2/output/vcf/test_fusion_data.vcf.gz",
@@ -742,6 +742,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-10T15:33:41.470029785"
+        "timestamp": "2025-07-11T14:39:01.707689765"
     }
 }
