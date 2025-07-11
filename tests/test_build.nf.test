@@ -42,5 +42,4 @@ nextflow_pipeline {
             )
         }
     }
-
 }
