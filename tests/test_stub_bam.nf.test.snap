@@ -768,14 +768,14 @@
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "vcf",
-                "vcf/test_fusion_data.vcf.gz"
+                "vcf/test_fusion_data.vcf"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-11T14:56:00.138311656"
+        "timestamp": "2025-07-14T16:53:36.788101"
     },
     "stub test salmon": {
         "content": [
@@ -1969,13 +1969,13 @@
                 "stringtie/test.gene.abundance.txt",
                 "stringtie/test.transcripts.gtf",
                 "vcf",
-                "vcf/test_fusion_data.vcf.gz"
+                "vcf/test_fusion_data.vcf"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-11T14:43:32.816080551"
+        "timestamp": "2025-07-14T16:09:39.371336"
     }
 }
