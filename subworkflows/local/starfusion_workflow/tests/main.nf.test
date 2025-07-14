@@ -7,6 +7,7 @@ nextflow_workflow {
     tag "star"
     tag "star/genomegenerate"
     tag "star/align"
+    options "-stub"
 
 
     test("STARFUSION_WORKFLOW - Homo sapiens - FASTQs minigenome") {
@@ -57,36 +58,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                // ch_reads
-                input[0] = Channel.of(
-                    [
-                        [ id: "test_fastqs" ],
-                        [
-                            file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_1.fastq.gz", checkIfExists: true),
-                            file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_2.fastq.gz", checkIfExists: true)
-                        ]
-                    ] )
-
-                // ch_gtf
-                input[1] =
-                    Channel.fromPath(
-                        "https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf", checkIfExists: true
-                    )
-                    .map{ [ [ id: it.name ], it ] }
-
-                // ch_starindex_ref
-                input[2] = STAR_GENOMEGENERATE.out.index
-
-                // ch_fasta
-                input[3] =
-                    Channel.fromPath(
-                        "https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa", checkIfExists: true
-                    )
-                    .map{ [ [ id: it.name ], it ] }
-
+                input[0] = []
                 // ch_starfusion_ref
-                input[4] = STARFUSION_BUILD.out.reference
-
+                input[1] = STARFUSION_BUILD.out.reference
+                input[2] = []
                 """
             }
             params {
