@@ -438,11 +438,11 @@
                 "FUSIONINSPECTOR": {
                     "STAR-Fusion": null
                 },
-                "FUSIONREPORT": {
-                    "fusion_report": "4.0.0"
+                "FUSIONREPORT_DETECT": {
+                    "fusion_report": "4.0.1"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "4.0.0"
+                    "fusion_report": "4.0.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -1113,11 +1113,11 @@
                 "FUSIONCATCHER_FUSIONCATCHER": {
                     "fusioncatcher": "1.33"
                 },
-                "FUSIONREPORT": {
-                    "fusion_report": "4.0.0"
+                "FUSIONREPORT_DETECT": {
+                    "fusion_report": "4.0.1"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "4.0.0"
+                    "fusion_report": "4.0.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -1554,11 +1554,11 @@
                 "FUSIONINSPECTOR": {
                     "STAR-Fusion": null
                 },
-                "FUSIONREPORT": {
-                    "fusion_report": "4.0.0"
+                "FUSIONREPORT_DETECT": {
+                    "fusion_report": "4.0.1"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "4.0.0"
+                    "fusion_report": "4.0.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
