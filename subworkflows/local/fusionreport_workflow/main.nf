@@ -32,4 +32,3 @@ workflow FUSIONREPORT_WORKFLOW {
         csv                      = ch_csv
 
 }
-

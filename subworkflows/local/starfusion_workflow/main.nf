@@ -25,4 +25,3 @@ workflow STARFUSION_WORKFLOW {
         fusions               = ch_starfusion_fusions
         versions              = ch_versions
     }
-

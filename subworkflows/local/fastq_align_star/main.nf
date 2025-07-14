@@ -53,4 +53,3 @@ workflow FASTQ_ALIGN_STAR {
     log_final     = STAR_ALIGN.out.log_final
     gene_count    = STAR_ALIGN.out.read_per_gene_tab
 }
-
