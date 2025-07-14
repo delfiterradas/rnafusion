@@ -22,7 +22,7 @@
                     {
                         "id": "test_sample"
                     },
-                    "test_sample.fusions.csv:md5,49f378c2112d7e0b3b17d9095c79e6bd"
+                    "test_sample.fusions.csv:md5,ee6c6838110d68bc75a13c19dca0a321"
                 ]
             ],
             "test_sample_fusionreport_index.html",
@@ -59,18 +59,15 @@
             "versions.yml"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-12-06T14:23:44.59690452"
+        "timestamp": "2025-06-26T16:15:03.892288278"
     },
     "FUSIONREPORT - arriba - starfusion - fusioncatcher - stub": {
         "content": [
             {
                 "0": [
-                    "versions.yml:md5,6bd28f2526774f519a7627a30c6a7f2f"
-                ],
-                "1": [
                     [
                         {
                             "id": "test_sample"
@@ -78,7 +75,7 @@
                         "test_sample.fusionreport.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
+                "1": [
                     [
                         {
                             "id": "test_sample"
@@ -86,7 +83,7 @@
                         "test_sample.fusionreport_filtered.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "3": [
+                "2": [
                     [
                         {
                             "id": "test_sample"
@@ -94,7 +91,7 @@
                         "test_sample_fusionreport_index.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "4": [
+                "3": [
                     [
                         {
                             "id": "test_sample"
@@ -105,7 +102,7 @@
                         ]
                     ]
                 ],
-                "5": [
+                "4": [
                     [
                         {
                             "id": "test_sample"
@@ -113,13 +110,16 @@
                         "test_sample.fusions.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "6": [
+                "5": [
                     [
                         {
                             "id": "test_sample"
                         },
                         "test_sample.fusions.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
+                ],
+                "6": [
+                    "versions.yml:md5,947ac2c0ed1623930f951f4f4ee3501e"
                 ],
                 "csv": [
                     [
@@ -173,14 +173,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6bd28f2526774f519a7627a30c6a7f2f"
+                    "versions.yml:md5,947ac2c0ed1623930f951f4f4ee3501e"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.4"
         },
-        "timestamp": "2024-12-10T15:13:58.414161"
+        "timestamp": "2025-07-01T14:42:59.809164059"
     }
 }

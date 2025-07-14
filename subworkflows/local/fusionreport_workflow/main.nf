@@ -1,4 +1,4 @@
-include { FUSIONREPORT      }     from '../../../modules/local/fusionreport/detect/main'
+include { FUSIONREPORT_DETECT      }     from '../../../modules/nf-core/fusionreport/detect/main'
 
 
 workflow FUSIONREPORT_WORKFLOW {
@@ -17,12 +17,12 @@ workflow FUSIONREPORT_WORKFLOW {
             .join(starfusion_fusions, failOnMismatch:true, failOnDuplicate:true)
             .join(fusioncatcher_fusions, failOnMismatch:true, failOnDuplicate:true)
 
-        FUSIONREPORT(ch_fusions, fusionreport_ref, params.tools_cutoff)
-        ch_fusion_list = FUSIONREPORT.out.fusion_list
-        ch_fusion_list_filtered = FUSIONREPORT.out.fusion_list_filtered
-        ch_versions = ch_versions.mix(FUSIONREPORT.out.versions)
-        ch_report = FUSIONREPORT.out.report
-        ch_csv = FUSIONREPORT.out.csv
+        FUSIONREPORT_DETECT(ch_fusions, fusionreport_ref, params.tools_cutoff)
+        ch_fusion_list = FUSIONREPORT_DETECT.out.fusion_list
+        ch_fusion_list_filtered = FUSIONREPORT_DETECT.out.fusion_list_filtered
+        ch_versions = ch_versions.mix(FUSIONREPORT_DETECT.out.versions)
+        ch_report = FUSIONREPORT_DETECT.out.report
+        ch_csv = FUSIONREPORT_DETECT.out.csv
 
     emit:
         versions                 = ch_versions
