@@ -6,9 +6,7 @@
 
 include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode_download/main'
 include { FUSIONCATCHER_DOWNLOAD }          from '../../../modules/local/fusioncatcher/download/main'
-include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
-include { STARFUSION_BUILD }                from '../../../modules/nf-core/starfusion/build/main'
 include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
 include { GET_RRNA_TRANSCRIPTS }            from '../../../modules/local/get_rrna_transcript/main'
 include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatsplicing/prepgenomelib/main.nf'
@@ -25,6 +23,8 @@ include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/
 include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../../modules/nf-core/gatk4/createsequencedictionary/main'
 include { GATK4_BEDTOINTERVALLIST }         from '../../../modules/nf-core/gatk4/bedtointervallist/main'
 include { SALMON_INDEX }                    from '../../../modules/nf-core/salmon/index/main'
+include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
+include { STARFUSION_BUILD }                from '../../../modules/nf-core/starfusion/build/main'
 include { GFFREAD }                         from '../../../modules/nf-core/gffread/main'
 include { getFileSuffix } from '../../../modules/nf-core/cat/cat/main.nf'
 
