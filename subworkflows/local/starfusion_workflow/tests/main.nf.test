@@ -33,7 +33,7 @@ nextflow_workflow {
             }
 
             run("STARFUSION_BUILD") {
-            script "../../../../modules/local/starfusion/build/main.nf"
+            script "../../../../modules/nf-core/starfusion/build/main.nf"
             process {
                 """
                 input[0] = [

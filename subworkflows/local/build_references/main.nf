@@ -8,7 +8,7 @@ include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode
 include { FUSIONCATCHER_DOWNLOAD }          from '../../../modules/local/fusioncatcher/download/main'
 include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
-include { STARFUSION_BUILD }                from '../../../modules/local/starfusion/build/main'
+include { STARFUSION_BUILD }                from '../../../modules/nf-core/starfusion/build/main'
 include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
 include { GET_RRNA_TRANSCRIPTS }            from '../../../modules/local/get_rrna_transcript/main'
 include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatsplicing/prepgenomelib/main.nf'
