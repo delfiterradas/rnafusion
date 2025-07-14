@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline"
     script "../main.nf"
     profile "test_build"
+    options "-stub"
     tag "pipeline"
     tag "pipeline_rnafusion"
     tag "test_build"
@@ -15,7 +16,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 input            = "${projectDir}/tests/yml/bam.yml"
-                tools            = "ctatsplicing,starfusion,arriba,fusionreport,salmon"
+                tools            = "all"
                 no_cosmic        = true
             }
         }
@@ -41,5 +42,4 @@ nextflow_pipeline {
             )
         }
     }
-
 }
