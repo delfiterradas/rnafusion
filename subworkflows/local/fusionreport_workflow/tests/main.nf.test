@@ -12,7 +12,7 @@ nextflow_workflow {
 
         setup {
             run("FUSIONREPORT_DOWNLOAD") {
-                script "../../../../modules/local/fusionreport/download/main.nf"
+                script "../../../../modules/nf-core/fusionreport/download/main.nf"
                 process {
                     """
                     """

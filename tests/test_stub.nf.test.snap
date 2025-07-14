@@ -516,11 +516,11 @@
                 "FUSIONINSPECTOR": {
                     "STAR-Fusion": null
                 },
-                "FUSIONREPORT": {
-                    "fusion_report": "4.0.0"
+                "FUSIONREPORT_DETECT": {
+                    "fusion_report": "4.0.1"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "4.0.0"
+                    "fusion_report": "4.0.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -875,9 +875,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-02T14:33:17.006992"
+        "timestamp": "2025-07-08T15:06:14.950970078"
     },
     "stub test salmon": {
         "content": [
@@ -1220,11 +1220,11 @@
                 "FUSIONCATCHER_FUSIONCATCHER": {
                     "fusioncatcher": "1.33"
                 },
-                "FUSIONREPORT": {
-                    "fusion_report": "4.0.0"
+                "FUSIONREPORT_DETECT": {
+                    "fusion_report": "4.0.1"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "4.0.0"
+                    "fusion_report": "4.0.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -1460,7 +1460,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-03T11:12:10.068978"
+        "timestamp": "2025-07-08T15:04:39.201458666"
     },
     "stub test fastp": {
         "content": [
@@ -1732,11 +1732,11 @@
                 "FUSIONINSPECTOR": {
                     "STAR-Fusion": null
                 },
-                "FUSIONREPORT": {
-                    "fusion_report": "4.0.0"
+                "FUSIONREPORT_DETECT": {
+                    "fusion_report": "4.0.1"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
-                    "fusion_report": "4.0.0"
+                    "fusion_report": "4.0.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
                     "gatk4": "4.6.1.0"
@@ -2176,8 +2176,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-02T14:19:12.460594"
+        "timestamp": "2025-07-08T15:01:11.405363456"
     }
 }

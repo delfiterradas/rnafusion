@@ -1,11 +1,14 @@
 nextflow_process {
 
-    name "Test Process FUSIONREPORT"
+    name "Test Process FUSIONREPORT_DETECT"
     script "../main.nf"
-    process "FUSIONREPORT"
+    process "FUSIONREPORT_DETECT"
     tag "modules"
     tag "modules_local"
     tag "fusionreport"
+    tag "fusionreport/detect"
+    tag "modules_nfcore"
+    tag "fusionreport/download"
 
 
     test("FUSIONREPORT - arriba - starfusion - fusioncatcher") {
@@ -27,7 +30,6 @@ nextflow_process {
 
                 input[0] = [
                     [ id:'test_sample' ], // meta map
-                    file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/reads_1.fq.gz"),
                     file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/arriba.tsv"),
                     file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/starfusion.tsv"),
                     file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/fusioncatcher.txt")
@@ -38,11 +40,14 @@ nextflow_process {
                 """
             }
             params {
-                arriba          = true
-                starfusion      = true
-                fusioncatcher   = true
-                no_cosmic       = true
-                outdir          = "$outputDir"
+                arriba                     = true
+                starfusion                 = true
+                fusioncatcher              = true
+                no_cosmic                  = true
+                outdir                     = "$outputDir"
+                fusionreport_download_args = '--no-cosmic'
+                fusionreport_detect_args   = {params.no_cosmic} ? "--no-cosmic" : ""
+                fusionreport_detect_args2  = "--export csv"
             }
         }
 
@@ -84,23 +89,26 @@ nextflow_process {
 
                 input[0] = [
                     [ id:'test_sample' ], // meta map
-                    file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/reads_1.fq.gz"),
-                    file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/arriba.tsv"),
-                    file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/starfusion.tsv"),
-                    file("https://github.com/Clinical-Genomics/fusion-report/raw/master/tests/test_data/fusioncatcher.txt")
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/arriba.tsv', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/starfusion.tsv', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/fusioncatcher.txt', checkIfExists: true)
                 ]
 
                 input[1] = FUSIONREPORT_DOWNLOAD.out.fusionreport_ref
 
                 input[2] = 1
+
                 """
             }
         params {
-                arriba          = true
-                starfusion      = true
-                fusioncatcher   = true
-                no_cosmic       = true
-                outdir          = "$outputDir"
+                arriba                     = true
+                starfusion                 = true
+                fusioncatcher              = true
+                no_cosmic                  = true
+                outdir                     = "$outputDir"
+                fusionreport_download_args = '--no-cosmic'
+                fusionreport_detect_args   = {params.no_cosmic} ? "--no-cosmic" : ""
+                fusionreport_detect_args2  = "--export csv"
             }
         }
 
@@ -111,6 +119,4 @@ nextflow_process {
             )
         }
     }
-
-
 }
