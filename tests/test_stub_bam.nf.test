@@ -318,6 +318,7 @@ nextflow_pipeline {
                 tools            = "fusioninspector,arriba,fusionreport"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 input            = "${projectDir}/tests/yml/bam.yml"
+                no_cosmic        = true
             }
         }
 
