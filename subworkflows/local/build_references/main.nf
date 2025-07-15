@@ -171,13 +171,25 @@ workflow BUILD_REFERENCES {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
             }
-            dfam_urls_ch = Channel.of([
-                params.dfam_hmm,
-                params.dfam_h3f,
-                params.dfam_h3i,
-                params.dfam_h3m,
-                params.dfam_h3p
-            ])
+            if(params.dfam_hmm && params.dfam_h3p && params.dfam_h3m && params.dfam_h3i && params.dfam_h3f) {
+                dfam_hmm = Channel.of(params.dfam_hmm)
+                dfam_h3f = Channel.of(params.dfam_h3f)
+                dfam_h3i = Channel.of(params.dfam_h3i)
+                dfam_h3m = Channel.of(params.dfam_h3m)
+                dfam_h3p = Channel.of(params.dfam_h3p)
+            } else {
+                dfam_hmm = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm")
+                dfam_h3f = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3f")
+                dfam_h3i = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3i")
+                dfam_h3m = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3")
+                dfam_h3p = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3p")
+            }
+            dfam_urls_ch = dfam_hmm
+                .concat(dfam_h3f,
+                dfam_h3i,
+                dfam_h3m,
+                dfam_h3p
+                ).collect().view()
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, params.pfam_url, dfam_urls_ch, params.annot_filter_url)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {

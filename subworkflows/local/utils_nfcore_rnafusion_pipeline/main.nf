@@ -64,7 +64,9 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters(
+
+    )
 
     //
     // Create channel from input file provided through params.input
@@ -160,6 +162,10 @@ def validateInputParameters() {
 
     if (params.no_cosmic) {
         log.warn("Skipping COSMIC DB download from `FUSIONREPORT_DOWNLOAD` and skip using it in `FUSIONREPORT`")
+    }
+
+    if ((params.dfam_hmm || params.dfam_h3p || params.dfam_h3m || params.dfam_h3i || params.dfam_h3f) && (params.dfam_version)) {
+        log.warn("Both custom dfam_urls and dfam_version were specified. \n If you want to use custom dfam URLs make sure to provide the full paths for each of the dfam params as the dfam_version will not be overwritten. \n Otherwise, use only the `--dfam_version` and `--species` params and the dfam URLs will be automatically filled.")
     }
 
 }
