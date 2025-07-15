@@ -14,7 +14,7 @@ process VCF_COLLECT {
 
     output:
     path "versions.yml"              , emit: versions
-    tuple val(meta), path("*vcf.gz") , emit: vcf
+    tuple val(meta), path("*vcf")    , emit: vcf
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,7 +24,6 @@ process VCF_COLLECT {
     // TODO use BGZIP to compress the VCF file instead of GZIP
     """
     vcf_collect.py --fusioninspector $fusioninspector_tsv --fusionreport $fusionreport_report --fusioninspector_gtf $fusioninspector_gtf_tsv --fusionreport_csv $fusionreport_csv --hgnc $hgnc_ref --sample ${prefix} --out ${prefix}_fusion_data.vcf
-    gzip ${prefix}_fusion_data.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -36,7 +35,7 @@ process VCF_COLLECT {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}_fusion_data.vcf.gz
+    touch ${prefix}_fusion_data.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -9,8 +9,8 @@ multiqc/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/multiqc_report.html
 fastqc/*_fastqc.{html,zip}
 pipeline_info/*.{html,json,txt,yml}
-references/arriba/blacklist_hg38_GRCh38_v2.4.0.tsv.gz
-references/arriba/known_fusions_hg38_GRCh38_v2.4.0.tsv.gz
+references/arriba/blacklist_hg38_GRCh38_v2.5.0.tsv.gz
+references/arriba/known_fusions_hg38_GRCh38_v2.5.0.tsv.gz
 references/ensembl/Homo_sapiens.GRCh38.102.dna.primary_assembly.fa
 references/hgnc/HGNC-DB-timestamp.txt
 references/hgnc/hgnc_complete_set.txt

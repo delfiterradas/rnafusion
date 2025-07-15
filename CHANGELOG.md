@@ -83,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated all `wget` containers to `conda-forge::wget=1.21.4` [#655](https://github.com/nf-core/rnafusion/pull/655)
 - Using FusionInspector abridged output (that now contains coding effects) for downstream analysis [#669](https://github.com/nf-core/rnafusion/pull/669)
 - Replaced local `FUSIONREPORT` and `FUSIONREPORT_DOWNLOAD` with `FUSIONREPORT_DETECT` and `FUSIONREPORT_DOWNLOAD` from nf-core [#703](https://github.com/nf-core/rnafusion/pull/703)
+- Updated arriba to v2.5.0 [#693](https://github.com/nf-core/rnafusion/pull/693)
 
 ### Fixed
 
@@ -101,6 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix bug in argument handling for FusionInspector [#669](https://github.com/nf-core/rnafusion/pull/669)
 - Upgrade STAR-Fusion to 1.15.1 to solve problem building STAR-Fusion references with `--human_gencode_filter` [#683](https://github.com/nf-core/rnafusion/pull/683)
 - Fix missing memory unit for fusioncatcher [#674](https://github.com/nf-core/rnafusion/pull/674)
+- Fix fusioncatcher download link [#693](https://github.com/nf-core/rnafusion/pull/693)
 
 ### Removed
 
