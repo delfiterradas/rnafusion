@@ -1,26 +1,25 @@
-process FUSIONREPORT {
+process FUSIONREPORT_DETECT {
     tag "$meta.id"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/d9/d99b7576d14caafd0494d6e2c1453edd161a933ccb62940701074128d3718bc5/data' :
-        'community.wave.seqera.io/library/fusion-report_openpyxl:77a2ba7e76ae0694'}"
-
+        'oras://community.wave.seqera.io/library/fusion-report_beautifulsoup4_click_colorlog_pruned:353260d00d0da0ec' :
+        'community.wave.seqera.io/library/fusion-report_beautifulsoup4_click_colorlog_pruned:78488bd99166aa9a'}"
 
     input:
-    tuple val(meta), path(arriba_fusions), path(starfusion_fusions),  path(fusioncatcher_fusions)
+    tuple val(meta), path(arriba_fusions), path(starfusion_fusions), path(fusioncatcher_fusions)
     tuple val(meta2), path(fusionreport_ref)
     val(tools_cutoff)
 
     output:
-    tuple val(meta), path("*fusionreport.tsv")                          , emit: fusion_list
-    tuple val(meta), path("*fusionreport_filtered.tsv")                 , emit: fusion_list_filtered
-    tuple val(meta), path("*index.html")                                , emit: report
-    tuple val(meta), path("*_*.html")                    , optional:true, emit: html
-    tuple val(meta), path("*.csv")                       , optional:true, emit: csv
-    tuple val(meta), path("*.json")                      , optional:true, emit: json
-    path "versions.yml"                                                 , emit: versions
+    tuple val(meta), path("*fusionreport.tsv")           , emit: fusion_list
+    tuple val(meta), path("*fusionreport_filtered.tsv")  , emit: fusion_list_filtered
+    tuple val(meta), path("*index.html")                 , emit: report
+    tuple val(meta), path("*_*.html")                    , emit: html                 , optional:true
+    tuple val(meta), path("*.csv")                       , emit: csv                  , optional:true
+    tuple val(meta), path("*.json")                      , emit: json                 , optional:true
+    path "versions.yml"                                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
