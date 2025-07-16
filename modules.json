@@ -52,7 +52,7 @@
                     },
                     "fusionreport/download": {
                         "branch": "master",
-                        "git_sha": "2737fcc61a0379e6f130de9069cadf77bc8e97ff",
+                        "git_sha": "df4b662dae05afb695a4326fc172178b5a7a48ce",
                         "installed_by": ["modules"]
                     },
                     "gatk4/bedtointervallist": {
