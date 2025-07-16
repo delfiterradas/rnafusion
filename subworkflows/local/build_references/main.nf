@@ -171,26 +171,37 @@ workflow BUILD_REFERENCES {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
             }
-            if(params.dfam_hmm && params.dfam_h3p && params.dfam_h3m && params.dfam_h3i && params.dfam_h3f) {
-                dfam_hmm = Channel.of(params.dfam_hmm)
-                dfam_h3f = Channel.of(params.dfam_h3f)
-                dfam_h3i = Channel.of(params.dfam_h3i)
-                dfam_h3m = Channel.of(params.dfam_h3m)
-                dfam_h3p = Channel.of(params.dfam_h3p)
+
+            if(params.pfam_url) {
+                pfam_url = Channel.fromPath(params.pfam_url, checkIfExists: true)
             } else {
-                dfam_hmm = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm")
-                dfam_h3f = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3f")
-                dfam_h3i = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3i")
-                dfam_h3m = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3")
-                dfam_h3p = Channel.of("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3p")
+                pfam_url = Channel.fromPath("http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${params.pfam_version}/Pfam-A.hmm.gz", checkIfExists: true)
             }
+
+            if(params.dfam_hmm && params.dfam_h3p && params.dfam_h3m && params.dfam_h3i && params.dfam_h3f) {
+                dfam_hmm = Channel.fromPath(params.dfam_hmm, checkIfExists: true)
+                dfam_h3f = Channel.fromPath(params.dfam_h3f, checkIfExists: true)
+                dfam_h3i = Channel.fromPath(params.dfam_h3i, checkIfExists: true)
+                dfam_h3m = Channel.fromPath(params.dfam_h3m, checkIfExists: true)
+                dfam_h3p = Channel.fromPath(params.dfam_h3p, checkIfExists: true)
+            } else {
+                dfam_hmm = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm"    , checkIfExists: true)
+                dfam_h3f = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3f", checkIfExists: true)
+                dfam_h3i = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3i", checkIfExists: true)
+                dfam_h3m = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3m", checkIfExists: true)
+                dfam_h3p = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3p", checkIfExists: true)
+            }
+
             dfam_urls_ch = dfam_hmm
-                .concat(dfam_h3f,
-                dfam_h3i,
-                dfam_h3m,
-                dfam_h3p
-                ).collect().view()
-            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, params.pfam_url, dfam_urls_ch, params.annot_filter_url)
+                .concat(
+                    dfam_h3f,
+                    dfam_h3i,
+                    dfam_h3m,
+                    dfam_h3p
+                )
+                .collect()
+
+            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, pfam_url, dfam_urls_ch, params.annot_filter_url)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {
                 CTATSPLICING_PREPGENOMELIB(

@@ -231,6 +231,63 @@
                     "description": "Path to the cancer introns CSV file to create the CTAT-SPLICING reference with",
                     "default": "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/CANCER_SPLICING_LIB_SUPPLEMENT/cancer_introns.GRCh38.Jun232020.tsv.gz"
                 },
+                "dfam_hmm": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to Dfam HMM database file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam HMM database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3f": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to Dfam H3F database file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3F database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3i": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to Dfam H3I database file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3I database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3m": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to Dfam H3M database file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3M database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3p": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to Dfam H3P database file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3P database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "pfam_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to Pfam database file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Pfam database file. Leave as null if using the automatical filling with `--pfam_version`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "annot_filter_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to annotation filter rule file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the annotation filter rule file (typically a Perl module).",
+                    "default": "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm",
+                    "fa_icon": "fas fa-filter"
+                },
                 "starindex_ref": {
                     "type": "string",
                     "format": "directory-path",
@@ -368,11 +425,11 @@
                     "default": "homo_sapiens"
                 },
                 "dfam_version": {
-                    "type": "string",
+                    "type": "number",
                     "description": "Version of dfam to use"
                 },
                 "pfam_version": {
-                    "type": "string",
+                    "type": "number",
                     "description": "Version of pfam to use"
                 }
             }
