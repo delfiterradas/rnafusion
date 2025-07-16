@@ -159,8 +159,7 @@
                 "fusioncatcher_download_link": {
                     "type": "string",
                     "description": "Fusioncatcher download link",
-                    "fa_icon": "far fa-file-code",
-                    "pattern": "^https?://.*$"
+                    "fa_icon": "far fa-file-code"
                 },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
