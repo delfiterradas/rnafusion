@@ -256,7 +256,7 @@ workflow RNAFUSION {
 
             if (params.starfusion_fusions) {
                 def fusions = file(params.starfusion_fusions, checkIfExists:true)                   // TODO: What is fusions used for? Remove?
-                ch_starfusion_fusions = ch_star_junctions.map { meta, _junc -> [ meta, fusions ] }  // TODO: We use the junctions but not the provided fusions
+                ch_starfusion_fusions = ch_star_junctions.map { meta, _junc -> [ meta, fusions ] }
             } else {
                 STARFUSION(
                     ch_star_junctions.map { meta, junc -> [ meta, [], junc ] },
