@@ -22,7 +22,8 @@ process FUSIONCATCHER_DOWNLOAD {
     def args = task.ext.args ?: ''
     meta = [ id: "human_v${genome_gencode_version}" ]
     """
-    gdown $args ${params.fusioncatcher_download_link} | tar xz human_v${genome_gencode_version}.tar.gz
+    gdown $args ${params.fusioncatcher_download_link}
+    tar xz human_v${genome_gencode_version}.tar.gz
     rm human_v${genome_gencode_version}.tar*
 
     cat <<-END_VERSIONS > versions.yml
