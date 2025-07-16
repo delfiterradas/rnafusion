@@ -8,7 +8,7 @@ include { BUILD_REFERENCES              }   from '../subworkflows/local/build_re
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow/main'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
-include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
+include { STARFUSION                    }   from '../modules/local/starfusion/detect/main'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
 include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
@@ -247,20 +247,26 @@ workflow RNAFUSION {
 
 
         //
-        // SUBWORKFLOW: Run STAR alignment and StarFusion
+        // MODULE: Run StarFusion
         //
 
         def ch_starfusion_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
-        if(tools.contains("starfusion")) {
+        if (tools.contains("starfusion")) {
             fusions_created = true
-            STARFUSION_WORKFLOW (
-                ch_star_junctions,
-                BUILD_REFERENCES.out.starfusion_ref,
-                params.starfusion_fusions
-            )
-            ch_versions             = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
-            ch_starfusion_fusions   = STARFUSION_WORKFLOW.out.fusions
+
+            if (params.starfusion_fusions) {
+                def fusions = file(params.starfusion_fusions, checkIfExists:true)
+                ch_starfusion_fusions = ch_star_junctions.map { meta, _junc -> [ meta, fusions ] }
+            } else {
+                STARFUSION(
+                    ch_star_junctions.map { meta, junc -> [ meta, [], junc ] },
+                    BUILD_REFERENCES.out.starfusion_ref.map { it -> it[1] }
+                )
+                ch_versions = ch_versions.mix(STARFUSION.out.versions)
+                ch_starfusion_fusions = STARFUSION.out.fusions
+            }
         }
+
 
         //
         // SUBWORKFLOW: Run FusionCatcher
