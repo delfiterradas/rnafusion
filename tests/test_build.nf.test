@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline"
     script "../main.nf"
     profile "test_build"
+    options "-stub"
     tag "pipeline"
     tag "pipeline_rnafusion"
     tag "test_build"
@@ -11,7 +12,20 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir = "$outputDir"
+                config_profile_name        = 'Test build references profile'
+                config_profile_description = 'Minimal test dataset to check pipeline function'
+
+                // Input data
+                references_only            = true
+                input                      = "${projectDir}/tests/csv/fastq.csv"
+                no_cosmic                  = true
+                tools                      = "arriba,starfusion,fusionreport,salmon,fusioninspector"
+                fasta                      = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa'
+                gtf                        = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf'
+                fusion_annot_lib           = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                species                    = 'homo_sapiens'
+                dfam_version               = '3.4'
+                outdir                     = "$outputDir"
             }
         }
 
@@ -36,5 +50,4 @@ nextflow_pipeline {
             )
         }
     }
-
 }
