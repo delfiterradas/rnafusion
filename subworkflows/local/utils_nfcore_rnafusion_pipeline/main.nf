@@ -163,7 +163,7 @@ def validateInputParameters() {
     }
 
     if ((params.dfam_hmm || params.dfam_h3p || params.dfam_h3m || params.dfam_h3i || params.dfam_h3f) && (params.dfam_version)) {
-        log.warn("Both custom dfam_urls and dfam_version were specified. \n If you want to use custom dfam URLs make sure to provide the full paths for each of the dfam params as the dfam_version will not be overwritten. \n Otherwise, use only the `--dfam_version` and `--species` params and the dfam URLs will be automatically filled.")
+        log.warn("Both custom dfam_urls and dfam_version were specified. URL building based on --dfam_version will not be triggered, instead specified dfam_urls will be used. \n If you want to use custom dfam URLs make sure to provide the full paths for each of the dfam params as the dfam_version will not be used. \n Otherwise, use only the `--dfam_version` and `--species` params and the dfam URLs will be automatically filled.")
     }
 
 }
