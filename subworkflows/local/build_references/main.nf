@@ -184,12 +184,14 @@ workflow BUILD_REFERENCES {
                 dfam_h3i = Channel.fromPath(params.dfam_h3i, checkIfExists: true)
                 dfam_h3m = Channel.fromPath(params.dfam_h3m, checkIfExists: true)
                 dfam_h3p = Channel.fromPath(params.dfam_h3p, checkIfExists: true)
-            } else {
+            } else if(params.dfam_version && params.species) {
                 dfam_hmm = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm"    , checkIfExists: true)
                 dfam_h3f = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3f", checkIfExists: true)
                 dfam_h3i = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3i", checkIfExists: true)
                 dfam_h3m = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3m", checkIfExists: true)
                 dfam_h3p = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3p", checkIfExists: true)
+            } else {
+                error("Expected --dfam_version and --species to be specified when using StarFusion to automatically fill in Dfam database or specify --dfam_{hmm,h3f,h3i,h3m,h3p} for manual input")
             }
 
             dfam_urls_ch = dfam_hmm
