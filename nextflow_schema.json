@@ -97,7 +97,7 @@
                 "arriba_ref_blacklist": {
                     "type": "string",
                     "format": "file-path",
-                    "pattern": "\\S+\\.tsv\\.gz$",
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
                 },
@@ -111,7 +111,7 @@
                 "arriba_ref_known_fusions": {
                     "type": "string",
                     "format": "file-path",
-                    "pattern": "\\S+\\.tsv\\.gz$",
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference known fusions"
                 },
@@ -160,8 +160,7 @@
                     "type": "string",
                     "description": "Fusioncatcher download link",
                     "fa_icon": "far fa-file-code",
-                    "pattern": "^https?://.*$",
-                    "default": "https://master.dl.sourceforge.net/project/rnafusion/fusioncatcher"
+                    "pattern": "^https?://.*$"
                 },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
@@ -263,7 +262,13 @@
                 "trim_tail": {
                     "type": "integer",
                     "description": "The amount of bases to trim at the tail of each read, none will be trimmed by default",
-                    "minimum": 1,
+                    "minimum": 0,
+                    "fa_icon": "fas fa-cut"
+                },
+                "trim_tail_fusioncatcher": {
+                    "type": "integer",
+                    "description": "The amount of bases to trim at the tail of each read for fusioncatcher, none will be trimmed by default",
+                    "minimum": 0,
                     "fa_icon": "fas fa-cut"
                 },
                 "adapter_fasta": {

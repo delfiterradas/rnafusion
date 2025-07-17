@@ -14,6 +14,8 @@ nextflow_pipeline {
             params {
                 outdir           = "$outputDir"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                tools            = "all"
+                no_cosmic              = true
             }
         }
 
@@ -135,6 +137,39 @@ nextflow_pipeline {
         }
     }
 
+    test("stub test fusioncatcher trim") {
+
+        when {
+            params {
+                outdir           = "$outputDir"
+                tools            = "fusioncatcher"
+                trim_tail_fusioncatcher = 50
+                fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+
+            }
+        }
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            // Ignore files with timestamps in their names
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_path: All files in ${params.outdir}/ with stable content
+            // def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore') //TODO uncomment once -stub is removed
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    // Number of successful tasks
+                    workflow.trace.succeeded().size(),
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_rnafusion_software_mqc_versions.yml"),
+                    // All stable path name, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    // stable_path // TODO uncomment once -stub is removed
+                ).match() }
+            )
+        }
+    }
+
     test("stub test starfusion") {
 
         when {
@@ -206,6 +241,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "fusionreport,arriba,starfusion,fusioncatcher"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                no_cosmic        = true
             }
         }
 
@@ -302,6 +338,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "fusioninspector,arriba,fusionreport"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                no_cosmic        = true
             }
         }
 

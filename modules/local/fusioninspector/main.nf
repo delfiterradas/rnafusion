@@ -13,7 +13,7 @@ process FUSIONINSPECTOR {
 
     output:
     tuple val(meta), path("*FusionInspector.fusions.tsv")                  , emit: tsv
-    tuple val(meta), path("*.gtf")                          , optional:true, emit: out_gtf
+    tuple val(meta), path("fi_workdir/*.gtf")                              , optional:true, emit: out_gtf
     tuple val(meta), path("*FusionInspector.log")                          , emit: log
     tuple val(meta), path("*html")                                         , emit: html
     tuple val(meta), path("*abridged.tsv")                                 , emit: abridged_tsv
@@ -41,7 +41,7 @@ process FUSIONINSPECTOR {
         --vis $args $args2
 
     # Touch the output files to make sure they exist
-    touch ${prefix}.FusionInspector.log
+    touch FusionInspector.log
     touch ${prefix}.FusionInspector.fusions.abridged.tsv
     touch ${prefix}.FusionInspector.fusions.tsv
     touch ${prefix}.fusion_inspector_web.html
@@ -58,7 +58,7 @@ process FUSIONINSPECTOR {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.FusionInspector.log
+    touch FusionInspector.log
     touch ${prefix}.FusionInspector.fusions.abridged.tsv
     touch ${prefix}.FusionInspector.fusions.tsv
     touch ${prefix}.fusion_inspector_web.html

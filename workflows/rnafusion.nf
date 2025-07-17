@@ -7,9 +7,8 @@
 include { BUILD_REFERENCES              }   from '../subworkflows/local/build_references'
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow/main'
-include { ARRIBA_WORKFLOW               }   from '../subworkflows/local/arriba_workflow'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
-include { STARFUSION_WORKFLOW           }   from '../subworkflows/local/starfusion_workflow'
+include { STARFUSION                    }   from '../modules/local/starfusion/detect/main'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
 include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
@@ -21,11 +20,12 @@ include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quan
 include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
 include { FASTQ_ALIGN_STAR              }   from '../subworkflows/local/fastq_align_star'
-include { CTATSPLICING_WORKFLOW         }   from '../subworkflows/local/ctatsplicing_workflow'
 include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
+include { ARRIBA_ARRIBA                 }   from '../modules/nf-core/arriba/arriba/main'
+include { CTATSPLICING_STARTOCANCERINTRONS } from '../modules/local/ctatsplicing/startocancerintrons'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,58 +195,78 @@ workflow RNAFUSION {
         }
 
         //
-        // SUBWORKFLOW: Run CTAT-SPLICING
+        // MODULE: Run CTAT-SPLICING
         //
 
         if(tools.contains("ctatsplicing")) {
-            CTATSPLICING_WORKFLOW(
-                ch_star_splice_junctions,
-                ch_star_junctions,
-                ch_aligned_reads,
+            def ch_ctatsplicing_input = ch_star_splice_junctions
+                .join(ch_star_junctions, failOnMismatch:true, failOnDuplicate:true)
+                .join(ch_aligned_reads, failOnMismatch:true, failOnDuplicate:true)
+                .map { meta, split_junction, junction, bam, bai ->
+                    [ meta, split_junction, junction, bam, bai ]
+                }
+
+            CTATSPLICING_STARTOCANCERINTRONS(
+                ch_ctatsplicing_input,
                 BUILD_REFERENCES.out.starfusion_ref
             )
-            ch_versions = ch_versions.mix(CTATSPLICING_WORKFLOW.out.versions)
+
+            ch_versions = ch_versions.mix(CTATSPLICING_STARTOCANCERINTRONS.out.versions.first())
         }
 
         //
-        // SUBWORKFLOW: Run Arriba
+        // MODULE: Run Arriba
         //
 
         // TODO: improve how params.arriba_fusions would avoid running arriba module. Maybe imputed from samplesheet?
 
         def fusions_created = false
         def ch_arriba_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set arriba fusions to empty by default
-        if(tools.contains("arriba")) {
+
+        if (tools.contains("arriba")) {
             fusions_created = true
-            ARRIBA_WORKFLOW (
-                ch_aligned_reads.map { meta, bam, _bai -> [ meta, bam ]},
-                BUILD_REFERENCES.out.gtf,
-                BUILD_REFERENCES.out.fasta,
-                BUILD_REFERENCES.out.arriba_ref_blacklist,
-                BUILD_REFERENCES.out.arriba_ref_cytobands,
-                BUILD_REFERENCES.out.arriba_ref_known_fusions,
-                BUILD_REFERENCES.out.arriba_ref_protein_domains,
-                params.arriba_fusions
-            )
-            ch_versions = ch_versions.mix(ARRIBA_WORKFLOW.out.versions)
-            ch_arriba_fusions = ARRIBA_WORKFLOW.out.fusions
+
+            if (params.arriba_fusions) {
+                ch_arriba_fusions = ch_aligned_reads.map { meta, _bam, _bai -> meta }
+                    .combine(Channel.value(file(params.arriba_fusions, checkIfExists: true)))
+                    .map { meta, fusion_file -> [meta, fusion_file] }
+            } else {
+                ARRIBA_ARRIBA(
+                    ch_aligned_reads.map { meta, bam, _bai -> [meta, bam] },
+                    BUILD_REFERENCES.out.fasta,
+                    BUILD_REFERENCES.out.gtf,
+                    BUILD_REFERENCES.out.arriba_ref_blacklist,
+                    BUILD_REFERENCES.out.arriba_ref_known_fusions,
+                    BUILD_REFERENCES.out.arriba_ref_cytobands,
+                    BUILD_REFERENCES.out.arriba_ref_protein_domains
+                )
+
+                ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
+            }
         }
 
+
         //
-        // SUBWORKFLOW: Run STAR alignment and StarFusion
+        // MODULE: Run StarFusion
         //
 
         def ch_starfusion_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set starfusion fusions to empty by default
-        if(tools.contains("starfusion")) {
+        if (tools.contains("starfusion")) {
             fusions_created = true
-            STARFUSION_WORKFLOW (
-                ch_star_junctions,
-                BUILD_REFERENCES.out.starfusion_ref,
-                params.starfusion_fusions
-            )
-            ch_versions             = ch_versions.mix(STARFUSION_WORKFLOW.out.versions)
-            ch_starfusion_fusions   = STARFUSION_WORKFLOW.out.fusions
+
+            if (params.starfusion_fusions) {
+                def fusions = file(params.starfusion_fusions, checkIfExists:true)
+                ch_starfusion_fusions = ch_star_junctions.map { meta, _junc -> [ meta, fusions ] }
+            } else {
+                STARFUSION(
+                    ch_star_junctions.map { meta, junc -> [ meta, [], junc ] },
+                    BUILD_REFERENCES.out.starfusion_ref.map { it -> it[1] }
+                )
+                ch_versions = ch_versions.mix(STARFUSION.out.versions)
+                ch_starfusion_fusions = STARFUSION.out.fusions
+            }
         }
+
 
         //
         // SUBWORKFLOW: Run FusionCatcher
@@ -255,11 +275,14 @@ workflow RNAFUSION {
         def ch_fusioncatcher_fusions = ch_samplesheet.map { it -> [it[0], []] } // Set fusioncatcher fusions to empty by default
         if(tools.contains("fusioncatcher")) {
             fusions_created = true
-            FUSIONCATCHER_WORKFLOW (
-                ch_reads,
-                BUILD_REFERENCES.out.fusioncatcher_ref,       // channel [ meta, path       ]
-                params.fusioncatcher_fusions
-            )
+        fusioncatcher_trimming = params.trim_tail_fusioncatcher != 0
+        FUSIONCATCHER_WORKFLOW (
+            ch_reads,
+            fusioncatcher_trimming,
+            params.adapter_fasta,
+            BUILD_REFERENCES.out.fusioncatcher_ref,       // channel [ meta, path       ]
+            params.fusioncatcher_fusions
+        )
             ch_versions = ch_versions.mix(FUSIONCATCHER_WORKFLOW.out.versions)
             // Add output of fusioncatcher to a channel + add empty entries for the samples that could not be run
             ch_fusioncatcher_fusions = FUSIONCATCHER_WORKFLOW.out.fusions.mix(ch_fastqs_to_process.not_found)
