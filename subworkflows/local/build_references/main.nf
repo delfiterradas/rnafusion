@@ -133,37 +133,12 @@ workflow BUILD_REFERENCES {
         }
     }
 
-    def ch_arriba_ref_blacklist       = Channel.empty()
-    def ch_arriba_ref_cytobands       = Channel.empty()
-    def ch_arriba_ref_known_fusions   = Channel.empty()
-    def ch_arriba_ref_protein_domains = Channel.empty()
-    if (tools.contains("arriba")) {
-        if (!exists_not_empty(params.arriba_ref_blacklist) || !exists_not_empty(params.arriba_ref_known_fusions) || !exists_not_empty(params.arriba_ref_protein_domains) || !exists_not_empty(params.arriba_ref_cytobands)) {
-            ARRIBA_DOWNLOAD(params.genome)
-            ch_versions = ch_versions.mix(ARRIBA_DOWNLOAD.out.versions)
-            ch_arriba_ref_blacklist       = ARRIBA_DOWNLOAD.out.blacklist
-            ch_arriba_ref_cytobands       = ARRIBA_DOWNLOAD.out.cytobands
-            ch_arriba_ref_known_fusions   = ARRIBA_DOWNLOAD.out.known_fusions
-            ch_arriba_ref_protein_domains = ARRIBA_DOWNLOAD.out.protein_domains
-        } else {
-            ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist)
-            ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands)
-            ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions)
-            ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains)
-        }
-    }
+    def ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist)
+    def ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands)
+    def ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions)
+    def ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains)
 
-    def ch_fusioncatcher_ref = Channel.empty()
-    if (tools.contains("fusioncatcher")) {
-        if (!exists_not_empty(params.fusioncatcher_ref)) {
-            FUSIONCATCHER_DOWNLOAD(params.genome_gencode_version)
-            ch_versions = ch_versions.mix(FUSIONCATCHER_DOWNLOAD.out.versions)
-            ch_fusioncatcher_ref = FUSIONCATCHER_DOWNLOAD.out.reference
-        }
-        else {
-            ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] }
-        }
-    }
+    def ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] }
 
     def ch_starfusion_ref = Channel.empty()
     if (tools.intersect(["starfusion", "ctatsplicing", "fusioninspector"])) {
