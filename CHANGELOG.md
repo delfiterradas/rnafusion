@@ -103,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade STAR-Fusion to 1.15.1 to solve problem building STAR-Fusion references with `--human_gencode_filter` [#683](https://github.com/nf-core/rnafusion/pull/683)
 - Fix missing memory unit for fusioncatcher [#674](https://github.com/nf-core/rnafusion/pull/674)
 - Fix fusioncatcher download link [#693](https://github.com/nf-core/rnafusion/pull/693)
+- Fix fusionreport singularity container [#713](https://github.com/nf-core/rnafusion/pull/713)
 
 ### Removed
 
@@ -111,6 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed parameter `--build_references`
 - Removed fusioncatcher build [#650](https://github.com/nf-core/rnafusion/pull/650)
 - Removed subworkflow with less than two modules: `ARRIBA_WORKFLOW` [#692](https://github.com/nf-core/rnafusion/pull/692)
+- Removed subworkflow with less than two modules: `STARFUSION_WORKFLOW` [#707](https://github.com/nf-core/rnafusion/pull/707)
 - Removed subworkflow with less than two modules: `CTATSPLICING_WORKFLOW` [#704](https://github.com/nf-core/rnafusion/pull/704)
 
 ### Parameters
