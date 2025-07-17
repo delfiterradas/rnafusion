@@ -102,7 +102,7 @@
                 "arriba_ref_blacklist": {
                     "type": "string",
                     "format": "file-path",
-                    "pattern": "\\S+\\.tsv$",
+                    "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
                 },
@@ -116,7 +116,7 @@
                 "arriba_ref_known_fusions": {
                     "type": "string",
                     "format": "file-path",
-                    "pattern": "\\S+\\.tsv$",
+                    "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference known fusions"
                 },
