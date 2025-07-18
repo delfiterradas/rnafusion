@@ -77,7 +77,7 @@
                     "description": "Path to reference folder"
                 },
                 "genomes_ignore": {
-                    "type": "string",
+                    "type": "boolean",
                     "fa_icon": "far fa-file-code",
                     "description": "Don't automatically assign reference parameters to the correct references in --genomes_base"
                 },
