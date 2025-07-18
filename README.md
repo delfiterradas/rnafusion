@@ -1,7 +1,7 @@
 <h1>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/nf-core-rnafusion_logo_dark.png">
-    <img alt="nf-core/rnafusion" src="docs/images/nf-core-rnafusion_logo_light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/nf-core-rnafusion_logo_dark_new.png">
+    <img alt="nf-core/rnafusion" src="docs/images/nf-core-rnafusion_logo_light_new.png">
   </picture>
 </h1>
 
