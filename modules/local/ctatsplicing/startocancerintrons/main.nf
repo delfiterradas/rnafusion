@@ -42,7 +42,7 @@ process CTATSPLICING_STARTOCANCERINTRONS {
         ${args}
 
     # Create the missing outputs when no cancer introns are found
-    if [ $? -eq 0 ]; then
+    if [ \$? -eq 0 ]; then
         touch ${prefix}.cancer_intron_reads.sorted.bam
         touch ${prefix}.cancer_intron_reads.sorted.bam.bai
         touch ${prefix}.gene_reads.sorted.sifted.bam
