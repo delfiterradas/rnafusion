@@ -72,6 +72,7 @@ workflow {
         }
         tools = pattern.replace('^((', "").replace(')?,?)*(?<!,)$', "").tokenize("|") - "all"
     }
+    log.debug("Rnafusion tools to run: ${tools}")
 
     def profiles = workflow.profile
     if ((profiles.contains("conda") || profiles.contains("mamba")) && (tools.contains("ctatsplicing"))) {
