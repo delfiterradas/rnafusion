@@ -172,10 +172,10 @@ workflow BUILD_REFERENCES {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
             }
 
-            if(params.pfam_url) {
-                pfam_url = Channel.fromPath(params.pfam_url, checkIfExists: true)
+            if(params.pfam_file) {
+                pfam_file = Channel.fromPath(params.pfam_file, checkIfExists: true)
             } else {
-                pfam_url = Channel.fromPath("http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${params.pfam_version}/Pfam-A.hmm.gz", checkIfExists: true)
+                error("Expected `--pfam_version` to be specified when using StarFusion to automatically fill in Pfam database or specify `--pfam_file` for custom input")
             }
 
             if(params.dfam_hmm && params.dfam_h3p && params.dfam_h3m && params.dfam_h3i && params.dfam_h3f) {
@@ -184,14 +184,8 @@ workflow BUILD_REFERENCES {
                 dfam_h3i = Channel.fromPath(params.dfam_h3i, checkIfExists: true)
                 dfam_h3m = Channel.fromPath(params.dfam_h3m, checkIfExists: true)
                 dfam_h3p = Channel.fromPath(params.dfam_h3p, checkIfExists: true)
-            } else if(params.dfam_version && params.species) {
-                dfam_hmm = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm"    , checkIfExists: true)
-                dfam_h3f = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3f", checkIfExists: true)
-                dfam_h3i = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3i", checkIfExists: true)
-                dfam_h3m = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3m", checkIfExists: true)
-                dfam_h3p = Channel.fromPath("https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam.hmm.h3p", checkIfExists: true)
             } else {
-                error("Expected --dfam_version and --species to be specified when using StarFusion to automatically fill in Dfam database or specify --dfam_{hmm,h3f,h3i,h3m,h3p} for manual input")
+                error("Expected `--dfam_version` and `--species` to be specified when using StarFusion to automatically fill in Dfam database or specify `--dfam_{hmm,h3f,h3i,h3m,h3p}` for custom input")
             }
 
             dfam_urls_ch = dfam_hmm
@@ -203,7 +197,7 @@ workflow BUILD_REFERENCES {
                 )
                 .collect()
 
-            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, pfam_url, dfam_urls_ch, params.annot_filter_url)
+            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, pfam_file, dfam_urls_ch, params.annot_filter_url)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {
                 CTATSPLICING_PREPGENOMELIB(

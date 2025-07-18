@@ -232,50 +232,50 @@
                 },
                 "dfam_hmm": {
                     "type": "string",
-                    "format": "uri",
+                    "format": "file-path",
                     "pattern": "\\S+\\.hmm$",
-                    "description": "URL to Dfam HMM database file",
-                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam HMM database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "description": "Path to Dfam HMM database file",
+                    "help_text": "Provide a valid path pointing to the Dfam HMM database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
                     "fa_icon": "fas fa-link"
                 },
                 "dfam_h3f": {
                     "type": "string",
-                    "format": "uri",
+                    "format": "file-path",
                     "pattern": "\\S+\\.h3f$",
-                    "description": "URL to Dfam H3F database file",
-                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3F database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "description": "Path to Dfam H3F database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3F database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
                     "fa_icon": "fas fa-link"
                 },
                 "dfam_h3i": {
                     "type": "string",
-                    "format": "uri",
+                    "format": "file-path",
                     "pattern": "\\S+\\.h3i$",
-                    "description": "URL to Dfam H3I database file",
-                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3I database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "description": "Path to Dfam H3I database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3I database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
                     "fa_icon": "fas fa-link"
                 },
                 "dfam_h3m": {
                     "type": "string",
-                    "format": "uri",
+                    "format": "file-path",
                     "pattern": "\\S+\\.h3m$",
-                    "description": "URL to Dfam H3M database file",
-                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3M database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "description": "Path to Dfam H3M database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3M database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
                     "fa_icon": "fas fa-link"
                 },
                 "dfam_h3p": {
                     "type": "string",
-                    "format": "uri",
+                    "format": "file-path",
                     "pattern": "\\S+\\.h3p$",
-                    "description": "URL to Dfam H3P database file",
-                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Dfam H3P database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "description": "Path to Dfam H3P database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3P database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
                     "fa_icon": "fas fa-link"
                 },
-                "pfam_url": {
+                "pfam_file": {
                     "type": "string",
-                    "format": "uri",
-                    "pattern": "\\S+\\.hmm(\\.gz)$",
-                    "description": "URL to Pfam database file",
-                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the Pfam database file. Leave as null if using the automatical filling with `--pfam_version`.",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.hmm(\\.gz)?$",
+                    "description": "Path to Pfam database file",
+                    "help_text": "Provide a valid path pointing to the Pfam database file. Leave as null if using the automatical filling with `--pfam_version`.",
                     "fa_icon": "fas fa-link"
                 },
                 "annot_filter_url": {
@@ -424,11 +424,11 @@
                     "default": "homo_sapiens"
                 },
                 "dfam_version": {
-                    "type": "number",
+                    "type": ["number", "null"],
                     "description": "Version of dfam to use"
                 },
                 "pfam_version": {
-                    "type": "number",
+                    "type": ["number", "null"],
                     "description": "Version of pfam to use"
                 }
             }
