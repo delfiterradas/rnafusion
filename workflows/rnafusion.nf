@@ -310,7 +310,7 @@ workflow RNAFUSION {
         def ch_fusionreport_csv = Channel.empty()
         if(!params.skip_vis && tools.contains("fusionreport")) {
             if (!fusions_created) {
-                error("Could not find any fusion files. Please generate some with --arriba, --starfusion and/or --fusioncatcher")
+                error("Could not find any fusion files. Please generate some with `--tools arriba`, `--tools starfusion` and/or `--tools fusioncatcher`")
             }
             FUSIONREPORT_WORKFLOW (
                 BUILD_REFERENCES.out.fusionreport_ref,
@@ -330,7 +330,7 @@ workflow RNAFUSION {
             ch_fusionreport_csv     = null
             ch_fusionreport_report  = null
         } else if(tools.contains("fusioninspector")) {
-            error("Could not find any valid fusions for fusioninspector input. Please provide some via --fusioninspector_fusions or generate them with --arriba, --starfusion and/or --fusioncatcher with --skip_vis disabled and --fusionreport enabled")
+            error("Could not find any valid fusions for fusioninspector input. Please provide some via --fusioninspector_fusions or generate them with `--tools arriba`, `--tools starfusion` and/or `--tools fusioncatcher` with --skip_vis disabled and `--tools fusionreport enabled")
         }
 
         //
