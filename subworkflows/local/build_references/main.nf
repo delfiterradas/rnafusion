@@ -5,7 +5,6 @@
 */
 
 include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode_download/main'
-include { FUSIONCATCHER_DOWNLOAD }          from '../../../modules/local/fusioncatcher/download/main'
 include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
 include { STARFUSION_BUILD }                from '../../../modules/local/starfusion/build/main'
@@ -19,7 +18,6 @@ include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatspl
 ========================================================================================
 */
 
-include { ARRIBA_DOWNLOAD }                 from '../../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'
 include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/genomegenerate/main'
 include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../../modules/nf-core/gatk4/createsequencedictionary/main'
