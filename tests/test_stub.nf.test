@@ -15,7 +15,9 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 tools            = "all"
-                no_cosmic              = true
+                no_cosmic        = true
+                genomes_base     = "${outputDir}/references"
+
             }
         }
 
@@ -48,6 +50,8 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "arriba"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
+
             }
         }
 
@@ -80,6 +84,8 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "ctatsplicing"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
+
             }
         }
 
@@ -112,6 +118,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "fusioncatcher"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
             }
         }
 
@@ -145,6 +152,7 @@ nextflow_pipeline {
                 tools            = "fusioncatcher"
                 trim_tail_fusioncatcher = 50
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
 
             }
         }
@@ -177,6 +185,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "starfusion"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
             }
         }
 
@@ -209,6 +218,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "stringtie"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
             }
         }
 
@@ -242,6 +252,7 @@ nextflow_pipeline {
                 tools            = "fusionreport,arriba,starfusion,fusioncatcher"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 no_cosmic        = true
+                genomes_base     = "${outputDir}/references"
             }
         }
 
@@ -274,6 +285,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "fastp"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
             }
         }
 
@@ -306,6 +318,7 @@ nextflow_pipeline {
                 outdir           = "$outputDir"
                 tools            = "salmon"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
+                genomes_base     = "${outputDir}/references"
             }
         }
 
@@ -339,6 +352,7 @@ nextflow_pipeline {
                 tools            = "fusioninspector,arriba,fusionreport"
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 no_cosmic        = true
+                genomes_base     = "${outputDir}/references"
             }
         }
 

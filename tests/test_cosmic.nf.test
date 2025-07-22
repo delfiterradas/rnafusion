@@ -13,6 +13,7 @@ nextflow_pipeline {
             params {
                 outdir               = "$outputDir"
                 tools                = "fastp"
+                genomes_base         = "${outputDir}/references"
             }
         }
 
