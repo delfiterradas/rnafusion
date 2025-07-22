@@ -18,8 +18,14 @@ nextflow_pipeline {
                 // Input data
                 references_only            = true
                 input                      = "${projectDir}/tests/csv/fastq.csv"
+                genomes_base               = "${outputDir}/references"
+                fusioncatcher_ref          = null
+                arriba_ref_protein_domains = null
+                arriba_ref_known_fusions   = null
+                arriba_ref_blacklist       = null
+                arriba_ref_cytobands       = null
                 no_cosmic                  = true
-                tools                      = "arriba,starfusion,fusionreport,salmon,fusioninspector"
+                tools                      = "all"
                 fasta                      = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa'
                 gtf                        = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf'
                 fusion_annot_lib           = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'

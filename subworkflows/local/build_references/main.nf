@@ -131,12 +131,12 @@ workflow BUILD_REFERENCES {
         }
     }
 
-    def ch_arriba_ref_blacklist       = Channel.fromPath(params.arriba_ref_blacklist)
-    def ch_arriba_ref_cytobands       = Channel.fromPath(params.arriba_ref_cytobands)
-    def ch_arriba_ref_known_fusions   = Channel.fromPath(params.arriba_ref_known_fusions)
-    def ch_arriba_ref_protein_domains = Channel.fromPath(params.arriba_ref_protein_domains)
+    def ch_arriba_ref_blacklist       = params.arriba_ref_blacklist ? Channel.fromPath(params.arriba_ref_blacklist) : Channel.empty()
+    def ch_arriba_ref_cytobands       = params.arriba_ref_cytobands ? Channel.fromPath(params.arriba_ref_cytobands) : Channel.empty()
+    def ch_arriba_ref_known_fusions   = params.arriba_ref_known_fusions ? Channel.fromPath(params.arriba_ref_known_fusions) : Channel.empty()
+    def ch_arriba_ref_protein_domains = params.arriba_ref_protein_domains ? Channel.fromPath(params.arriba_ref_protein_domains) : Channel.empty()
 
-    def ch_fusioncatcher_ref = Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] }
+    def ch_fusioncatcher_ref = params.fusioncatcher_ref ? Channel.fromPath(params.fusioncatcher_ref).map { it -> [[id:it.name], it] } : Channel.empty()
 
     def ch_starfusion_ref = Channel.empty()
     if (tools.intersect(["starfusion", "ctatsplicing", "fusioninspector"])) {
