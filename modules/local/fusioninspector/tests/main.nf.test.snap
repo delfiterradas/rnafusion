@@ -398,7 +398,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.FusionInspector.fusions.tsv:md5,01a2578b59f112d23a1475cd75b9af0b"
+                    "test.FusionInspector.fusions.tsv:md5,c992c4485f060b1c41be5c29efc4abba"
                 ]
             ],
             [
@@ -416,7 +416,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.FusionInspector.fusions.abridged.tsv:md5,98d99b567527d990086689e4f7f8cc12"
+                    "test.FusionInspector.fusions.abridged.tsv:md5,727aed24358441c63fe08b0e6aaca42b"
                 ]
             ],
             [
@@ -425,14 +425,14 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "FusionInspector.log:md5,6cdafdbfe281ca9bb92c484e5a001d41"
+                    "FusionInspector.log:md5,fc708e06807eb0c84a182a11b1c5112c"
                 ]
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-30T15:11:10.528898"
+        "timestamp": "2025-07-22T17:01:54.346734"
     }
 }
