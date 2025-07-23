@@ -9,7 +9,7 @@
                         },
                         [
                             "AnnotFilterRule.pm:md5,f94966013cd0df9624a6dda0b75fefa0",
-                            "PFAM.domtblout.dat.gz:md5,b8cf97310b4af1275237febab723d16c",
+                            "PFAM.domtblout.dat.gz:md5,075c489b35a7fd55b741102769af210f",
                             [
                                 "_fusion_annot_lib.idx.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
                                 "_prot_info_db.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -35,42 +35,42 @@
                                 "trans.blast.dat.index.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
                                 "validate_ctat_genome_lib.ok:md5,d41d8cd98f00b204e9800998ecf8427e"
                             ],
-                            "blast_pairs.dat.gz:md5,31ec48d5116f44b12fdd3f47155241dc",
-                            "blast_pairs.idx:md5,0264ed1a28c50370e598cc8bd874dce0",
+                            "blast_pairs.dat.gz:md5,79b51d2021d564aba2bc931d52816114",
+                            "blast_pairs.idx:md5,c2d738b2541366d75d21b3503e5d5121",
                             [
-                                "cancer_splicing.idx:md5,fcec006060ebd0bfb1b0cf38c9f78116"
+                                "cancer_splicing.idx:md5,ca755ab82af1285bfbf945d92a260a6f"
                             ],
                             "fusion_annot_lib.gz:md5,23d82a5da81f91ca4e1ecd6481992a12",
-                            "fusion_annot_lib.idx:md5,21bc9b75123be07089e86023285b67f8",
-                            "pfam_domains.dbm:md5,68a00826b188aa577237a701e6f18e8c",
-                            "refGene.bed:md5,a14d9396c44c5fc0cd6b4d3194e8902d",
+                            "fusion_annot_lib.idx:md5,252532308d08ee6c012c69883c343d02",
+                            "pfam_domains.dbm:md5,a5c6c00f2f0759f85bdef39629b3e5d2",
+                            "refGene.bed:md5,2262b9ee22ea50009f4a8c51c6b2fac7",
                             "refGene.sort.bed.gz:md5,01bf4093e3e9dcad8ed3a0f45a381c95",
                             "refGene.sort.bed.gz.tbi:md5,6dd8cd94a5cd10699fe8445a70c5b232",
-                            "ref_annot.cdna.fa:md5,4907484edddb1a52d1ef5acb814fa709",
-                            "ref_annot.cdna.fa.idx:md5,8f5c6a6c2ffec0188fac2483f806aabc",
-                            "ref_annot.cds:md5,de204070512c909b351c5876133f4f54",
-                            "ref_annot.cdsplus.fa:md5,180f4e5d277f2d5fc4bb092c11eaaf68",
-                            "ref_annot.cdsplus.fa.idx:md5,be8bb33932b6c2f82213a0622241ad0f",
+                            "ref_annot.cdna.fa:md5,b087fb1b388d75a88887bb98d8c5d339",
+                            "ref_annot.cdna.fa.idx:md5,d6c43237e5c522278f944edc79b5c567",
+                            "ref_annot.cds:md5,3686879a92b12a36ee89fcb4dfc9d9f8",
+                            "ref_annot.cdsplus.fa:md5,72561309cba7f598c641c19df84e9c0e",
+                            "ref_annot.cdsplus.fa.idx:md5,5751b6d5373f24fd98a2ce86618e3b7c",
                             "ref_annot.gtf:md5,5ce8afe99ef3940a877a04caeacf9181",
-                            "ref_annot.gtf.gene_spans:md5,4884ab6d453096b48bf85595299d9183",
+                            "ref_annot.gtf.gene_spans:md5,96105e687b1c346c773abc5915d817b2",
                             "ref_annot.gtf.mini.sortu:md5,1d29ccecdbb7b40a99c84a02d6c2c1be",
                             "ref_annot.gtf.mm2.splice.bed:md5,340585ea1843bf06bf555575ddecf28c",
-                            "ref_annot.pep:md5,22f05c0bf182e2645f0a01c4fb45e908",
-                            "ref_annot.prot_info.dbm:md5,218a49ac07f0db5fba0b1b48e6b12343",
+                            "ref_annot.pep:md5,28d1d869dcd616da362ead8ae39df21d",
+                            "ref_annot.prot_info.dbm:md5,18abe5ec2717d4c214d7546b998dfe44",
                             "ref_genome.fa:md5,ad699c56ed38566c7d3e9579486b1706",
                             "ref_genome.fa.fai:md5,e3f74a27219b33ae80fd5de5cbeaf32b",
                             "ref_genome.fa.mm2:md5,ce50979ea284748eb9f84ae88cfd930e",
                             "ref_genome.fa.ndb:md5,6ea574753b557610f62f6e4ab79e19f5",
                             "ref_genome.fa.nhr:md5,50f28dae71683c4394bfaf94a1ef4392",
-                            "ref_genome.fa.nin:md5,3c4114ca4fb5dd0dc2095f4cf5f7b844",
-                            "ref_genome.fa.njs:md5,39b423551f658bb0cb5032ac00bd74eb",
+                            "ref_genome.fa.nin:md5,d4d9344b71466f067e9a3d8043feb891",
+                            "ref_genome.fa.njs:md5,2b049589cf2e3ab830883dda45ffdf3c",
                             "ref_genome.fa.not:md5,1e53e9d08f1d23af0299cfa87478a7bb",
                             "ref_genome.fa.nsq:md5,d2361e7871ce4cf51181c112a48f191b",
                             "ref_genome.fa.ntf:md5,de1250813f0c7affc6d12dac9d0fb6bb",
                             "ref_genome.fa.nto:md5,33cdeccccebe80329f1fdbee7f5874cb",
                             [
                                 "Genome:md5,9e3efdd0901cabb5a2d589664a63b372",
-                                "Log.out:md5,5310b905153fa779043520ec3fc7ca3b",
+                                "Log.out:md5,a352597c0bed7b2ae1018532a5893203",
                                 "SA:md5,7dd9083264be9c6a2194d990bc10d237",
                                 "SAindex:md5,ac4711df685109e04356db9e9cb9fb7f",
                                 "build.ok:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -81,14 +81,14 @@
                                 "exonGeTrInfo.tab:md5,3c35618d07a8e35a0f9108699fcdda42",
                                 "exonInfo.tab:md5,bcbb3f32fa31fe504cc737f337ad341c",
                                 "geneInfo.tab:md5,db5db4b6e003904e9908fce7c05f0125",
-                                "genomeParameters.txt:md5,9664cf5658a941c5d4cf9f5bb5e5cb4f",
+                                "genomeParameters.txt:md5,09b8b0bb918b2c628030d9fb1aa7aea6",
                                 "sjdbInfo.txt:md5,e4cc1bbf8bd687cfc3d7c2c702e6def7",
                                 "sjdbList.fromGTF.out.tab:md5,8f3e8604b00d4067e4eb80aa476a8113",
                                 "sjdbList.out.tab:md5,5d78dd49d5db24ca2c056b7ebe5c2059",
                                 "transcriptInfo.tab:md5,b758c0ccaddcf0453bab5905b3cec4a2"
                             ],
                             "trans.blast.align_coords.align_coords.dat:md5,9f6b7a75aea03a9671190be25ecdd4c2",
-                            "trans.blast.align_coords.align_coords.dbm:md5,4ae2e5e8d141bd2e066da74ffb60403b",
+                            "trans.blast.align_coords.align_coords.dbm:md5,776d70b98b4be1290e3e187b5fef3a80",
                             "trans.blast.dat.gz:md5,85ba5ea96c566f751ad83a3e4b8ab128"
                         ]
                     ]
@@ -102,7 +102,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-16T09:41:16.195052"
+        "timestamp": "2025-07-23T08:54:58.892241"
     },
     "test - stub": {
         "content": [
