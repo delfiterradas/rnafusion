@@ -82,7 +82,7 @@ nextflow_process {
             process {
                 """
                 input[0] = Channel.of([ id:'test_sample' ])
-                    .combine(FUSIONINSPECTOR.out.tsv.collect{ meta, tsv -> tsv })
+                    .combine(FUSIONINSPECTOR.out.abridged_tsv.collect{ meta, tsv -> tsv })
                     .combine(FUSIONINSPECTOR.out.out_gtf.collect{ meta, gtf -> gtf })
                     .combine(FUSIONREPORT_DETECT.out.report.collect{ meta, report -> report })
                     .combine(FUSIONREPORT_DETECT.out.csv.collect{ meta, csv -> csv })
@@ -156,7 +156,7 @@ nextflow_process {
             process {
                 """
                 input[0] = Channel.of([ id:'test_sample' ])
-                    .combine(FUSIONINSPECTOR.out.tsv.collect{ meta, tsv -> tsv })
+                    .combine(FUSIONINSPECTOR.out.abridged_tsv.collect{ meta, tsv -> tsv })
                     .combine(FUSIONINSPECTOR.out.out_gtf.collect{ meta, gtf -> gtf })
                     .combine(Channel.of(file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/fusionreport/test_sample_fusionreport_index.html", checkIfExists: true)))
                     .combine(Channel.of(file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/fusionreport/test_sample.fusions.csv", checkIfExists: true)))
