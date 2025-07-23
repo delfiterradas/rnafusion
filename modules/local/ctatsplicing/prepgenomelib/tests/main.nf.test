@@ -6,7 +6,7 @@ nextflow_process {
 
     setup {
         run("STARFUSION_BUILD") {
-            script "../../../starfusion/build/main.nf"
+            script "../../../../nf-core/starfusion/build/main.nf"
             process {
                 """
                 input[0] = [
