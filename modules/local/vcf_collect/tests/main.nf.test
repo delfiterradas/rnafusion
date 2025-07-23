@@ -53,6 +53,15 @@ nextflow_process {
                 }
             }
 
+            run("AGAT_CONVERTSPGFF2TSV") {
+                script "../../../nf-core/agat/convertspgff2tsv/main.nf"
+                process {
+                    """
+                    input[0] = FUSIONINSPECTOR.out.out_gtf
+                    """
+                }
+            }
+
             run("FUSIONREPORT_DOWNLOAD") {
                 script "../../../nf-core/fusionreport/download/main.nf"
                 process {
@@ -83,7 +92,7 @@ nextflow_process {
                 """
                 input[0] = Channel.of([ id:'test_sample' ])
                     .combine(FUSIONINSPECTOR.out.abridged_tsv.collect{ meta, tsv -> tsv })
-                    .combine(FUSIONINSPECTOR.out.out_gtf.collect{ meta, gtf -> gtf })
+                    .combine(AGAT_CONVERTSPGFF2TSV.out.tsv.collect{ meta, tsv -> tsv })
                     .combine(FUSIONREPORT_DETECT.out.report.collect{ meta, report -> report })
                     .combine(FUSIONREPORT_DETECT.out.csv.collect{ meta, csv -> csv })
                 input[1] = [[ id:'hgnc' ], file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/reference/hgnc/hgnc_complete_set.txt", checkIfExists: true)]
@@ -150,6 +159,15 @@ nextflow_process {
                     """
                 }
             }
+
+            run("AGAT_CONVERTSPGFF2TSV") {
+                script "../../../nf-core/agat/convertspgff2tsv/main.nf"
+                process {
+                    """
+                    input[0] = FUSIONINSPECTOR.out.out_gtf
+                    """
+                }
+            }
         }
 
         when {
@@ -157,7 +175,7 @@ nextflow_process {
                 """
                 input[0] = Channel.of([ id:'test_sample' ])
                     .combine(FUSIONINSPECTOR.out.abridged_tsv.collect{ meta, tsv -> tsv })
-                    .combine(FUSIONINSPECTOR.out.out_gtf.collect{ meta, gtf -> gtf })
+                    .combine(AGAT_CONVERTSPGFF2TSV.out.tsv.collect{ meta, tsv -> tsv }))
                     .combine(Channel.of(file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/fusionreport/test_sample_fusionreport_index.html", checkIfExists: true)))
                     .combine(Channel.of(file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/human/fusionreport/test_sample.fusions.csv", checkIfExists: true)))
                 input[1] = [[ id:'hgnc' ], file("https://github.com/nf-core/test-datasets/raw/rnafusion/testdata/reference/hgnc/hgnc_complete_set.txt")]
