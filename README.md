@@ -29,9 +29,19 @@ In rnafusion the full-sized test includes reference building and fusion detectio
 
 ![nf-core/rnafusion metro map](docs/images/nf-core-rnafusion_metro_map.png)
 
-### Build references
+### References
 
-`--references_only` triggers a workflow to ONLY build references, otherwise the references are build when the analysis is run:
+The references for the pipeline can be downloaded from the nf-core AWS megatests S3 bucket using the following command for the [AWS CLI tool](https://github.com/aws/aws-cli):
+
+```bash
+aws --no-sign-request s3 sync s3://nf-core-megatests/rnafusion/references/ <path_to_references>
+```
+
+The path to the downloaded references can then be provided to the pipeline with the `--genomes_base` parameter.
+
+:warning: **Please note that the references are large and can take a long time to download, so it is recommended to download them once and use them for all future runs of the pipeline.**
+
+The pipeline is also able to build the references in case files from a specific gencode version are missing. This is done automatically when the expected references are not found and these files will be automatically published in the directory specified by the `--genomes_base` parameter. Use the `--references_only` parameter to trigger the reference building workflow only, without running the rest of the pipeline.
 
 1. Download gencode fasta and gtf files
 2. Create [STAR](https://github.com/alexdobin/STAR) index
