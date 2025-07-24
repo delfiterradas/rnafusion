@@ -34,8 +34,9 @@
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
-                    "wget": "1.21.4",
-                    "STAR-Fusion": "1.15.0"
+                    "gunzip": 1.12,
+                    "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -187,7 +188,7 @@
                 "references/GRCh38/hgnc/hgnc_complete_set.txt"
             ],
             [
-                "minigenome.dict:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "minigenome.dict:md5,f2dfb8df1d1f860050fc0dba1399fd9e",
                 "rrna.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "rrna.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "DB-timestamp.txt:md5,d41d8cd98f00b204e9800998ecf8427e",

@@ -17,7 +17,6 @@ nextflow_pipeline {
                 tools            = "all"
                 no_cosmic        = true
                 genomes_base     = "${outputDir}/references"
-
             }
         }
 

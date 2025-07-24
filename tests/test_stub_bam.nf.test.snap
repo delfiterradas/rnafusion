@@ -38,8 +38,9 @@
                     "STAR-Fusion": "1.15.0"
                 },
                 "STARFUSION_BUILD": {
-                    "wget": "1.21.4",
-                    "STAR-Fusion": "1.15.0"
+                    "gunzip": 1.12,
+                    "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -471,8 +472,9 @@
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
-                    "wget": "1.21.4",
-                    "STAR-Fusion": "1.15.0"
+                    "gunzip": 1.12,
+                    "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -921,8 +923,9 @@
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
-                    "wget": "1.21.4",
-                    "STAR-Fusion": "1.15.0"
+                    "gunzip": 1.12,
+                    "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -1138,8 +1141,9 @@
                     "STAR-Fusion": "1.15.0"
                 },
                 "STARFUSION_BUILD": {
-                    "wget": "1.21.4",
-                    "STAR-Fusion": "1.15.0"
+                    "gunzip": 1.12,
+                    "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -1575,8 +1579,9 @@
                     "STAR-Fusion": "1.15.0"
                 },
                 "STARFUSION_BUILD": {
-                    "wget": "1.21.4",
-                    "STAR-Fusion": "1.15.0"
+                    "gunzip": 1.12,
+                    "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",

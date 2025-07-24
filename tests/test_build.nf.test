@@ -3,7 +3,6 @@ nextflow_pipeline {
     name "Test pipeline"
     script "../main.nf"
     profile "test_build"
-    options "-stub"
     tag "pipeline"
     tag "pipeline_rnafusion"
     tag "test_build"
