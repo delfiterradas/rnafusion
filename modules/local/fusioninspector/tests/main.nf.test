@@ -26,8 +26,15 @@ nextflow_process {
 
                     input[2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
                     input[3] = "homo_sapiens"
-                    input [4] = "3.8"
-                    input [5] = "37.4"
+                    input[4] = "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz"
+                    input[5] = [
+                        "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm",
+                        "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3f",
+                        "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3i",
+                        "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m",
+                        "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p"
+                    ]
+                    input[6] = "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm"
                     """
                 }
             }
