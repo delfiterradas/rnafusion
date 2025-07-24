@@ -5,8 +5,6 @@
 */
 
 include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode_download/main'
-include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
-include { FUSIONCATCHER_DOWNLOAD }          from '../../../modules/local/fusioncatcher/download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
 include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
 include { GET_RRNA_TRANSCRIPTS }            from '../../../modules/local/get_rrna_transcript/main'
