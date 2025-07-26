@@ -74,7 +74,7 @@
             "trans.blast.align_coords.align_coords.dat:md5,9f6b7a75aea03a9671190be25ecdd4c2",
             "trans.blast.align_coords.align_coords.dbm",
             "trans.blast.dat.gz:md5,85ba5ea96c566f751ad83a3e4b8ab128",
-            "refGene.bed:md5,ae9d27b8f4efb1e57dccddf97be0f329",
+            true,
             "refGene.sort.bed.gz:md5,01bf4093e3e9dcad8ed3a0f45a381c95",
             "refGene.sort.bed.gz.tbi:md5,6dd8cd94a5cd10699fe8445a70c5b232",
             true,
@@ -84,7 +84,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-25T15:06:29.346013"
+        "timestamp": "2025-07-26T20:17:06.519409"
     },
     "test - stub": {
         "content": [

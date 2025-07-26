@@ -123,7 +123,7 @@ nextflow_process {
                 path(process.out.reference[0][1]).resolve("trans.blast.align_coords.align_coords.dat"),
                 file("$outputDir/trans.blast.align_coords.align_coords.dbm").name,
                 path(process.out.reference[0][1]).resolve("trans.blast.dat.gz"),
-                path(process.out.reference[0][1]).resolve("refGene.bed"),
+                path(process.out.reference[0][1]).resolve("refGene.bed").exists(),
                 path(process.out.reference[0][1]).resolve("refGene.sort.bed.gz"),
                 path(process.out.reference[0][1]).resolve("refGene.sort.bed.gz.tbi"),
                 path(process.out.reference[0][1]).resolve("cancer_splicing_lib/cancer_splicing.idx").exists(),
