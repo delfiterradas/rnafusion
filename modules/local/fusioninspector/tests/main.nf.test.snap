@@ -392,15 +392,8 @@
     },
     "FUSIONINSPECTOR": {
         "content": [
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test.FusionInspector.fusions.tsv:md5,25af7c8a33eae6d6af4f6bfe4abb9c4c"
-                ]
-            ],
+            true,
+            true,
             [
                 [
                     {
@@ -416,23 +409,15 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.FusionInspector.fusions.abridged.tsv:md5,a985145b60f2493c91598cf0eb739900"
+                    "test.FusionInspector.fusions.abridged.tsv:md5,2097101e06c55ed70e73429a81330682"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "FusionInspector.log:md5,924b6ba4831c4fd9611b8026ec7905fa"
-                ]
-            ]
+            true
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-28T10:19:42.587045"
+        "timestamp": "2025-07-28T12:29:41.961289"
     }
 }

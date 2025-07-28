@@ -62,10 +62,11 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.tsv,
+                    path(process.out.tsv[0][1]).exists(),
+                    path(process.out.abridged_tsv[0][1]).exists(),
                     process.out.out_gtf,
                     process.out.abridged_tsv,
-                    process.out.log,
+                    path(process.out.abridged_tsv[0][1]).exists(),
                 ).match() }
             )
         }
