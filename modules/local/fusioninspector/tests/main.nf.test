@@ -65,8 +65,7 @@ nextflow_process {
                     path(process.out.tsv[0][1]).exists(),
                     path(process.out.abridged_tsv[0][1]).exists(),
                     process.out.out_gtf,
-                    process.out.abridged_tsv,
-                    path(process.out.abridged_tsv[0][1]).exists(),
+                    path(process.out.log[0][1]).exists(),
                 ).match() }
             )
         }
