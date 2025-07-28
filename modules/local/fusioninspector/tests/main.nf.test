@@ -16,15 +16,15 @@ nextflow_process {
                 process {
                     """
                     input[0] = [
-                        [ id:'minigenome fasta' ],
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
+                        [ id:'minigenome_fasta' ],
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/minigenome.fa')
                     ]
                     input[1] = [
-                        [ id:'minigenome gtf' ],
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
+                        [ id:'minigenome_gtf' ],
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/minigenome.gtf')
                     ]
 
-                    input[2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
+                    input[2] = file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/CTAT_HumanFusionLib.mini.dat.gz')
                     input[3] = "homo_sapiens"
                     input[4] = "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz"
                     input[5] = [
