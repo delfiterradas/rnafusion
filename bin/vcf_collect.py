@@ -89,6 +89,8 @@ def vcf_collect(
         | ((all_df["orig_start"] == 0) & (all_df["orig_end"] == 0))
     ]
 
+    all_df["transcript_version"] = all_df["Transcript_id"].astype(str).str.split(".").str[-1]
+
     all_df.replace("", np.nan, inplace=True)
     all_df = all_df.drop_duplicates()
 
