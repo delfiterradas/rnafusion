@@ -211,6 +211,7 @@ nextflow_pipeline {
     }
 
     test("stub test fusionreport") {
+        tag "fusionreport"
 
         when {
             params {
@@ -219,6 +220,7 @@ nextflow_pipeline {
                 fusion_annot_lib = 'https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz'
                 input            = "${projectDir}/tests/yml/bam.yml"
                 no_cosmic        = true
+                pfam_file        = "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz"
             }
         }
 
