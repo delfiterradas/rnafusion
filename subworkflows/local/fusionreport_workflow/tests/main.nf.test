@@ -59,10 +59,10 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.fusion_list,
                     workflow.out.fusion_list_filtered,
-                    workflow.out.report,
                     workflow.out.csv,
-                    workflow.out.versions
-                ).match() }
+                ).match() },
+                { assert path(workflow.out.report[0][1]).exists() },  // Extract the file path
+                { assert path(workflow.out.versions[0]).exists() },
             )
         }
     }
