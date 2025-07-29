@@ -38,4 +38,3 @@ workflow TRIM_WORKFLOW {
         ch_fastqc_trimmed       // Channel [ meta, path_zip  ]
         versions = ch_versions  // Channel [ versions        ]
     }
-

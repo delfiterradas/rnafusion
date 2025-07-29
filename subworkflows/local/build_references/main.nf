@@ -6,9 +6,7 @@
 
 include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode_download/main'
 include { FUSIONCATCHER_DOWNLOAD }          from '../../../modules/local/fusioncatcher/download/main'
-include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
-include { STARFUSION_BUILD }                from '../../../modules/local/starfusion/build/main'
 include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
 include { GET_RRNA_TRANSCRIPTS }            from '../../../modules/local/get_rrna_transcript/main'
 include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatsplicing/prepgenomelib/main.nf'
@@ -25,6 +23,8 @@ include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/
 include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../../modules/nf-core/gatk4/createsequencedictionary/main'
 include { GATK4_BEDTOINTERVALLIST }         from '../../../modules/nf-core/gatk4/bedtointervallist/main'
 include { SALMON_INDEX }                    from '../../../modules/nf-core/salmon/index/main'
+include { FUSIONREPORT_DOWNLOAD }           from '../../../modules/nf-core/fusionreport/download/main'
+include { STARFUSION_BUILD }                from '../../../modules/nf-core/starfusion/build/main'
 include { GFFREAD }                         from '../../../modules/nf-core/gffread/main'
 include { getFileSuffix } from '../../../modules/nf-core/cat/cat/main.nf'
 
@@ -171,7 +171,33 @@ workflow BUILD_REFERENCES {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
             }
-            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, params.dfam_version, params.pfam_version)
+
+            if(params.pfam_file) {
+                pfam_file = Channel.fromPath(params.pfam_file, checkIfExists: true)
+            } else {
+                error("Expected `--pfam_version` to be specified when using StarFusion to automatically fill in Pfam database or specify `--pfam_file` for custom input")
+            }
+
+            if(params.dfam_hmm && params.dfam_h3p && params.dfam_h3m && params.dfam_h3i && params.dfam_h3f) {
+                dfam_hmm = Channel.fromPath(params.dfam_hmm, checkIfExists: true)
+                dfam_h3f = Channel.fromPath(params.dfam_h3f, checkIfExists: true)
+                dfam_h3i = Channel.fromPath(params.dfam_h3i, checkIfExists: true)
+                dfam_h3m = Channel.fromPath(params.dfam_h3m, checkIfExists: true)
+                dfam_h3p = Channel.fromPath(params.dfam_h3p, checkIfExists: true)
+            } else {
+                error("Expected `--dfam_version` and `--species` to be specified when using StarFusion to automatically fill in Dfam database or specify `--dfam_{hmm,h3f,h3i,h3m,h3p}` for custom input")
+            }
+
+            dfam_urls_ch = dfam_hmm
+                .concat(
+                    dfam_h3f,
+                    dfam_h3i,
+                    dfam_h3m,
+                    dfam_h3p
+                )
+                .collect()
+
+            STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, pfam_file, dfam_urls_ch, params.annot_filter_url)
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
             if (tools.contains("ctatsplicing")) {
                 CTATSPLICING_PREPGENOMELIB(

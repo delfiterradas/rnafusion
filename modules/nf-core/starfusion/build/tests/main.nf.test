@@ -1,12 +1,15 @@
 nextflow_process {
-
-    name "Test Process CTATSPLICING_PREPGENOMELIB"
+    name "Test Process STARFUSION_BUILD"
     script "../main.nf"
-    process "CTATSPLICING_PREPGENOMELIB"
+    process "STARFUSION_BUILD"
+    tag "modules"
+    tag "modules_nfcore"
+    tag "starfusion"
+    tag "starfusion/build"
+    tag "fusioninspector"
 
-    setup {
-        run("STARFUSION_BUILD") {
-            script "../../../../nf-core/starfusion/build/main.nf"
+    test("STARFUSION_BUILD - human - minigenome") {
+        when {
             process {
                 """
                 input[0] = [
@@ -29,20 +32,6 @@ nextflow_process {
                     "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p"
                 ]
                 input[6] = "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm"
-                """
-            }
-        }
-    }
-
-    test("test") {
-
-        when {
-            process {
-                """
-                input[0] = STARFUSION_BUILD.out.reference
-                input[1] = [
-                    file("https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/CANCER_SPLICING_LIB_SUPPLEMENT/cancer_introns.GRCh38.Jun232020.tsv.gz", checkIfExists:true)
-                ]
                 """
             }
         }
@@ -123,37 +112,77 @@ nextflow_process {
                 path(process.out.reference[0][1]).resolve("trans.blast.align_coords.align_coords.dat"),
                 file("$outputDir/trans.blast.align_coords.align_coords.dbm").name,
                 path(process.out.reference[0][1]).resolve("trans.blast.dat.gz"),
-                path(process.out.reference[0][1]).resolve("refGene.bed").exists(),
-                path(process.out.reference[0][1]).resolve("refGene.sort.bed.gz"),
-                path(process.out.reference[0][1]).resolve("refGene.sort.bed.gz.tbi"),
-                path(process.out.reference[0][1]).resolve("cancer_splicing_lib/cancer_splicing.idx").exists(),
-                process.out.version
-                ).match()
+                process.out.versions
+            ).match()
         }
     }
-    test("test - stub") {
 
+    test("STARFUSION_BUILD - human - minigenome - stub") {
         options "-stub"
 
         when {
-            params {
-                outdir = "$outputDir"
-            }
             process {
                 """
-                input[0] = STARFUSION_BUILD.out.reference
-                input[1] = [
-                    file("https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/CANCER_SPLICING_LIB_SUPPLEMENT/cancer_introns.GRCh38.Jun232020.tsv.gz", checkIfExists:true)
+                input[0] = [
+                    [ id:'minigenome_fasta' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
                 ]
+                input[1] = [
+                    [ id:'minigenome_gtf' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
+                ]
+
+                input[2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
+                input[3] = "homo_sapiens"
+                input[4] = "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz"
+                input[5] = [
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3f",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3i",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3p"
+                ]
+                input[6] = "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm"
                 """
             }
         }
 
         then {
-            assertAll(
-                { assert process.success },
-                { assert snapshot(process.out.findAll { key, value -> !key.isNumber() }).match() }
-            )
+            assert snapshot(process.out).match()
+        }
+    }
+
+    test("STARFUSION_BUILD - stub - fail") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'minigenome_fasta' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
+                ]
+                input[1] = [
+                    [ id:'minigenome_gtf' ],
+                    file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
+                ]
+
+                input[2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
+                input[3] = "homo_sapiens"
+                input[4] = "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.4/Pfam-A.hmm.gz"
+                input[5] = [
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3f",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3i",
+                    "https://www.dfam.org/releases/Dfam_3.8/infrastructure/dfamscan/homo_sapiens_dfam.hmm.h3m"
+                ]
+                input[6] = "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm"
+                """
+            }
+        }
+
+        then {
+            assert process.failed
         }
     }
 }

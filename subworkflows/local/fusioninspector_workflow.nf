@@ -68,4 +68,3 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         ch_arriba_visualisation
         versions             = ch_versions
 }
-
