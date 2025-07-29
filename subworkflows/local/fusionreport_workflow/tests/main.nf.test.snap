@@ -22,25 +22,14 @@
                     {
                         "id": "test_sample"
                     },
-                    "test_sample_fusionreport_index.html:md5,9dfbf94471173bebbd8085e440515e4d"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_sample"
-                    },
                     "test_sample.fusions.csv:md5,ee6c6838110d68bc75a13c19dca0a321"
                 ]
-            ],
-            [
-                "versions.yml:md5,5b80da331704f6d2093b7609537222e8"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-06-19T11:32:39.322725"
+        "timestamp": "2025-07-14T15:59:24.708716"
     }
 }
