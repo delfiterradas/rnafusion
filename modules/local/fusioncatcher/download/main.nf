@@ -4,8 +4,8 @@ process FUSIONCATCHER_DOWNLOAD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/3b/3b54fa9135194c72a18d00db6b399c03248103f87e43ca75e4b50d61179994b3/data':
-        'community.wave.seqera.io/library/wget:1.21.4--8b0fcde81c17be5e' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/0b/0b97801b2147f99c974bdf01b821c043654f6bf1f2864a1633231740999df072/data':
+        'community.wave.seqera.io/library/tar_pip_gdown:34715940085a0f1c' }"
 
     input:
     val genome_gencode_version
@@ -22,13 +22,13 @@ process FUSIONCATCHER_DOWNLOAD {
     def args = task.ext.args ?: ''
     meta = [ id: "human_v${genome_gencode_version}" ]
     """
-    wget --no-check-certificate $args ${params.fusioncatcher_download_link}
+    gdown --no-cookies ${params.fusioncatcher_download_link} -O human_v46.tar.gz
     tar xz human_v${genome_gencode_version}.tar.gz
     rm human_v${genome_gencode_version}.tar*
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
+        gdown: \$(gdown --version | head -1 | cut -d ' ' -f 2)
         tar: \$(tar --version | head -1 | sed -e 's/tar (GNU tar) //')
     END_VERSIONS
     """
@@ -39,7 +39,7 @@ process FUSIONCATCHER_DOWNLOAD {
     touch human_v${genome_gencode_version}/ensembl_fully_overlapping_genes.txt
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        wget: \$(wget --version | head -1 | cut -d ' ' -f 3)
+        gdown: \$(gdown --version | head -1 | cut -d ' ' -f 2)
         tar: \$(tar --version | head -1 | sed -e 's/tar (GNU tar) //')
     END_VERSIONS
     """

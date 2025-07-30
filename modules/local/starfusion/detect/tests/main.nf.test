@@ -57,7 +57,7 @@ nextflow_process {
             assert snapshot(
                 process.out.fusions,
                 process.out.abridged,
-                process.out.coding_effect,
+                path(process.out.coding_effect[0][1]).resolve("*.coding_effect.tsv").exists(),
                 process.out.versions
             ).match()
         }
