@@ -1,5 +1,5 @@
 # nf-core/rnafusion: Documentation
-
+test
 The nf-core/rnafusion documentation is split into the following pages:
 
 - [Usage](usage.md)
