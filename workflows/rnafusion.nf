@@ -12,7 +12,7 @@ include { STARFUSION                    }   from '../modules/local/starfusion/de
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
 include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
-include { FUSIONREPORT_WORKFLOW         }   from '../subworkflows/local/fusionreport_workflow'
+include { FUSIONREPORT_DETECT           }   from '../modules/nf-core/fusionreport/detect/main'
 include { FASTQC                        }   from '../modules/nf-core/fastqc/main'
 include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
 include { STAR_ALIGN                    }   from '../modules/nf-core/star/align/main'
@@ -308,21 +308,26 @@ workflow RNAFUSION {
         def ch_fusion_list_filtered = Channel.empty()
         def ch_fusionreport_report = Channel.empty()
         def ch_fusionreport_csv = Channel.empty()
-        if(!params.skip_vis && tools.contains("fusionreport")) {
+        if (!params.skip_vis && tools.contains("fusionreport")) {
             if (!fusions_created) {
                 error("Could not find any fusion files. Please generate some with `--tools arriba`, `--tools starfusion` and/or `--tools fusioncatcher`")
             }
-            FUSIONREPORT_WORKFLOW (
+
+            def ch_fusions = ch_arriba_fusions
+                .join(ch_starfusion_fusions, failOnMismatch:true, failOnDuplicate:true)
+                .join(ch_fusioncatcher_fusions, failOnMismatch:true, failOnDuplicate:true)
+
+            FUSIONREPORT_DETECT(
+                ch_fusions,
                 BUILD_REFERENCES.out.fusionreport_ref,
-                ch_arriba_fusions,
-                ch_starfusion_fusions,
-                ch_fusioncatcher_fusions
+                params.tools_cutoff
             )
-            ch_versions             = ch_versions.mix(FUSIONREPORT_WORKFLOW.out.versions)
-            ch_fusion_list          = FUSIONREPORT_WORKFLOW.out.fusion_list
-            ch_fusion_list_filtered = FUSIONREPORT_WORKFLOW.out.fusion_list_filtered
-            ch_fusionreport_report  = FUSIONREPORT_WORKFLOW.out.report
-            ch_fusionreport_csv     = FUSIONREPORT_WORKFLOW.out.csv
+
+            ch_versions             = ch_versions.mix(FUSIONREPORT_DETECT.out.versions)
+            ch_fusion_list          = FUSIONREPORT_DETECT.out.fusion_list
+            ch_fusion_list_filtered = FUSIONREPORT_DETECT.out.fusion_list_filtered
+            ch_fusionreport_report  = FUSIONREPORT_DETECT.out.report
+            ch_fusionreport_csv     = FUSIONREPORT_DETECT.out.csv
         } else if(params.fusioninspector_fusions) {
             def input_fusions       = file(params.fusioninspector_fusions, checkIfExists:true)
             ch_fusion_list          = ch_reads.map { it -> [ it[0], input_fusions ] }
