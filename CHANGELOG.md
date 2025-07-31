@@ -119,6 +119,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed subworkflow with less than two modules: `ARRIBA_WORKFLOW` [#692](https://github.com/nf-core/rnafusion/pull/692)
 - Removed subworkflow with less than two modules: `STARFUSION_WORKFLOW` [#707](https://github.com/nf-core/rnafusion/pull/707)
 - Removed subworkflow with less than two modules: `CTATSPLICING_WORKFLOW` [#704](https://github.com/nf-core/rnafusion/pull/704)
+- Removed subworkflow with less than two modules: `FUSIONREPORT_WORKFLOW` [#721](https://github.com/nf-core/rnafusion/pull/721)
 
 ### Parameters
 
