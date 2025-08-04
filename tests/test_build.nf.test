@@ -8,7 +8,6 @@ nextflow_pipeline {
     tag "test_build"
 
     test("Test build references") {
-
         when {
             params {
                 outdir = "$outputDir"
