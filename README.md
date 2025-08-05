@@ -42,7 +42,7 @@ The path to the downloaded references can then be provided to the pipeline with 
 
 :warning: **Please note that the references are large and can take a long time to download, so it is recommended to download them once and use them for all future runs of the pipeline.**
 
-The pipeline is also able to build the references in case files from a specific gencode version are missing. This is done automatically when the expected references are not found and these files will be automatically published in the directory specified by the `--genomes_base` parameter. Use the `--references_only` parameter to trigger the reference building workflow only, without running the rest of the pipeline.
+The pipeline is also able to build the references in case files from a specific gencode version are missing (Note: only genocode 46 is available for fusioncatcher). This is done automatically when the expected references are not found and these files will be automatically published in the directory specified by the `--genomes_base` parameter. Use the `--references_only` parameter to trigger the reference building workflow only, without running the rest of the pipeline.
 
 1. Download gencode fasta and gtf files
 2. Create [STAR](https://github.com/alexdobin/STAR) index
