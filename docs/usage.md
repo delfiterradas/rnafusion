@@ -50,7 +50,7 @@ nextflow run nf-core/rnafusion \
 > **IMPORTANT**
 >
 > - Note that this step takes about 24 hours to complete on HPC.
-> - Do not provide a samplesheet via the `input` parameter, otherwise the pipeline will run the analysis directly after downloading the references (except if that is what you want).
+> 
 
 References for each tools can also be downloaded separately with:
 
