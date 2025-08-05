@@ -25,6 +25,11 @@
                         "git_sha": "98bd7be6d2191b0d5900ee698d91b52eeab90311",
                         "installed_by": ["modules"]
                     },
+                    "bioawk": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
                     "cat/cat": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
