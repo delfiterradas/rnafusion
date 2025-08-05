@@ -15,7 +15,7 @@ include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatspl
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ========================================================================================
 */
-include { RRNATRANSCRIPTS                 } from '../../../modules/nf-core/rrnatranscripts/main'
+include { BIOAWK                          } from '../../../modules/nf-core/bioawk/main'
 include { AGAT_CONVERTGFF2BED             } from '../../../modules/nf-core/agat/convertgff2bed/main'
 include { ARRIBA_DOWNLOAD }                 from '../../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'
@@ -85,10 +85,10 @@ workflow BUILD_REFERENCES {
             GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
             ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
 
-            RRNATRANSCRIPTS(ch_gtf)
-            ch_versions = ch_versions.mix(RRNATRANSCRIPTS.out.versions)
+            BIOAWK(ch_gtf)
+            ch_versions = ch_versions.mix(BIOAWK.out.versions)
 
-            AGAT_CONVERTGFF2BED(RRNATRANSCRIPTS.out.rrna_gtf)
+            AGAT_CONVERTGFF2BED(BIOAWK.out.output)
             ch_versions = ch_versions.mix(AGAT_CONVERTGFF2BED.out.versions)
 
             GATK4_BEDTOINTERVALLIST(AGAT_CONVERTGFF2BED.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
