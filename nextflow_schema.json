@@ -102,7 +102,6 @@
                 "arriba_ref_blacklist": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
@@ -110,7 +109,6 @@
                 "arriba_ref_cytobands": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference cytobands"
@@ -118,7 +116,6 @@
                 "arriba_ref_known_fusions": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference known fusions"
@@ -126,7 +123,6 @@
                 "arriba_ref_protein_domains": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": true,
                     "pattern": "\\S+\\.gff3$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference protein domain"
@@ -162,7 +158,6 @@
                 "fusioncatcher_ref": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },

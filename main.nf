@@ -79,6 +79,25 @@ workflow {
         error("Conda or Mamba runs are not supported when ctatsplicing is in `--tools`")
     }
 
+    if (tools.contains("fusioncatcher") && (!params.fusioncatcher_ref || !file(params.fusioncatcher_ref).exists())) {
+        error("You have selected `fusioncatcher` in `--tools`, but did not provide an existing path to the fusioncatcher reference files with `--fusioncatcher_ref`.")
+    }
+
+    if (tools.contains("arriba")) {
+        if (!params.arriba_ref_blacklist || !file(params.arriba_ref_blacklist).exists()) {
+            error("You have selected `arriba` in `--tools`, but did not provide an existing path to the arriba reference blacklist file with `--arriba_ref_blacklist`.")
+        }
+        if (!params.arriba_ref_cytobands || !file(params.arriba_ref_cytobands).exists()) {
+            error("You have selected `arriba` in `--tools`, but did not provide an existing path to the arriba reference cytobands file with `--arriba_ref_cytobands`.")
+        }
+        if (!params.arriba_ref_known_fusions || !file(params.arriba_ref_known_fusions).exists()) {
+            error("You have selected `arriba` in `--tools`, but did not provide an existing path to the arriba reference known fusions file with `--arriba_ref_known_fusions`.")
+        }
+        if (!params.arriba_ref_protein_domains || !file(params.arriba_ref_protein_domains).exists()) {
+            error("You have selected `arriba` in `--tools`, but did not provide an existing path to the arriba reference protein domains file with `--arriba_ref_protein_domains`.")
+        }
+    }
+
     //
     // WORKFLOW: Run main workflow
     //
