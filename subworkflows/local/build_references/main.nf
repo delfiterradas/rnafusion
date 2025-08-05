@@ -8,7 +8,6 @@ include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode
 include { FUSIONCATCHER_DOWNLOAD }          from '../../../modules/local/fusioncatcher/download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
 include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
-include { GET_RRNA_TRANSCRIPTS }            from '../../../modules/local/get_rrna_transcript/main'
 include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatsplicing/prepgenomelib/main.nf'
 
 /*
@@ -16,7 +15,8 @@ include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatspl
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ========================================================================================
 */
-
+include { RRNATRANSCRIPTS                 } from '../../../modules/nf-core/rrnatranscripts/main'
+include { AGAT_CONVERTGFF2BED             } from '../../../modules/nf-core/agat/convertgff2bed/main'
 include { ARRIBA_DOWNLOAD }                 from '../../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'
 include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/genomegenerate/main'
@@ -84,10 +84,16 @@ workflow BUILD_REFERENCES {
         if (!exists_not_empty(params.rrna_intervals)){
             GATK4_CREATESEQUENCEDICTIONARY(ch_fasta)
             ch_versions = ch_versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
-            GET_RRNA_TRANSCRIPTS(ch_gtf)
-            ch_versions = ch_versions.mix(GET_RRNA_TRANSCRIPTS.out.versions)
-            GATK4_BEDTOINTERVALLIST(GET_RRNA_TRANSCRIPTS.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
+
+            RRNATRANSCRIPTS(ch_gtf)
+            ch_versions = ch_versions.mix(RRNATRANSCRIPTS.out.versions)
+
+            AGAT_CONVERTGFF2BED(RRNATRANSCRIPTS.out.rrna_gtf)
+            ch_versions = ch_versions.mix(AGAT_CONVERTGFF2BED.out.versions)
+
+            GATK4_BEDTOINTERVALLIST(AGAT_CONVERTGFF2BED.out.bed, GATK4_CREATESEQUENCEDICTIONARY.out.dict )
             ch_versions = ch_versions.mix(GATK4_BEDTOINTERVALLIST.out.versions)
+
             ch_rrna_interval = GATK4_BEDTOINTERVALLIST.out.interval_list
         } else {
             ch_rrna_interval = Channel.fromPath(params.rrna_intervals).map { that -> [[id:that.Name], that] }
