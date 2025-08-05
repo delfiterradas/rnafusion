@@ -5,6 +5,11 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "agat/convertgff2bed": {
+                        "branch": "master",
+                        "git_sha": "b785bb0b56bb518ab40c41f41d0e8749fb638257",
+                        "installed_by": ["modules"]
+                    },
                     "agat/convertspgff2tsv": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
@@ -93,6 +98,11 @@
                     "picard/collectwgsmetrics": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "installed_by": ["modules"]
+                    },
+                    "rrnatranscripts": {
+                        "branch": "master",
+                        "git_sha": "b785bb0b56bb518ab40c41f41d0e8749fb638257",
                         "installed_by": ["modules"]
                     },
                     "salmon/index": {
