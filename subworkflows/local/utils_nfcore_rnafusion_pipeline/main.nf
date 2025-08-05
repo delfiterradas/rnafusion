@@ -165,19 +165,19 @@ def validateInputParameters() {
     def dfamParams = ['dfam_hmm', 'dfam_h3p', 'dfam_h3m', 'dfam_h3i', 'dfam_h3f']
 
     if (params.dfam_version) {
-        def dfamPattern = /https:\/\/www\.dfam\.org\/releases\/Dfam_${params.dfam_version}\/infrastructure\/dfamscan\/${params.species}_dfam\..*/
+        def dfamPattern = "https://www.dfam.org/releases/Dfam_${params.dfam_version}/infrastructure/dfamscan/${params.species}_dfam"
 
         def setDfamParams = dfamParams.findAll { params[it] }
 
         if (setDfamParams) {
             def customParams = setDfamParams.findAll { paramName ->
-                !params[paramName].matches(dfamPattern)
+                !params[paramName]?.startsWith(dfamPattern)
             }
             if (customParams) {
                 def paramDetails = customParams.collect { paramName ->
                     "   --${paramName}: ${params[paramName]}"
                 }.join('\n')
-                dfam_warn = "Both custom DFAM paths as well as `--dfam_version` (${params.dfam_version}) and `--species` (${params.species}) were provided.\n" +
+                def dfam_warn = "Both custom DFAM paths as well as `--dfam_version` (${params.dfam_version}) and `--species` (${params.species}) were provided.\n" +
                     "Custom DFAM paths parameters provided:\n${paramDetails}\n" +
                     "The pipeline will prioritize these custom files specified with `--${customParams}` and **will NOT** construct these URLs based on `--dfam_version` nor `--species`.\n" +
                     "   - If you intend to use custom DFAM files, please ensure that all `--dfam_h*` parameters point to full and valid paths.\n" +
@@ -188,10 +188,10 @@ def validateInputParameters() {
     }
 
     if (params.pfam_version){
-        def pfamPattern = /http:\/\/ftp\.ebi\.ac\.uk\/pub\/databases\/Pfam\/releases\/Pfam${params.pfam_version}\/Pfam-A\..*/
+        def pfamPattern = "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam${params.pfam_version}/Pfam-A"
 
-        if (!(params.pfam_file.matches(pfamPattern))){
-            pfam_warn = "Both `--pfam_file` (${params.pfam_file}) and `--pfam_version` (${params.pfam_version}) were provided.\n" +
+        if (!(params.pfam_file?.startsWith(pfamPattern))) {
+            def pfam_warn = "Both `--pfam_file` (${params.pfam_file}) and `--pfam_version` (${params.pfam_version}) were provided.\n" +
                     "The pipeline will prioritize the custom file from `--pfam_file` and **will NOT** construct the URL based on `--pfam_version`.\n" +
                     "   - If you intend to use a custom PFAM file, please ensure that `--pfam_file` points to a full and valid path.\n" +
                     "   - If you prefer to let the pipeline build the PFAM URL automatically, omit `--pfam_file` and instead provide only `--pfam_version`."

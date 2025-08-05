@@ -50,7 +50,6 @@ nextflow run nf-core/rnafusion \
 > **IMPORTANT**
 >
 > - Note that this step takes about 24 hours to complete on HPC.
-> 
 
 References for each tools can also be downloaded separately with:
 
