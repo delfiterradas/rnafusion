@@ -1,8 +1,14 @@
 {
     "stub test starfusion": {
         "content": [
-            14,
+            15,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -18,9 +24,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -52,14 +55,15 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -182,15 +186,21 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-14T15:48:07.635249587"
+        "timestamp": "2025-08-06T03:21:00.500662919"
     },
     "stub test stringtie": {
         "content": [
-            15,
+            16,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -206,9 +216,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -238,14 +245,15 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -298,20 +306,26 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-02T17:05:41.044302"
+        "timestamp": "2025-08-06T03:22:15.713895494"
     },
     "stub test arriba": {
         "content": [
-            14,
+            15,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.5.0"
                 },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.5.0"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -328,9 +342,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -354,17 +365,18 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -412,15 +424,18 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-08T12:57:24.512309"
+        "timestamp": "2025-08-06T03:11:10.337479886"
     },
     "stub test fusioninspector": {
         "content": [
-            23,
+            24,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "AGAT_CONVERTSPGFF2TSV": {
                     "agat": "v1.4.1"
                 },
@@ -432,6 +447,9 @@
                 },
                 "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -457,9 +475,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -495,12 +510,15 @@
             },
             [
                 "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
                 "arriba_visualisation",
                 "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -634,9 +652,6 @@
                 "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -774,15 +789,21 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-14T16:53:36.788101"
+        "timestamp": "2025-08-06T03:41:21.307526426"
     },
     "stub test salmon": {
         "content": [
-            14,
+            15,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -798,9 +819,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GFFREAD": {
                     "gffread": "0.12.7"
@@ -828,14 +846,15 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -884,227 +903,45 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-03T10:34:40.653967"
+        "timestamp": "2025-08-06T03:33:59.679716364"
     },
     "stub test ctatsplicing": {
         "content": [
-            16,
+            0,
             {
-                "CTATSPLICING_PREPGENOMELIB": {
-                    "ctat-splicing": "0.0.2"
-                },
-                "CTATSPLICING_STARTOCANCERINTRONS": {
-                    "ctat-splicing": "0.0.2"
-                },
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "GATK4_BEDTOINTERVALLIST": {
-                    "gatk4": "4.6.1.0"
-                },
-                "GATK4_CREATESEQUENCEDICTIONARY": {
-                    "gatk4": "4.6.1.0"
-                },
-                "GATK4_MARKDUPLICATES": {
-                    "gatk4": "4.6.1.0",
-                    "samtools": 1.21
-                },
-                "GENCODE_DOWNLOAD": {
-                    "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
-                "PICARD_COLLECTINSERTSIZEMETRICS": {
-                    "picard": "3.3.0"
-                },
-                "PICARD_COLLECTRNASEQMETRICS": {
-                    "picard": "3.3.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
-                },
-                "STARFUSION_BUILD": {
-                    "gunzip": 1.12,
-                    "hmmer": 3.4,
-                    "STAR-Fusion": "1.15.1"
-                },
-                "STAR_GENOMEGENERATE": {
-                    "star": "2.7.11b",
-                    "samtools": 1.21,
-                    "gawk": "5.1.0"
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
             },
             [
-                "ctatsplicing",
-                "ctatsplicing/test.cancer.introns",
-                "ctatsplicing/test.cancer.introns.prelim",
-                "ctatsplicing/test.cancer_intron_reads.sorted.bam",
-                "ctatsplicing/test.cancer_intron_reads.sorted.bam.bai",
-                "ctatsplicing/test.chckpts",
-                "ctatsplicing/test.ctat-splicing.igv.html",
-                "ctatsplicing/test.gene_reads.sorted.sifted.bam",
-                "ctatsplicing/test.gene_reads.sorted.sifted.bam.bai",
-                "ctatsplicing/test.igv.tracks",
-                "ctatsplicing/test.introns",
-                "ctatsplicing/test.introns.for_IGV.bed",
-                "fastqc",
-                "fastqc/test.html",
-                "fastqc/test.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
-                "picard",
-                "picard/test.bai",
-                "picard/test.bam",
-                "picard/test.bam.metrics",
-                "picard/test.cram",
-                "picard/test.cram.crai",
-                "picard/test.rna_metrics",
-                "picard/test_collectinsertsize.pdf",
-                "picard/test_collectinsertsize.txt",
                 "pipeline_info",
-                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
-                "references",
-                "references/gencode",
-                "references/gencode/Homo_sapiens.GRCh38.46.gtf",
-                "references/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
-                "references/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
-                "references/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
-                "references/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
-                "references/star",
-                "references/star/Genome",
-                "references/star/Log.out",
-                "references/star/SA",
-                "references/star/SAindex",
-                "references/star/chrLength.txt",
-                "references/star/chrName.txt",
-                "references/star/chrNameLength.txt",
-                "references/star/chrStart.txt",
-                "references/star/exonGeTrInfo.tab",
-                "references/star/exonInfo.tab",
-                "references/star/geneInfo.tab",
-                "references/star/genomeParameters.txt",
-                "references/star/sjdbInfo.txt",
-                "references/star/sjdbList.fromGTF.out.tab",
-                "references/star/sjdbList.out.tab",
-                "references/star/transcriptInfo.tab",
-                "references/starfusion",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/AnnotFilterRule.pm",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/PFAM.domtblout.dat.gz",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/_fusion_annot_lib.idx.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/_prot_info_db.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/annotfiltrule_cp.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/blast_pairs.idx.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/cp_gene_blast_pairs.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/cp_pfam_dat.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/cp_ref_annot_cdna.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/fusion_annot_lib.cp.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/index_pfam_hits.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/index_ref_annot_cdna.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/makeblastdb.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/mm2.splice_bed.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/mm2_genome_idx.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_annot.cdsplus.dfam_masked.fa.cp.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_annot.cdsplus.dfam_masked.fa.idx.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_annot.gtf.gene_spans.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_annot.gtf.mini.sortu.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_annot.gtf.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_genome.fa.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/ref_genome_fai.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/trans.blast.dat.cp.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/trans.blast.dat.index.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/__chkpts/validate_ctat_genome_lib.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/blast_pairs.dat.gz",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/blast_pairs.idx",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/cancer_splicing_lib",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/cancer_splicing_lib/cancer_splicing.idx",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/fusion_annot_lib.gz",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/fusion_annot_lib.idx",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/pfam_domains.dbm",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/refGene.bed",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/refGene.sort.bed.gz",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/refGene.sort.bed.gz.tbi",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.cdna.fa",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.cdna.fa.idx",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.cds",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.cdsplus.fa",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.cdsplus.fa.idx",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.gtf",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.gtf.gene_spans",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.gtf.mini.sortu",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.gtf.mm2.splice.bed",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.pep",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_annot.prot_info.dbm",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.fai",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.mm2",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.ndb",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.nhr",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.nin",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.njs",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.not",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.nsq",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.ntf",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.nto",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/Genome",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/Log.out",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/SA",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/SAindex",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/build.ok",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/chrLength.txt",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/chrName.txt",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/chrNameLength.txt",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/chrStart.txt",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/exonGeTrInfo.tab",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/exonInfo.tab",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/geneInfo.tab",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/genomeParameters.txt",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/sjdbInfo.txt",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/sjdbList.fromGTF.out.tab",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/sjdbList.out.tab",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/ref_genome.fa.star.idx/transcriptInfo.tab",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm",
-                "references/starfusion/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa_genome_lib_build_dir/trans.blast.dat.gz",
-                "star",
-                "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai"
+                "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-14T15:46:23.95688627"
+        "timestamp": "2025-08-06T03:11:35.363568093"
     },
     "stub test fusionreport": {
         "content": [
-            20,
+            21,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.5.0"
                 },
                 "ARRIBA_DOWNLOAD": {
                     "arriba_download": "2.5.0"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1134,9 +971,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -1168,9 +1002,13 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -1188,9 +1026,6 @@
                 "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1327,15 +1162,21 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-22T14:08:17.97268"
+        "timestamp": "2025-08-06T03:31:36.419602575"
     },
     "stub test fastp": {
         "content": [
-            13,
+            14,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTP": {
                     "fastp": "0.24.0"
                 },
@@ -1358,9 +1199,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -1378,6 +1216,10 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastp",
                 "fastp/test.fastp.html",
                 "fastp/test.fastp.json",
@@ -1392,9 +1234,6 @@
                 "fastqc_for_fastp/test_trimmed.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1420,15 +1259,21 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.10.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-05-07T13:29:36.326072757"
+        "timestamp": "2025-08-06T03:32:51.98792128"
     },
     "stub test fusioncatcher": {
         "content": [
-            13,
+            14,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -1452,9 +1297,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -1472,6 +1314,10 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -1481,9 +1327,6 @@
                 "fusioncatcher/test.summary.txt",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1512,15 +1355,18 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-22T14:03:08.199969"
+        "timestamp": "2025-08-06T03:13:18.315049907"
     },
     "stub test all": {
         "content": [
-            35,
+            36,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "AGAT_CONVERTSPGFF2TSV": {
                     "agat": "v1.4.1"
                 },
@@ -1532,6 +1378,9 @@
                 },
                 "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
                 },
                 "CTATSPLICING_PREPGENOMELIB": {
                     "ctat-splicing": "0.0.2"
@@ -1576,9 +1425,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GFFREAD": {
                     "gffread": "0.12.7"
@@ -1632,12 +1478,15 @@
             },
             [
                 "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
                 "arriba_visualisation",
                 "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "ctatsplicing",
                 "ctatsplicing/test.cancer.introns",
                 "ctatsplicing/test.cancer.introns.prelim",
@@ -1796,9 +1645,6 @@
                 "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1978,9 +1824,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.0",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-22T13:58:16.809449"
+        "timestamp": "2025-08-06T03:09:39.3024867"
     }
 }
