@@ -15,11 +15,6 @@
                         "git_sha": "077818897bfe993e1ed91a0339bcbe53fe13edc7",
                         "installed_by": ["modules"]
                     },
-                    "arriba/download": {
-                        "branch": "master",
-                        "git_sha": "98bd7be6d2191b0d5900ee698d91b52eeab90311",
-                        "installed_by": ["modules"]
-                    },
                     "cat/cat": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
