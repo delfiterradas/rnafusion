@@ -23,10 +23,9 @@ jobs:
             {
               "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ github.sha }}",
               "genomes_base": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/references",
-              "cosmic_username": "${{ secrets.cosmic_username }}",
-              "cosmic_passwd": "${{ secrets.cosmic_passwd }}",
               "tools": "all",
               "stub": true
+              "no_cosmic": true"
             }
           profiles: test
 
