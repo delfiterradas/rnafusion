@@ -16,7 +16,6 @@ include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatspl
 */
 include { BIOAWK                          } from '../../../modules/nf-core/bioawk/main'
 include { AGAT_CONVERTGFF2BED             } from '../../../modules/nf-core/agat/convertgff2bed/main'
-include { ARRIBA_DOWNLOAD }                 from '../../../modules/nf-core/arriba/download/main'
 include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'
 include { STAR_GENOMEGENERATE }             from '../../../modules/nf-core/star/genomegenerate/main'
 include { GATK4_CREATESEQUENCEDICTIONARY }  from '../../../modules/nf-core/gatk4/createsequencedictionary/main'
