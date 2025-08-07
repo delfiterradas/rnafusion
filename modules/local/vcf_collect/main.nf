@@ -28,6 +28,7 @@ process VCF_COLLECT {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         python: \$(python --version | sed 's/Python //g')
+        vcf_collect: 0.1
         HGNC DB retrieval: \$(cat $hgnc_date)
     END_VERSIONS
     """
@@ -40,6 +41,7 @@ process VCF_COLLECT {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         python: \$(python --version | sed 's/Python //g')
+        vcf_collect: 0.1
     END_VERSIONS
     """
 }

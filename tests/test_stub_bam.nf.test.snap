@@ -500,7 +500,8 @@
                     "gawk": "5.1.0"
                 },
                 "VCF_COLLECT": {
-                    "python": "3.11.0"
+                    "python": "3.11.0",
+                    "vcf_collect": 0.1
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -787,7 +788,7 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-06T03:41:21.307526426"
+        "timestamp": "2025-08-07T15:10:07.731105"
     },
     "stub test salmon": {
         "content": [
@@ -1555,7 +1556,8 @@
                     "stringtie": "2.2.3"
                 },
                 "VCF_COLLECT": {
-                    "python": "3.11.0"
+                    "python": "3.11.0",
+                    "vcf_collect": 0.1
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1904,6 +1906,6 @@
             "nf-test": "0.9.0",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-06T03:09:39.3024867"
+        "timestamp": "2025-08-07T13:56:14.46501"
     }
 }
