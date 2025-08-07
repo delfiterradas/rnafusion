@@ -22,8 +22,8 @@ jobs:
           parameters: |
             {
               "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ github.sha }}",
-              "genomes_base": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ github.sha }}/references",
-              "all": true,
+              "genomes_base": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/references",
+              "tools": "all",
               "stub": true
               "no_cosmic": true"
             }

@@ -34,8 +34,8 @@ jobs:
             {
               "hook_url": "${{ secrets.MEGATESTS_ALERTS_SLACK_HOOK_URL }}",
               "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ steps.revision.outputs.revision }}"
-              "genomes_base": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/results-${{ github.sha }}/references",
-              "all": true,
+              "genomes_base": "s3://${{ secrets.AWS_S3_BUCKET }}/rnafusion/references",
+              "tools": "all",
               "no_cosmic": true
             }
           profiles: test_full
