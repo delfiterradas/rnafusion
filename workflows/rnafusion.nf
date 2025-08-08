@@ -8,7 +8,7 @@ include { BUILD_REFERENCES              }   from '../subworkflows/local/build_re
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow/main'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
-include { STARFUSION                    }   from '../modules/local/starfusion/detect/main'
+include { STARFUSION_DETECT             }   from '../modules/nf-core/starfusion/detect/main'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
 include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
@@ -258,12 +258,12 @@ workflow RNAFUSION {
                 def fusions = file(params.starfusion_fusions, checkIfExists:true)
                 ch_starfusion_fusions = ch_star_junctions.map { meta, _junc -> [ meta, fusions ] }
             } else {
-                STARFUSION(
+                STARFUSION_DETECT(
                     ch_star_junctions.map { meta, junc -> [ meta, [], junc ] },
                     BUILD_REFERENCES.out.starfusion_ref.map { it -> it[1] }
                 )
-                ch_versions = ch_versions.mix(STARFUSION.out.versions)
-                ch_starfusion_fusions = STARFUSION.out.fusions
+                ch_versions = ch_versions.mix(STARFUSION_DETECT.out.versions)
+                ch_starfusion_fusions = STARFUSION_DETECT.out.fusions
             }
         }
 
