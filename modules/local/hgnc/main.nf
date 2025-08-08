@@ -10,7 +10,7 @@ process HGNC_DOWNLOAD {
     output:
     path "hgnc_complete_set.txt"        , emit: hgnc_ref
     path "HGNC-DB-timestamp.txt"        , emit: hgnc_date
-    path "versions.yml"   , emit: versions
+    path "versions.yml"                 , emit: versions
 
 
     script:

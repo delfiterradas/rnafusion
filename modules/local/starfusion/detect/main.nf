@@ -54,5 +54,3 @@ process STARFUSION {
     END_VERSIONS
     """
 }
-
-

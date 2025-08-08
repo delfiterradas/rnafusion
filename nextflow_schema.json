@@ -76,6 +76,11 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to reference folder"
                 },
+                "genomes_ignore": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Don't automatically assign reference parameters to the correct references in --genomes_base"
+                },
                 "genome_gencode_version": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",
@@ -97,7 +102,7 @@
                 "arriba_ref_blacklist": {
                     "type": "string",
                     "format": "file-path",
-                    "pattern": "\\S+\\.tsv$",
+                    "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
                 },
@@ -111,7 +116,7 @@
                 "arriba_ref_known_fusions": {
                     "type": "string",
                     "format": "file-path",
-                    "pattern": "\\S+\\.tsv$",
+                    "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference known fusions"
                 },
@@ -159,8 +164,7 @@
                 "fusioncatcher_download_link": {
                     "type": "string",
                     "description": "Fusioncatcher download link",
-                    "fa_icon": "far fa-file-code",
-                    "pattern": "^https?://.*$"
+                    "fa_icon": "far fa-file-code"
                 },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",

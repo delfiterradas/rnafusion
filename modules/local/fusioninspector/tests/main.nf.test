@@ -12,22 +12,29 @@ nextflow_process {
 
         setup {
             run("STARFUSION_BUILD") {
-                script "../../../../nf-core/starfusion/build/main.nf"
+                script "../../../nf-core/starfusion/build/main.nf"
                 process {
                     """
                     input[0] = [
-                        [ id:'minigenome fasta' ],
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa")
+                        [ id:'minigenome_fasta' ],
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/minigenome.fa')
                     ]
                     input[1] = [
-                        [ id:'minigenome gtf' ],
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf")
+                        [ id:'minigenome_gtf' ],
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/minigenome.gtf')
                     ]
 
-                    input[2] = file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/CTAT_HumanFusionLib.mini.dat.gz")
+                    input[2] = file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/CTAT_HumanFusionLib.mini.dat.gz')
                     input[3] = "homo_sapiens"
-                    input [4] = "3.8"
-                    input [5] = "37.4"
+                    input[4] = "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/Pfam-A.hmm.gz"
+                    input[5] = [
+                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm",
+                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3f",
+                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3i",
+                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3m",
+                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3p"
+                    ]
+                    input[6] = "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm"
                     """
                 }
             }
@@ -55,10 +62,10 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.tsv,
+                    path(process.out.tsv[0][1]).exists(),
+                    path(process.out.abridged_tsv[0][1]).exists(),
                     process.out.out_gtf,
-                    process.out.abridged_tsv,
-                    process.out.log,
+                    path(process.out.log[0][1]).exists(),
                 ).match() }
             )
         }

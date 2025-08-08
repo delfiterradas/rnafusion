@@ -15,11 +15,6 @@
                         "git_sha": "077818897bfe993e1ed91a0339bcbe53fe13edc7",
                         "installed_by": ["modules"]
                     },
-                    "arriba/download": {
-                        "branch": "master",
-                        "git_sha": "98bd7be6d2191b0d5900ee698d91b52eeab90311",
-                        "installed_by": ["modules"]
-                    },
                     "cat/cat": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
@@ -37,12 +32,12 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "b1966f36ec9de31927b2603d8f499960b2a4c294",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
                     "fusioncatcher/fusioncatcher": {
                         "branch": "master",
-                        "git_sha": "1037205706929921360f57e8042eae6819825e31",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
                     "fusionreport/detect": {
@@ -77,7 +72,7 @@
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "7b50cb7be890e4b28cffb82e438cc6a8d7805d3f",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
                     "picard/collectinsertsizemetrics": {
