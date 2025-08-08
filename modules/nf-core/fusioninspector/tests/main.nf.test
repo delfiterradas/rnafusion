@@ -6,13 +6,15 @@ nextflow_process {
     tag "modules"
     tag "modules_local"
     tag "fusioninspector"
+    tag "starfusion/build"
+    tag "modules_nfcore"
 
-    test("FUSIONINSPECTOR") {
+    test("FUSIONINSPECTOR - test") {
         config './nextflow.config'
 
         setup {
             run("STARFUSION_BUILD") {
-                script "../../../nf-core/starfusion/build/main.nf"
+                script "../../starfusion/build/main.nf"
                 process {
                     """
                     input[0] = [
@@ -26,13 +28,13 @@ nextflow_process {
 
                     input[2] = file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/CTAT_HumanFusionLib.mini.dat.gz')
                     input[3] = "homo_sapiens"
-                    input[4] = "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/Pfam-A.hmm.gz"
+                    input[4] = file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/Pfam-A.hmm.gz')
                     input[5] = [
-                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm",
-                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3f",
-                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3i",
-                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3m",
-                        "https://github.com/nf-core/test-datasets/raw/refs/heads/rnafusion/testdata/human/test_starfusion_dfam.hmm.h3p"
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_dfam.hmm'),
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_dfam.hmm.h3f'),
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_dfam.hmm.h3i'),
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_dfam.hmm.h3m'),
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_dfam.hmm.h3p')
                     ]
                     input[6] = "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm"
                     """
@@ -46,8 +48,8 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     [
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_1.fastq.gz"),
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_2.fastq.gz")
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_rnaseq_1.fastq.gz'),
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_rnaseq_2.fastq.gz')
                     ], // reads
                     [
                         file("https://github.com/FusionInspector/FusionInspector/raw/master/test/fusion_targets.A.txt")
@@ -61,18 +63,21 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
+                { assert file(process.out.tsv[0][1]).getText().contains("THRA--AC090627.1\t72\t83\t72.00\t80.15") },
+                { assert file(process.out.abridged_tsv[0][1]).getText().contains("THRA--AC090627.1\t72\t83\t72.00\t80.15") },
                 { assert snapshot(
-                    path(process.out.tsv[0][1]).exists(),
-                    path(process.out.abridged_tsv[0][1]).exists(),
+                    file(process.out.tsv[0][1]).name,
                     process.out.out_gtf,
-                    path(process.out.log[0][1]).exists(),
+                    file(process.out.abridged_tsv[0][1]).name,
+                    file(process.out.log[0][1]).name,
+                    process.out.versions
                 ).match() }
             )
         }
 
     }
 
-    test("FUSIONINSPECTOR stub") {
+    test("FUSIONINSPECTOR - test - stub") {
         options "-stub"
         when {
             process {
@@ -80,8 +85,8 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     [
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_1.fastq.gz"),
-                        file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_2.fastq.gz")
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_rnaseq_1.fastq.gz'),
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/test_starfusion_rnaseq_2.fastq.gz')
                     ], // reads
                     [
                         file("https://github.com/FusionInspector/FusionInspector/raw/master/test/fusion_targets.A.txt")
