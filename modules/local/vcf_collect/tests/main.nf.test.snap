@@ -30,7 +30,11 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
+<<<<<<< HEAD
         "timestamp": "2025-08-12T20:45:40.474082615"
+=======
+        "timestamp": "2025-08-08T19:14:49.152483213"
+>>>>>>> 16c1f051 (Update snapshot)
     },
     "VCF_COLLECT - human - fusionreport - fusioninspector": {
         "content": [
