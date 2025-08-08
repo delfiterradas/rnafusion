@@ -240,7 +240,8 @@ workflow RNAFUSION {
                     BUILD_REFERENCES.out.arriba_ref_cytobands,
                     BUILD_REFERENCES.out.arriba_ref_protein_domains
                 )
-
+                
+                ch_arriba_fusions = ARRIBA_ARRIBA.out.fusions
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
             }
         }
