@@ -3,7 +3,7 @@
         "content": [
             {
                 "0": [
-                    "versions.yml:md5,b02658c5b6acb46ffdf2facd15b4bd04"
+                    "versions.yml:md5,72bcf5b24f6ce37d0ec9e494b2daf2a0"
                 ],
                 "1": [
                     [
@@ -22,7 +22,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b02658c5b6acb46ffdf2facd15b4bd04"
+                    "versions.yml:md5,72bcf5b24f6ce37d0ec9e494b2daf2a0"
                 ]
             }
         ],
@@ -30,7 +30,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-23T18:42:46.524540741"
+        "timestamp": "2025-08-08T19:07:43.832762986"
     },
     "VCF_COLLECT - human - fusionreport - fusioninspector": {
         "content": [
@@ -53,6 +53,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T18:39:55.640372223"
+        "timestamp": "2025-08-08T19:07:25.796383573"
     }
 }
