@@ -2,29 +2,34 @@ process CTATSPLICING_STARTOCANCERINTRONS {
     tag "$meta.id"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://data.broadinstitute.org/Trinity/CTAT_SINGULARITY/CTAT-SPLICING/ctat_splicing.v0.0.2.simg' :
-        'docker.io/trinityctat/ctat_splicing:0.0.2' }"
+    container "nf-core/ctatsplicing:0.0.3"
 
     input:
     tuple val(meta), path(split_junction), path(junction), path(bam), path(bai)
     tuple val(meta2), path(genome_lib)
 
     output:
-    tuple val(meta), path("*.cancer_intron_reads.sorted.bam")       , emit: cancer_introns_sorted_bam
-    tuple val(meta), path("*.cancer_intron_reads.sorted.bam.bai")   , emit: cancer_introns_sorted_bai
-    tuple val(meta), path("*.gene_reads.sorted.sifted.bam")         , emit: gene_reads_sorted_bam
-    tuple val(meta), path("*.gene_reads.sorted.sifted.bam.bai")     , emit: gene_reads_sorted_bai
-    tuple val(meta), path("*.cancer.introns")                       , emit: cancer_introns
-    tuple val(meta), path("*.cancer.introns.prelim")                , emit: cancer_introns_prelim
-    tuple val(meta), path("*${prefix}.introns")                     , emit: introns
-    tuple val(meta), path("*.introns.for_IGV.bed")                  , emit: introns_igv_bed, optional: true
-    tuple val(meta), path("*.ctat-splicing.igv.html")               , emit: igv_html, optional: true
-    tuple val(meta), path("*.igv.tracks")                           , emit: igv_tracks, optional: true
-    tuple val(meta), path("*.chckpts")                              , emit: chckpts
-    path "versions.yml"                                             , emit: versions
+    tuple val(meta), path("*.cancer_intron_reads.sorted.bam")    , emit: cancer_introns_sorted_bam, optional: true
+    tuple val(meta), path("*.cancer_intron_reads.sorted.bam.bai"), emit: cancer_introns_sorted_bai, optional: true
+    tuple val(meta), path("*.gene_reads.sorted.sifted.bam")      , emit: gene_reads_sorted_bam    , optional: true
+    tuple val(meta), path("*.gene_reads.sorted.sifted.bam.bai")  , emit: gene_reads_sorted_bai    , optional: true
+    tuple val(meta), path("*.cancer.introns")                    , emit: cancer_introns
+    tuple val(meta), path("*.cancer.introns.prelim")             , emit: cancer_introns_prelim
+    tuple val(meta), path("*${prefix}.introns")                  , emit: introns
+    tuple val(meta), path("*.introns.for_IGV.bed")               , emit: introns_igv_bed          , optional: true
+    tuple val(meta), path("*.ctat-splicing.igv.html")            , emit: igv_html                 , optional: true
+    tuple val(meta), path("*.igv.tracks")                        , emit: igv_tracks               , optional: true
+    tuple val(meta), path("*.chckpts")                           , emit: chckpts                  , optional: true
+    path "versions.yml"                                          , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
 
     script:
+    // Exit if running this module with -profile conda / -profile mamba
+    if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
+        error "CTATSPLICING_STARTOCANCERINTRONS module does not support Conda. Please use Docker / Singularity / Podman instead."
+    }
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
     def bam_arg = bam ? "--bam_file ${bam}" : ""
@@ -40,14 +45,6 @@ process CTATSPLICING_STARTOCANCERINTRONS {
         --output_prefix ${prefix} \\
         --ctat_genome_lib ${genome_lib} \\
         ${args}
-
-    # Create the missing outputs when no cancer introns are found
-    if [ \$? -eq 0 ]; then
-        touch ${prefix}.cancer_intron_reads.sorted.bam
-        touch ${prefix}.cancer_intron_reads.sorted.bam.bai
-        touch ${prefix}.gene_reads.sorted.sifted.bam
-        touch ${prefix}.gene_reads.sorted.sifted.bam.bai
-    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
