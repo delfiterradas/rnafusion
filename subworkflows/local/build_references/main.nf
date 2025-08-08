@@ -7,13 +7,13 @@
 include { GENCODE_DOWNLOAD }                from '../../../modules/local/gencode_download/main'
 include { HGNC_DOWNLOAD }                   from '../../../modules/local/hgnc/main'
 include { GTF_TO_REFFLAT }                  from '../../../modules/local/uscs/custom_gtftogenepred/main'
-include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/local/ctatsplicing/prepgenomelib/main.nf'
 
 /*
 ========================================================================================
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ========================================================================================
 */
+include { CTATSPLICING_PREPGENOMELIB }      from '../../../modules/nf-core/ctatsplicing/prepgenomelib/main.nf'
 include { BIOAWK                          } from '../../../modules/nf-core/bioawk/main'
 include { AGAT_CONVERTGFF2BED             } from '../../../modules/nf-core/agat/convertgff2bed/main'
 include { SAMTOOLS_FAIDX }                  from '../../../modules/nf-core/samtools/faidx/main'

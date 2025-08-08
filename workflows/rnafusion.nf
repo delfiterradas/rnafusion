@@ -25,7 +25,7 @@ include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { validateInputSamplesheet      }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
 include { ARRIBA_ARRIBA                 }   from '../modules/nf-core/arriba/arriba/main'
-include { CTATSPLICING_STARTOCANCERINTRONS } from '../modules/local/ctatsplicing/startocancerintrons'
+include { CTATSPLICING_STARTOCANCERINTRONS } from '../modules/nf-core/ctatsplicing/startocancerintrons'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
