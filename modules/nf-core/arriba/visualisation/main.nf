@@ -8,24 +8,24 @@ process ARRIBA_VISUALISATION {
         'community.wave.seqera.io/library/arriba_wget:a3e48cf793a0b654' }"
 
     input:
-    tuple val(meta), path(bam), path(bai), path(fusions)
+    tuple val(meta) , path(bam), path(bai), path(fusions)
     tuple val(meta2), path(gtf)
     tuple val(meta3), path(protein_domains)
     tuple val(meta4), path(cytobands)
 
     output:
-    tuple val(meta), path("*.pdf")          , emit: pdf
-    path "versions.yml"                     , emit: versions
+    tuple val(meta), path("*.pdf"), emit: pdf
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
-    def arg_cytobands = cytobands ? " --cytobands=$cytobands" : ""
-    def arg_alignment = bam ? " --alignments=$bam" : ""
+    def args                = task.ext.args   ?: ''
+    def arg_cytobands       = cytobands       ? " --cytobands=$cytobands"           : ""
+    def arg_alignment       = bam             ? " --alignments=$bam"                : ""
     def arg_protein_domains = protein_domains ? "--proteinDomains=$protein_domains" : ""
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    def prefix              = task.ext.prefix ?: "${meta.id}"
     """
     draw_fusions.R \\
         --fusions=$fusions \\
