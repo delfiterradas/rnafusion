@@ -29,7 +29,6 @@ nextflow_process {
     }
 
     test("VCF_COLLECT - human - fusionreport - fusioninspector - stub") {
-
         options "-stub"
 
         when {
