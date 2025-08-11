@@ -11,7 +11,7 @@ include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workf
 include { STARFUSION_DETECT             }   from '../modules/nf-core/starfusion/detect/main'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
-include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
+include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow/main'
 include { FUSIONREPORT_DETECT           }   from '../modules/nf-core/fusionreport/detect/main'
 include { FASTQC                        }   from '../modules/nf-core/fastqc/main'
 include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
