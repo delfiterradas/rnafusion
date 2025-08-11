@@ -11,7 +11,7 @@ include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workf
 include { STARFUSION                    }   from '../modules/local/starfusion/detect/main'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
 include { FUSIONCATCHER_WORKFLOW        }   from '../subworkflows/local/fusioncatcher_workflow'
-include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow'
+include { FUSIONINSPECTOR_WORKFLOW      }   from '../subworkflows/local/fusioninspector_workflow/main'
 include { FUSIONREPORT_DETECT           }   from '../modules/nf-core/fusionreport/detect/main'
 include { FASTQC                        }   from '../modules/nf-core/fastqc/main'
 include { MULTIQC                       }   from '../modules/nf-core/multiqc/main'
@@ -240,7 +240,7 @@ workflow RNAFUSION {
                     BUILD_REFERENCES.out.arriba_ref_cytobands,
                     BUILD_REFERENCES.out.arriba_ref_protein_domains
                 )
-                
+
                 ch_arriba_fusions = ARRIBA_ARRIBA.out.fusions
                 ch_versions = ch_versions.mix(ARRIBA_ARRIBA.out.versions)
             }
