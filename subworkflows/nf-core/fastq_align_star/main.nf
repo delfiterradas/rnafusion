@@ -28,7 +28,7 @@ workflow FASTQ_ALIGN_STAR {
     //
     // Sort, index BAM file and run samtools stats, flagstat and idxstats
     //
-    BAM_SORT_STATS_SAMTOOLS_GENOME ( STAR_ALIGN.out.bam_sorted_aligned, ch_fasta )
+    BAM_SORT_STATS_SAMTOOLS_GENOME ( STAR_ALIGN.out.bam, ch_fasta )
     ch_versions = ch_versions.mix(BAM_SORT_STATS_SAMTOOLS_GENOME.out.versions)
 
     //

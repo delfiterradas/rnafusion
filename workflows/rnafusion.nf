@@ -18,6 +18,7 @@ include { MULTIQC                       }   from '../modules/nf-core/multiqc/mai
 include { STAR_ALIGN                    }   from '../modules/nf-core/star/align/main'
 include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
 include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_INDEX                }   from '../modules/nf-core/samtools/index/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
 include { FASTQ_ALIGN_STAR              }   from '../subworkflows/nf-core/fastq_align_star'
 include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -188,9 +189,9 @@ workflow RNAFUSION {
                 [[:], []]
             )
             FASTQ_ALIGN_STAR.out.bam_sorted_aligned.view()
-            FASTQ_ALIGN_STAR.out.bai.view()
+            SAMTOOLS_INDEX(FASTQ_ALIGN_STAR.out.bam_sorted_aligned)
             ch_bam_bai = FASTQ_ALIGN_STAR.out.bam_sorted_aligned
-                    .join(FASTQ_ALIGN_STAR.out.bai, failOnMismatch:true, failOnDuplicate:true)
+                    .join(SAMTOOLS_INDEX.out.bai, failOnMismatch:true, failOnDuplicate:true)
             ch_versions             = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
             ch_aligned_reads        = ch_aligned_reads.mix(ch_bam_bai)
             ch_star_junctions       = ch_star_junctions.mix(FASTQ_ALIGN_STAR.out.junctions)
