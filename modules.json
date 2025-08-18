@@ -43,12 +43,14 @@
                     "ctatsplicing/prepgenomelib": {
                         "branch": "master",
                         "git_sha": "8476d6a2adf7fb2e2f23229344aeabcd94a14b0b",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/ctatsplicing/prepgenomelib/ctatsplicing-prepgenomelib.diff"
                     },
                     "ctatsplicing/startocancerintrons": {
                         "branch": "master",
                         "git_sha": "8476d6a2adf7fb2e2f23229344aeabcd94a14b0b",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/ctatsplicing/startocancerintrons/ctatsplicing-startocancerintrons.diff"
                     },
                     "fastp": {
                         "branch": "master",
