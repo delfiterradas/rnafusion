@@ -1,10 +1,16 @@
 {
     "Test build references": {
         "content": [
-            12,
+            13,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "CTATSPLICING_PREPGENOMELIB": {
-                    "ctat-splicing": "0.0.2"
+                    "ctatsplicing": "0.0.2"
                 },
                 "FUSIONREPORT_DOWNLOAD": {
                     "fusion_report": "4.0.1"
@@ -14,9 +20,6 @@
                 },
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GFFREAD": {
                     "gffread": "0.12.7"
@@ -48,11 +51,12 @@
                 }
             },
             [
+                "agat",
+                "agat/minigenome.gtf.bed",
+                "bioawk",
+                "bioawk/minigenome.gtf_rrna.gtf.gz",
                 "gatk4",
                 "gatk4/minigenome.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "pipeline_info",
                 "pipeline_info/nf_core_rnafusion_software_mqc_versions.yml",
                 "references",
@@ -187,9 +191,9 @@
                 "references/GRCh38/hgnc/hgnc_complete_set.txt"
             ],
             [
+                "minigenome.gtf.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "minigenome.gtf_rrna.gtf.gz:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "minigenome.dict:md5,f2dfb8df1d1f860050fc0dba1399fd9e",
-                "rrna.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "rrna.gtf:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "fusion_report.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "minigenome.fa.fai:md5,e3f74a27219b33ae80fd5de5cbeaf32b",
                 "minigenome.gtf.fasta:md5,349d42b5dbd73e163cdbad3453d8cd3a",
@@ -281,6 +285,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-31T10:02:44.229294202"
+        "timestamp": "2025-08-18T13:58:42.038319834"
     }
 }

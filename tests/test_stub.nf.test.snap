@@ -1,8 +1,14 @@
 {
     "stub test starfusion": {
         "content": [
-            16,
+            17,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -19,9 +25,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -37,12 +40,12 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "STARFUSION": {
-                    "STAR-Fusion": "1.15.0"
-                },
                 "STARFUSION_BUILD": {
                     "gunzip": 1.12,
                     "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
+                },
+                "STARFUSION_DETECT": {
                     "STAR-Fusion": "1.15.1"
                 },
                 "STAR_ALIGN": {
@@ -60,14 +63,15 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -214,12 +218,18 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:57:52.257731378"
+        "timestamp": "2025-08-18T16:11:25.285702343"
     },
     "stub test stringtie": {
         "content": [
-            16,
+            17,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -235,9 +245,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -275,14 +282,15 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -356,14 +364,20 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:58:41.747600647"
+        "timestamp": "2025-08-08T11:20:46.857913005"
     },
     "stub test arriba": {
         "content": [
-            15,
+            16,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.5.0"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -380,9 +394,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -414,17 +425,18 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -491,12 +503,15 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:54:33.526664584"
+        "timestamp": "2025-08-08T11:16:32.896368369"
     },
     "stub test fusioninspector": {
         "content": [
-            23,
+            24,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "AGAT_CONVERTSPGFF2TSV": {
                     "agat": "v1.4.1"
                 },
@@ -506,11 +521,14 @@
                 "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
                 },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONINSPECTOR": {
-                    "STAR-Fusion": null
+                    "FusionInspector": "2.10.0"
                 },
                 "FUSIONREPORT_DETECT": {
                     "fusion_report": "4.0.1"
@@ -530,9 +548,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -577,12 +592,15 @@
             },
             [
                 "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
                 "arriba_visualisation",
                 "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -590,119 +608,9 @@
                 "fusioninspector/test",
                 "fusioninspector/test/FusionInspector.log",
                 "fusioninspector/test/IGV_inputs",
-                "fusioninspector/test/IGV_inputs/TrinityFusion.bed",
-                "fusioninspector/test/IGV_inputs/cytoBand.txt",
-                "fusioninspector/test/IGV_inputs/test.ROI.bed",
-                "fusioninspector/test/IGV_inputs/test.bed",
-                "fusioninspector/test/IGV_inputs/test.bed.sorted.bed.gz",
-                "fusioninspector/test/IGV_inputs/test.bed.sorted.bed.gz.tbi",
-                "fusioninspector/test/IGV_inputs/test.consolidated.bam",
-                "fusioninspector/test/IGV_inputs/test.consolidated.bam.bai",
-                "fusioninspector/test/IGV_inputs/test.fa",
-                "fusioninspector/test/IGV_inputs/test.fa.fai",
-                "fusioninspector/test/IGV_inputs/test.fusion_inspector_web.json",
-                "fusioninspector/test/IGV_inputs/test.gtf",
-                "fusioninspector/test/IGV_inputs/test.igv.Pfam.bed",
-                "fusioninspector/test/IGV_inputs/test.igv.seqsimilar.bed",
-                "fusioninspector/test/IGV_inputs/test.junction_reads.bam",
-                "fusioninspector/test/IGV_inputs/test.junction_reads.bam.bai",
-                "fusioninspector/test/IGV_inputs/test.spanning_reads.bam",
-                "fusioninspector/test/IGV_inputs/test.spanning_reads.bam.bai",
-                "fusioninspector/test/IGV_inputs/tracks.json",
                 "fusioninspector/test/chckpts_dir",
-                "fusioninspector/test/chckpts_dir/EM_adj_counts.ok",
-                "fusioninspector/test/chckpts_dir/add_FFPM.ok",
-                "fusioninspector/test/chckpts_dir/add_splice_info.ok",
-                "fusioninspector/test/chckpts_dir/append_microH_info.ok",
-                "fusioninspector/test/chckpts_dir/blast_filter.ok",
-                "fusioninspector/test/chckpts_dir/coalesce_junc_n_span.ok",
-                "fusioninspector/test/chckpts_dir/cp_consol_bam.ok",
-                "fusioninspector/test/chckpts_dir/cp_contigs_file_workdir",
-                "fusioninspector/test/chckpts_dir/cp_final.ok",
-                "fusioninspector/test/chckpts_dir/cp_gtf_file_workdir.ok",
-                "fusioninspector/test/chckpts_dir/cp_tracks_json.ok",
-                "fusioninspector/test/chckpts_dir/create_fi_igvjs.ok",
-                "fusioninspector/test/chckpts_dir/cytoband.ok",
-                "fusioninspector/test/chckpts_dir/filter_by_frag_threshs.ok",
-                "fusioninspector/test/chckpts_dir/final.abridged.ok",
-                "fusioninspector/test/chckpts_dir/fusion_annotator.ok",
-                "fusioninspector/test/chckpts_dir/fusion_coding_region_effect.ok",
-                "fusioninspector/test/chckpts_dir/fusion_contigs.ok",
-                "fusioninspector/test/chckpts_dir/fusion_reports_html.ok",
-                "fusioninspector/test/chckpts_dir/get_fusion_JUNCTION_reads_from_bam.ok",
-                "fusioninspector/test/chckpts_dir/get_fusion_SPANNING_reads_from_bam.ok",
-                "fusioninspector/test/chckpts_dir/index_consol_bam.ok",
-                "fusioninspector/test/chckpts_dir/init_EM_adj_counts.ok",
-                "fusioninspector/test/chckpts_dir/init_spanning_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/mark_dup_reads.ok",
-                "fusioninspector/test/chckpts_dir/mark_dups_reads.index.ok",
-                "fusioninspector/test/chckpts_dir/merged_contig_fai.ok",
-                "fusioninspector/test/chckpts_dir/merged_contig_gtf_to_bed.ok",
-                "fusioninspector/test/chckpts_dir/microH.dat.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_extract_junc_reads.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_junc_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_pfam_bed.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_pfam_gff3.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_seqsim_bed.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_seqsim_gff3.ok",
-                "fusioninspector/test/chckpts_dir/prep_spanning_reads.ok",
-                "fusioninspector/test/chckpts_dir/run_STAR.ok",
-                "fusioninspector/test/chckpts_dir/samtools_idx_junc_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/samtools_index_span_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/span_reads_acc.ok",
-                "fusioninspector/test/chckpts_dir/test.bed.bedsort.ok",
-                "fusioninspector/test/chckpts_dir/test.bed.bgzip.ok",
-                "fusioninspector/test/chckpts_dir/test.bed.tabix.ok",
                 "fusioninspector/test/fi_workdir",
-                "fusioninspector/test/fi_workdir/Log.final.out",
-                "fusioninspector/test/fi_workdir/Log.out",
-                "fusioninspector/test/fi_workdir/Log.progress.out",
-                "fusioninspector/test/fi_workdir/SJ.out.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome",
-                "fusioninspector/test/fi_workdir/_STARgenome/exonGeTrInfo.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/exonInfo.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/geneInfo.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/sjdbInfo.txt",
-                "fusioninspector/test/fi_workdir/_STARgenome/sjdbList.fromGTF.out.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/sjdbList.out.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/transcriptInfo.tab",
-                "fusioninspector/test/fi_workdir/microH.dat",
-                "fusioninspector/test/fi_workdir/pipeliner.456.cmds",
-                "fusioninspector/test/fi_workdir/star_align.ok",
-                "fusioninspector/test/fi_workdir/test.fa",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.info",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter.info",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.fusion_junction_read_accs",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.fusion_spanning_read_accs",
                 "fusioninspector/test/fi_workdir/test.gtf",
-                "fusioninspector/test/fi_workdir/test.igv.Pfam.gff3",
-                "fusioninspector/test/fi_workdir/test.igv.seqsimilar.gff3",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated.coding_effect",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.bai",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.failed_reads_during_span_analysis",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_junc_reads.sam",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_junction_info",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_span_reads.sam",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_spanning_info",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.read_align_counts.idx",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.read_align_counts.idx.ok",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.spanning_reads_want.idx",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam.bai",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam.bai.ok",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam.ok",
                 "fusioninspector/test/test.FusionInspector.fusions.abridged.tsv",
                 "fusioninspector/test/test.FusionInspector.fusions.tsv",
                 "fusioninspector/test/test.fusion_inspector_web.html",
@@ -716,9 +624,6 @@
                 "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -872,12 +777,18 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-07T11:57:10.372482"
+        "timestamp": "2025-08-18T16:16:11.496999226"
     },
     "stub test salmon": {
         "content": [
-            11,
+            12,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -889,9 +800,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GFFREAD": {
                     "gffread": "0.12.7"
@@ -913,14 +821,15 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -963,14 +872,20 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T15:01:29.71875007"
+        "timestamp": "2025-08-08T11:22:26.942424142"
     },
     "stub test ctatsplicing": {
         "content": [
-            17,
+            18,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "CTATSPLICING_PREPGENOMELIB": {
-                    "ctat-splicing": "0.0.2"
+                    "ctatsplicing": "0.0.2"
                 },
                 "CTATSPLICING_STARTOCANCERINTRONS": {
                     "ctat-splicing": "0.0.2"
@@ -990,9 +905,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
@@ -1029,6 +941,10 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "ctatsplicing",
                 "ctatsplicing/test.cancer.introns",
                 "ctatsplicing/test.cancer.introns.prelim",
@@ -1046,9 +962,6 @@
                 "fastqc/test.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1196,14 +1109,20 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:55:32.804299315"
+        "timestamp": "2025-08-18T16:08:54.904059765"
     },
     "stub test fusionreport": {
         "content": [
-            20,
+            21,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "ARRIBA_ARRIBA": {
                     "arriba": "2.5.0"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1230,9 +1149,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -1248,12 +1164,12 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "STARFUSION": {
-                    "STAR-Fusion": "1.15.0"
-                },
                 "STARFUSION_BUILD": {
                     "gunzip": 1.12,
                     "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
+                },
+                "STARFUSION_DETECT": {
                     "STAR-Fusion": "1.15.1"
                 },
                 "STAR_ALIGN": {
@@ -1271,9 +1187,13 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -1291,9 +1211,6 @@
                 "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1446,12 +1363,18 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:59:37.673773299"
+        "timestamp": "2025-08-18T16:13:31.815555556"
     },
     "stub test fastp": {
         "content": [
-            10,
+            11,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTP": {
                     "fastp": "0.24.0"
                 },
@@ -1470,9 +1393,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -1484,6 +1404,10 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastp",
                 "fastp/test.fastp.html",
                 "fastp/test.fastp.json",
@@ -1498,9 +1422,6 @@
                 "fastqc_for_fastp/test_trimmed.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1522,12 +1443,18 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T15:00:31.452519757"
+        "timestamp": "2025-08-08T11:21:51.143010384"
     },
     "stub test fusioncatcher": {
         "content": [
-            9,
+            10,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -1543,9 +1470,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -1557,6 +1481,10 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
@@ -1566,9 +1494,6 @@
                 "fusioncatcher/test.summary.txt",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1590,12 +1515,18 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:56:09.844925286"
+        "timestamp": "2025-08-08T11:18:29.46107784"
     },
     "stub test fusioncatcher trim": {
         "content": [
-            10,
+            11,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "FASTP_FOR_FUSIONCATCHER": {
                     "fastp": "0.24.0"
                 },
@@ -1614,9 +1545,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
-                },
                 "GTF_TO_REFFLAT": {
                     "gtfToGenePred": 377
                 },
@@ -1628,6 +1556,10 @@
                 }
             },
             [
+                "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastp_for_fusioncatcher",
                 "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher.fastp.html",
                 "fastp_for_fusioncatcher/test_trimmed_for_fusioncatcher.fastp.json",
@@ -1643,9 +1575,6 @@
                 "fusioncatcher/test.summary.txt",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1667,12 +1596,15 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-22T14:57:01.736743773"
+        "timestamp": "2025-08-08T11:19:01.10521868"
     },
     "stub test all": {
         "content": [
-            34,
+            35,
             {
+                "AGAT_CONVERTGFF2BED": {
+                    "agat": "v1.5.1"
+                },
                 "AGAT_CONVERTSPGFF2TSV": {
                     "agat": "v1.4.1"
                 },
@@ -1682,8 +1614,11 @@
                 "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
                 },
+                "BIOAWK": {
+                    "bioawk": 1.0
+                },
                 "CTATSPLICING_PREPGENOMELIB": {
-                    "ctat-splicing": "0.0.2"
+                    "ctatsplicing": "0.0.2"
                 },
                 "CTATSPLICING_STARTOCANCERINTRONS": {
                     "ctat-splicing": "0.0.2"
@@ -1701,7 +1636,7 @@
                     "fusioncatcher": "1.33"
                 },
                 "FUSIONINSPECTOR": {
-                    "STAR-Fusion": null
+                    "FusionInspector": "2.10.0"
                 },
                 "FUSIONREPORT_DETECT": {
                     "fusion_report": "4.0.1"
@@ -1721,9 +1656,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GET_RRNA_TRANSCRIPTS": {
-                    "get_rrna_transcripts": "v1.0"
                 },
                 "GFFREAD": {
                     "gffread": "0.12.7"
@@ -1752,12 +1684,12 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "STARFUSION": {
-                    "STAR-Fusion": "1.15.0"
-                },
                 "STARFUSION_BUILD": {
                     "gunzip": 1.12,
                     "hmmer": 3.4,
+                    "STAR-Fusion": "1.15.1"
+                },
+                "STARFUSION_DETECT": {
                     "STAR-Fusion": "1.15.1"
                 },
                 "STAR_ALIGN": {
@@ -1786,12 +1718,15 @@
             },
             [
                 "agat",
+                "agat/Homo_sapiens.GRCh38.46.gtf.bed",
                 "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
                 "arriba_visualisation",
                 "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
+                "bioawk",
+                "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "ctatsplicing",
                 "ctatsplicing/test.cancer.introns",
                 "ctatsplicing/test.cancer.introns.prelim",
@@ -1824,119 +1759,9 @@
                 "fusioninspector/test",
                 "fusioninspector/test/FusionInspector.log",
                 "fusioninspector/test/IGV_inputs",
-                "fusioninspector/test/IGV_inputs/TrinityFusion.bed",
-                "fusioninspector/test/IGV_inputs/cytoBand.txt",
-                "fusioninspector/test/IGV_inputs/test.ROI.bed",
-                "fusioninspector/test/IGV_inputs/test.bed",
-                "fusioninspector/test/IGV_inputs/test.bed.sorted.bed.gz",
-                "fusioninspector/test/IGV_inputs/test.bed.sorted.bed.gz.tbi",
-                "fusioninspector/test/IGV_inputs/test.consolidated.bam",
-                "fusioninspector/test/IGV_inputs/test.consolidated.bam.bai",
-                "fusioninspector/test/IGV_inputs/test.fa",
-                "fusioninspector/test/IGV_inputs/test.fa.fai",
-                "fusioninspector/test/IGV_inputs/test.fusion_inspector_web.json",
-                "fusioninspector/test/IGV_inputs/test.gtf",
-                "fusioninspector/test/IGV_inputs/test.igv.Pfam.bed",
-                "fusioninspector/test/IGV_inputs/test.igv.seqsimilar.bed",
-                "fusioninspector/test/IGV_inputs/test.junction_reads.bam",
-                "fusioninspector/test/IGV_inputs/test.junction_reads.bam.bai",
-                "fusioninspector/test/IGV_inputs/test.spanning_reads.bam",
-                "fusioninspector/test/IGV_inputs/test.spanning_reads.bam.bai",
-                "fusioninspector/test/IGV_inputs/tracks.json",
                 "fusioninspector/test/chckpts_dir",
-                "fusioninspector/test/chckpts_dir/EM_adj_counts.ok",
-                "fusioninspector/test/chckpts_dir/add_FFPM.ok",
-                "fusioninspector/test/chckpts_dir/add_splice_info.ok",
-                "fusioninspector/test/chckpts_dir/append_microH_info.ok",
-                "fusioninspector/test/chckpts_dir/blast_filter.ok",
-                "fusioninspector/test/chckpts_dir/coalesce_junc_n_span.ok",
-                "fusioninspector/test/chckpts_dir/cp_consol_bam.ok",
-                "fusioninspector/test/chckpts_dir/cp_contigs_file_workdir",
-                "fusioninspector/test/chckpts_dir/cp_final.ok",
-                "fusioninspector/test/chckpts_dir/cp_gtf_file_workdir.ok",
-                "fusioninspector/test/chckpts_dir/cp_tracks_json.ok",
-                "fusioninspector/test/chckpts_dir/create_fi_igvjs.ok",
-                "fusioninspector/test/chckpts_dir/cytoband.ok",
-                "fusioninspector/test/chckpts_dir/filter_by_frag_threshs.ok",
-                "fusioninspector/test/chckpts_dir/final.abridged.ok",
-                "fusioninspector/test/chckpts_dir/fusion_annotator.ok",
-                "fusioninspector/test/chckpts_dir/fusion_coding_region_effect.ok",
-                "fusioninspector/test/chckpts_dir/fusion_contigs.ok",
-                "fusioninspector/test/chckpts_dir/fusion_reports_html.ok",
-                "fusioninspector/test/chckpts_dir/get_fusion_JUNCTION_reads_from_bam.ok",
-                "fusioninspector/test/chckpts_dir/get_fusion_SPANNING_reads_from_bam.ok",
-                "fusioninspector/test/chckpts_dir/index_consol_bam.ok",
-                "fusioninspector/test/chckpts_dir/init_EM_adj_counts.ok",
-                "fusioninspector/test/chckpts_dir/init_spanning_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/mark_dup_reads.ok",
-                "fusioninspector/test/chckpts_dir/mark_dups_reads.index.ok",
-                "fusioninspector/test/chckpts_dir/merged_contig_fai.ok",
-                "fusioninspector/test/chckpts_dir/merged_contig_gtf_to_bed.ok",
-                "fusioninspector/test/chckpts_dir/microH.dat.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_extract_junc_reads.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_junc_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_pfam_bed.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_pfam_gff3.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_seqsim_bed.ok",
-                "fusioninspector/test/chckpts_dir/prep_igv_seqsim_gff3.ok",
-                "fusioninspector/test/chckpts_dir/prep_spanning_reads.ok",
-                "fusioninspector/test/chckpts_dir/run_STAR.ok",
-                "fusioninspector/test/chckpts_dir/samtools_idx_junc_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/samtools_index_span_reads_bam.ok",
-                "fusioninspector/test/chckpts_dir/span_reads_acc.ok",
-                "fusioninspector/test/chckpts_dir/test.bed.bedsort.ok",
-                "fusioninspector/test/chckpts_dir/test.bed.bgzip.ok",
-                "fusioninspector/test/chckpts_dir/test.bed.tabix.ok",
                 "fusioninspector/test/fi_workdir",
-                "fusioninspector/test/fi_workdir/Log.final.out",
-                "fusioninspector/test/fi_workdir/Log.out",
-                "fusioninspector/test/fi_workdir/Log.progress.out",
-                "fusioninspector/test/fi_workdir/SJ.out.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome",
-                "fusioninspector/test/fi_workdir/_STARgenome/exonGeTrInfo.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/exonInfo.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/geneInfo.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/sjdbInfo.txt",
-                "fusioninspector/test/fi_workdir/_STARgenome/sjdbList.fromGTF.out.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/sjdbList.out.tab",
-                "fusioninspector/test/fi_workdir/_STARgenome/transcriptInfo.tab",
-                "fusioninspector/test/fi_workdir/microH.dat",
-                "fusioninspector/test/fi_workdir/pipeliner.456.cmds",
-                "fusioninspector/test/fi_workdir/star_align.ok",
-                "fusioninspector/test/fi_workdir/test.fa",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.info",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.EMadj.min_frag_thresh.wSpliceInfo.post_blast_filter.post_promisc_filter.info",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.fusion_junction_read_accs",
-                "fusioninspector/test/fi_workdir/test.fusion_preds.coalesced.summary.fusion_spanning_read_accs",
                 "fusioninspector/test/fi_workdir/test.gtf",
-                "fusioninspector/test/fi_workdir/test.igv.Pfam.gff3",
-                "fusioninspector/test/fi_workdir/test.igv.seqsimilar.gff3",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated",
-                "fusioninspector/test/fi_workdir/test.post_blast_and_promiscuity_filter.EMadj.FFPM.wMicroH.annotated.coding_effect",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.bai",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.failed_reads_during_span_analysis",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_junc_reads.sam",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_junction_info",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_span_reads.sam",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.fusion_spanning_info",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.read_align_counts.idx",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.read_align_counts.idx.ok",
-                "fusioninspector/test/fi_workdir/test.star.cSorted.dupsMarked.bam.spanning_reads_want.idx",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam.bai",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam.bai.ok",
-                "fusioninspector/test/fi_workdir/test.star.sortedByCoord.out.bam.ok",
                 "fusioninspector/test/test.FusionInspector.fusions.abridged.tsv",
                 "fusioninspector/test/test.FusionInspector.fusions.tsv",
                 "fusioninspector/test/test.fusion_inspector_web.html",
@@ -1950,9 +1775,6 @@
                 "fusionreport/test/test_fusionreport_index.html",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
-                "get",
-                "get/rrna.bed",
-                "get/rrna.gtf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -2143,6 +1965,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-07T10:38:44.804072"
+        "timestamp": "2025-08-18T16:02:59.744224309"
     }
 }

@@ -5,6 +5,11 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "agat/convertgff2bed": {
+                        "branch": "master",
+                        "git_sha": "b785bb0b56bb518ab40c41f41d0e8749fb638257",
+                        "installed_by": ["modules"]
+                    },
                     "agat/convertspgff2tsv": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
@@ -13,6 +18,16 @@
                     "arriba/arriba": {
                         "branch": "master",
                         "git_sha": "077818897bfe993e1ed91a0339bcbe53fe13edc7",
+                        "installed_by": ["modules"]
+                    },
+                    "arriba/visualisation": {
+                        "branch": "master",
+                        "git_sha": "025a6f75e1f72e4ab60abb4bd65b3f289d4ad910",
+                        "installed_by": ["modules"]
+                    },
+                    "bioawk": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
                     "cat/cat": {
@@ -24,6 +39,18 @@
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"]
+                    },
+                    "ctatsplicing/prepgenomelib": {
+                        "branch": "master",
+                        "git_sha": "8476d6a2adf7fb2e2f23229344aeabcd94a14b0b",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/ctatsplicing/prepgenomelib/ctatsplicing-prepgenomelib.diff"
+                    },
+                    "ctatsplicing/startocancerintrons": {
+                        "branch": "master",
+                        "git_sha": "8476d6a2adf7fb2e2f23229344aeabcd94a14b0b",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/ctatsplicing/startocancerintrons/ctatsplicing-startocancerintrons.diff"
                     },
                     "fastp": {
                         "branch": "master",
@@ -38,6 +65,11 @@
                     "fusioncatcher/fusioncatcher": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
+                    "fusioninspector": {
+                        "branch": "master",
+                        "git_sha": "310a7a59c7f2362d25070e5928f3139f92377eaf",
                         "installed_by": ["modules"]
                     },
                     "fusionreport/detect": {
@@ -133,6 +165,11 @@
                     "starfusion/build": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
+                    "starfusion/detect": {
+                        "branch": "master",
+                        "git_sha": "310a7a59c7f2362d25070e5928f3139f92377eaf",
                         "installed_by": ["modules"]
                     },
                     "stringtie/merge": {
