@@ -90,7 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update logo [#715](https://github.com/nf-core/rnafusion/pull/715)
 - Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
-- Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#XXX](https://github.com/nf-core/rnafusion/pull/XXX)
+- Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
 
 ### Fixed
 
