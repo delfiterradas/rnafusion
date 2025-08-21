@@ -234,7 +234,17 @@ workflow BUILD_REFERENCES {
 ========================================================================================
 */
 
+//
+// A function to test if a file exists and is not empty.
+//   Input: A string that represents a file path
+//   Output: A boolean
+//
 def exists_not_empty(path) {
+    // Return false for invalid values
+    if(!path) {
+        return false
+    }
+
     def path_to_check = file(path as String)
     // Return false if the path does not exist
     if(!path_to_check.exists()) {
