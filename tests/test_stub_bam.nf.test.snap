@@ -1293,6 +1293,9 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
+                "fastqc_for_fastp",
+                "fastqc_for_fastp/test_trimmed.html",
+                "fastqc_for_fastp/test_trimmed.zip",
                 "gatk4",
                 "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
@@ -1325,7 +1328,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-21T18:44:39.897883035"
+        "timestamp": "2025-08-21T22:51:21.946095021"
     },
     "stub test fusioncatcher": {
         "content": [
@@ -1560,6 +1563,9 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
+                "fastqc_for_fastp",
+                "fastqc_for_fastp/test_trimmed.html",
+                "fastqc_for_fastp/test_trimmed.zip",
                 "fusioncatcher",
                 "fusioncatcher/test.fusion-genes.txt",
                 "fusioncatcher/test.log",
@@ -1758,6 +1764,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-21T18:33:36.953695887"
+        "timestamp": "2025-08-21T22:50:42.87458983"
     }
 }
