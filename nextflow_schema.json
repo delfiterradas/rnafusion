@@ -13,15 +13,18 @@
             "properties": {
                 "skip_qc": {
                     "type": "boolean",
-                    "description": "Skip QC steps"
+                    "description": "Skip QC steps",
+                    "fa_icon": "fas fa-forward"
                 },
                 "skip_vcf": {
                     "type": "boolean",
-                    "description": "Skip vcf creation step"
+                    "description": "Skip vcf creation step",
+                    "fa_icon": "fas fa-forward"
                 },
                 "skip_vis": {
                     "type": "boolean",
-                    "description": "Skip visualisation steps"
+                    "description": "Skip visualisation steps",
+                    "fa_icon": "fas fa-forward"
                 }
             },
             "fa_icon": "fas fa-fast-forward"
@@ -135,11 +138,6 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba output"
                 },
-                "download_refs": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Download references instead of building them (for fusioncatcher and starfusion)"
-                },
                 "fusioncatcher_fusions": {
                     "type": "string",
                     "format": "file-path",
@@ -160,11 +158,6 @@
                     "format": "directory-path",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
-                },
-                "fusioncatcher_download_link": {
-                    "type": "string",
-                    "description": "Fusioncatcher download link",
-                    "fa_icon": "far fa-file-code"
                 },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
@@ -339,6 +332,19 @@
                     "pattern": "\\S+\\.f(n|ast)?a$",
                     "description": "Path to adapter fasta file: default: []",
                     "fa_icon": "fas fa-cut"
+                },
+                "save_trimmed_fail": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-times-circle"
+                },
+                "min_trimmed_reads": {
+                    "type": "integer",
+                    "default": 1,
+                    "fa_icon": "fas fa-search-minus"
+                },
+                "save_merged": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-download"
                 }
             }
         },
@@ -429,11 +435,13 @@
                 },
                 "dfam_version": {
                     "type": ["number", "null"],
-                    "description": "Version of dfam to use"
+                    "description": "Version of dfam to use",
+                    "fa_icon": "fas fa-code-branch"
                 },
                 "pfam_version": {
                     "type": ["number", "null"],
-                    "description": "Version of pfam to use"
+                    "description": "Version of pfam to use",
+                    "fa_icon": "fas fa-code-branch"
                 }
             }
         },
