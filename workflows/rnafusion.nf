@@ -115,7 +115,7 @@ workflow RNAFUSION {
         }
 
         //
-        // SUBWORKFLOW: Read QC, optional UMI extraction, and trimming (nf-core)
+        // SUBWORKFLOW: Read QC and trimming (nf-core)
         //
 
         def ch_reads = Channel.empty()
@@ -123,12 +123,12 @@ workflow RNAFUSION {
         // adapter_fasta as a channel (or empty if not provided)
         def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
 
-        // control flags mapped to the nf-core subworkflow: disable umi usage in this pipeline
+        // disable umi usage in this subworkflow for this pipeline
         def with_umi         = false
         def skip_umi_extract = false
         def umi_discard_read = 0
 
-        // if 'fastp' isn't selected, we still run the subworkflow but skip trimming;
+        // if 'fastp' isn't selected, we still run the subworkflow but skip trimming
         def skip_trimming    = (!tools.contains("fastp"))
 
         // optional fastp output controls + minimum reads after trimming
@@ -149,15 +149,17 @@ workflow RNAFUSION {
             min_trimmed_reads            // min_trimmed_reads
         )
 
-        // primary reads for downstream tools
         ch_reads    = FASTQ_FASTQC_UMITOOLS_FASTP.out.reads
         ch_versions = ch_versions.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.versions)
 
-        // feed MultiQC with outputs (if not skipped)
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_raw_zip.collect{ it[1] }.ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_trim_zip.collect{ it[1] }.ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_html.collect{ it[1] }.ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_json.collect{ it[1] }.ifEmpty([]))
+        ch_sbwf_fastp_mqc = Channel.empty()
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_raw_zip.map { it[1] })
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_trim_zip.map { it[1] })
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_html.map { it[1] })
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_json.map { it[1] })
+            .ifEmpty([])
+
+        ch_multiqc_files = ch_multiqc_files.mix(ch_sbwf_fastp_mqc)
 
         //
         // MODULE: SALMON_QUANT
