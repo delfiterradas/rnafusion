@@ -91,6 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
 - Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
+- Replaced local subworkflow `TRIM_WORKFLOW` for its nf-core subworkflow equivalent `FASTQ_FASTQC_UMITOOLS_FASTP` [#752](https://github.com/nf-core/rnafusion/pull/752)
 
 ### Fixed
 
@@ -127,6 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed subworkflow with less than two modules: `CTATSPLICING_WORKFLOW` [#704](https://github.com/nf-core/rnafusion/pull/704)
 - Removed subworkflow with less than two modules: `FUSIONREPORT_WORKFLOW` [#721](https://github.com/nf-core/rnafusion/pull/721)
 - Removed local module `GET_RRNA_TRANSCRIPTS` [#736](https://github.com/nf-core/rnafusion/pull/736)
+- Removed old unused parameters `params.download_refs` and `params.fusioncatcher_download_link` [#752](https://github.com/nf-core/rnafusion/pull/752)
 
 ### Parameters
 
@@ -141,6 +143,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--stringtie`         | `--tools stringtie`             |
 | `--all`               | `--tools all`                   |
 |                       | `--fusioncatcher_download_link` |
+|                       | `--trim_tail_fusioncatcher`     |
+|                       | `--save_trimmed_fail`           |
+|                       | `--save_merged`                 |
+|                       | `--min_trimmed_reads`           |
 |                       | `--trim_tail_fusioncatcher`     |
 
 ## v3.0.2 - [2024-04-10]
