@@ -8,3 +8,6 @@ testing*
 *.pyc
 null/
 .nf-test*
+log/
+test/
+reports/
