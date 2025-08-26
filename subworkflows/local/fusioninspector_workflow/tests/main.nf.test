@@ -4,6 +4,17 @@ nextflow_workflow {
     script "../main.nf"
     workflow "FUSIONINSPECTOR_WORKFLOW"
     config './nextflow.config'
+    tag 'subworkflows'
+    tag 'subworkflows/fusioninspector_workflow'
+    tag 'cat/cat'
+    tag 'subworkflows_nfcore'
+    tag 'fusionreport/detect'
+    tag 'fusioninspector'
+    tag 'starfusion/build'
+    tag 'fusionreport/download'
+    tag 'arriba/visualisation'
+    tag 'subworkflows/../../modules/local/vcf_collect'
+    tag 'agat/convertspgff2tsv'
 
     test("FUSIONINSPECTOR_WORKFLOW - human") {
 
