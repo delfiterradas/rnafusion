@@ -357,7 +357,9 @@ workflow RNAFUSION {
                 BUILD_REFERENCES.out.hgnc_date,
                 BUILD_REFERENCES.out.starfusion_ref,
                 params.skip_vis,
-                params.skip_vcf
+                params.skip_vcf,
+                params.tools_cutoff,
+                params.whitelist
             )
             ch_versions      = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
             ch_multiqc_files = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
