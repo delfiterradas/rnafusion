@@ -52,6 +52,9 @@ workflow FASTQ_ALIGN_STAR {
     tab                 = STAR_ALIGN.out.tab                                 // channel: [ val(meta), path(tab)            ]
     orig_bam_transcript = STAR_ALIGN.out.bam_transcript                      // channel: [ val(meta), path(bam)            ]
     bam_sorted_aligned  = STAR_ALIGN.out.bam_sorted_aligned                  // channel: [ val(meta), path(bam)            ]
+    junctions           = STAR_ALIGN.out.junction                            // channel: [ val(meta), path(junction)       ]
+    spl_junc_tabs       = STAR_ALIGN.out.spl_junc_tab                        // channel: [ val(meta), path(spl_junc_tab)   ]
+    gene_count          = STAR_ALIGN.out.read_per_gene_tab                   // channel: [ val(meta), path(read_tab)       ]
 
     bam                 = BAM_SORT_STATS_SAMTOOLS_GENOME.out.bam             // channel: [ val(meta), path(bam) ]
     bai                 = BAM_SORT_STATS_SAMTOOLS_GENOME.out.bai             // channel: [ val(meta), path(bai) ]

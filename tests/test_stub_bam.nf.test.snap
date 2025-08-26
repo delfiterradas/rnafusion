@@ -189,9 +189,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-18T15:54:01.219397324"
+        "timestamp": "2025-08-26T23:14:20.283916876"
     },
     "stub test stringtie": {
         "content": [
@@ -311,9 +311,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-08T11:34:57.146117646"
+        "timestamp": "2025-08-26T23:15:30.482022054"
     },
     "stub test arriba": {
         "content": [
@@ -423,9 +423,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-08T11:31:27.759259528"
+        "timestamp": "2025-08-26T22:48:22.193453934"
     },
     "stub test fusioninspector": {
         "content": [
@@ -673,9 +673,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-18T16:00:15.182860428"
+        "timestamp": "2025-08-26T23:30:41.022404222"
     },
     "stub test salmon": {
         "content": [
@@ -1000,9 +1000,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-18T15:47:14.034109802"
+        "timestamp": "2025-08-26T23:06:10.100949608"
     },
     "stub test fusionreport": {
         "content": [
@@ -1227,9 +1227,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-18T15:56:39.559031879"
+        "timestamp": "2025-08-26T23:22:51.682095887"
     },
     "stub test fastp": {
         "content": [
@@ -1762,8 +1762,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-18T15:39:59.605183405"
+        "timestamp": "2025-08-26T23:00:13.773945342"
     }
 }
