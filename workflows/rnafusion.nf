@@ -18,8 +18,9 @@ include { MULTIQC                       }   from '../modules/nf-core/multiqc/mai
 include { STAR_ALIGN                    }   from '../modules/nf-core/star/align/main'
 include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
 include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_INDEX                }   from '../modules/nf-core/samtools/index/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
-include { FASTQ_ALIGN_STAR              }   from '../subworkflows/local/fastq_align_star'
+include { FASTQ_ALIGN_STAR              }   from '../subworkflows/nf-core/fastq_align_star'
 include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
@@ -181,13 +182,18 @@ workflow RNAFUSION {
                 ch_fastqs_to_align,
                 BUILD_REFERENCES.out.starindex_ref,
                 BUILD_REFERENCES.out.gtf,
-                BUILD_REFERENCES.out.fasta,
-                BUILD_REFERENCES.out.fai,
                 params.star_ignore_sjdbgtf,
-                params.cram
+                ch_fastqs_to_align.map { meta, _fastqs -> meta.seq_platform },
+                ch_fastqs_to_align.map { meta, _fastqs -> meta.seq_center },
+                BUILD_REFERENCES.out.fasta,
+                [[:], []]
             )
+            FASTQ_ALIGN_STAR.out.bam_sorted_aligned.view()
+            SAMTOOLS_INDEX(FASTQ_ALIGN_STAR.out.bam_sorted_aligned)
+            ch_bam_bai = FASTQ_ALIGN_STAR.out.bam_sorted_aligned
+                .join(SAMTOOLS_INDEX.out.bai, failOnMismatch:true, failOnDuplicate:true)
             ch_versions             = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
-            ch_aligned_reads        = ch_aligned_reads.mix(FASTQ_ALIGN_STAR.out.bam_bai)
+            ch_aligned_reads        = ch_aligned_reads.mix(ch_bam_bai)
             ch_star_junctions       = ch_star_junctions.mix(FASTQ_ALIGN_STAR.out.junctions)
             ch_star_splice_junctions = ch_star_splice_junctions.mix(FASTQ_ALIGN_STAR.out.spl_junc_tabs)
             ch_multiqc_files        = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.log_final.collect{it[1]}.ifEmpty([]))
