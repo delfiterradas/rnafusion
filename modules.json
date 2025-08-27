@@ -159,7 +159,7 @@
                     },
                     "samtools/sort": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "e89ff68a46b848c4d8aabb8569767516d46db319",
                         "installed_by": ["bam_sort_stats_samtools", "modules"]
                     },
                     "samtools/stats": {
