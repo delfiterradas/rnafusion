@@ -188,7 +188,6 @@ workflow RNAFUSION {
                 BUILD_REFERENCES.out.fasta,
                 [[:], []]
             )
-            FASTQ_ALIGN_STAR.out.bam_sorted_aligned.view()
             SAMTOOLS_INDEX(FASTQ_ALIGN_STAR.out.bam_sorted_aligned)
             ch_bam_bai = FASTQ_ALIGN_STAR.out.bam_sorted_aligned
                 .join(SAMTOOLS_INDEX.out.bai, failOnMismatch:true, failOnDuplicate:true)
