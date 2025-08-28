@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for references hosted on the nf-core AWS S3 bucket. [#717](https://github.com/nf-core/rnafusion/pull/717)
 - Added `--dfam_hmm`, `--dfam_h3f`, `--dfam_h3i`, `--dfam_h3m`, `--dfam_h3p`, `--pfam_file` and `--annot_filter_url` parameters to allow use of custom files in `STARFUSION_BUILD` module [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Add nf-test to local module: `VCF_COLLECT`. [#745](https://github.com/nf-core/rnafusion/pull/745)
+- Added nf-test for local subworkflow: `FUSIONINSPECTOR_WORKFLOW`. [#753](https://github.com/nf-core/rnafusion/pull/753)
 
 ### Changed
 
