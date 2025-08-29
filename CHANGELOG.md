@@ -92,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
 - Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
 - Replaced local subworkflow `TRIM_WORKFLOW` for its nf-core subworkflow equivalent `FASTQ_FASTQC_UMITOOLS_FASTP` [#752](https://github.com/nf-core/rnafusion/pull/752)
+- Changed local `FASTQ_ALIGN_STAR` for subworkflow from nf-core [#756](https://github.com/nf-core/rnafusion/pull/756)
 
 ### Fixed
 
@@ -116,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update VCF_COLLECT script to adapt to transcript_version not being an entry in fusioninspector gtf anymore [#726](https://github.com/nf-core/rnafusion/pull/726)
 - Fix rRNA detection and make it more customizable with nf-core modules [#736](https://github.com/nf-core/rnafusion/pull/736)
 - Fix rRNA detection in GTF using `transcript_type` [#749](https://github.com/nf-core/rnafusion/pull/749)
+- Fixed nf-test for `QC_WORKFLOW` subworkflow [#756](https://github.com/nf-core/rnafusion/pull/756)
 
 ### Removed
 

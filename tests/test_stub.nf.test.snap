@@ -1,7 +1,7 @@
 {
     "stub test starfusion": {
         "content": [
-            17,
+            27,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -37,7 +37,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
@@ -189,7 +201,13 @@
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat",
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm",
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -216,13 +234,13 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
         "timestamp": "2025-08-21T18:20:40.211602465"
     },
     "stub test stringtie": {
         "content": [
-            17,
+            27,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -258,7 +276,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STAR_ALIGN": {
@@ -332,7 +362,13 @@
                 "references/GRCh38/gencode_v46/star/sjdbList.fromGTF.out.tab",
                 "references/GRCh38/gencode_v46/star/sjdbList.out.tab",
                 "references/GRCh38/gencode_v46/star/transcriptInfo.tab",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -362,13 +398,13 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
         "timestamp": "2025-08-21T18:21:21.812203485"
     },
     "stub test arriba": {
         "content": [
-            16,
+            26,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -407,7 +443,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STAR_ALIGN": {
@@ -478,7 +526,13 @@
                 "references/GRCh38/gencode_v46/star/sjdbList.fromGTF.out.tab",
                 "references/GRCh38/gencode_v46/star/sjdbList.out.tab",
                 "references/GRCh38/gencode_v46/star/transcriptInfo.tab",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -501,13 +555,13 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
         "timestamp": "2025-08-21T18:15:00.863385937"
     },
     "stub test fusioninspector": {
         "content": [
-            24,
+            34,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -564,7 +618,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
@@ -750,7 +816,13 @@
                 "references/GRCh38/hgnc",
                 "references/GRCh38/hgnc/HGNC-DB-timestamp.txt",
                 "references/GRCh38/hgnc/hgnc_complete_set.txt",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -775,7 +847,7 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
         "timestamp": "2025-08-21T18:31:32.043336569"
     },
@@ -876,7 +948,7 @@
     },
     "stub test ctatsplicing": {
         "content": [
-            18,
+            28,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -918,7 +990,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
@@ -1084,7 +1168,13 @@
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat",
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm",
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -1107,13 +1197,13 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-21T19:00:06.777067929"
+        "timestamp": "2025-08-27T18:42:46.678568423"
     },
     "stub test fusionreport": {
         "content": [
-            21,
+            31,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -1161,7 +1251,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
@@ -1334,7 +1436,13 @@
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dat",
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.align_coords.align_coords.dbm",
                 "references/GRCh38/gencode_v46/starfusion/ctat_genome_lib_build_dir/trans.blast.dat.gz",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -1361,7 +1469,7 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
         "timestamp": "2025-08-21T18:26:22.470758896"
     },
@@ -1600,7 +1708,7 @@
     },
     "stub test all": {
         "content": [
-            35,
+            45,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
@@ -1681,7 +1789,19 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_INDEX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.21
                 },
                 "STARFUSION_BUILD": {
@@ -1927,7 +2047,13 @@
                 "salmon/test",
                 "salmon/test_lib_format_counts.json",
                 "salmon/test_meta_info.json",
+                "samtools",
+                "samtools/test.Aligned.sortedByCoord.bam",
+                "samtools/test.flagstat",
+                "samtools/test.idxstats",
+                "samtools/test.stats",
                 "star",
+                "star/test.Aligned.sortedByCoord.bam.bai",
                 "star/test.Aligned.sortedByCoord.out.bam",
                 "star/test.Aligned.sortedByCoord.out.bam.bai",
                 "star/test.Aligned.unsort.out.bam",
@@ -1963,7 +2089,7 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
         "timestamp": "2025-08-21T22:48:04.457572169"
     }
