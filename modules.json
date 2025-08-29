@@ -224,6 +224,8 @@
                     "fastq_align_star": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "installed_by": ["subworkflows"]
+                    },
                     "fastq_fastqc_umitools_fastp": {
                         "branch": "master",
                         "git_sha": "db5a84497b80c4932b4498ec231f19403d19bcff",
