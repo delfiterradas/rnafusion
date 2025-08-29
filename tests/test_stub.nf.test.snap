@@ -9,7 +9,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
@@ -236,7 +236,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T18:45:45.33537438"
+        "timestamp": "2025-08-21T18:20:40.211602465"
     },
     "stub test stringtie": {
         "content": [
@@ -248,7 +248,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
@@ -400,7 +400,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T18:46:51.467658698"
+        "timestamp": "2025-08-21T18:21:21.812203485"
     },
     "stub test arriba": {
         "content": [
@@ -415,7 +415,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
@@ -557,7 +557,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T18:41:39.472865742"
+        "timestamp": "2025-08-21T18:15:00.863385937"
     },
     "stub test fusioninspector": {
         "content": [
@@ -578,7 +578,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONINSPECTOR": {
@@ -849,7 +849,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T18:51:23.029137047"
+        "timestamp": "2025-08-21T18:31:32.043336569"
     },
     "stub test salmon": {
         "content": [
@@ -861,7 +861,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
@@ -944,7 +944,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-08T11:22:26.942424142"
+        "timestamp": "2025-08-21T18:27:42.592742898"
     },
     "stub test ctatsplicing": {
         "content": [
@@ -962,7 +962,7 @@
                 "CTATSPLICING_STARTOCANCERINTRONS": {
                     "ctat-splicing": "0.0.2"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
@@ -1214,7 +1214,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER_FUSIONCATCHER": {
@@ -1471,7 +1471,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T18:48:05.810728943"
+        "timestamp": "2025-08-21T18:26:22.470758896"
     },
     "stub test fastp": {
         "content": [
@@ -1486,10 +1486,10 @@
                 "FASTP": {
                     "fastp": "0.24.0"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
-                "FASTQC_FOR_FASTP": {
+                "FASTQC_TRIM": {
                     "fastqc": "0.12.1"
                 },
                 "GATK4_BEDTOINTERVALLIST": {
@@ -1551,7 +1551,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-08T11:21:51.143010384"
+        "timestamp": "2025-08-21T22:48:35.622133369"
     },
     "stub test fusioncatcher": {
         "content": [
@@ -1563,7 +1563,7 @@
                 "BIOAWK": {
                     "bioawk": 1.0
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER_FUSIONCATCHER": {
@@ -1623,7 +1623,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-08T11:18:29.46107784"
+        "timestamp": "2025-08-21T18:16:52.604596162"
     },
     "stub test fusioncatcher trim": {
         "content": [
@@ -1638,7 +1638,7 @@
                 "FASTP_FOR_FUSIONCATCHER": {
                     "fastp": "0.24.0"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER_FUSIONCATCHER": {
@@ -1704,7 +1704,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-08T11:19:01.10521868"
+        "timestamp": "2025-08-21T18:17:29.899160389"
     },
     "stub test all": {
         "content": [
@@ -1734,10 +1734,10 @@
                 "FASTP": {
                     "fastp": "0.24.0"
                 },
-                "FASTQC": {
+                "FASTQC_RAW": {
                     "fastqc": "0.12.1"
                 },
-                "FASTQC_FOR_FASTP": {
+                "FASTQC_TRIM": {
                     "fastqc": "0.12.1"
                 },
                 "FUSIONCATCHER_FUSIONCATCHER": {
@@ -2091,6 +2091,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T18:40:27.833068219"
+        "timestamp": "2025-08-21T22:48:04.457572169"
     }
 }

@@ -55,12 +55,12 @@
                     "fastp": {
                         "branch": "master",
                         "git_sha": "d082103d7976a2804f21225446cc110cbd822f4c",
-                        "installed_by": ["modules"]
+                        "installed_by": ["fastq_fastqc_umitools_fastp", "modules"]
                     },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
-                        "installed_by": ["modules"]
+                        "installed_by": ["fastq_fastqc_umitools_fastp", "modules"]
                     },
                     "fusioncatcher/fusioncatcher": {
                         "branch": "master",
@@ -201,6 +201,11 @@
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
                         "installed_by": ["modules"]
+                    },
+                    "umitools/extract": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["fastq_fastqc_umitools_fastp"]
                     }
                 }
             },
@@ -219,6 +224,9 @@
                     "fastq_align_star": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                    "fastq_fastqc_umitools_fastp": {
+                        "branch": "master",
+                        "git_sha": "db5a84497b80c4932b4498ec231f19403d19bcff",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nextflow_pipeline": {
