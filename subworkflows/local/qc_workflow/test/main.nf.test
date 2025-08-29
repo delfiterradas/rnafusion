@@ -28,8 +28,8 @@ nextflow_workflow {
             }
 
             // Filter GTF to extract rRNA genes
-            run("GET_RRNA_TRANSCRIPTS") {
-                script "../../../../modules/local/get_rrna_transcript/main.nf"
+            run("BIOAWK") {
+                script "../../../../modules/nf-core/bioawk/main.nf"
                 process {
                     """
                     input[0] = Channel.of(
@@ -42,13 +42,22 @@ nextflow_workflow {
                 }
             }
 
+            run("AGAT_CONVERTGFF2BED") {
+                script "../../../../modules/nf-core/agat/convertgff2bed/main.nf"
+                process {
+                    """
+                    input[0] = BIOAWK.out.output
+                    """
+                }
+            }
+
 
             // Convert rRNA BED to interval list (the necessary file)
             run("GATK4_BEDTOINTERVALLIST") {
                 script "../../../../modules/nf-core/gatk4/bedtointervallist/main.nf"
                 process {
                     """
-                    input[0] = GET_RRNA_TRANSCRIPTS.out.bed
+                    input[0] = AGAT_CONVERTGFF2BED.out.bed
                     input[1] = Channel.of(
                         [
                             [id: 'chr22_dic'],
